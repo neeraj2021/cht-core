@@ -301,6 +301,82 @@ module.exports = [
     ]
   },
 
+  // Task 1: CBAC Follow-up — triggered after high-risk CBAC submission
+  {
+    name: 'cbac.follow_up',
+    icon: 'icon-healthcare',
+    title: 'task.cbac.follow_up.title',
+    appliesTo: 'reports',
+    appliesToType: ['cbac'],
+    appliesIf: function(contact, report) {
+      return getField(report, 'risk_category') === 'High Risk' && isAlive(contact);
+    },
+    resolvedIf: function(contact, report, event, dueDate) {
+      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);
+      const endTime = addDays(dueDate, event.end + 1).getTime();
+      return isFormArraySubmittedInWindow(contact.reports, ['cbac_followup'], startTime, endTime);
+    },
+    actions: [{
+      type: 'report',
+      form: 'cbac_followup',
+      label: 'CBAC Follow-up',
+      modifyContent: function(content, contact) {
+        content['inputs/contact/_id']        = contact.contact._id;
+        content['inputs/contact/patient_id'] = contact.contact.patient_id;
+        content['inputs/contact/name']       = contact.contact.name;
+        content['inputs/contact/gender']     = contact.contact.gender;
+      },
+    }],
+    events: [{
+      id: 'cbac-follow-up',
+      // Production: days: 5, start: 5, end: 7
+      // days: 5,
+      // start: 5,
+      days: 0,   // DEV: immediate
+      start: 0,  // DEV: immediate
+      end: 7,
+    }],
+  },
+
+  // Task 2: CBAC Checkup Date Follow-up — triggered when patient agreed to checkup date
+  {
+    name: 'cbac.checkup_date_follow_up',
+    icon: 'icon-healthcare',
+    title: 'task.cbac.checkup_date_follow_up.title',
+    appliesTo: 'reports',
+    appliesToType: ['cbac_followup'],
+    appliesIf: function(contact, report) {
+      return getField(report, 't_willing_for_checkup') === 'yes' && isAlive(contact);
+    },
+    resolvedIf: function(contact, report, event, dueDate) {
+      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);
+      const endTime = addDays(dueDate, event.end + 1).getTime();
+      return isFormArraySubmittedInWindow(contact.reports, ['cbac_followup'], startTime, endTime);
+    },
+    actions: [{
+      type: 'report',
+      form: 'cbac_followup',
+      label: 'CBAC Checkup Follow-up',
+      modifyContent: function(content, contact) {
+        content['inputs/contact/_id']        = contact.contact._id;
+        content['inputs/contact/patient_id'] = contact.contact.patient_id;
+        content['inputs/contact/name']       = contact.contact.name;
+        content['inputs/contact/gender']     = contact.contact.gender;
+      },
+    }],
+    events: [{
+      id: 'cbac-checkup-date-follow-up',
+      // Production: use date entered by CHW in previous cbac_followup
+      // dueDate: function(event, contact, report) {
+      //   return getDateISOLocal(getField(report, 't_checkup_date'));
+      // },
+      // start: 1,
+      days: 0,   // DEV: immediate
+      start: 0,  // DEV: immediate
+      end: 7,
+    }],
+  },
+
   {
     name: 'pnc.danger_sign_followup_baby.from_report',
     icon: 'icon-follow-up',

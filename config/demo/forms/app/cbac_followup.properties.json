@@ -1,0 +1,9 @@
+{
+  "title": "CBAC Follow-up",
+  "icon": "icon-healthcare",
+  "context": {
+    "person": true,
+    "place": false,
+    "expression": "true"
+  }
+}

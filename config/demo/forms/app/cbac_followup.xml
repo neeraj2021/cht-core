@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://www.opendatakit.org/xforms">
+  <h:head>
+    <h:title>CBAC Follow Up</h:title>
+    <model odk:xforms-version="1.0.0">
+      <instance>
+        <data id="cbac_followup" prefix="J1!cbac_followup!" delimiter="#">
+          <patient_id/>
+          <patient_uuid/>
+          <patient_name/>
+          <reporter_name/>
+          <title/>
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source/>
+            <source_id/>
+            <user>
+              <name/>
+              <phone/>
+            </user>
+            <contact>
+              <_id/>
+              <patient_id/>
+              <name/>
+              <gender/>
+            </contact>
+          </inputs>
+          <abcd>
+            <ncd_day_visited/>
+            <willing_for_checkup/>
+            <checkup_date/>
+            <t_ncd_day_visited/>
+            <t_willing_for_checkup/>
+            <t_checkup_date/>
+          </abcd>
+          <meta tag="hidden">
+            <instanceID/>
+            <instanceName/>
+          </meta>
+        </data>
+      </instance>
+      <instance id="contact-summary"/>
+      <instance id="user-contact-summary"/>
+      <instance id="yes_no">
+        <root>
+          <item>
+            <name>yes</name>
+            <label>Yes</label>
+          </item>
+          <item>
+            <name>no</name>
+            <label>No</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="gender">
+        <root>
+          <item>
+            <name>male</name>
+            <label>Male</label>
+          </item>
+          <item>
+            <name>female</name>
+            <label>Female</label>
+          </item>
+        </root>
+      </instance>
+      <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
+      <bind nodeset="/data/patient_uuid" type="string" calculate="../inputs/contact/_id"/>
+      <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
+      <bind nodeset="/data/reporter_name" type="string" calculate="../inputs/user/name"/>
+      <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/inputs/source" type="string"/>
+      <bind nodeset="/data/inputs/source_id" type="string"/>
+      <bind nodeset="/data/inputs/user/name" type="string"/>
+      <bind nodeset="/data/inputs/user/phone" type="string"/>
+      <bind nodeset="/data/inputs/contact/_id" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/contact/patient_id" type="string"/>
+      <bind nodeset="/data/inputs/contact/name" type="string"/>
+      <bind nodeset="/data/inputs/contact/gender" type="string"/>
+      <bind nodeset="/data/abcd/ncd_day_visited" type="string"/>
+      <bind nodeset="/data/abcd/willing_for_checkup" type="string" required=" /data/abcd/ncd_day_visited  = 'no'" relevant=" /data/abcd/ncd_day_visited  = 'no'"/>
+      <bind nodeset="/data/abcd/checkup_date" type="date" required="true()" relevant=" /data/abcd/willing_for_checkup  = 'yes'"/>
+      <bind nodeset="/data/abcd/t_ncd_day_visited" type="string" calculate=" /data/abcd/ncd_day_visited "/>
+      <bind nodeset="/data/abcd/t_willing_for_checkup" type="string" calculate=" /data/abcd/willing_for_checkup "/>
+      <bind nodeset="/data/abcd/t_checkup_date" type="string" calculate=" /data/abcd/checkup_date "/>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
+      <bind nodeset="/data/meta/instanceName" type="string" calculate=" /data/title "/>
+    </model>
+  </h:head>
+  <h:body class="pages grid-layout">
+    <group appearance="field-list" ref="/data/inputs">
+      <label>Patient &amp; CHW Info</label>
+      <group ref="/data/inputs/user"/>
+      <group ref="/data/inputs/contact">
+        <input ref="/data/inputs/contact/_id" appearance="select-contact type-person role-patient">
+          <label>Patient's Name</label>
+        </input>
+        <input ref="/data/inputs/contact/patient_id" appearance="hidden">
+          <label>Medic ID</label>
+        </input>
+        <input ref="/data/inputs/contact/name" appearance="hidden">
+          <label>Patient Name</label>
+        </input>
+        <select1 ref="/data/inputs/contact/gender">
+          <label>Gender</label>
+          <itemset nodeset="instance('gender')/root/item">
+            <value ref="name"/>
+            <label ref="label"/>
+          </itemset>
+        </select1>
+      </group>
+    </group>
+    <group appearance="field-list" ref="/data/abcd">
+      <select1 ref="/data/abcd/ncd_day_visited">
+        <label>Did the patient visit for NCD day?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/abcd/willing_for_checkup">
+        <label>Is the patient willing to go for checkup?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <input ref="/data/abcd/checkup_date">
+        <label>When can the patient go for checkup?</label>
+      </input>
+    </group>
+  </h:body>
+</h:html>

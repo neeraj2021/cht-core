@@ -1,0 +1,835 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://www.opendatakit.org/xforms">
+  <h:head>
+    <h:title>CBAC</h:title>
+    <model odk:xforms-version="1.0.0">
+      <instance>
+        <data id="cbac" prefix="J1!cbac!" delimiter="#">
+          <patient_id/>
+          <patient_uuid/>
+          <patient_name/>
+          <reporter_name/>
+          <reporter_place/>
+          <title/>
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source/>
+            <source_id/>
+            <user>
+              <name/>
+              <phone/>
+            </user>
+            <reporter_name_note/>
+            <contact>
+              <_id/>
+              <patient_id/>
+              <name/>
+              <gender/>
+            </contact>
+            <state/>
+            <district/>
+          </inputs>
+          <instructions/>
+          <total_question/>
+          <page_1>
+            <age_range/>
+            <smoke_frequency/>
+            <alcohol_frequency/>
+            <waist_size/>
+            <physical_activities_frequency/>
+            <family_medical_history/>
+          </page_1>
+          <page_2>
+            <shortness_of_breath/>
+            <cough_more_than_2_weeks/>
+            <blood_in_sputum/>
+            <fever_more_than_2_weeks/>
+            <loss_of_weight/>
+            <night_sweats/>
+            <current_anti_tb_drug/>
+            <family_tb/>
+            <history_of_tb/>
+            <history_of_fits/>
+            <difficulty_opening_mouth/>
+            <mouth_ulcers_or_growth/>
+            <voice_change/>
+            <skin_patch_discoloration/>
+            <difficulty_holding_objects/>
+            <loss_of_sensation/>
+          </page_2>
+          <page_3>
+            <breast_lump/>
+            <nipple_discharge/>
+            <breast_shape_size_change/>
+            <bleeding_between_periods/>
+            <post_menopause_bleeding/>
+            <post_intercourse_bleeding/>
+            <foul_smelling_vaginal_discharge/>
+          </page_3>
+          <total_score/>
+          <risk_category/>
+          <group_summary>
+            <summary_high_risk/>
+            <summary_low_risk/>
+            <grp_lbl_filled_by>
+              <lbl_filled_by_lbl/>
+              <lbl_filled_by_val/>
+            </grp_lbl_filled_by>
+            <grp_lbl_patient>
+              <lbl_patient_lbl/>
+              <lbl_patient_val/>
+            </grp_lbl_patient>
+            <grp_lbl_gender>
+              <lbl_gender_lbl/>
+              <lbl_gender_val/>
+            </grp_lbl_gender>
+            <grp_lbl_state>
+              <lbl_state_lbl/>
+              <lbl_state_val/>
+            </grp_lbl_state>
+            <grp_lbl_district>
+              <lbl_district_lbl/>
+              <lbl_district_val/>
+            </grp_lbl_district>
+            <grp_lbl_score>
+              <lbl_score_lbl/>
+              <lbl_score_val/>
+            </grp_lbl_score>
+            <grp_lbl_risk>
+              <lbl_risk_lbl/>
+              <lbl_risk_val/>
+            </grp_lbl_risk>
+          </group_summary>
+          <meta tag="hidden">
+            <instanceID/>
+            <instanceName/>
+          </meta>
+        </data>
+      </instance>
+      <instance id="contact-summary"/>
+      <instance id="user-contact-summary"/>
+      <instance id="frequency">
+        <root>
+          <item>
+            <name>0</name>
+            <label>Not at all</label>
+          </item>
+          <item>
+            <name>1</name>
+            <label>Several days</label>
+          </item>
+          <item>
+            <name>2</name>
+            <label>More than half the days</label>
+          </item>
+          <item>
+            <name>3</name>
+            <label>Nearly every day</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="states">
+        <root>
+          <item>
+            <name>kerala</name>
+            <label>Kerala</label>
+          </item>
+          <item>
+            <name>tamil_nadu</name>
+            <label>Tamil Nadu</label>
+          </item>
+          <item>
+            <name>andhra_pradesh</name>
+            <label>Andhra Pradesh</label>
+          </item>
+          <item>
+            <name>telangana</name>
+            <label>Telangana</label>
+          </item>
+          <item>
+            <name>karnataka</name>
+            <label>Karnataka</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="districts">
+        <root>
+          <item>
+            <name>chennai</name>
+            <label>Chennai</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>thanjavur</name>
+            <label>Thanjavur</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>coimbatore</name>
+            <label>Coimbatore</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>madurai</name>
+            <label>Madurai</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>salem</name>
+            <label>Salem</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>tiruchirappalli</name>
+            <label>Tiruchirappalli</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>thiruvananthapuram</name>
+            <label>Thiruvananthapuram</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kochi</name>
+            <label>Kochi</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kozhikode</name>
+            <label>Kozhikode</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>thrissur</name>
+            <label>Thrissur</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kollam</name>
+            <label>Kollam</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>visakhapatnam</name>
+            <label>Visakhapatnam</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>vijayawada</name>
+            <label>Vijayawada</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>guntur</name>
+            <label>Guntur</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>tirupati</name>
+            <label>Tirupati</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>kurnool</name>
+            <label>Kurnool</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>hyderabad</name>
+            <label>Hyderabad</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>warangal</name>
+            <label>Warangal</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>nizamabad</name>
+            <label>Nizamabad</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>karimnagar</name>
+            <label>Karimnagar</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>khammam</name>
+            <label>Khammam</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>bengaluru</name>
+            <label>Bengaluru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>mysuru</name>
+            <label>Mysuru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>hubli</name>
+            <label>Hubli</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>mangaluru</name>
+            <label>Mangaluru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>belagavi</name>
+            <label>Belagavi</label>
+            <filter>karnataka</filter>
+          </item>
+        </root>
+      </instance>
+      <instance id="smoke_frequency">
+        <root>
+          <item>
+            <name>0</name>
+            <label>Never</label>
+          </item>
+          <item>
+            <name>1</name>
+            <label>Used to consume in the past/ Sometimes now</label>
+          </item>
+          <item>
+            <name>2</name>
+            <label>Daily</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="age_range">
+        <root>
+          <item>
+            <name>0</name>
+            <label>30-39 years</label>
+          </item>
+          <item>
+            <name>1</name>
+            <label>40-49 years</label>
+          </item>
+          <item>
+            <name>2</name>
+            <label>≥ 50 years</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="alcohol_frequency">
+        <root>
+          <item>
+            <name>0</name>
+            <label>No</label>
+          </item>
+          <item>
+            <name>1</name>
+            <label>Yes</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="physical_activities_frequency">
+        <root>
+          <item>
+            <name>0</name>
+            <label>At least 150 minutes in a week</label>
+          </item>
+          <item>
+            <name>1</name>
+            <label>Less than 150 minutes in a week</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="family_medical_history">
+        <root>
+          <item>
+            <name>0</name>
+            <label>No</label>
+          </item>
+          <item>
+            <name>2</name>
+            <label>Yes</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="waist_size">
+        <root>
+          <item>
+            <name>0</name>
+            <label>80 cm or less</label>
+            <filter>female</filter>
+          </item>
+          <item>
+            <name>0</name>
+            <label>90 cm or less</label>
+            <filter>male</filter>
+          </item>
+          <item>
+            <name>1</name>
+            <label>81-90 cm</label>
+            <filter>female</filter>
+          </item>
+          <item>
+            <name>1</name>
+            <label>91-100 cm</label>
+            <filter>male</filter>
+          </item>
+          <item>
+            <name>2</name>
+            <label>More than 90 cm</label>
+            <filter>female</filter>
+          </item>
+          <item>
+            <name>2</name>
+            <label>More than 100 cm</label>
+            <filter>male</filter>
+          </item>
+        </root>
+      </instance>
+      <instance id="gender">
+        <root>
+          <item>
+            <name>male</name>
+            <label>Male</label>
+          </item>
+          <item>
+            <name>female</name>
+            <label>Female</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="yes_no">
+        <root>
+          <item>
+            <name>yes</name>
+            <label>Yes</label>
+          </item>
+          <item>
+            <name>no</name>
+            <label>No</label>
+          </item>
+        </root>
+      </instance>
+      <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
+      <bind nodeset="/data/patient_uuid" type="string" calculate="../inputs/contact/_id"/>
+      <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
+      <bind nodeset="/data/reporter_name" type="string" calculate="../inputs/user/name"/>
+      <bind nodeset="/data/reporter_place" type="string" calculate="instance('user-contact-summary')/context/facility_name"/>
+      <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/inputs/source" type="string"/>
+      <bind nodeset="/data/inputs/source_id" type="string"/>
+      <bind nodeset="/data/inputs/user/name" type="string"/>
+      <bind nodeset="/data/inputs/user/phone" type="string"/>
+      <bind nodeset="/data/inputs/reporter_name_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/inputs/contact/_id" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/contact/patient_id" type="string"/>
+      <bind nodeset="/data/inputs/contact/name" type="string"/>
+      <bind nodeset="/data/inputs/contact/gender" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/state" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/district" type="string" required="true()"/>
+      <bind nodeset="/data/instructions" readonly="true()" type="string"/>
+      <bind nodeset="/data/total_question" type="string" calculate="if( /data/inputs/contact/gender  = 'male', '22', '29')"/>
+      <bind nodeset="/data/page_1/age_range" type="string" required="true()"/>
+      <bind nodeset="/data/page_1/smoke_frequency" type="string" required="true()"/>
+      <bind nodeset="/data/page_1/alcohol_frequency" type="string" required="true()"/>
+      <bind nodeset="/data/page_1/waist_size" type="string" required="true()"/>
+      <bind nodeset="/data/page_1/physical_activities_frequency" type="string" required="true()"/>
+      <bind nodeset="/data/page_1/family_medical_history" type="string" required="true()"/>
+      <bind nodeset="/data/page_2/shortness_of_breath" type="string"/>
+      <bind nodeset="/data/page_2/cough_more_than_2_weeks" type="string"/>
+      <bind nodeset="/data/page_2/blood_in_sputum" type="string"/>
+      <bind nodeset="/data/page_2/fever_more_than_2_weeks" type="string"/>
+      <bind nodeset="/data/page_2/loss_of_weight" type="string"/>
+      <bind nodeset="/data/page_2/night_sweats" type="string"/>
+      <bind nodeset="/data/page_2/current_anti_tb_drug" type="string"/>
+      <bind nodeset="/data/page_2/family_tb" type="string"/>
+      <bind nodeset="/data/page_2/history_of_tb" type="string"/>
+      <bind nodeset="/data/page_2/history_of_fits" type="string"/>
+      <bind nodeset="/data/page_2/difficulty_opening_mouth" type="string"/>
+      <bind nodeset="/data/page_2/mouth_ulcers_or_growth" type="string"/>
+      <bind nodeset="/data/page_2/voice_change" type="string"/>
+      <bind nodeset="/data/page_2/skin_patch_discoloration" type="string"/>
+      <bind nodeset="/data/page_2/difficulty_holding_objects" type="string"/>
+      <bind nodeset="/data/page_2/loss_of_sensation" type="string"/>
+      <bind nodeset="/data/page_3" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3/breast_lump" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3/nipple_discharge" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3/breast_shape_size_change" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3/bleeding_between_periods" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3/post_menopause_bleeding" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3/post_intercourse_bleeding" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3/foul_smelling_vaginal_discharge" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/total_score" type="string" calculate=" /data/page_1/age_range  +  /data/page_1/smoke_frequency  +  /data/page_1/alcohol_frequency  +  /data/page_1/waist_size  +  /data/page_1/physical_activities_frequency  +  /data/page_1/family_medical_history "/>
+      <bind nodeset="/data/risk_category" type="string" calculate="if( /data/total_score  &gt; 4, 'High Risk', 'Low Risk')"/>
+      <bind nodeset="/data/group_summary/summary_high_risk" readonly="true()" type="string" relevant=" /data/total_score  &gt; 4"/>
+      <bind nodeset="/data/group_summary/summary_low_risk" readonly="true()" type="string" relevant=" /data/total_score  &lt;= 4"/>
+      <bind nodeset="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_lbl" readonly="true()" type="string" calculate="'Filled by'"/>
+      <bind nodeset="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_val" readonly="true()" type="string" calculate=" /data/reporter_name "/>
+      <bind nodeset="/data/group_summary/grp_lbl_patient/lbl_patient_lbl" readonly="true()" type="string" calculate="'Patient'"/>
+      <bind nodeset="/data/group_summary/grp_lbl_patient/lbl_patient_val" readonly="true()" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/group_summary/grp_lbl_gender/lbl_gender_lbl" readonly="true()" type="string" calculate="'Gender'"/>
+      <bind nodeset="/data/group_summary/grp_lbl_gender/lbl_gender_val" readonly="true()" type="string" calculate=" /data/inputs/contact/gender "/>
+      <bind nodeset="/data/group_summary/grp_lbl_state/lbl_state_lbl" readonly="true()" type="string" calculate="'State'"/>
+      <bind nodeset="/data/group_summary/grp_lbl_state/lbl_state_val" readonly="true()" type="string" calculate=" /data/inputs/state "/>
+      <bind nodeset="/data/group_summary/grp_lbl_district/lbl_district_lbl" readonly="true()" type="string" calculate="'District'"/>
+      <bind nodeset="/data/group_summary/grp_lbl_district/lbl_district_val" readonly="true()" type="string" calculate=" /data/inputs/district "/>
+      <bind nodeset="/data/group_summary/grp_lbl_score/lbl_score_lbl" readonly="true()" type="string" calculate="'CBAC Total Score'"/>
+      <bind nodeset="/data/group_summary/grp_lbl_score/lbl_score_val" readonly="true()" type="string" calculate=" /data/total_score "/>
+      <bind nodeset="/data/group_summary/grp_lbl_risk/lbl_risk_lbl" readonly="true()" type="string" calculate="'Risk Category'"/>
+      <bind nodeset="/data/group_summary/grp_lbl_risk/lbl_risk_val" readonly="true()" type="string" calculate=" /data/risk_category "/>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
+      <bind nodeset="/data/meta/instanceName" type="string" calculate=" /data/title "/>
+    </model>
+  </h:head>
+  <h:body class="pages grid-layout">
+    <group appearance="field-list" ref="/data/inputs">
+      <label>Patient &amp; Reporter Infooo</label>
+      <group ref="/data/inputs/user"/>
+      <input ref="/data/inputs/reporter_name_note">
+        <label> Filled by: <output value=" /data/reporter_name "/></label>
+      </input>
+      <group ref="/data/inputs/contact">
+        <input ref="/data/inputs/contact/_id" appearance="select-contact type-person role-patient">
+          <label>Patient's Name</label>
+          <hint>Select the patient from your areaaaa</hint>
+        </input>
+        <input ref="/data/inputs/contact/patient_id" appearance="hidden">
+          <label>Medic ID</label>
+        </input>
+        <input ref="/data/inputs/contact/name" appearance="hidden">
+          <label>Patient Name</label>
+        </input>
+        <select1 ref="/data/inputs/contact/gender">
+          <label>Gender</label>
+          <itemset nodeset="instance('gender')/root/item">
+            <value ref="name"/>
+            <label ref="label"/>
+          </itemset>
+        </select1>
+      </group>
+      <select1 ref="/data/inputs/state" appearance="minimal">
+        <label>State</label>
+        <itemset nodeset="instance('states')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/inputs/district" appearance="minimal">
+        <label>District</label>
+        <itemset nodeset="instance('districts')/root/item[filter =  /data/inputs/state ]">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <input ref="/data/instructions">
+      <label>A score above 4 indicates that the person may be at risk for these NCDs and needs to be prioritized for attending the weekly NCD day</label>
+    </input>
+    <group appearance="field-list" ref="/data/page_1">
+      <label> Questions 1 &amp; 6 of <output value=" /data/total_question "/></label>
+      <select1 ref="/data/page_1/age_range">
+        <label>1. What is your age? (in complete years)</label>
+        <hint>Use ✓ to indicate your answer</hint>
+        <itemset nodeset="instance('age_range')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_1/smoke_frequency">
+        <label>2. Do you smoke or consume smokeless products such as gutka or khaini?</label>
+        <hint>Use ✓ to indicate your answer</hint>
+        <itemset nodeset="instance('smoke_frequency')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_1/alcohol_frequency">
+        <label>3. Do you consume alcohol daily</label>
+        <hint>Use ✓ to indicate your answer</hint>
+        <itemset nodeset="instance('alcohol_frequency')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_1/waist_size">
+        <label>4. Measurement of waist (in cm)</label>
+        <hint>Use ✓ to indicate your answer</hint>
+        <itemset nodeset="instance('waist_size')/root/item[filter =  /data/inputs/contact/gender ]">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_1/physical_activities_frequency">
+        <label>5. Do you undertake any physical activities for minimum of 150 minutes in a week?</label>
+        <hint>Use ✓ to indicate your answer</hint>
+        <itemset nodeset="instance('physical_activities_frequency')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_1/family_medical_history">
+        <label>6. Do you have a family history (any one of your parents or siblings) of high blood pressure, diabetes and heart disease?</label>
+        <hint>Use ✓ to indicate your answer</hint>
+        <itemset nodeset="instance('family_medical_history')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/page_2">
+      <label> Questions 2 &amp; 22 of <output value=" /data/total_question "/></label>
+      <select1 ref="/data/page_2/shortness_of_breath">
+        <label>7. Shortness of breath</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_2/cough_more_than_2_weeks">
+        <label>8. Coughing more than 2 weeks</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_2/blood_in_sputum">
+        <label>9. Blood in sputum</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_2/fever_more_than_2_weeks">
+        <label>10. Fever for more than 2 weeks</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_2/loss_of_weight">
+        <label>11. Loss of weight</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_2/night_sweats">
+        <label>12. Night Sweats</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_2/current_anti_tb_drug">
+        <label>13. Are you currently taking anti-TB drug</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_2/family_tb">
+        <label>14. Anyone in family currently suffering from TB</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_2/history_of_tb">
+        <label>15. History of TB</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_2/history_of_fits">
+        <label>16. History of fits</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_2/difficulty_opening_mouth">
+        <label>17. Difficulty in opening mouth</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_2/mouth_ulcers_or_growth">
+        <label>18. Ulcers/patch/growth in mouth that has not healed in two weeks</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_2/voice_change">
+        <label>19. Any change in the tone of your voice</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_2/skin_patch_discoloration">
+        <label>20. Any patch or discoloration on skin</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_2/difficulty_holding_objects">
+        <label>21. Difficulty in holding objects with fingers</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_2/loss_of_sensation">
+        <label>22. Loss of sensation for cold/hot objects in palm or sole</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/page_3">
+      <label> Questions 23 &amp; 29 of <output value=" /data/total_question "/></label>
+      <select1 ref="/data/page_3/breast_lump">
+        <label>23. Lump in the breast</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_3/nipple_discharge">
+        <label>24. Blood stained discharge from the nipple</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_3/breast_shape_size_change">
+        <label>25. Change in shape and size of breast</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_3/bleeding_between_periods">
+        <label>26. Bleeding between periods</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_3/post_menopause_bleeding">
+        <label>27. Bleeding after menopause</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_3/post_intercourse_bleeding">
+        <label>28. Bleeding after intercourse</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_3/foul_smelling_vaginal_discharge">
+        <label>29. Foul smelling vaginal discharge</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/group_summary">
+      <label>Assessment Summary</label>
+      <input ref="/data/group_summary/summary_high_risk">
+        <label>Score is greater than 4. This person may be at risk for NCDs and should be prioritized for the weekly NCD day.</label>
+      </input>
+      <input ref="/data/group_summary/summary_low_risk">
+        <label>Score is 4 or below. This person appears to be at low risk for NCDs at this time.</label>
+      </input>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_filled_by">
+        <input ref="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_lbl" appearance="w5">
+          <label>**Filled by:**</label>
+        </input>
+        <input ref="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_val" appearance="w5">
+          <label>
+            <output value=" /data/reporter_name "/>
+          </label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_patient">
+        <input ref="/data/group_summary/grp_lbl_patient/lbl_patient_lbl" appearance="w5">
+          <label>**Patient:**</label>
+        </input>
+        <input ref="/data/group_summary/grp_lbl_patient/lbl_patient_val" appearance="w5">
+          <label>
+            <output value=" /data/patient_name "/>
+          </label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_gender">
+        <input ref="/data/group_summary/grp_lbl_gender/lbl_gender_lbl" appearance="w5">
+          <label>**Gender:**</label>
+        </input>
+        <input ref="/data/group_summary/grp_lbl_gender/lbl_gender_val" appearance="w5">
+          <label>
+            <output value=" /data/inputs/contact/gender "/>
+          </label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_state">
+        <input ref="/data/group_summary/grp_lbl_state/lbl_state_lbl" appearance="w5">
+          <label>**State:**</label>
+        </input>
+        <input ref="/data/group_summary/grp_lbl_state/lbl_state_val" appearance="w5">
+          <label>
+            <output value=" /data/inputs/state "/>
+          </label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_district">
+        <input ref="/data/group_summary/grp_lbl_district/lbl_district_lbl" appearance="w5">
+          <label>**District:**</label>
+        </input>
+        <input ref="/data/group_summary/grp_lbl_district/lbl_district_val" appearance="w5">
+          <label>
+            <output value=" /data/inputs/district "/>
+          </label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_score">
+        <input ref="/data/group_summary/grp_lbl_score/lbl_score_lbl" appearance="w5">
+          <label>**CBAC Total Score:**</label>
+        </input>
+        <input ref="/data/group_summary/grp_lbl_score/lbl_score_val" appearance="w5">
+          <label>
+            <output value=" /data/total_score "/>
+          </label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_risk">
+        <input ref="/data/group_summary/grp_lbl_risk/lbl_risk_lbl" appearance="w5">
+          <label>**Risk Category:**</label>
+        </input>
+        <input ref="/data/group_summary/grp_lbl_risk/lbl_risk_val" appearance="w5">
+          <label>
+            <output value=" /data/risk_category "/>
+          </label>
+        </input>
+      </group>
+    </group>
+  </h:body>
+</h:html>
