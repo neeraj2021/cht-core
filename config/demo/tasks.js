@@ -320,12 +320,6 @@ module.exports = [
       type: 'report',
       form: 'cbac_followup',
       label: 'CBAC Follow-up',
-      modifyContent: function(content, contact) {
-        content['inputs/contact/_id']        = contact.contact._id;
-        content['inputs/contact/patient_id'] = contact.contact.patient_id;
-        content['inputs/contact/name']       = contact.contact.name;
-        content['inputs/contact/gender']     = contact.contact.gender;
-      },
     }],
     events: [{
       id: 'cbac-follow-up',
@@ -357,12 +351,6 @@ module.exports = [
       type: 'report',
       form: 'cbac_followup',
       label: 'CBAC Checkup Follow-up',
-      modifyContent: function(content, contact) {
-        content['inputs/contact/_id']        = contact.contact._id;
-        content['inputs/contact/patient_id'] = contact.contact.patient_id;
-        content['inputs/contact/name']       = contact.contact.name;
-        content['inputs/contact/gender']     = contact.contact.gender;
-      },
     }],
     events: [{
       id: 'cbac-checkup-date-follow-up',
