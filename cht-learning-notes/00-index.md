@@ -17,6 +17,7 @@ Notes from exploring the CHT Core codebase and building a PHQ-9 form.
 | 09 | [09-tasks.md](09-tasks.md) | What tasks are, tasks.js schema, simple/complex examples, deploy & test |
 | 10 | [10-hierarchy-and-contact-types.md](10-hierarchy-and-contact-types.md) | Place hierarchy (district_hospital → health_center → clinic → person), ER diagram, CouchDB queries |
 | 11 | [11-hierarchy-explorer-tool.md](11-hierarchy-explorer-tool.md) | Hierarchy Explorer web app: features, how the tree is built, CORS setup, contact field, quick IDs |
+| 12 | [12-form-visibility-and-permissions.md](12-form-visibility-and-permissions.md) | Controlling form visibility by role: expression in .properties.json vs permissions in app_settings.json |
 
 ## Quick Reference
 
