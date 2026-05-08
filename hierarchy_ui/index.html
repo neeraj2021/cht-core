@@ -1,0 +1,1012 @@
+<!--
+=============================================================
+  CHT HIERARCHY EXPLORER — HOW TO RUN
+=============================================================
+
+  PREREQUISITES
+  -------------
+  - CouchDB running at http://127.0.0.1:5984  (default CHT dev setup)
+  - Python 3  OR  Node.js installed (for the local HTTP server)
+
+  WHY YOU NEED A LOCAL SERVER
+  ---------------------------
+  Browsers block fetch() requests from file:// pages (CORS + mixed-content
+  rules). Serving the file over HTTP from localhost sidesteps both issues.
+
+  STEP 1 — Enable CORS on CouchDB (one-time setup)
+  -------------------------------------------------
+  Run these 5 curl commands once. They persist in CouchDB's config.
+
+    curl -X PUT http://127.0.0.1:5984/_node/_local/_config/httpd/enable_cors \
+      -H 'Authorization: Basic bWVkaWM6cGFzc3dvcmQ=' \
+      -H 'Content-Type: application/json' -d '"true"'
+
+    curl -X PUT http://127.0.0.1:5984/_node/_local/_config/cors/enable \
+      -H 'Authorization: Basic bWVkaWM6cGFzc3dvcmQ=' \
+      -H 'Content-Type: application/json' -d '"true"'
+
+    curl -X PUT http://127.0.0.1:5984/_node/_local/_config/cors/origins \
+      -H 'Authorization: Basic bWVkaWM6cGFzc3dvcmQ=' \
+      -H 'Content-Type: application/json' -d '"*"'
+
+    curl -X PUT http://127.0.0.1:5984/_node/_local/_config/cors/methods \
+      -H 'Authorization: Basic bWVkaWM6cGFzc3dvcmQ=' \
+      -H 'Content-Type: application/json' -d '"GET, POST, PUT, DELETE, OPTIONS"'
+
+    curl -X PUT http://127.0.0.1:5984/_node/_local/_config/cors/headers \
+      -H 'Authorization: Basic bWVkaWM6cGFzc3dvcmQ=' \
+      -H 'Content-Type: application/json' -d '"Accept, Authorization, Content-Type, Origin"'
+
+  STEP 2 — Serve this file over HTTP
+  ------------------------------------
+  Navigate to this file's directory first:
+
+    cd /home/neeraj/cht-core/hierarchy_ui
+
+  Option A — Python 3 (recommended, zero deps):
+    python3 -m http.server 8090
+
+  Option B — Node.js (if Python unavailable):
+    npx serve -p 8090 .
+
+  Option C — Node.js one-liner (no npx):
+    node -e "require('http').createServer((q,r)=>{require('fs').readFile('index.html',(e,d)=>{r.writeHead(200,{'Content-Type':'text/html'});r.end(d)})}).listen(8090)"
+
+  STEP 3 — Open in browser
+  -------------------------
+    http://localhost:8090
+
+  CREDENTIALS (encoded in Authorization header inside this file)
+  ---------------------------------------------------------------
+    Username : medic
+    Password : password
+    Base64   : bWVkaWM6cGFzc3dvcmQ=   (medic:password)
+
+  To change credentials, update the AUTH constant in the <script> section:
+    const AUTH = 'Basic <your-base64-here>';
+
+  Generate base64 for a new user:
+    echo -n "username:password" | base64
+
+  QUICK TEST IDs
+  --------------
+  Paste any of these into the search bar to try the explorer:
+
+    019dfc17-771b-7cce-af60-d7a104b75935  →  TN Health Facility     (district_hospital, root)
+    019dfc18-11ff-7cce-af60-e77996975e13  →  TN Health Center 1     (health_center)
+    019dfc18-97ad-7cce-af60-e9e9cd5fbe46  →  TN Health Area 1       (clinic / household)
+
+  Leave the search bar empty and click Explore to load the full hierarchy
+  of all district_hospital roots.
+
+=============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CHT Hierarchy Explorer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Tree connector lines */
+    .tree-children {
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    .tree-children::before {
+      content: '';
+      position: absolute;
+      left: 0.6rem;
+      top: 0;
+      bottom: 1.2rem;
+      width: 2px;
+      background: #cbd5e1;
+    }
+    .tree-item {
+      position: relative;
+    }
+    .tree-item::before {
+      content: '';
+      position: absolute;
+      left: -0.9rem;
+      top: 1.25rem;
+      width: 0.9rem;
+      height: 2px;
+      background: #cbd5e1;
+    }
+
+    /* Collapse animation */
+    .collapsible {
+      overflow: hidden;
+      transition: max-height 0.25s ease;
+    }
+
+    /* Type badge colors */
+    .badge-district_hospital { background: #dbeafe; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    .badge-health_center     { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+    .badge-clinic            { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+    .badge-person            { background: #ede9fe; color: #5b21b6; border: 1px solid #ddd6fe; }
+    .badge-unknown           { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+
+    /* Card left border per type */
+    .border-district_hospital { border-left: 4px solid #3b82f6; }
+    .border-health_center     { border-left: 4px solid #10b981; }
+    .border-clinic            { border-left: 4px solid #f59e0b; }
+    .border-person            { border-left: 4px solid #8b5cf6; }
+    .border-unknown           { border-left: 4px solid #94a3b8; }
+
+    /* Searched ID highlight — vivid yellow-amber ring + glow */
+    .node-card.is-searched {
+      outline: 3px solid #f59e0b;
+      outline-offset: 2px;
+      box-shadow: 0 0 0 6px rgba(245,158,11,0.15), 0 4px 20px rgba(245,158,11,0.25);
+      background: #fffbeb !important;
+    }
+    /* Small "Searched" tag */
+    .searched-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #f59e0b;
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* Spinner */
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spin { animation: spin 0.8s linear infinite; }
+
+    /* Sidebar slide-in */
+    #sidebar {
+      transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
+    }
+    #sidebar.open {
+      transform: translateX(0);
+    }
+
+    /* JSON syntax highlighting */
+    .json-key   { color: #0f766e; }
+    .json-str   { color: #7c3aed; }
+    .json-num   { color: #b45309; }
+    .json-bool  { color: #dc2626; }
+    .json-null  { color: #6b7280; }
+
+    /* Subtle card hover */
+    .node-card {
+      cursor: pointer;
+      transition: box-shadow 0.15s, background 0.15s;
+    }
+    .node-card:hover {
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    /* Copy button flash */
+    @keyframes copiedFlash {
+      0%   { background: #22c55e; color: #fff; }
+      100% { background: transparent; color: inherit; }
+    }
+    .copy-flash { animation: copiedFlash 0.6s ease forwards; }
+  </style>
+</head>
+<body class="bg-slate-50 min-h-screen font-sans">
+
+  <!-- ─── Header ──────────────────────────────────────────── -->
+  <header class="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-20">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <div class="w-8 h-8 bg-red-600 rounded-md flex items-center justify-center">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 7l9-4 9 4M3 7v10l9 4m0-14v14m9-14v10l-9 4"/>
+          </svg>
+        </div>
+        <span class="font-bold text-slate-800 text-lg hidden sm:inline">CHT Hierarchy Explorer</span>
+      </div>
+      <div class="flex-1 flex gap-2">
+        <input
+          id="idInput"
+          type="text"
+          placeholder="Enter a doc ID — or leave empty to load full hierarchy..."
+          class="flex-1 px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-slate-50"
+        />
+        <button
+          id="exploreBtn"
+          onclick="explore()"
+          class="px-4 py-2 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-sm font-semibold rounded-lg transition-colors flex items-center gap-2 flex-shrink-0"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          Explore
+        </button>
+        <button
+          onclick="clearAll()"
+          class="px-3 py-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 text-sm rounded-lg transition-colors flex-shrink-0"
+          title="Clear"
+        >✕</button>
+      </div>
+    </div>
+    <!-- Legend -->
+    <div class="max-w-6xl mx-auto px-4 pb-2 flex gap-3 flex-wrap items-center">
+      <span class="text-xs text-slate-400">Legend:</span>
+      <span class="text-xs px-2 py-0.5 rounded-full badge-district_hospital">District Hospital</span>
+      <span class="text-xs px-2 py-0.5 rounded-full badge-health_center">Health Center</span>
+      <span class="text-xs px-2 py-0.5 rounded-full badge-clinic">Clinic / Household</span>
+      <span class="text-xs px-2 py-0.5 rounded-full badge-person">Person</span>
+      <span class="ml-2 flex items-center gap-1 text-xs text-slate-400">
+        <span class="inline-block w-3 h-3 rounded-sm bg-amber-400 border border-amber-500"></span>
+        Searched node
+      </span>
+      <span class="ml-auto text-xs text-slate-400">Click any card to inspect full doc →</span>
+    </div>
+  </header>
+
+  <!-- ─── Layout wrapper ───────────────────────────────────── -->
+  <div class="flex max-w-6xl mx-auto">
+
+    <!-- ─── Main content ─────────────────────────────────── -->
+    <main id="mainArea" class="flex-1 px-4 py-6 min-w-0 transition-all duration-200">
+
+      <!-- Empty state -->
+      <div id="emptyState" class="flex flex-col items-center justify-center py-24 text-slate-400">
+        <svg class="w-16 h-16 mb-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M3 7l9-4 9 4M3 7v10l9 4m0-14v14m9-14v10l-9 4"/>
+        </svg>
+        <p class="text-lg font-medium text-slate-500">Enter a doc ID — or leave empty and click Explore</p>
+        <p class="text-sm mt-1 text-center max-w-sm">Leave the search bar <strong>empty</strong> to load the full hierarchy, or paste any doc ID to jump straight to it.</p>
+        <div class="mt-6 p-3 bg-slate-100 rounded-lg text-xs text-slate-500 font-mono max-w-md w-full">
+          <div class="text-slate-400 mb-2 font-sans font-semibold text-xs">Quick IDs to try:</div>
+          <div class="space-y-1.5">
+            <div class="flex gap-2 items-center">
+              <span class="badge-district_hospital px-1.5 py-0.5 rounded text-xs font-sans">H.Facility</span>
+              <span class="cursor-pointer hover:text-blue-600 transition-colors break-all" onclick="tryId('019dfc17-771b-7cce-af60-d7a104b75935')">019dfc17-771b-7cce-af60-d7a104b75935</span>
+            </div>
+            <div class="flex gap-2 items-center">
+              <span class="badge-health_center px-1.5 py-0.5 rounded text-xs font-sans">H.Center</span>
+              <span class="cursor-pointer hover:text-blue-600 transition-colors break-all" onclick="tryId('019dfc18-11ff-7cce-af60-e77996975e13')">019dfc18-11ff-7cce-af60-e77996975e13</span>
+            </div>
+            <div class="flex gap-2 items-center">
+              <span class="badge-clinic px-1.5 py-0.5 rounded text-xs font-sans">Clinic</span>
+              <span class="cursor-pointer hover:text-blue-600 transition-colors break-all" onclick="tryId('019dfc18-97ad-7cce-af60-e9e9cd5fbe46')">019dfc18-97ad-7cce-af60-e9e9cd5fbe46</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error state -->
+      <div id="errorState" class="hidden bg-red-50 border border-red-200 rounded-xl p-4 flex items-start gap-3 mb-4">
+        <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <div>
+          <p class="text-red-700 font-semibold text-sm">Error</p>
+          <p id="errorMsg" class="text-red-600 text-sm mt-0.5"></p>
+        </div>
+      </div>
+
+      <!-- Loading state -->
+      <div id="loadingState" class="hidden flex flex-col items-center justify-center py-20 gap-3">
+        <svg class="w-8 h-8 text-blue-500 spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+        </svg>
+        <p id="loadingMsg" class="text-slate-500 text-sm">Loading hierarchy...</p>
+      </div>
+
+      <!-- Stats bar -->
+      <div id="statsBar" class="hidden mb-4 p-3 bg-white rounded-xl border border-slate-200 flex flex-wrap gap-3 text-sm text-slate-600 items-center">
+        <span class="font-semibold text-slate-700">Summary:</span>
+        <span id="statRoot" class="text-slate-600"></span>
+        <span id="statCounts" class="flex gap-2 flex-wrap"></span>
+        <span id="statDepth" class="text-slate-400 text-xs ml-auto"></span>
+      </div>
+
+      <!-- Tree output -->
+      <div id="treeOutput" class="hidden"></div>
+
+    </main>
+
+    <!-- ─── Sidebar ──────────────────────────────────────── -->
+    <aside
+      id="sidebar"
+      class="fixed top-0 right-0 h-full w-96 bg-white border-l border-slate-200 shadow-2xl z-30 flex flex-col"
+      style="transform: translateX(100%);"
+    >
+      <!-- Sidebar header -->
+      <div class="flex items-center justify-between px-4 py-3 border-b border-slate-200 flex-shrink-0">
+        <div class="flex items-center gap-2 min-w-0">
+          <span id="sidebarTypeIcon" class="p-1.5 rounded-lg flex-shrink-0"></span>
+          <div class="min-w-0">
+            <div id="sidebarName" class="font-semibold text-slate-800 text-sm truncate"></div>
+            <div id="sidebarTypeBadge" class="mt-0.5"></div>
+          </div>
+        </div>
+        <button onclick="closeSidebar()" class="text-slate-400 hover:text-slate-600 ml-2 flex-shrink-0 p-1 rounded hover:bg-slate-100 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- ID row with copy button -->
+      <div class="px-4 py-2.5 border-b border-slate-100 flex items-center gap-2 bg-slate-50">
+        <span class="text-xs text-slate-400 flex-shrink-0">ID:</span>
+        <code id="sidebarId" class="text-xs text-slate-700 font-mono flex-1 truncate"></code>
+        <button
+          id="copyBtn"
+          onclick="copyId()"
+          title="Copy ID"
+          class="flex-shrink-0 flex items-center gap-1 text-xs text-slate-500 hover:text-blue-600 px-2 py-1 rounded border border-slate-200 hover:border-blue-300 bg-white transition-colors"
+        >
+          <svg id="copyIcon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+          </svg>
+          <span id="copyLabel">Copy</span>
+        </button>
+      </div>
+
+      <!-- View toggle -->
+      <div class="px-4 py-2 border-b border-slate-100 flex gap-1">
+        <button
+          id="tabFormatted"
+          onclick="switchTab('formatted')"
+          class="flex-1 py-1.5 text-xs font-semibold rounded-md bg-blue-600 text-white transition-colors"
+        >Formatted</button>
+        <button
+          id="tabRaw"
+          onclick="switchTab('raw')"
+          class="flex-1 py-1.5 text-xs font-semibold rounded-md text-slate-500 hover:bg-slate-100 transition-colors"
+        >Raw JSON</button>
+      </div>
+
+      <!-- Formatted view -->
+      <div id="sidebarFormatted" class="flex-1 overflow-y-auto px-4 py-3 space-y-1.5 text-sm">
+
+        <!-- Associated Contact card — injected here when present -->
+        <div id="contactSection" class="hidden mb-3">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wide">Associated Contact</span>
+            <div class="flex-1 h-px bg-slate-100"></div>
+          </div>
+          <!-- contact loading -->
+          <div id="contactLoading" class="hidden flex items-center gap-2 py-2 text-xs text-slate-400">
+            <svg class="w-3.5 h-3.5 spin text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+            Loading contact…
+          </div>
+          <!-- contact error -->
+          <div id="contactError" class="hidden text-xs text-red-400 py-1"></div>
+          <!-- contact card -->
+          <div id="contactCard" class="hidden rounded-xl border border-purple-200 bg-purple-50 p-3 cursor-pointer hover:bg-purple-100 transition-colors"
+               onclick="openSidebar(window._contactId)">
+            <div class="flex items-start gap-2">
+              <span class="badge-person p-1.5 rounded-lg flex-shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                </svg>
+              </span>
+              <div class="flex-1 min-w-0">
+                <div id="contactName" class="font-semibold text-slate-800 text-xs"></div>
+                <div class="flex items-center gap-1 mt-0.5">
+                  <code id="contactId" class="text-xs text-slate-400 font-mono truncate flex-1"></code>
+                  <button
+                    onclick="event.stopPropagation(); copyToClipboard(window._contactId, this)"
+                    title="Copy contact ID"
+                    class="flex-shrink-0 p-0.5 rounded text-slate-300 hover:text-blue-500 transition-colors"
+                  >
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- contact detail rows -->
+            <div id="contactDetails" class="mt-2.5 grid grid-cols-2 gap-x-3 gap-y-1 text-xs text-slate-600"></div>
+            <p class="mt-2 text-xs text-purple-400 italic">Click to inspect full contact doc →</p>
+          </div>
+        </div>
+
+        <!-- Doc fields label -->
+        <div class="flex items-center gap-2 mb-1">
+          <span class="text-xs font-bold text-slate-500 uppercase tracking-wide">Document Fields</span>
+          <div class="flex-1 h-px bg-slate-100"></div>
+        </div>
+
+      </div>
+
+      <!-- Raw JSON view -->
+      <div id="sidebarRaw" class="hidden flex-1 overflow-y-auto">
+        <pre id="sidebarRawPre" class="text-xs font-mono p-4 text-slate-700 whitespace-pre-wrap break-all leading-relaxed"></pre>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Sidebar backdrop -->
+  <div id="sidebarBackdrop" class="hidden fixed inset-0 bg-black/20 z-20" onclick="closeSidebar()"></div>
+
+  <script>
+    const COUCH_BASE = 'http://127.0.0.1:5984/medic';
+    const AUTH       = 'Basic bWVkaWM6cGFzc3dvcmQ=';
+
+    const TYPE_LABELS = {
+      district_hospital: 'District Hospital',
+      health_center:     'Health Center',
+      clinic:            'Clinic / Household',
+      person:            'Person',
+    };
+
+    const TYPE_ICONS = {
+      district_hospital: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>`,
+      health_center:     `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>`,
+      clinic:            `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>`,
+      person:            `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>`,
+    };
+
+    // ── State ─────────────────────────────────────────────────
+    let searchedId   = null;   // the ID that was explicitly searched
+    let sidebarDocId = null;   // ID shown in sidebar (for copy)
+    let nodeCounter  = 0;
+    const stats      = { counts: {}, maxDepth: 0 };
+
+    // ── CouchDB helpers ───────────────────────────────────────
+
+    async function fetchDoc(id) {
+      const res = await fetch(`${COUCH_BASE}/${encodeURIComponent(id)}`, {
+        headers: { Authorization: AUTH, Accept: 'application/json' }
+      });
+      if (res.status === 404) throw new Error(`Document not found: ${id}`);
+      if (!res.ok)            throw new Error(`CouchDB error ${res.status} for id: ${id}`);
+      return res.json();
+    }
+
+    async function fetchChildren(parentId) {
+      const res = await fetch(`${COUCH_BASE}/_find`, {
+        method: 'POST',
+        headers: { Authorization: AUTH, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          selector: { 'parent._id': parentId },
+          limit: 500,
+        })
+      });
+      if (!res.ok) throw new Error(`Failed to fetch children of ${parentId}`);
+      const data = await res.json();
+      return data.docs || [];
+    }
+
+    async function fetchAllRoots() {
+      const res = await fetch(`${COUCH_BASE}/_find`, {
+        method: 'POST',
+        headers: { Authorization: AUTH, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          selector: { type: 'district_hospital' },
+          limit: 200,
+        })
+      });
+      if (!res.ok) throw new Error('Failed to fetch root documents');
+      const data = await res.json();
+      return data.docs || [];
+    }
+
+    function extractAncestry(doc) {
+      const chain = [];
+      let p = doc.parent;
+      while (p && p._id) { chain.push(p._id); p = p.parent; }
+      return chain;
+    }
+
+    async function fetchAncestors(doc) {
+      const ids = extractAncestry(doc);
+      if (!ids.length) return [];
+      return Promise.all(ids.map(id => fetchDoc(id).catch(() => ({ _id: id, name: id, type: 'unknown' }))));
+    }
+
+    // ── Tree building ─────────────────────────────────────────
+
+    async function buildSubtree(doc, depth = 0) {
+      const type = doc.type || 'unknown';
+      stats.counts[type] = (stats.counts[type] || 0) + 1;
+      if (depth > stats.maxDepth) stats.maxDepth = depth;
+      const node = { doc, children: [] };
+      if (type !== 'person') {
+        setLoading(`Loading children of "${doc.name || doc._id}"…`);
+        const children = await fetchChildren(doc._id);
+        node.children = await Promise.all(children.map(c => buildSubtree(c, depth + 1)));
+      }
+      return node;
+    }
+
+    // ── UI helpers ────────────────────────────────────────────
+
+    function setLoading(msg) { document.getElementById('loadingMsg').textContent = msg; }
+    function show(id) { document.getElementById(id).classList.remove('hidden'); }
+    function hide(id) { document.getElementById(id).classList.add('hidden'); }
+    function showError(msg) { document.getElementById('errorMsg').textContent = msg; show('errorState'); }
+    function formatDate(ts) {
+      if (!ts) return null;
+      return new Date(ts).toLocaleDateString('en-IN', { year:'numeric', month:'short', day:'numeric' });
+    }
+
+    // ── Card rendering ────────────────────────────────────────
+
+    function renderCard(doc, isSearchedNode = false) {
+      const type     = doc.type || 'unknown';
+      const icon     = TYPE_ICONS[type] || TYPE_ICONS.person;
+      const reported = formatDate(doc.reported_date);
+      const dob      = doc.date_of_birth ? `<span class="text-slate-400">DOB:</span> ${doc.date_of_birth}` : '';
+      const phone    = doc.phone         ? `<span class="text-slate-400">Phone:</span> ${doc.phone}` : '';
+      const sex      = doc.sex           ? `<span class="text-slate-400">Sex:</span> ${doc.sex}` : '';
+      const shortId  = doc.place_id || doc.patient_id || doc.external_id;
+      const shortTag = shortId ? `<span class="text-slate-400">Short ID:</span> ${shortId}` : '';
+      const extras   = [dob, phone, sex, shortTag,
+        reported ? `<span class="text-slate-400">Created:</span> ${reported}` : ''
+      ].filter(Boolean);
+
+      const searchedClass = isSearchedNode ? 'is-searched' : '';
+      const searchedTag   = isSearchedNode
+        ? `<span class="searched-tag">
+            <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>Searched
+           </span>`
+        : '';
+
+      // ID row with inline copy button
+      const idRow = `
+        <div class="flex items-center gap-1 mt-0.5">
+          <span class="text-xs text-slate-400 font-mono truncate flex-1">${doc._id}</span>
+          <button
+            onclick="event.stopPropagation(); copyToClipboard('${doc._id}', this)"
+            title="Copy ID"
+            class="flex-shrink-0 p-0.5 rounded text-slate-300 hover:text-blue-500 transition-colors"
+          >
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+            </svg>
+          </button>
+        </div>`;
+
+      return `
+        <div
+          class="node-card bg-white rounded-xl border border-slate-200 border-${type} shadow-sm p-4 ${searchedClass}"
+          onclick="openSidebar('${doc._id}')"
+          data-id="${doc._id}"
+        >
+          <div class="flex items-start justify-between gap-2 flex-wrap">
+            <div class="flex items-center gap-2 min-w-0 flex-1">
+              <span class="badge-${type} p-1.5 rounded-lg flex-shrink-0">${icon}</span>
+              <div class="min-w-0 flex-1">
+                <div class="font-semibold text-slate-800 text-sm truncate">${doc.name || '(unnamed)'}</div>
+                ${idRow}
+              </div>
+            </div>
+            <div class="flex items-center gap-2 flex-shrink-0 flex-wrap justify-end">
+              ${doc.role ? `<span class="text-xs px-2 py-0.5 rounded-full font-medium whitespace-nowrap bg-slate-100 text-slate-600 border border-slate-200">${doc.role}</span>` : ''}
+              <span class="badge-${type} text-xs px-2 py-0.5 rounded-full font-medium whitespace-nowrap">
+                ${TYPE_LABELS[type] || type}
+              </span>
+              ${searchedTag}
+            </div>
+          </div>
+          ${extras.length ? `
+          <div class="mt-2.5 flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-600">
+            ${extras.map(e => `<span>${e}</span>`).join('')}
+          </div>` : ''}
+        </div>`;
+    }
+
+    // ── Tree rendering ────────────────────────────────────────
+
+    function renderTree(node) {
+      const id          = `node-${nodeCounter++}`;
+      const hasChildren = node.children && node.children.length > 0;
+      const isSearched  = node.doc._id === searchedId;
+
+      const childrenHtml = hasChildren
+        ? node.children.map(c => `<div class="tree-item mt-2">${renderTree(c)}</div>`).join('')
+        : '';
+
+      const toggleBtn = hasChildren ? `
+        <button
+          onclick="toggleNode('${id}')"
+          id="btn-${id}"
+          class="mt-2 text-xs text-slate-500 hover:text-blue-600 flex items-center gap-1 transition-colors"
+        >
+          <svg id="chevron-${id}" class="w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+          <span id="btnlabel-${id}">${node.children.length} child${node.children.length !== 1 ? 'ren' : ''}</span>
+        </button>` : '';
+
+      return `
+        <div>
+          ${renderCard(node.doc, isSearched)}
+          ${toggleBtn}
+          ${hasChildren ? `
+          <div id="${id}" class="collapsible tree-children" style="max-height: 999999px;">
+            ${childrenHtml}
+          </div>` : ''}
+        </div>`;
+    }
+
+    function toggleNode(id) {
+      const el      = document.getElementById(id);
+      const chevron = document.getElementById(`chevron-${id}`);
+      const label   = document.getElementById(`btnlabel-${id}`);
+      if (!el) return;
+      const isOpen = el.style.maxHeight !== '0px';
+      if (isOpen) {
+        el.style.maxHeight    = '0px';
+        chevron.style.transform = 'rotate(-90deg)';
+        const count = el.querySelectorAll('.node-card').length;
+        label.textContent = `Show ${count} item${count !== 1 ? 's' : ''}`;
+      } else {
+        el.style.maxHeight    = '999999px';
+        chevron.style.transform = '';
+        const num = label.textContent.match(/\d+/)?.[0];
+        label.textContent = num ? `${num} child${parseInt(num) !== 1 ? 'ren' : ''}` : 'children';
+      }
+    }
+
+    // ── Breadcrumb ────────────────────────────────────────────
+
+    function renderBreadcrumb(ancestors, rootDoc) {
+      const all = [...ancestors].reverse();
+      if (!all.length) return '';
+      const crumbs = all.map(a => `
+        <span class="badge-${a.type || 'unknown'} text-xs px-2 py-0.5 rounded-full cursor-pointer hover:opacity-80 transition-opacity"
+              onclick="tryId('${a._id}')" title="Explore ${a.name || a._id}">
+          ${a.name || a._id}
+        </span>
+        <svg class="w-3 h-3 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>`).join('');
+
+      return `
+        <div class="mb-4 p-3 bg-white rounded-xl border border-slate-200 flex items-center gap-1.5 flex-wrap text-sm overflow-x-auto">
+          <span class="text-xs text-slate-400 mr-1 flex-shrink-0">Ancestry:</span>
+          ${crumbs}
+          <span class="badge-${rootDoc.type || 'unknown'} text-xs px-2 py-0.5 rounded-full font-semibold">
+            ${rootDoc.name || rootDoc._id}
+          </span>
+        </div>`;
+    }
+
+    // ── Main explore ──────────────────────────────────────────
+
+    async function explore(inputId) {
+      const id = inputId !== undefined ? inputId : document.getElementById('idInput').value.trim();
+      searchedId = id || null;
+
+      hide('emptyState');
+      hide('errorState');
+      hide('treeOutput');
+      hide('statsBar');
+      show('loadingState');
+      setLoading('Fetching documents…');
+      nodeCounter = 0;
+      Object.keys(stats.counts).forEach(k => delete stats.counts[k]);
+      stats.maxDepth = 0;
+
+      try {
+        if (!id) {
+          // ── Empty search: load all district_hospital roots ──
+          setLoading('Finding all root nodes…');
+          const roots = await fetchAllRoots();
+          if (!roots.length) throw new Error('No district_hospital documents found in the medic database.');
+
+          const trees = await Promise.all(roots.map(r => buildSubtree(r, 0)));
+          hide('loadingState');
+
+          const forestHtml = trees.map((tree, i) =>
+            `<div class="${i > 0 ? 'mt-6' : ''}">${renderTree(tree)}</div>`
+          ).join('');
+          document.getElementById('treeOutput').innerHTML = forestHtml;
+
+          document.getElementById('statRoot').innerHTML =
+            `<span class="font-medium">Full hierarchy (${roots.length} root${roots.length !== 1 ? 's' : ''})</span>`;
+
+        } else {
+          // ── ID search: fetch that doc + ancestors + subtree ──
+          const rootDoc = await fetchDoc(id);
+          setLoading('Fetching parent chain…');
+          const [ancestors, tree] = await Promise.all([
+            fetchAncestors(rootDoc),
+            buildSubtree(rootDoc, 0),
+          ]);
+          hide('loadingState');
+
+          const breadcrumb = renderBreadcrumb(ancestors, rootDoc);
+          document.getElementById('treeOutput').innerHTML = breadcrumb + renderTree(tree);
+
+          document.getElementById('statRoot').innerHTML =
+            `<span class="font-medium">${rootDoc.name || rootDoc._id}</span>`;
+
+          // Scroll to and briefly pulse the searched card
+          setTimeout(() => {
+            const el = document.querySelector('.node-card.is-searched');
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 100);
+        }
+
+        show('treeOutput');
+
+        // Stats bar
+        const countsHtml = Object.entries(stats.counts)
+          .map(([t, n]) => `<span class="badge-${t} px-2 py-0.5 rounded-full text-xs">${n} ${TYPE_LABELS[t] || t}</span>`)
+          .join('');
+        document.getElementById('statCounts').innerHTML = countsHtml;
+        document.getElementById('statDepth').textContent = `Depth: ${stats.maxDepth}`;
+        show('statsBar');
+
+      } catch (err) {
+        hide('loadingState');
+        showError(err.message);
+      }
+    }
+
+    function tryId(id) {
+      document.getElementById('idInput').value = id;
+      explore(id);
+    }
+
+    function clearAll() {
+      document.getElementById('idInput').value = '';
+      searchedId = null;
+      closeSidebar();
+      hide('treeOutput');
+      hide('statsBar');
+      hide('errorState');
+      hide('loadingState');
+      show('emptyState');
+    }
+
+    // ── Sidebar ───────────────────────────────────────────────
+
+    const docCache = {};
+
+    async function openSidebar(id) {
+      sidebarDocId = id;
+      const sidebar = document.getElementById('sidebar');
+
+      // Show loading state in sidebar immediately
+      document.getElementById('sidebarName').textContent      = 'Loading…';
+      document.getElementById('sidebarId').textContent        = id;
+      document.getElementById('sidebarTypeBadge').innerHTML   = '';
+      document.getElementById('sidebarTypeIcon').innerHTML    = '';
+      document.getElementById('sidebarRawPre').textContent    = '';
+      // Clear old field rows but keep static structure intact
+      document.querySelectorAll('.doc-field-row').forEach(r => r.remove());
+      document.getElementById('contactSection').classList.add('hidden');
+      document.getElementById('contactCard').classList.add('hidden');
+      document.getElementById('contactError').classList.add('hidden');
+      document.getElementById('contactLoading').classList.add('hidden');
+      switchTab('formatted');
+
+      sidebar.classList.add('open');
+      sidebar.style.transform = 'translateX(0)';
+      show('sidebarBackdrop');
+
+      try {
+        // Use cache to avoid re-fetching
+        if (!docCache[id]) docCache[id] = await fetchDoc(id);
+        const doc = docCache[id];
+        populateSidebar(doc);
+      } catch (err) {
+        document.getElementById('sidebarFormatted').innerHTML =
+          `<p class="text-red-500 text-xs">${err.message}</p>`;
+      }
+    }
+
+    function populateSidebar(doc) {
+      const type = doc.type || 'unknown';
+      document.getElementById('sidebarName').textContent    = doc.name || '(unnamed)';
+      document.getElementById('sidebarId').textContent      = doc._id;
+      document.getElementById('sidebarTypeIcon').className  = `badge-${type} p-1.5 rounded-lg flex-shrink-0`;
+      document.getElementById('sidebarTypeIcon').innerHTML  = TYPE_ICONS[type] || TYPE_ICONS.person;
+      document.getElementById('sidebarTypeBadge').innerHTML =
+        `<span class="badge-${type} text-xs px-2 py-0.5 rounded-full">${TYPE_LABELS[type] || type}</span>`;
+
+      // Inject doc field rows into the formatted container (after the static HTML sections)
+      const fieldsContainer = document.getElementById('sidebarFormatted');
+      // Remove old field rows (everything after the doc-fields label div)
+      const oldRows = fieldsContainer.querySelectorAll('.doc-field-row');
+      oldRows.forEach(r => r.remove());
+      const fieldRowsHtml = renderFieldRows(doc);
+      fieldsContainer.insertAdjacentHTML('beforeend', fieldRowsHtml);
+
+      // Raw JSON with syntax highlighting
+      document.getElementById('sidebarRawPre').innerHTML = syntaxHighlight(JSON.stringify(doc, null, 2));
+
+      // Associated contact
+      populateContact(doc);
+    }
+
+    async function populateContact(doc) {
+      const contactSection = document.getElementById('contactSection');
+      const contactLoading = document.getElementById('contactLoading');
+      const contactError   = document.getElementById('contactError');
+      const contactCard    = document.getElementById('contactCard');
+
+      // Reset
+      contactSection.classList.add('hidden');
+      contactCard.classList.add('hidden');
+      contactError.classList.add('hidden');
+      contactLoading.classList.add('hidden');
+
+      const contactId = doc.contact?._id;
+      if (!contactId) return;
+
+      // Show section + spinner
+      contactSection.classList.remove('hidden');
+      contactLoading.classList.remove('hidden');
+      window._contactId = contactId;
+
+      try {
+        if (!docCache[contactId]) docCache[contactId] = await fetchDoc(contactId);
+        const c = docCache[contactId];
+        window._contactId = contactId;
+
+        document.getElementById('contactName').textContent = c.name || '(unnamed)';
+        document.getElementById('contactId').textContent   = contactId;
+
+        // Build detail pills
+        const details = [
+          c.role          && ['Role',   c.role],
+          c.sex           && ['Sex',    c.sex],
+          c.phone         && ['Phone',  c.phone],
+          c.date_of_birth && ['DOB',    c.date_of_birth],
+          c.patient_id    && ['Pat. ID',c.patient_id],
+          c.external_id   && ['Ext. ID',c.external_id],
+          c.reported_date && ['Created',formatDate(c.reported_date)],
+        ].filter(Boolean);
+
+        document.getElementById('contactDetails').innerHTML = details.map(([label, val]) => `
+          <div>
+            <span class="text-slate-400 font-semibold">${label}: </span>
+            <span class="text-slate-700">${val}</span>
+          </div>`).join('');
+
+        contactLoading.classList.add('hidden');
+        contactCard.classList.remove('hidden');
+      } catch (err) {
+        contactLoading.classList.add('hidden');
+        contactError.classList.remove('hidden');
+        contactError.textContent = `Could not load contact: ${err.message}`;
+      }
+    }
+
+    function renderFieldRows(doc) {
+      const skip = new Set(['_id', '_rev']);
+      const revRow = `
+        <div class="doc-field-row flex gap-2 py-1.5 border-b border-slate-50 px-1">
+          <span class="text-xs font-semibold text-slate-500 w-32 flex-shrink-0 pt-0.5">_rev</span>
+          <span class="text-xs text-slate-400 font-mono flex-1 break-all">${doc._rev || ''}</span>
+        </div>`;
+
+      const rows = Object.entries(doc)
+        .filter(([k]) => !skip.has(k))
+        .map(([k, v]) => `
+          <div class="doc-field-row flex gap-2 py-1.5 border-b border-slate-50 hover:bg-slate-50 rounded px-1 transition-colors">
+            <span class="text-xs font-semibold text-slate-500 w-32 flex-shrink-0 pt-0.5">${k}</span>
+            <span class="text-xs text-slate-700 flex-1 break-all">${renderValue(v)}</span>
+          </div>`).join('');
+
+      return revRow + rows;
+    }
+
+    function renderValue(v) {
+      if (v === null || v === undefined || v === '') return '<span class="text-slate-300 italic">empty</span>';
+      if (typeof v === 'boolean') return `<span class="${v ? 'text-green-600' : 'text-red-500'} font-semibold">${v}</span>`;
+      if (typeof v === 'number') return `<span class="text-amber-700">${v}</span>`;
+      if (typeof v === 'string') {
+        // Detect dates
+        if (/^\d{4}-\d{2}-\d{2}/.test(v)) return `<span class="text-indigo-600">${v}</span>`;
+        if (v.length > 80) return `<span title="${v}">${v.substring(0, 80)}<span class="text-slate-400">…</span></span>`;
+        return v;
+      }
+      if (Array.isArray(v)) {
+        if (!v.length) return '<span class="text-slate-300 italic">[]</span>';
+        return `<span class="text-slate-400">[${v.length} item${v.length !== 1 ? 's' : ''}]</span>
+          <details class="inline ml-1 cursor-pointer">
+            <summary class="text-xs text-blue-500 hover:underline inline">show</summary>
+            <div class="mt-1 pl-2 border-l-2 border-slate-200 space-y-0.5">
+              ${v.map(i => `<div>${renderValue(i)}</div>`).join('')}
+            </div>
+          </details>`;
+      }
+      if (typeof v === 'object') {
+        const keys = Object.keys(v);
+        if (!keys.length) return '<span class="text-slate-300 italic">{}</span>';
+        return `<details class="cursor-pointer">
+          <summary class="text-xs text-blue-500 hover:underline">{${keys.slice(0,3).join(', ')}${keys.length > 3 ? '…' : ''}}</summary>
+          <div class="mt-1 pl-2 border-l-2 border-slate-200 space-y-0.5">
+            ${keys.map(k => `
+              <div class="flex gap-2">
+                <span class="text-xs font-semibold text-slate-400 w-24 flex-shrink-0">${k}</span>
+                <span class="text-xs text-slate-600 flex-1 break-all">${renderValue(v[k])}</span>
+              </div>`).join('')}
+          </div>
+        </details>`;
+      }
+      return String(v);
+    }
+
+    function syntaxHighlight(json) {
+      return json
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, match => {
+          if (/^"/.test(match)) {
+            if (/:$/.test(match)) return `<span class="json-key">${match}</span>`;
+            return `<span class="json-str">${match}</span>`;
+          }
+          if (/true|false/.test(match)) return `<span class="json-bool">${match}</span>`;
+          if (/null/.test(match))       return `<span class="json-null">${match}</span>`;
+          return `<span class="json-num">${match}</span>`;
+        });
+    }
+
+    function closeSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.style.transform = 'translateX(100%)';
+      hide('sidebarBackdrop');
+      sidebarDocId = null;
+    }
+
+    function switchTab(tab) {
+      const isFormatted = tab === 'formatted';
+      document.getElementById('sidebarFormatted').classList.toggle('hidden', !isFormatted);
+      document.getElementById('sidebarRaw').classList.toggle('hidden', isFormatted);
+      document.getElementById('tabFormatted').className =
+        `flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors ${isFormatted ? 'bg-blue-600 text-white' : 'text-slate-500 hover:bg-slate-100'}`;
+      document.getElementById('tabRaw').className =
+        `flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors ${!isFormatted ? 'bg-blue-600 text-white' : 'text-slate-500 hover:bg-slate-100'}`;
+    }
+
+    // ── Copy to clipboard ─────────────────────────────────────
+
+    function copyToClipboard(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.innerHTML;
+        btn.innerHTML = `<svg class="w-3 h-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>`;
+        setTimeout(() => { btn.innerHTML = orig; }, 1500);
+      });
+    }
+
+    function copyId() {
+      if (!sidebarDocId) return;
+      navigator.clipboard.writeText(sidebarDocId).then(() => {
+        document.getElementById('copyLabel').textContent = 'Copied!';
+        document.getElementById('copyBtn').classList.add('border-green-300', 'text-green-600');
+        setTimeout(() => {
+          document.getElementById('copyLabel').textContent = 'Copy';
+          document.getElementById('copyBtn').classList.remove('border-green-300', 'text-green-600');
+        }, 1500);
+      });
+    }
+
+    // ── Keyboard shortcuts ────────────────────────────────────
+
+    document.getElementById('idInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') explore();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeSidebar();
+    });
+  </script>
+</body>
+</html>
