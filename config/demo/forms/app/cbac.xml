@@ -39,6 +39,7 @@
           <instructions/>
           <total_question/>
           <page_1>
+            <generated_note_name_30/>
             <age_range/>
             <smoke_frequency/>
             <alcohol_frequency/>
@@ -47,6 +48,8 @@
             <family_medical_history/>
           </page_1>
           <page_2>
+            <generated_note_name_42/>
+            <generated_note_name_43/>
             <shortness_of_breath/>
             <cough_more_than_2_weeks/>
             <blood_in_sputum/>
@@ -65,6 +68,8 @@
             <loss_of_sensation/>
           </page_2>
           <page_3>
+            <generated_note_name_64/>
+            <generated_note_name_65/>
             <breast_lump/>
             <nipple_discharge/>
             <breast_shape_size_change/>
@@ -73,39 +78,22 @@
             <post_intercourse_bleeding/>
             <foul_smelling_vaginal_discharge/>
           </page_3>
+          <page_4>
+            <fuel_type_for_cooking/>
+            <occupational_exposure/>
+          </page_4>
           <total_score/>
           <risk_category/>
           <group_summary>
             <summary_high_risk/>
             <summary_low_risk/>
-            <grp_lbl_filled_by>
-              <lbl_filled_by_lbl/>
-              <lbl_filled_by_val/>
-            </grp_lbl_filled_by>
-            <grp_lbl_patient>
-              <lbl_patient_lbl/>
-              <lbl_patient_val/>
-            </grp_lbl_patient>
-            <grp_lbl_gender>
-              <lbl_gender_lbl/>
-              <lbl_gender_val/>
-            </grp_lbl_gender>
-            <grp_lbl_state>
-              <lbl_state_lbl/>
-              <lbl_state_val/>
-            </grp_lbl_state>
-            <grp_lbl_district>
-              <lbl_district_lbl/>
-              <lbl_district_val/>
-            </grp_lbl_district>
-            <grp_lbl_score>
-              <lbl_score_lbl/>
-              <lbl_score_val/>
-            </grp_lbl_score>
-            <grp_lbl_risk>
-              <lbl_risk_lbl/>
-              <lbl_risk_val/>
-            </grp_lbl_risk>
+            <lbl_filled_by/>
+            <lbl_patient_val/>
+            <lbl_gender_val/>
+            <lbl_state_val/>
+            <lbl_district_val/>
+            <lbl_score_val/>
+            <lbl_risk_val/>
           </group_summary>
           <meta tag="hidden">
             <instanceID/>
@@ -419,6 +407,46 @@
           </item>
         </root>
       </instance>
+      <instance id="fuel_type">
+        <root>
+          <item>
+            <name>firewood</name>
+            <label>Firewood</label>
+          </item>
+          <item>
+            <name>crop_residue</name>
+            <label>Crop Residue</label>
+          </item>
+          <item>
+            <name>cow_dung_cake</name>
+            <label>Cow dung cake</label>
+          </item>
+          <item>
+            <name>coal</name>
+            <label>Coal</label>
+          </item>
+          <item>
+            <name>kerosene</name>
+            <label>Kerosene</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="occupational_exposure">
+        <root>
+          <item>
+            <name>crop_residue_burning</name>
+            <label>Crop residue burning/burning of garbage – leaves</label>
+          </item>
+          <item>
+            <name>working_in_industries</name>
+            <label>Working in industries with smoke</label>
+          </item>
+          <item>
+            <name>gas_and_dust_exposure</name>
+            <label>gas and dust exposure such as brick kilns and glass factories</label>
+          </item>
+        </root>
+      </instance>
       <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
       <bind nodeset="/data/patient_uuid" type="string" calculate="../inputs/contact/_id"/>
       <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
@@ -438,12 +466,15 @@
       <bind nodeset="/data/inputs/district" type="string" required="true()"/>
       <bind nodeset="/data/instructions" readonly="true()" type="string"/>
       <bind nodeset="/data/total_question" type="string" calculate="if( /data/inputs/contact/gender  = 'male', '22', '29')"/>
+      <bind nodeset="/data/page_1/generated_note_name_30" readonly="true()" type="string"/>
       <bind nodeset="/data/page_1/age_range" type="string" required="true()"/>
       <bind nodeset="/data/page_1/smoke_frequency" type="string" required="true()"/>
       <bind nodeset="/data/page_1/alcohol_frequency" type="string" required="true()"/>
       <bind nodeset="/data/page_1/waist_size" type="string" required="true()"/>
       <bind nodeset="/data/page_1/physical_activities_frequency" type="string" required="true()"/>
       <bind nodeset="/data/page_1/family_medical_history" type="string" required="true()"/>
+      <bind nodeset="/data/page_2/generated_note_name_42" readonly="true()" type="string"/>
+      <bind nodeset="/data/page_2/generated_note_name_43" readonly="true()" type="string"/>
       <bind nodeset="/data/page_2/shortness_of_breath" type="string"/>
       <bind nodeset="/data/page_2/cough_more_than_2_weeks" type="string"/>
       <bind nodeset="/data/page_2/blood_in_sputum" type="string"/>
@@ -461,6 +492,8 @@
       <bind nodeset="/data/page_2/difficulty_holding_objects" type="string"/>
       <bind nodeset="/data/page_2/loss_of_sensation" type="string"/>
       <bind nodeset="/data/page_3" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3/generated_note_name_64" readonly="true()" type="string"/>
+      <bind nodeset="/data/page_3/generated_note_name_65" readonly="true()" type="string"/>
       <bind nodeset="/data/page_3/breast_lump" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
       <bind nodeset="/data/page_3/nipple_discharge" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
       <bind nodeset="/data/page_3/breast_shape_size_change" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
@@ -468,31 +501,26 @@
       <bind nodeset="/data/page_3/post_menopause_bleeding" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
       <bind nodeset="/data/page_3/post_intercourse_bleeding" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
       <bind nodeset="/data/page_3/foul_smelling_vaginal_discharge" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_4/fuel_type_for_cooking" type="string"/>
+      <bind nodeset="/data/page_4/occupational_exposure" type="string"/>
       <bind nodeset="/data/total_score" type="string" calculate=" /data/page_1/age_range  +  /data/page_1/smoke_frequency  +  /data/page_1/alcohol_frequency  +  /data/page_1/waist_size  +  /data/page_1/physical_activities_frequency  +  /data/page_1/family_medical_history "/>
       <bind nodeset="/data/risk_category" type="string" calculate="if( /data/total_score  &gt; 4, 'High Risk', 'Low Risk')"/>
       <bind nodeset="/data/group_summary/summary_high_risk" readonly="true()" type="string" relevant=" /data/total_score  &gt; 4"/>
       <bind nodeset="/data/group_summary/summary_low_risk" readonly="true()" type="string" relevant=" /data/total_score  &lt;= 4"/>
-      <bind nodeset="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_lbl" readonly="true()" type="string" calculate="'Filled by'"/>
-      <bind nodeset="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_val" readonly="true()" type="string" calculate=" /data/reporter_name "/>
-      <bind nodeset="/data/group_summary/grp_lbl_patient/lbl_patient_lbl" readonly="true()" type="string" calculate="'Patient'"/>
-      <bind nodeset="/data/group_summary/grp_lbl_patient/lbl_patient_val" readonly="true()" type="string" calculate=" /data/patient_name "/>
-      <bind nodeset="/data/group_summary/grp_lbl_gender/lbl_gender_lbl" readonly="true()" type="string" calculate="'Gender'"/>
-      <bind nodeset="/data/group_summary/grp_lbl_gender/lbl_gender_val" readonly="true()" type="string" calculate=" /data/inputs/contact/gender "/>
-      <bind nodeset="/data/group_summary/grp_lbl_state/lbl_state_lbl" readonly="true()" type="string" calculate="'State'"/>
-      <bind nodeset="/data/group_summary/grp_lbl_state/lbl_state_val" readonly="true()" type="string" calculate=" /data/inputs/state "/>
-      <bind nodeset="/data/group_summary/grp_lbl_district/lbl_district_lbl" readonly="true()" type="string" calculate="'District'"/>
-      <bind nodeset="/data/group_summary/grp_lbl_district/lbl_district_val" readonly="true()" type="string" calculate=" /data/inputs/district "/>
-      <bind nodeset="/data/group_summary/grp_lbl_score/lbl_score_lbl" readonly="true()" type="string" calculate="'CBAC Total Score'"/>
-      <bind nodeset="/data/group_summary/grp_lbl_score/lbl_score_val" readonly="true()" type="string" calculate=" /data/total_score "/>
-      <bind nodeset="/data/group_summary/grp_lbl_risk/lbl_risk_lbl" readonly="true()" type="string" calculate="'Risk Category'"/>
-      <bind nodeset="/data/group_summary/grp_lbl_risk/lbl_risk_val" readonly="true()" type="string" calculate=" /data/risk_category "/>
+      <bind nodeset="/data/group_summary/lbl_filled_by" readonly="true()" type="string" calculate=" /data/reporter_name "/>
+      <bind nodeset="/data/group_summary/lbl_patient_val" readonly="true()" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/group_summary/lbl_gender_val" readonly="true()" type="string" calculate=" /data/inputs/contact/gender "/>
+      <bind nodeset="/data/group_summary/lbl_state_val" readonly="true()" type="string" calculate=" /data/inputs/state "/>
+      <bind nodeset="/data/group_summary/lbl_district_val" readonly="true()" type="string" calculate=" /data/inputs/district "/>
+      <bind nodeset="/data/group_summary/lbl_score_val" readonly="true()" type="string" calculate=" /data/total_score "/>
+      <bind nodeset="/data/group_summary/lbl_risk_val" readonly="true()" type="string" calculate=" /data/risk_category "/>
       <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
       <bind nodeset="/data/meta/instanceName" type="string" calculate=" /data/title "/>
     </model>
   </h:head>
   <h:body class="pages grid-layout">
     <group appearance="field-list" ref="/data/inputs">
-      <label>Patient &amp; Reporter Infooo</label>
+      <label>Patient &amp; Reporter Info</label>
       <group ref="/data/inputs/user"/>
       <input ref="/data/inputs/reporter_name_note">
         <label> Filled by: <output value=" /data/reporter_name "/></label>
@@ -500,7 +528,7 @@
       <group ref="/data/inputs/contact">
         <input ref="/data/inputs/contact/_id" appearance="select-contact type-person role-patient">
           <label>Patient's Name</label>
-          <hint>Select the patient from your areaaaa</hint>
+          <hint>Select the patient from your area</hint>
         </input>
         <input ref="/data/inputs/contact/patient_id" appearance="hidden">
           <label>Medic ID</label>
@@ -535,7 +563,10 @@
       <label>A score above 4 indicates that the person may be at risk for these NCDs and needs to be prioritized for attending the weekly NCD day</label>
     </input>
     <group appearance="field-list" ref="/data/page_1">
-      <label> Questions 1 &amp; 6 of <output value=" /data/total_question "/></label>
+      <label>Part A: Risk Assessment</label>
+      <input ref="/data/page_1/generated_note_name_30">
+        <label> &lt;i&gt; Questions 1 &amp; 6 of <output value=" /data/total_question "/> &lt;/i&gt; </label>
+      </input>
       <select1 ref="/data/page_1/age_range">
         <label>1. What is your age? (in complete years)</label>
         <hint>Use ✓ to indicate your answer</hint>
@@ -586,7 +617,13 @@
       </select1>
     </group>
     <group appearance="field-list" ref="/data/page_2">
-      <label> Questions 2 &amp; 22 of <output value=" /data/total_question "/></label>
+      <label>Part B: Early Detection: Ask if Patient has any of these Symptoms</label>
+      <input ref="/data/page_2/generated_note_name_42">
+        <label>&lt;b&gt; B1: Women and Men &lt;/b&gt;</label>
+      </input>
+      <input ref="/data/page_2/generated_note_name_43">
+        <label> &lt;i&gt; Questions 2 &amp; 22 of <output value=" /data/total_question "/> &lt;/i&gt; </label>
+      </input>
       <select1 ref="/data/page_2/shortness_of_breath">
         <label>7. Shortness of breath</label>
         <itemset nodeset="instance('yes_no')/root/item">
@@ -701,7 +738,13 @@
       </select1>
     </group>
     <group appearance="field-list" ref="/data/page_3">
-      <label> Questions 23 &amp; 29 of <output value=" /data/total_question "/></label>
+      <label>Part B: Early Detection: Ask if Patient has any of these Symptoms</label>
+      <input ref="/data/page_3/generated_note_name_64">
+        <label>&lt;b&gt; B2: Women only &lt;/b&gt;</label>
+      </input>
+      <input ref="/data/page_3/generated_note_name_65">
+        <label> &lt;i&gt; Questions 23 &amp; 29 of <output value=" /data/total_question "/> &lt;/i&gt; </label>
+      </input>
       <select1 ref="/data/page_3/breast_lump">
         <label>23. Lump in the breast</label>
         <itemset nodeset="instance('yes_no')/root/item">
@@ -752,6 +795,23 @@
         </itemset>
       </select1>
     </group>
+    <group appearance="field-list" ref="/data/page_4">
+      <label>Part C: Circle all that Apply</label>
+      <select ref="/data/page_4/fuel_type_for_cooking">
+        <label>Type of Fuel used for cooking</label>
+        <itemset nodeset="instance('fuel_type')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select>
+      <select ref="/data/page_4/occupational_exposure">
+        <label>Occupational exposure</label>
+        <itemset nodeset="instance('occupational_exposure')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select>
+    </group>
     <group appearance="field-list" ref="/data/group_summary">
       <label>Assessment Summary</label>
       <input ref="/data/group_summary/summary_high_risk">
@@ -760,76 +820,27 @@
       <input ref="/data/group_summary/summary_low_risk">
         <label>Score is 4 or below. This person appears to be at low risk for NCDs at this time.</label>
       </input>
-      <group appearance="field-list" ref="/data/group_summary/grp_lbl_filled_by">
-        <input ref="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_lbl" appearance="w5">
-          <label>**Filled by:**</label>
-        </input>
-        <input ref="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_val" appearance="w5">
-          <label>
-            <output value=" /data/reporter_name "/>
-          </label>
-        </input>
-      </group>
-      <group appearance="field-list" ref="/data/group_summary/grp_lbl_patient">
-        <input ref="/data/group_summary/grp_lbl_patient/lbl_patient_lbl" appearance="w5">
-          <label>**Patient:**</label>
-        </input>
-        <input ref="/data/group_summary/grp_lbl_patient/lbl_patient_val" appearance="w5">
-          <label>
-            <output value=" /data/patient_name "/>
-          </label>
-        </input>
-      </group>
-      <group appearance="field-list" ref="/data/group_summary/grp_lbl_gender">
-        <input ref="/data/group_summary/grp_lbl_gender/lbl_gender_lbl" appearance="w5">
-          <label>**Gender:**</label>
-        </input>
-        <input ref="/data/group_summary/grp_lbl_gender/lbl_gender_val" appearance="w5">
-          <label>
-            <output value=" /data/inputs/contact/gender "/>
-          </label>
-        </input>
-      </group>
-      <group appearance="field-list" ref="/data/group_summary/grp_lbl_state">
-        <input ref="/data/group_summary/grp_lbl_state/lbl_state_lbl" appearance="w5">
-          <label>**State:**</label>
-        </input>
-        <input ref="/data/group_summary/grp_lbl_state/lbl_state_val" appearance="w5">
-          <label>
-            <output value=" /data/inputs/state "/>
-          </label>
-        </input>
-      </group>
-      <group appearance="field-list" ref="/data/group_summary/grp_lbl_district">
-        <input ref="/data/group_summary/grp_lbl_district/lbl_district_lbl" appearance="w5">
-          <label>**District:**</label>
-        </input>
-        <input ref="/data/group_summary/grp_lbl_district/lbl_district_val" appearance="w5">
-          <label>
-            <output value=" /data/inputs/district "/>
-          </label>
-        </input>
-      </group>
-      <group appearance="field-list" ref="/data/group_summary/grp_lbl_score">
-        <input ref="/data/group_summary/grp_lbl_score/lbl_score_lbl" appearance="w5">
-          <label>**CBAC Total Score:**</label>
-        </input>
-        <input ref="/data/group_summary/grp_lbl_score/lbl_score_val" appearance="w5">
-          <label>
-            <output value=" /data/total_score "/>
-          </label>
-        </input>
-      </group>
-      <group appearance="field-list" ref="/data/group_summary/grp_lbl_risk">
-        <input ref="/data/group_summary/grp_lbl_risk/lbl_risk_lbl" appearance="w5">
-          <label>**Risk Category:**</label>
-        </input>
-        <input ref="/data/group_summary/grp_lbl_risk/lbl_risk_val" appearance="w5">
-          <label>
-            <output value=" /data/risk_category "/>
-          </label>
-        </input>
-      </group>
+      <input ref="/data/group_summary/lbl_filled_by" appearance="w5">
+        <label>**Filled by:**</label>
+      </input>
+      <input ref="/data/group_summary/lbl_patient_val" appearance="w5">
+        <label>**Patient:**</label>
+      </input>
+      <input ref="/data/group_summary/lbl_gender_val" appearance="w5">
+        <label>**Gender:**</label>
+      </input>
+      <input ref="/data/group_summary/lbl_state_val" appearance="w5">
+        <label>**State:**</label>
+      </input>
+      <input ref="/data/group_summary/lbl_district_val" appearance="w5">
+        <label>**District:**</label>
+      </input>
+      <input ref="/data/group_summary/lbl_score_val" appearance="w5">
+        <label>**CBAC Total Score:**</label>
+      </input>
+      <input ref="/data/group_summary/lbl_risk_val" appearance="w5">
+        <label>**Risk Category:**</label>
+      </input>
     </group>
   </h:body>
 </h:html>

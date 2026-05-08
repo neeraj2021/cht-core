@@ -1,0 +1,136 @@
+{
+  "_id": "019e03dd-aae3-7771-9a13-9e55933f5f13",
+  "_rev": "1-5c9b0c00fb71952620e9669fd1542319",
+  "form": "cbac",
+  "type": "data_record",
+  "content_type": "xml",
+  "reported_date": 1778181319390,
+  "contact": {
+    "_id": "019dfc20-9064-7881-a237-2b8660fa5836",
+    "parent": {
+      "_id": "019dfc18-97ad-7cce-af60-e9e9cd5fbe46",
+      "parent": {
+        "_id": "019dfc18-11ff-7cce-af60-e77996975e13",
+        "parent": {
+          "_id": "019dfc17-771b-7cce-af60-d7a104b75935"
+        }
+      }
+    }
+  },
+  "from": "",
+  "form_version": {
+    "time": 1778181245438,
+    "sha256": "cd3fe2cd232b1254f0acf8f39be29a3b0c4fcc12bb0814f3b02b27a66796f5e6"
+  },
+  "hidden_fields": [
+    "meta"
+  ],
+  "fields": {
+    "patient_id": "89084",
+    "patient_uuid": "019dfc20-9064-7881-a237-2b8660fa5836",
+    "patient_name": "TN CHW 1",
+    "reporter_name": "neeraj",
+    "reporter_place": "",
+    "title": "TN CHW 1",
+    "inputs": {
+      "meta": {
+        "location": {
+          "lat": "",
+          "long": "",
+          "error": "",
+          "message": ""
+        }
+      },
+      "source": "",
+      "source_id": "",
+      "user": {
+        "name": "neeraj",
+        "phone": "783647"
+      },
+      "reporter_name_note": "",
+      "contact": {
+        "_id": "019dfc20-9064-7881-a237-2b8660fa5836",
+        "patient_id": "89084",
+        "name": "TN CHW 1",
+        "gender": "male"
+      },
+      "state": "tamil_nadu",
+      "district": "chennai"
+    },
+    "instructions": "",
+    "total_question": "22",
+    "page_1": {
+      "generated_note_name_30": "",
+      "age_range": "2",
+      "smoke_frequency": "1",
+      "alcohol_frequency": "0",
+      "waist_size": "1",
+      "physical_activities_frequency": "1",
+      "family_medical_history": "2"
+    },
+    "page_2": {
+      "generated_note_name_42": "",
+      "generated_note_name_43": "",
+      "shortness_of_breath": "no",
+      "cough_more_than_2_weeks": "no",
+      "blood_in_sputum": "no",
+      "fever_more_than_2_weeks": "no",
+      "loss_of_weight": "no",
+      "night_sweats": "no",
+      "current_anti_tb_drug": "no",
+      "family_tb": "no",
+      "history_of_tb": "no",
+      "history_of_fits": "no",
+      "difficulty_opening_mouth": "no",
+      "mouth_ulcers_or_growth": "no",
+      "voice_change": "no",
+      "skin_patch_discoloration": "no",
+      "difficulty_holding_objects": "no",
+      "loss_of_sensation": "no"
+    },
+    "page_4": {
+      "fuel_type_for_cooking": "crop_residue cow_dung_cake coal",
+      "occupational_exposure": "working_in_industries gas_and_dust_exposure"
+    },
+    "total_score": "7",
+    "risk_category": "High Risk",
+    "group_summary": {
+      "summary_high_risk": "",
+      "lbl_filled_by": "neeraj",
+      "lbl_patient_val": "TN CHW 1",
+      "lbl_gender_val": "male",
+      "lbl_state_val": "tamil_nadu",
+      "lbl_district_val": "chennai",
+      "lbl_score_val": "7",
+      "lbl_risk_val": "High Risk"
+    },
+    "meta": {
+      "instanceID": "uuid:5d5d9027-b1b4-4adc-9d25-b084bf2ea038",
+      "instanceName": "TN CHW 1",
+      "deprecatedID": ""
+    }
+  },
+  "geolocation_log": [
+    {
+      "timestamp": 1778181319401,
+      "recording": {
+        "latitude": 28.4688384,
+        "longitude": 77.0310144,
+        "altitude": null,
+        "accuracy": 984356.3175450427,
+        "altitudeAccuracy": null,
+        "heading": null,
+        "speed": null
+      }
+    }
+  ],
+  "geolocation": {
+    "latitude": 28.4688384,
+    "longitude": 77.0310144,
+    "altitude": null,
+    "accuracy": 984356.3175450427,
+    "altitudeAccuracy": null,
+    "heading": null,
+    "speed": null
+  }
+}
