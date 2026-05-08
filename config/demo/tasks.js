@@ -14,7 +14,8 @@ const {
   addDays,
   getRecentANCVisitWithEvent,
   isPregnancyTaskMuted,
-  getField
+  getField,
+  getNewestReport
 } = extras;
 
 const generateEventForHomeVisit = (week, start, end) => ({
@@ -299,6 +300,231 @@ module.exports = [
         }
       }
     ]
+  },
+
+  // NCD Task 1: Hypertension Follow-up — moderate (systolic > 120 AND diastolic > 80)
+  // Severe cases (systolic > 140 OR diastolic > 90) are handled by ncd.hypertension_referral below
+  {
+    name: 'ncd.hypertension_followup',
+    icon: 'icon-healthcare-generic-2',
+    title: 'task.ncd.hypertension_followup.title',
+    appliesTo: 'reports',
+    appliesToType: ['ncd'],
+    appliesIf: function(contact, report) {
+      const systolic = parseInt(getField(report, 'hypertension.systolic'));
+      const diastolic = parseInt(getField(report, 'hypertension.diastolic'));
+      // Moderate: both elevated, but NOT in severe range (severe task takes priority)
+      const isModerate = systolic > 120 && diastolic > 80;
+      const isSevere = systolic > 140 || diastolic > 90;
+      return isModerate && !isSevere && isAlive(contact);
+    },
+    resolvedIf: function(contact, report, event, dueDate) {
+      // Resolve if a newer NCD report exists for this patient (re-assessment happened)
+      const newerNcd = getNewestReport(contact.reports, ['ncd']);
+      if (newerNcd && newerNcd.reported_date > report.reported_date) { return true; }
+
+      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);
+      const endTime = addDays(dueDate, event.end + 1).getTime();
+      return isFormArraySubmittedInWindow(contact.reports, ['ncd_hypertension_followup'], startTime, endTime);
+    },
+    actions: [{
+      type: 'report',
+      form: 'ncd_hypertension_followup',
+      label: 'Hypertension Follow-up',
+      modifyContent: function(content, _contact, report) {
+        content.t_systolic = getField(report, 'hypertension.systolic');
+        content.t_diastolic = getField(report, 'hypertension.diastolic');
+      }
+    }],
+    events: [{
+      id: 'ncd-hypertension-followup',
+      // Production: days: 30, start: 5, end: 7
+      // days: 30,
+      // start: 5,
+      days: 0,  // DEV: immediate
+      start: 0, // DEV: immediate
+      end: 7,
+    }],
+  },
+
+  // NCD Task 2: Hypertension Referral — severe (systolic > 140 OR diastolic > 90)
+  {
+    name: 'ncd.hypertension_referral',
+    icon: 'icon-healthcare-generic-2',
+    title: 'task.ncd.hypertension_referral.title',
+    appliesTo: 'reports',
+    appliesToType: ['ncd'],
+    appliesIf: function(contact, report) {
+      const systolic = parseInt(getField(report, 'hypertension.systolic'));
+      const diastolic = parseInt(getField(report, 'hypertension.diastolic'));
+      return (systolic > 140 || diastolic > 90) && isAlive(contact);
+    },
+    resolvedIf: function(contact, report, event, dueDate) {
+      // Resolve if a newer NCD report exists for this patient (re-assessment happened)
+      const newerNcd = getNewestReport(contact.reports, ['ncd']);
+      if (newerNcd && newerNcd.reported_date > report.reported_date) { return true; }
+
+      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);
+      const endTime = addDays(dueDate, event.end + 1).getTime();
+      // Resolve if referral form submitted and patient visited PHC or not willing
+      const referralDone = contact.reports.some(function(r) {
+        if (r.form !== 'ncd_hypertension_referral') { return false; }
+        if (r.reported_date < startTime || r.reported_date > endTime) { return false; }
+        const visited = getField(r, 'referral.t_phc_visited');
+        const willing = getField(r, 'referral.t_willing_to_visit');
+        return visited === 'yes' || willing === 'no';
+      });
+      return referralDone;
+    },
+    actions: [{
+      type: 'report',
+      form: 'ncd_hypertension_referral',
+      label: 'Hypertension Referral Follow-up',
+      modifyContent: function(content, _contact, report) {
+        content.t_systolic = getField(report, 'hypertension.systolic');
+        content.t_diastolic = getField(report, 'hypertension.diastolic');
+      }
+    }],
+    events: [{
+      id: 'ncd-hypertension-referral',
+      // Production: days: 5, start: 3, end: 7
+      // days: 5,
+      // start: 3,
+      days: 0,  // DEV: immediate
+      start: 0, // DEV: immediate
+      end: 7,
+    }],
+  },
+
+  // NCD Task 2b: Hypertension Referral Follow-up — when patient agreed to a PHC visit date
+  {
+    name: 'ncd.hypertension_referral_scheduled',
+    icon: 'icon-healthcare-generic-2',
+    title: 'task.ncd.hypertension_referral_scheduled.title',
+    appliesTo: 'reports',
+    appliesToType: ['ncd_hypertension_referral'],
+    appliesIf: function(contact, report) {
+      return getField(report, 'referral.t_willing_to_visit') === 'yes' &&
+             getField(report, 'referral.t_phc_visit_date') &&
+             isAlive(contact);
+    },
+    resolvedIf: function(contact, report, event, dueDate) {
+      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);
+      const endTime = addDays(dueDate, event.end + 1).getTime();
+      const referralDone = contact.reports.some(function(r) {
+        if (r.form !== 'ncd_hypertension_referral') { return false; }
+        if (r.reported_date < startTime || r.reported_date > endTime) { return false; }
+        const visited = getField(r, 'referral.t_phc_visited');
+        const willing = getField(r, 'referral.t_willing_to_visit');
+        return visited === 'yes' || willing === 'no';
+      });
+      return referralDone;
+    },
+    actions: [{
+      type: 'report',
+      form: 'ncd_hypertension_referral',
+      label: 'Hypertension Referral Follow-up',
+      modifyContent: function(content, _contact, report) {
+        content.t_systolic = getField(report, 'inputs.t_systolic');
+        content.t_diastolic = getField(report, 'inputs.t_diastolic');
+      }
+    }],
+    events: [{
+      id: 'ncd-hypertension-referral-scheduled',
+      start: 3,
+      end: 7,
+      dueDate: function(_event, _contact, report) {
+        return getDateISOLocal(getField(report, 'referral.t_phc_visit_date'));
+      }
+    }],
+  },
+
+  // NCD Task 3: Diabetes Referral — rapid glucose > 140 mg/dL
+  {
+    name: 'ncd.diabetes_referral',
+    icon: 'icon-healthcare-generic-2',
+    title: 'task.ncd.diabetes_referral.title',
+    appliesTo: 'reports',
+    appliesToType: ['ncd'],
+    appliesIf: function(contact, report) {
+      const glucose = parseInt(getField(report, 'diabetes_section.rapid_glucose'));
+      return glucose > 140 && isAlive(contact);
+    },
+    resolvedIf: function(contact, report, event, dueDate) {
+      // Resolve if a newer NCD report exists for this patient (re-assessment happened)
+      const newerNcd = getNewestReport(contact.reports, ['ncd']);
+      if (newerNcd && newerNcd.reported_date > report.reported_date) { return true; }
+
+      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);
+      const endTime = addDays(dueDate, event.end + 1).getTime();
+      const referralDone = contact.reports.some(function(r) {
+        if (r.form !== 'ncd_diabetes_referral') { return false; }
+        if (r.reported_date < startTime || r.reported_date > endTime) { return false; }
+        const visited = getField(r, 'referral.t_phc_visited');
+        const willing = getField(r, 'referral.t_willing_to_visit');
+        return visited === 'yes' || willing === 'no';
+      });
+      return referralDone;
+    },
+    actions: [{
+      type: 'report',
+      form: 'ncd_diabetes_referral',
+      label: 'Diabetes Referral Follow-up',
+      modifyContent: function(content, _contact, report) {
+        content.t_rapid_glucose = getField(report, 'diabetes_section.rapid_glucose');
+      }
+    }],
+    events: [{
+      id: 'ncd-diabetes-referral',
+      // Production: days: 5, start: 3, end: 7
+      // days: 5,
+      // start: 3,
+      days: 0,  // DEV: immediate
+      start: 0, // DEV: immediate
+      end: 7,
+    }],
+  },
+
+  // NCD Task 3b: Diabetes Referral Follow-up — when patient agreed to a PHC visit date
+  {
+    name: 'ncd.diabetes_referral_scheduled',
+    icon: 'icon-healthcare-generic-2',
+    title: 'task.ncd.diabetes_referral_scheduled.title',
+    appliesTo: 'reports',
+    appliesToType: ['ncd_diabetes_referral'],
+    appliesIf: function(contact, report) {
+      return getField(report, 'referral.t_willing_to_visit') === 'yes' &&
+             getField(report, 'referral.t_phc_visit_date') &&
+             isAlive(contact);
+    },
+    resolvedIf: function(contact, report, event, dueDate) {
+      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);
+      const endTime = addDays(dueDate, event.end + 1).getTime();
+      const referralDone = contact.reports.some(function(r) {
+        if (r.form !== 'ncd_diabetes_referral') { return false; }
+        if (r.reported_date < startTime || r.reported_date > endTime) { return false; }
+        const visited = getField(r, 'referral.t_phc_visited');
+        const willing = getField(r, 'referral.t_willing_to_visit');
+        return visited === 'yes' || willing === 'no';
+      });
+      return referralDone;
+    },
+    actions: [{
+      type: 'report',
+      form: 'ncd_diabetes_referral',
+      label: 'Diabetes Referral Follow-up',
+      modifyContent: function(content, _contact, report) {
+        content.t_rapid_glucose = getField(report, 'inputs.t_rapid_glucose');
+      }
+    }],
+    events: [{
+      id: 'ncd-diabetes-referral-scheduled',
+      start: 3,
+      end: 7,
+      dueDate: function(_event, _contact, report) {
+        return getDateISOLocal(getField(report, 'referral.t_phc_visit_date'));
+      }
+    }],
   },
 
   // Task 1: CBAC Follow-up — triggered after high-risk CBAC submission

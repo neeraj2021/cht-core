@@ -1,0 +1,1358 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://www.opendatakit.org/xforms">
+  <h:head>
+    <h:title>NCD - Combined Forms</h:title>
+    <model odk:xforms-version="1.0.0">
+      <instance>
+        <data id="ncd" prefix="J1!ncd!" delimiter="#">
+          <patient_id/>
+          <patient_uuid/>
+          <patient_name/>
+          <reporter_name/>
+          <reporter_place/>
+          <title/>
+          <form_start_timestamp/>
+          <form_sync_timestamp/>
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source/>
+            <source_id/>
+            <user>
+              <name/>
+              <phone/>
+            </user>
+            <reporter_name_note/>
+            <contact>
+              <_id/>
+              <patient_id/>
+              <name/>
+            </contact>
+            <state/>
+            <district/>
+          </inputs>
+          <intro_form_1/>
+          <form_1_personal_details>
+            <height_cm/>
+            <weight_kg/>
+            <bmi/>
+            <bmi_display/>
+          </form_1_personal_details>
+          <intro_personal_history/>
+          <personal_history>
+            <diag_diabetes/>
+            <treat_diabetes/>
+            <diag_bp/>
+            <treat_bp/>
+            <diag_heart/>
+            <treat_heart/>
+            <diag_stroke/>
+            <treat_stroke/>
+            <diag_kidney/>
+            <treat_kidney/>
+            <diag_copd/>
+            <treat_copd/>
+            <diag_asthma/>
+            <treat_asthma/>
+            <diag_wound/>
+            <treat_wound/>
+            <diag_oral_cancer/>
+            <treat_oral_cancer/>
+            <other_disease/>
+          </personal_history>
+          <intro_hypertension/>
+          <hypertension>
+            <systolic/>
+            <diastolic/>
+          </hypertension>
+          <intro_diabetes/>
+          <diabetes_section>
+            <rapid_glucose/>
+          </diabetes_section>
+          <form_1_summary>
+            <grp_lbl_filled_by>
+              <lbl_filled_by_lbl/>
+              <calc_reporter_name/>
+            </grp_lbl_filled_by>
+            <grp_lbl_patient>
+              <lbl_patient_lbl/>
+              <calc_patient_name/>
+            </grp_lbl_patient>
+            <grp_lbl_state>
+              <lbl_state_lbl/>
+              <calc_state/>
+            </grp_lbl_state>
+            <grp_lbl_district>
+              <lbl_district_lbl/>
+              <calc_district/>
+            </grp_lbl_district>
+            <grp_lbl_bmi>
+              <lbl_bmi_lbl/>
+              <calc_bmi/>
+            </grp_lbl_bmi>
+            <grp_lbl_bp>
+              <lbl_bp_lbl/>
+              <calc_bp/>
+            </grp_lbl_bp>
+            <grp_lbl_glucose>
+              <lbl_glucose_lbl/>
+              <calc_rapid_glucose/>
+            </grp_lbl_glucose>
+          </form_1_summary>
+          <fill_phq9_form/>
+          <intro_form_2/>
+          <phq9_questions>
+            <page_1>
+              <little_interest_or_pleasure/>
+              <feeling_depressed_or_hopeless/>
+            </page_1>
+            <page_2>
+              <trouble_sleeping/>
+              <feeling_tired/>
+            </page_2>
+            <page_3>
+              <poor_appetite_or_overeating/>
+              <feeling_bad_about_yourself/>
+            </page_3>
+            <page_4>
+              <trouble_concentrating/>
+              <moving_or_speaking_slowly/>
+            </page_4>
+            <page_5>
+              <thoughts_of_self_harm/>
+            </page_5>
+            <total_score/>
+            <severity_category/>
+          </phq9_questions>
+          <form_2_summary>
+            <phq9_completion_note/>
+            <grp_lbl_phq9_patient>
+              <lbl_phq9_patient_lbl/>
+              <calc_phq9_patient_name/>
+            </grp_lbl_phq9_patient>
+            <grp_lbl_phq9_score>
+              <lbl_phq9_score_lbl/>
+              <calc_phq9_total_score/>
+            </grp_lbl_phq9_score>
+            <grp_lbl_phq9_severity>
+              <lbl_phq9_severity_lbl/>
+              <calc_phq9_severity_category/>
+            </grp_lbl_phq9_severity>
+            <severity_guide/>
+          </form_2_summary>
+          <fill_breast_cancer_form/>
+          <intro_form_3/>
+          <bc_age_and_menarche>
+            <bc_current_age/>
+            <bc_age_at_first_period/>
+          </bc_age_and_menarche>
+          <bc_menstrual_and_childbirth>
+            <bc_irregular_menstrual_periods/>
+            <bc_age_at_first_childbirth/>
+          </bc_menstrual_and_childbirth>
+          <bc_breastfeeding_and_family_history>
+            <bc_breastfeeding_duration/>
+            <bc_family_history_of_breast_cancer/>
+          </bc_breastfeeding_and_family_history>
+          <bc_ethnic_background>
+            <bc_ethnicity_group/>
+          </bc_ethnic_background>
+          <bc_score_age/>
+          <bc_score_menarche/>
+          <bc_score_irregular_periods/>
+          <bc_score_childbirth_age/>
+          <bc_score_breastfeeding/>
+          <bc_score_family_history/>
+          <bc_score_ethnicity/>
+          <bc_total_risk_score/>
+          <bc_risk_category/>
+          <form_3_summary>
+            <bc_completion_note/>
+            <grp_lbl_bc_patient>
+              <lbl_bc_patient_lbl/>
+              <calc_bc_patient_name/>
+            </grp_lbl_bc_patient>
+            <grp_lbl_bc_score>
+              <lbl_bc_score_lbl/>
+              <calc_bc_risk_score/>
+            </grp_lbl_bc_score>
+            <grp_lbl_bc_risk_category>
+              <lbl_bc_risk_category_lbl/>
+              <calc_bc_risk_category/>
+            </grp_lbl_bc_risk_category>
+            <bc_risk_guide/>
+          </form_3_summary>
+          <fill_oral_cancer_form/>
+          <intro_form_4/>
+          <oc_participant>
+            <oc_age/>
+            <oc_gender/>
+          </oc_participant>
+          <oc_habit_history>
+            <oc_cigarette_bidi/>
+            <oc_smokeless_tobacco/>
+            <oc_areca_nut/>
+            <oc_alcohol/>
+            <oc_alcohol_frequency/>
+          </oc_habit_history>
+          <oc_photo_1_page>
+            <oc_photo_1 type="binary"/>
+            <oc_ai_photo_1_label/>
+            <oc_ai_photo_1_score/>
+          </oc_photo_1_page>
+          <oc_photo_2_page>
+            <oc_photo_2 type="binary"/>
+            <oc_ai_photo_2_label/>
+            <oc_ai_photo_2_score/>
+          </oc_photo_2_page>
+          <oc_photo_3_page>
+            <oc_photo_3 type="binary"/>
+            <oc_ai_photo_3_label/>
+            <oc_ai_photo_3_score/>
+          </oc_photo_3_page>
+          <oc_photo_4_page>
+            <oc_photo_4 type="binary"/>
+            <oc_ai_photo_4_label/>
+            <oc_ai_photo_4_score/>
+          </oc_photo_4_page>
+          <oc_photo_5_page>
+            <oc_photo_5 type="binary"/>
+            <oc_ai_photo_5_label/>
+            <oc_ai_photo_5_score/>
+          </oc_photo_5_page>
+          <oc_photo_6_page>
+            <oc_photo_6 type="binary"/>
+            <oc_ai_photo_6_label/>
+            <oc_ai_photo_6_score/>
+          </oc_photo_6_page>
+          <oc_photo_7_page>
+            <oc_photo_7 type="binary"/>
+            <oc_ai_photo_7_label/>
+            <oc_ai_photo_7_score/>
+          </oc_photo_7_page>
+          <oc_photo_8_page>
+            <oc_photo_8 type="binary"/>
+            <oc_ai_photo_8_label/>
+            <oc_ai_photo_8_score/>
+          </oc_photo_8_page>
+          <oc_state_final/>
+          <oc_district_final/>
+          <form_4_summary>
+            <oc_completion_note/>
+            <grp_lbl_oc_filled_by>
+              <lbl_oc_filled_by_lbl/>
+              <calc_oc_reporter_name/>
+            </grp_lbl_oc_filled_by>
+            <grp_lbl_oc_patient>
+              <lbl_oc_patient_lbl/>
+              <calc_oc_patient_name/>
+            </grp_lbl_oc_patient>
+            <grp_lbl_oc_state>
+              <lbl_oc_state_lbl/>
+              <calc_oc_state/>
+            </grp_lbl_oc_state>
+            <grp_lbl_oc_district>
+              <lbl_oc_district_lbl/>
+              <calc_oc_district/>
+            </grp_lbl_oc_district>
+            <oc_ai_analysis_summary/>
+            <oc_ai_analysis_status/>
+            <oc_ai_analysis_error/>
+          </form_4_summary>
+          <form_submit_timestamp/>
+          <meta tag="hidden">
+            <instanceID/>
+            <instanceName/>
+          </meta>
+        </data>
+      </instance>
+      <instance id="contact-summary"/>
+      <instance id="user-contact-summary"/>
+      <instance id="yes_no">
+        <root>
+          <item>
+            <name>yes</name>
+            <label>Yes</label>
+          </item>
+          <item>
+            <name>no</name>
+            <label>No</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="frequency">
+        <root>
+          <item>
+            <name>0</name>
+            <label>Not at all</label>
+          </item>
+          <item>
+            <name>1</name>
+            <label>Several days</label>
+          </item>
+          <item>
+            <name>2</name>
+            <label>More than half the days</label>
+          </item>
+          <item>
+            <name>3</name>
+            <label>Nearly every day</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="breastfeeding_history">
+        <root>
+          <item>
+            <name>lt24</name>
+            <label>Less than 24 months</label>
+          </item>
+          <item>
+            <name>gt24</name>
+            <label>Greater than 24 months</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="ethnicity_groups">
+        <root>
+          <item>
+            <name>group_general</name>
+            <label>General / Other</label>
+          </item>
+          <item>
+            <name>group_medium</name>
+            <label>Group B</label>
+          </item>
+          <item>
+            <name>group_high</name>
+            <label>Group A</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="gender">
+        <root>
+          <item>
+            <name>male</name>
+            <label>Male</label>
+          </item>
+          <item>
+            <name>female</name>
+            <label>Female</label>
+          </item>
+          <item>
+            <name>other</name>
+            <label>Other</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="history_status">
+        <root>
+          <item>
+            <name>past</name>
+            <label>Past</label>
+          </item>
+          <item>
+            <name>current</name>
+            <label>Current</label>
+          </item>
+          <item>
+            <name>never</name>
+            <label>Never</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="states">
+        <root>
+          <item>
+            <name>kerala</name>
+            <label>Kerala</label>
+          </item>
+          <item>
+            <name>tamil_nadu</name>
+            <label>Tamil Nadu</label>
+          </item>
+          <item>
+            <name>andhra_pradesh</name>
+            <label>Andhra Pradesh</label>
+          </item>
+          <item>
+            <name>telangana</name>
+            <label>Telangana</label>
+          </item>
+          <item>
+            <name>karnataka</name>
+            <label>Karnataka</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="districts">
+        <root>
+          <item>
+            <name>chennai</name>
+            <label>Chennai</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>thanjavur</name>
+            <label>Thanjavur</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>coimbatore</name>
+            <label>Coimbatore</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>madurai</name>
+            <label>Madurai</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>salem</name>
+            <label>Salem</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>tiruchirappalli</name>
+            <label>Tiruchirappalli</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>thiruvananthapuram</name>
+            <label>Thiruvananthapuram</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kochi</name>
+            <label>Kochi</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kozhikode</name>
+            <label>Kozhikode</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>thrissur</name>
+            <label>Thrissur</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kollam</name>
+            <label>Kollam</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>visakhapatnam</name>
+            <label>Visakhapatnam</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>vijayawada</name>
+            <label>Vijayawada</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>guntur</name>
+            <label>Guntur</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>tirupati</name>
+            <label>Tirupati</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>kurnool</name>
+            <label>Kurnool</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>hyderabad</name>
+            <label>Hyderabad</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>warangal</name>
+            <label>Warangal</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>nizamabad</name>
+            <label>Nizamabad</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>karimnagar</name>
+            <label>Karimnagar</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>khammam</name>
+            <label>Khammam</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>bengaluru</name>
+            <label>Bengaluru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>mysuru</name>
+            <label>Mysuru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>hubli</name>
+            <label>Hubli-Dharwad</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>mangaluru</name>
+            <label>Mangaluru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>belagavi</name>
+            <label>Belagavi</label>
+            <filter>karnataka</filter>
+          </item>
+        </root>
+      </instance>
+      <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
+      <bind nodeset="/data/patient_uuid" type="string" calculate="../inputs/contact/_id"/>
+      <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
+      <bind nodeset="/data/reporter_name" type="string" calculate="../inputs/user/name"/>
+      <bind nodeset="/data/reporter_place" type="string" calculate="instance('user-contact-summary')/context/facility_name"/>
+      <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/form_start_timestamp" type="string" calculate="once(if( /data/inputs/contact/_id  != '', now(), ''))"/>
+      <bind nodeset="/data/form_sync_timestamp" type="string"/>
+      <bind nodeset="/data/inputs/source" type="string"/>
+      <bind nodeset="/data/inputs/source_id" type="string"/>
+      <bind nodeset="/data/inputs/user/name" type="string"/>
+      <bind nodeset="/data/inputs/user/phone" type="string"/>
+      <bind nodeset="/data/inputs/reporter_name_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/inputs/contact/_id" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/contact/patient_id" type="string"/>
+      <bind nodeset="/data/inputs/contact/name" type="string"/>
+      <bind nodeset="/data/inputs/state" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/district" type="string" required="true()"/>
+      <bind nodeset="/data/intro_form_1" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_personal_details/height_cm" type="decimal" required="true()"/>
+      <bind nodeset="/data/form_1_personal_details/weight_kg" type="decimal" required="true()"/>
+      <bind nodeset="/data/form_1_personal_details/bmi" type="string" calculate="if( /data/form_1_personal_details/height_cm  &gt; 0 and  /data/form_1_personal_details/weight_kg  &gt; 0, round( /data/form_1_personal_details/weight_kg  div ( /data/form_1_personal_details/height_cm  *  /data/form_1_personal_details/height_cm  div 10000), 1), '')"/>
+      <bind nodeset="/data/form_1_personal_details/bmi_display" readonly="true()" type="string" relevant=" /data/form_1_personal_details/height_cm  != '' and  /data/form_1_personal_details/weight_kg  != ''"/>
+      <bind nodeset="/data/intro_personal_history" readonly="true()" type="string"/>
+      <bind nodeset="/data/personal_history/diag_diabetes" type="string" required="true()"/>
+      <bind nodeset="/data/personal_history/treat_diabetes" type="string" required="true()" relevant=" /data/personal_history/diag_diabetes  = 'yes'"/>
+      <bind nodeset="/data/personal_history/diag_bp" type="string" required="true()"/>
+      <bind nodeset="/data/personal_history/treat_bp" type="string" required="true()" relevant=" /data/personal_history/diag_bp  = 'yes'"/>
+      <bind nodeset="/data/personal_history/diag_heart" type="string" required="true()"/>
+      <bind nodeset="/data/personal_history/treat_heart" type="string" required="true()" relevant=" /data/personal_history/diag_heart  = 'yes'"/>
+      <bind nodeset="/data/personal_history/diag_stroke" type="string" required="true()"/>
+      <bind nodeset="/data/personal_history/treat_stroke" type="string" required="true()" relevant=" /data/personal_history/diag_stroke  = 'yes'"/>
+      <bind nodeset="/data/personal_history/diag_kidney" type="string" required="true()"/>
+      <bind nodeset="/data/personal_history/treat_kidney" type="string" required="true()" relevant=" /data/personal_history/diag_kidney  = 'yes'"/>
+      <bind nodeset="/data/personal_history/diag_copd" type="string" required="true()"/>
+      <bind nodeset="/data/personal_history/treat_copd" type="string" required="true()" relevant=" /data/personal_history/diag_copd  = 'yes'"/>
+      <bind nodeset="/data/personal_history/diag_asthma" type="string" required="true()"/>
+      <bind nodeset="/data/personal_history/treat_asthma" type="string" required="true()" relevant=" /data/personal_history/diag_asthma  = 'yes'"/>
+      <bind nodeset="/data/personal_history/diag_wound" type="string" required="true()"/>
+      <bind nodeset="/data/personal_history/treat_wound" type="string" required="true()" relevant=" /data/personal_history/diag_wound  = 'yes'"/>
+      <bind nodeset="/data/personal_history/diag_oral_cancer" type="string" required="true()"/>
+      <bind nodeset="/data/personal_history/treat_oral_cancer" type="string" required="true()" relevant=" /data/personal_history/diag_oral_cancer  = 'yes'"/>
+      <bind nodeset="/data/personal_history/other_disease" type="string"/>
+      <bind nodeset="/data/intro_hypertension" readonly="true()" type="string"/>
+      <bind nodeset="/data/hypertension/systolic" type="int" required="true()"/>
+      <bind nodeset="/data/hypertension/diastolic" type="int" required="true()"/>
+      <bind nodeset="/data/intro_diabetes" readonly="true()" type="string"/>
+      <bind nodeset="/data/diabetes_section/rapid_glucose" type="int" required="true()"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_filled_by/lbl_filled_by_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_filled_by/calc_reporter_name" type="string" calculate=" /data/reporter_name "/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_patient/lbl_patient_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_patient/calc_patient_name" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_state/lbl_state_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_state/calc_state" type="string" calculate=" /data/inputs/state "/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_district/lbl_district_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_district/calc_district" type="string" calculate=" /data/inputs/district "/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_bmi/lbl_bmi_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_bmi/calc_bmi" type="string" calculate=" /data/form_1_personal_details/bmi "/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_bp/lbl_bp_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_bp/calc_bp" type="string" calculate="concat( /data/hypertension/systolic , ' / ',  /data/hypertension/diastolic , ' mmHg')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_glucose/lbl_glucose_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_glucose/calc_rapid_glucose" type="string" calculate=" /data/diabetes_section/rapid_glucose "/>
+      <bind nodeset="/data/fill_phq9_form" type="string" required="true()"/>
+      <bind nodeset="/data/intro_form_2" readonly="true()" type="string" relevant=" /data/fill_phq9_form  = 'yes'"/>
+      <bind nodeset="/data/phq9_questions" relevant=" /data/fill_phq9_form  = 'yes'"/>
+      <bind nodeset="/data/phq9_questions/page_1/little_interest_or_pleasure" type="string" required="true()" relevant=" /data/fill_phq9_form  = 'yes'"/>
+      <bind nodeset="/data/phq9_questions/page_1/feeling_depressed_or_hopeless" type="string" required="true()" relevant=" /data/fill_phq9_form  = 'yes'"/>
+      <bind nodeset="/data/phq9_questions/page_2/trouble_sleeping" type="string" required="true()" relevant=" /data/fill_phq9_form  = 'yes'"/>
+      <bind nodeset="/data/phq9_questions/page_2/feeling_tired" type="string" required="true()" relevant=" /data/fill_phq9_form  = 'yes'"/>
+      <bind nodeset="/data/phq9_questions/page_3/poor_appetite_or_overeating" type="string" required="true()" relevant=" /data/fill_phq9_form  = 'yes'"/>
+      <bind nodeset="/data/phq9_questions/page_3/feeling_bad_about_yourself" type="string" required="true()" relevant=" /data/fill_phq9_form  = 'yes'"/>
+      <bind nodeset="/data/phq9_questions/page_4/trouble_concentrating" type="string" required="true()" relevant=" /data/fill_phq9_form  = 'yes'"/>
+      <bind nodeset="/data/phq9_questions/page_4/moving_or_speaking_slowly" type="string" required="true()" relevant=" /data/fill_phq9_form  = 'yes'"/>
+      <bind nodeset="/data/phq9_questions/page_5/thoughts_of_self_harm" type="string" required="true()" relevant=" /data/fill_phq9_form  = 'yes'"/>
+      <bind nodeset="/data/phq9_questions/total_score" type="string" calculate="if( /data/fill_phq9_form  = 'yes',  /data/phq9_questions/page_1/little_interest_or_pleasure  +  /data/phq9_questions/page_1/feeling_depressed_or_hopeless  +  /data/phq9_questions/page_2/trouble_sleeping  +  /data/phq9_questions/page_2/feeling_tired  +  /data/phq9_questions/page_3/poor_appetite_or_overeating  +  /data/phq9_questions/page_3/feeling_bad_about_yourself  +  /data/phq9_questions/page_4/trouble_concentrating  +  /data/phq9_questions/page_4/moving_or_speaking_slowly  +  /data/phq9_questions/page_5/thoughts_of_self_harm , '')"/>
+      <bind nodeset="/data/phq9_questions/severity_category" type="string" calculate="if( /data/phq9_questions/total_score  = '', '', if( /data/phq9_questions/total_score  &lt;= 4, 'minimal', if( /data/phq9_questions/total_score  &lt;= 9, 'mild', if( /data/phq9_questions/total_score  &lt;= 14, 'moderate', if( /data/phq9_questions/total_score  &lt;= 19, 'moderately_severe', 'severe')))))"/>
+      <bind nodeset="/data/form_2_summary" relevant=" /data/fill_phq9_form  = 'yes'"/>
+      <bind nodeset="/data/form_2_summary/phq9_completion_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_phq9_patient/lbl_phq9_patient_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_phq9_patient/calc_phq9_patient_name" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_phq9_score/lbl_phq9_score_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_phq9_score/calc_phq9_total_score" type="string" calculate=" /data/phq9_questions/total_score "/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_phq9_severity/lbl_phq9_severity_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_phq9_severity/calc_phq9_severity_category" type="string" calculate=" /data/phq9_questions/severity_category "/>
+      <bind nodeset="/data/form_2_summary/severity_guide" readonly="true()" type="string" relevant=" /data/fill_phq9_form  = 'yes'"/>
+      <bind nodeset="/data/fill_breast_cancer_form" type="string" required="true()"/>
+      <bind nodeset="/data/intro_form_3" readonly="true()" type="string" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_age_and_menarche" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_age_and_menarche/bc_current_age" type="int" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_age_and_menarche/bc_age_at_first_period" type="int" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_menstrual_and_childbirth" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_menstrual_and_childbirth/bc_irregular_menstrual_periods" type="string" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_menstrual_and_childbirth/bc_age_at_first_childbirth" type="int" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_breastfeeding_and_family_history" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_breastfeeding_and_family_history/bc_breastfeeding_duration" type="string" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_breastfeeding_and_family_history/bc_family_history_of_breast_cancer" type="string" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_ethnic_background" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_ethnic_background/bc_ethnicity_group" type="string" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_score_age" type="string" calculate="if( /data/fill_breast_cancer_form  = 'yes', if( /data/bc_age_and_menarche/bc_current_age  &gt;= 50, 2, if( /data/bc_age_and_menarche/bc_current_age  &gt;= 40, 1, 0)), '')"/>
+      <bind nodeset="/data/bc_score_menarche" type="string" calculate="if( /data/fill_breast_cancer_form  = 'yes', if( /data/bc_age_and_menarche/bc_age_at_first_period  &lt; 12, 1, 0), '')"/>
+      <bind nodeset="/data/bc_score_irregular_periods" type="string" calculate="if( /data/fill_breast_cancer_form  = 'yes', if( /data/bc_menstrual_and_childbirth/bc_irregular_menstrual_periods  = 'yes', 1, 0), '')"/>
+      <bind nodeset="/data/bc_score_childbirth_age" type="string" calculate="if( /data/fill_breast_cancer_form  = 'yes', if(string-length( /data/bc_menstrual_and_childbirth/bc_age_at_first_childbirth ) = 0, 0, if( /data/bc_menstrual_and_childbirth/bc_age_at_first_childbirth  &gt; 30, 1, 0)), '')"/>
+      <bind nodeset="/data/bc_score_breastfeeding" type="string" calculate="if( /data/fill_breast_cancer_form  = 'yes', if( /data/bc_breastfeeding_and_family_history/bc_breastfeeding_duration  = 'lt24', 1, 0), '')"/>
+      <bind nodeset="/data/bc_score_family_history" type="string" calculate="if( /data/fill_breast_cancer_form  = 'yes', if( /data/bc_breastfeeding_and_family_history/bc_family_history_of_breast_cancer  = 'yes', 2, 0), '')"/>
+      <bind nodeset="/data/bc_score_ethnicity" type="string" calculate="if( /data/fill_breast_cancer_form  = 'yes', if( /data/bc_ethnic_background/bc_ethnicity_group  = 'group_high', 1, if( /data/bc_ethnic_background/bc_ethnicity_group  = 'group_medium', 0.5, 0)), '')"/>
+      <bind nodeset="/data/bc_total_risk_score" type="string" calculate="if( /data/fill_breast_cancer_form  = 'yes',  /data/bc_score_age  +  /data/bc_score_menarche  +  /data/bc_score_irregular_periods  +  /data/bc_score_childbirth_age  +  /data/bc_score_breastfeeding  +  /data/bc_score_family_history  +  /data/bc_score_ethnicity , '')"/>
+      <bind nodeset="/data/bc_risk_category" type="string" calculate="if( /data/fill_breast_cancer_form  = 'yes', if( /data/bc_total_risk_score  &gt;= 6, 'High Risk', if( /data/bc_total_risk_score  &gt;= 3, 'Moderate Risk', 'Low Risk')), '')"/>
+      <bind nodeset="/data/form_3_summary" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/form_3_summary/bc_completion_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_3_summary/grp_lbl_bc_patient/lbl_bc_patient_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_3_summary/grp_lbl_bc_patient/calc_bc_patient_name" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/form_3_summary/grp_lbl_bc_score/lbl_bc_score_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_3_summary/grp_lbl_bc_score/calc_bc_risk_score" type="string" calculate=" /data/bc_total_risk_score "/>
+      <bind nodeset="/data/form_3_summary/grp_lbl_bc_risk_category/lbl_bc_risk_category_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_3_summary/grp_lbl_bc_risk_category/calc_bc_risk_category" type="string" calculate=" /data/bc_risk_category "/>
+      <bind nodeset="/data/form_3_summary/bc_risk_guide" readonly="true()" type="string" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/fill_oral_cancer_form" type="string" required="true()"/>
+      <bind nodeset="/data/intro_form_4" readonly="true()" type="string" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_participant" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_participant/oc_age" type="int" required="true()" relevant=" /data/fill_oral_cancer_form  = 'yes'" constraint=". &gt;= 0 and . &lt;= 120" jr:constraintMsg="Age must be between 0 and 120"/>
+      <bind nodeset="/data/oc_participant/oc_gender" type="string" required="true()" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_habit_history" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_habit_history/oc_cigarette_bidi" type="string" required="true()" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_habit_history/oc_smokeless_tobacco" type="string" required="true()" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_habit_history/oc_areca_nut" type="string" required="true()" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_habit_history/oc_alcohol" type="string" required="true()" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_habit_history/oc_alcohol_frequency" type="int" required="true()" relevant=" /data/oc_habit_history/oc_alcohol  = 'current'" constraint=". &gt;= 0 and . &lt;= 7" jr:constraintMsg="Enter a number from 0 to 7"/>
+      <bind nodeset="/data/oc_photo_1_page" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_photo_1_page/oc_photo_1" type="binary" required="true()" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_photo_1_page/oc_ai_photo_1_label" type="string"/>
+      <bind nodeset="/data/oc_photo_1_page/oc_ai_photo_1_score" type="string"/>
+      <bind nodeset="/data/oc_photo_2_page" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_photo_2_page/oc_photo_2" type="binary" required="true()" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_photo_2_page/oc_ai_photo_2_label" type="string"/>
+      <bind nodeset="/data/oc_photo_2_page/oc_ai_photo_2_score" type="string"/>
+      <bind nodeset="/data/oc_photo_3_page" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_photo_3_page/oc_photo_3" type="binary" required="true()" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_photo_3_page/oc_ai_photo_3_label" type="string"/>
+      <bind nodeset="/data/oc_photo_3_page/oc_ai_photo_3_score" type="string"/>
+      <bind nodeset="/data/oc_photo_4_page" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_photo_4_page/oc_photo_4" type="binary" required="true()" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_photo_4_page/oc_ai_photo_4_label" type="string"/>
+      <bind nodeset="/data/oc_photo_4_page/oc_ai_photo_4_score" type="string"/>
+      <bind nodeset="/data/oc_photo_5_page" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_photo_5_page/oc_photo_5" type="binary" required="true()" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_photo_5_page/oc_ai_photo_5_label" type="string"/>
+      <bind nodeset="/data/oc_photo_5_page/oc_ai_photo_5_score" type="string"/>
+      <bind nodeset="/data/oc_photo_6_page" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_photo_6_page/oc_photo_6" type="binary" required="true()" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_photo_6_page/oc_ai_photo_6_label" type="string"/>
+      <bind nodeset="/data/oc_photo_6_page/oc_ai_photo_6_score" type="string"/>
+      <bind nodeset="/data/oc_photo_7_page" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_photo_7_page/oc_photo_7" type="binary" required="true()" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_photo_7_page/oc_ai_photo_7_label" type="string"/>
+      <bind nodeset="/data/oc_photo_7_page/oc_ai_photo_7_score" type="string"/>
+      <bind nodeset="/data/oc_photo_8_page" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_photo_8_page/oc_photo_8" type="binary" required="true()" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/oc_photo_8_page/oc_ai_photo_8_label" type="string"/>
+      <bind nodeset="/data/oc_photo_8_page/oc_ai_photo_8_score" type="string"/>
+      <bind nodeset="/data/oc_state_final" type="string" calculate=" /data/inputs/state "/>
+      <bind nodeset="/data/oc_district_final" type="string" calculate=" /data/inputs/district "/>
+      <bind nodeset="/data/form_4_summary" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/form_4_summary/oc_completion_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_4_summary/grp_lbl_oc_filled_by/lbl_oc_filled_by_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_4_summary/grp_lbl_oc_filled_by/calc_oc_reporter_name" type="string" calculate=" /data/reporter_name "/>
+      <bind nodeset="/data/form_4_summary/grp_lbl_oc_patient/lbl_oc_patient_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_4_summary/grp_lbl_oc_patient/calc_oc_patient_name" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/form_4_summary/grp_lbl_oc_state/lbl_oc_state_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_4_summary/grp_lbl_oc_state/calc_oc_state" type="string" calculate=" /data/inputs/state "/>
+      <bind nodeset="/data/form_4_summary/grp_lbl_oc_district/lbl_oc_district_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_4_summary/grp_lbl_oc_district/calc_oc_district" type="string" calculate=" /data/inputs/district "/>
+      <bind nodeset="/data/form_4_summary/oc_ai_analysis_summary" type="string"/>
+      <bind nodeset="/data/form_4_summary/oc_ai_analysis_status" type="string"/>
+      <bind nodeset="/data/form_4_summary/oc_ai_analysis_error" type="string"/>
+      <bind nodeset="/data/form_submit_timestamp" type="string" calculate="if( /data/fill_oral_cancer_form  = 'yes', if( /data/oc_photo_8_page/oc_photo_8  != '', now(), ''), if( /data/fill_oral_cancer_form  = 'no', now(), ''))"/>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
+      <bind nodeset="/data/meta/instanceName" type="string" calculate=" /data/title "/>
+    </model>
+  </h:head>
+  <h:body class="pages grid-layout">
+    <group appearance="field-list" ref="/data/inputs">
+      <label>Patient &amp; Reporter Info</label>
+      <group ref="/data/inputs/user"/>
+      <input ref="/data/inputs/reporter_name_note">
+        <label> Filled by: <output value=" /data/reporter_name "/></label>
+      </input>
+      <group ref="/data/inputs/contact">
+        <input ref="/data/inputs/contact/_id" appearance="select-contact type-person role-patient">
+          <label>Patient's Name</label>
+          <hint>Select the patient from your area</hint>
+        </input>
+        <input ref="/data/inputs/contact/patient_id" appearance="hidden">
+          <label>Medic ID</label>
+        </input>
+        <input ref="/data/inputs/contact/name" appearance="hidden">
+          <label>Patient Name</label>
+        </input>
+      </group>
+      <select1 ref="/data/inputs/state" appearance="minimal">
+        <label>State</label>
+        <itemset nodeset="instance('states')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/inputs/district" appearance="minimal">
+        <label>District</label>
+        <itemset nodeset="instance('districts')/root/item[filter =  /data/inputs/state ]">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <input ref="/data/intro_form_1">
+      <label>## Form 1: Basic Health Checkup
+Please complete your health examination details.</label>
+    </input>
+    <group appearance="field-list" ref="/data/form_1_personal_details">
+      <label>Personal Details</label>
+      <input ref="/data/form_1_personal_details/height_cm">
+        <label>Height (cm)</label>
+        <hint>Enter height in centimetres</hint>
+      </input>
+      <input ref="/data/form_1_personal_details/weight_kg">
+        <label>Weight (kg)</label>
+        <hint>Enter weight in kilograms</hint>
+      </input>
+      <input ref="/data/form_1_personal_details/bmi_display">
+        <label> **BMI:** <output value=" /data/form_1_personal_details/bmi "/></label>
+      </input>
+    </group>
+    <input ref="/data/intro_personal_history">
+      <label>## Section 2: Personal History
+Please answer each question about your medical history.</label>
+    </input>
+    <group appearance="field-list" ref="/data/personal_history">
+      <label>Personal History</label>
+      <select1 ref="/data/personal_history/diag_diabetes">
+        <label>Diabetes – Diagnosed?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/treat_diabetes">
+        <label>Diabetes – Under Treatment?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/diag_bp">
+        <label>BP – Diagnosed?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/treat_bp">
+        <label>BP – Under Treatment?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/diag_heart">
+        <label>Heart Diseases – Diagnosed?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/treat_heart">
+        <label>Heart Diseases – Under Treatment?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/diag_stroke">
+        <label>Stroke – Diagnosed?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/treat_stroke">
+        <label>Stroke – Under Treatment?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/diag_kidney">
+        <label>Kidney Failure – Diagnosed?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/treat_kidney">
+        <label>Kidney Failure – Under Treatment?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/diag_copd">
+        <label>COPD – Diagnosed?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/treat_copd">
+        <label>COPD – Under Treatment?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/diag_asthma">
+        <label>Asthma – Diagnosed?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/treat_asthma">
+        <label>Asthma – Under Treatment?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/diag_wound">
+        <label>Non-healing Wound – Diagnosed?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/treat_wound">
+        <label>Non-healing Wound – Under Treatment?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/diag_oral_cancer">
+        <label>Oral Cancer – Diagnosed?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/treat_oral_cancer">
+        <label>Oral Cancer – Under Treatment?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <input ref="/data/personal_history/other_disease">
+        <label>Other Disease (if any)</label>
+        <hint>Describe any additional disease</hint>
+      </input>
+    </group>
+    <input ref="/data/intro_hypertension">
+      <label>## Section 3: Hypertension Screening
+Please enter your blood pressure readings.</label>
+    </input>
+    <group appearance="field-list" ref="/data/hypertension">
+      <label>Hypertension Screening</label>
+      <input ref="/data/hypertension/systolic">
+        <label>Systolic (mmHg)</label>
+        <hint>Enter systolic pressure</hint>
+      </input>
+      <input ref="/data/hypertension/diastolic">
+        <label>Diastolic (mmHg)</label>
+        <hint>Enter diastolic pressure</hint>
+      </input>
+    </group>
+    <input ref="/data/intro_diabetes">
+      <label>## Section 4: Diabetes
+Please enter your blood glucose reading.</label>
+    </input>
+    <group appearance="field-list" ref="/data/diabetes_section">
+      <label>Diabetes</label>
+      <input ref="/data/diabetes_section/rapid_glucose">
+        <label>Rapid Glucose Test (mg/dL)</label>
+        <hint>Enter blood glucose value</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/form_1_summary">
+      <label>Assessment Summary</label>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_filled_by">
+        <input ref="/data/form_1_summary/grp_lbl_filled_by/lbl_filled_by_lbl">
+          <label> **Filled by:** <output value=" /data/reporter_name "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_patient">
+        <input ref="/data/form_1_summary/grp_lbl_patient/lbl_patient_lbl">
+          <label> **Patient:** <output value=" /data/patient_name "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_state">
+        <input ref="/data/form_1_summary/grp_lbl_state/lbl_state_lbl">
+          <label> **State:** <output value=" /data/inputs/state "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_district">
+        <input ref="/data/form_1_summary/grp_lbl_district/lbl_district_lbl">
+          <label> **District:** <output value=" /data/inputs/district "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_bmi">
+        <input ref="/data/form_1_summary/grp_lbl_bmi/lbl_bmi_lbl">
+          <label> **BMI:** <output value=" /data/form_1_personal_details/bmi "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_bp">
+        <input ref="/data/form_1_summary/grp_lbl_bp/lbl_bp_lbl">
+          <label> **Blood Pressure:** <output value=" /data/hypertension/systolic "/> / <output value=" /data/hypertension/diastolic "/> mmHg </label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_glucose">
+        <input ref="/data/form_1_summary/grp_lbl_glucose/lbl_glucose_lbl">
+          <label> **Rapid Glucose Test:** <output value=" /data/diabetes_section/rapid_glucose "/> mg/dL </label>
+        </input>
+      </group>
+    </group>
+    <select1 ref="/data/fill_phq9_form" appearance="minimal">
+      <label>Do you want to fill PHQ-9 form?</label>
+      <hint>Select yes to continue with PHQ-9</hint>
+      <itemset nodeset="instance('yes_no')/root/item">
+        <value ref="name"/>
+        <label ref="label"/>
+      </itemset>
+    </select1>
+    <input ref="/data/intro_form_2">
+      <label>## Form 2: PHQ-9 Questionnaire
+Over the last 2 weeks, how often have you been bothered by any of the following problems?</label>
+    </input>
+    <group ref="/data/phq9_questions">
+      <label>PHQ-9 Questions</label>
+      <group appearance="field-list" ref="/data/phq9_questions/page_1">
+        <label>Questions 1 &amp; 2 of 9</label>
+        <select1 ref="/data/phq9_questions/page_1/little_interest_or_pleasure">
+          <label>1. Little interest or pleasure in doing things</label>
+          <hint>Use ✓ to indicate your answer</hint>
+          <itemset nodeset="instance('frequency')/root/item">
+            <value ref="name"/>
+            <label ref="label"/>
+          </itemset>
+        </select1>
+        <select1 ref="/data/phq9_questions/page_1/feeling_depressed_or_hopeless">
+          <label>2. Feeling down, depressed, or hopeless</label>
+          <hint>Use ✓ to indicate your answer</hint>
+          <itemset nodeset="instance('frequency')/root/item">
+            <value ref="name"/>
+            <label ref="label"/>
+          </itemset>
+        </select1>
+      </group>
+      <group appearance="field-list" ref="/data/phq9_questions/page_2">
+        <label>Questions 3 &amp; 4 of 9</label>
+        <select1 ref="/data/phq9_questions/page_2/trouble_sleeping">
+          <label>3. Trouble falling or staying asleep, or sleeping too much</label>
+          <hint>Use ✓ to indicate your answer</hint>
+          <itemset nodeset="instance('frequency')/root/item">
+            <value ref="name"/>
+            <label ref="label"/>
+          </itemset>
+        </select1>
+        <select1 ref="/data/phq9_questions/page_2/feeling_tired">
+          <label>4. Feeling tired or having little energy</label>
+          <hint>Use ✓ to indicate your answer</hint>
+          <itemset nodeset="instance('frequency')/root/item">
+            <value ref="name"/>
+            <label ref="label"/>
+          </itemset>
+        </select1>
+      </group>
+      <group appearance="field-list" ref="/data/phq9_questions/page_3">
+        <label>Questions 5 &amp; 6 of 9</label>
+        <select1 ref="/data/phq9_questions/page_3/poor_appetite_or_overeating">
+          <label>5. Poor appetite or overeating</label>
+          <hint>Use ✓ to indicate your answer</hint>
+          <itemset nodeset="instance('frequency')/root/item">
+            <value ref="name"/>
+            <label ref="label"/>
+          </itemset>
+        </select1>
+        <select1 ref="/data/phq9_questions/page_3/feeling_bad_about_yourself">
+          <label>6. Feeling bad about yourself — or that you are a failure or have let yourself or your family down</label>
+          <hint>Use ✓ to indicate your answer</hint>
+          <itemset nodeset="instance('frequency')/root/item">
+            <value ref="name"/>
+            <label ref="label"/>
+          </itemset>
+        </select1>
+      </group>
+      <group appearance="field-list" ref="/data/phq9_questions/page_4">
+        <label>Questions 7 &amp; 8 of 9</label>
+        <select1 ref="/data/phq9_questions/page_4/trouble_concentrating">
+          <label>7. Trouble concentrating on things, such as reading the newspaper or watching television</label>
+          <hint>Use ✓ to indicate your answer</hint>
+          <itemset nodeset="instance('frequency')/root/item">
+            <value ref="name"/>
+            <label ref="label"/>
+          </itemset>
+        </select1>
+        <select1 ref="/data/phq9_questions/page_4/moving_or_speaking_slowly">
+          <label>8. Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual</label>
+          <hint>Use ✓ to indicate your answer</hint>
+          <itemset nodeset="instance('frequency')/root/item">
+            <value ref="name"/>
+            <label ref="label"/>
+          </itemset>
+        </select1>
+      </group>
+      <group appearance="field-list" ref="/data/phq9_questions/page_5">
+        <label>Question 9 of 9</label>
+        <select1 ref="/data/phq9_questions/page_5/thoughts_of_self_harm">
+          <label>9. Thoughts that you would be better off dead or of hurting yourself in some way</label>
+          <hint>Use ✓ to indicate your answer</hint>
+          <itemset nodeset="instance('frequency')/root/item">
+            <value ref="name"/>
+            <label ref="label"/>
+          </itemset>
+        </select1>
+      </group>
+    </group>
+    <group appearance="field-list" ref="/data/form_2_summary">
+      <label>Form 2 Summary</label>
+      <input ref="/data/form_2_summary/phq9_completion_note">
+        <label>PHQ-9 Assessment completed!</label>
+      </input>
+      <group appearance="field-list" ref="/data/form_2_summary/grp_lbl_phq9_patient">
+        <input ref="/data/form_2_summary/grp_lbl_phq9_patient/lbl_phq9_patient_lbl">
+          <label> **Patient:** <output value=" /data/patient_name "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_2_summary/grp_lbl_phq9_score">
+        <input ref="/data/form_2_summary/grp_lbl_phq9_score/lbl_phq9_score_lbl">
+          <label> **PHQ-9 Total Score:** <output value=" /data/phq9_questions/total_score "/> / 27 </label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_2_summary/grp_lbl_phq9_severity">
+        <input ref="/data/form_2_summary/grp_lbl_phq9_severity/lbl_phq9_severity_lbl">
+          <label> **Severity:** <output value=" /data/phq9_questions/severity_category "/></label>
+        </input>
+      </group>
+      <input ref="/data/form_2_summary/severity_guide">
+        <label>0–4 Minimal · 5–9 Mild · 10–14 Moderate · 15–19 Mod. Severe · 20–27 Severe</label>
+      </input>
+    </group>
+    <select1 ref="/data/fill_breast_cancer_form" appearance="minimal">
+      <label>Do you want to fill Breast Cancer Risk Assessment form?</label>
+      <hint>Select yes to continue with Breast Cancer assessment</hint>
+      <itemset nodeset="instance('yes_no')/root/item">
+        <value ref="name"/>
+        <label ref="label"/>
+      </itemset>
+    </select1>
+    <input ref="/data/intro_form_3">
+      <label>## Form 3: Breast Cancer Risk Assessment
+This assessment uses key risk factors to estimate your breast cancer risk level.</label>
+    </input>
+    <group appearance="field-list" ref="/data/bc_age_and_menarche">
+      <label>Age &amp; Menstrual History</label>
+      <input ref="/data/bc_age_and_menarche/bc_current_age">
+        <label>What is your current age?</label>
+        <hint>Enter age in years.</hint>
+      </input>
+      <input ref="/data/bc_age_and_menarche/bc_age_at_first_period">
+        <label>At what age did you have your first menstrual period (menarche)?</label>
+        <hint>Enter age in years.</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/bc_menstrual_and_childbirth">
+      <label>Menstrual &amp; Childbirth History</label>
+      <select1 ref="/data/bc_menstrual_and_childbirth/bc_irregular_menstrual_periods">
+        <label>Do you experience irregular menstrual periods (e.g., cycles that are often early, late, or unpredictable)?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <input ref="/data/bc_menstrual_and_childbirth/bc_age_at_first_childbirth">
+        <label>If you have given birth, how old were you at the time of your first childbirth?</label>
+        <hint>Leave blank if not applicable.</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/bc_breastfeeding_and_family_history">
+      <label>Breastfeeding &amp; Family History</label>
+      <select1 ref="/data/bc_breastfeeding_and_family_history/bc_breastfeeding_duration">
+        <label>Have you breastfed for more than 2 years in total (including all children)?</label>
+        <itemset nodeset="instance('breastfeeding_history')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/bc_breastfeeding_and_family_history/bc_family_history_of_breast_cancer">
+        <label>Do you have a family history of breast cancer among close relatives (e.g., mother, sister)?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/bc_ethnic_background">
+      <label>Ethnic Background</label>
+      <select1 ref="/data/bc_ethnic_background/bc_ethnicity_group" appearance="minimal">
+        <label>Which ethnic group do you identify with?</label>
+        <itemset nodeset="instance('ethnicity_groups')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/form_3_summary">
+      <label>Form 3 Summary</label>
+      <input ref="/data/form_3_summary/bc_completion_note">
+        <label>Breast Cancer Risk Assessment completed!</label>
+      </input>
+      <group appearance="field-list" ref="/data/form_3_summary/grp_lbl_bc_patient">
+        <input ref="/data/form_3_summary/grp_lbl_bc_patient/lbl_bc_patient_lbl">
+          <label> **Patient:** <output value=" /data/patient_name "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_3_summary/grp_lbl_bc_score">
+        <input ref="/data/form_3_summary/grp_lbl_bc_score/lbl_bc_score_lbl">
+          <label> **Risk Score:** <output value=" /data/bc_total_risk_score "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_3_summary/grp_lbl_bc_risk_category">
+        <input ref="/data/form_3_summary/grp_lbl_bc_risk_category/lbl_bc_risk_category_lbl">
+          <label> **Risk Category:** <output value=" /data/bc_risk_category "/></label>
+        </input>
+      </group>
+      <input ref="/data/form_3_summary/bc_risk_guide">
+        <label>Score &lt; 3: Low Risk · Score 3–5: Moderate Risk · Score ≥ 6: High Risk</label>
+      </input>
+    </group>
+    <select1 ref="/data/fill_oral_cancer_form" appearance="minimal">
+      <label>Do you want to fill Oral Cancer Assessment form?</label>
+      <hint>Select yes to continue with Oral Cancer assessment</hint>
+      <itemset nodeset="instance('yes_no')/root/item">
+        <value ref="name"/>
+        <label ref="label"/>
+      </itemset>
+    </select1>
+    <input ref="/data/intro_form_4">
+      <label>## Form 4: Oral Cancer Assessment
+Please complete the habit history and photo documentation.</label>
+    </input>
+    <group appearance="field-list" ref="/data/oc_participant">
+      <label>Participant Details</label>
+      <input ref="/data/oc_participant/oc_age">
+        <label>Age</label>
+        <hint>Enter age in completed years</hint>
+      </input>
+      <select1 ref="/data/oc_participant/oc_gender">
+        <label>Gender</label>
+        <itemset nodeset="instance('gender')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/oc_habit_history">
+      <label>Habit History</label>
+      <select1 ref="/data/oc_habit_history/oc_cigarette_bidi">
+        <label>Cigarette / Bidi</label>
+        <itemset nodeset="instance('history_status')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/oc_habit_history/oc_smokeless_tobacco">
+        <label>Smokeless Tobacco</label>
+        <itemset nodeset="instance('history_status')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/oc_habit_history/oc_areca_nut">
+        <label>Areca Nut</label>
+        <itemset nodeset="instance('history_status')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/oc_habit_history/oc_alcohol">
+        <label>Alcohol</label>
+        <itemset nodeset="instance('history_status')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <input ref="/data/oc_habit_history/oc_alcohol_frequency">
+        <label>Alcohol frequency (days per week)</label>
+        <hint>Enter a whole number from 0 to 7</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/oc_photo_1_page">
+      <upload ref="/data/oc_photo_1_page/oc_photo_1" mediatype="image/*">
+        <label>Photo 1</label>
+      </upload>
+      <input ref="/data/oc_photo_1_page/oc_ai_photo_1_label">
+        <label>Photo 1 Label</label>
+      </input>
+      <input ref="/data/oc_photo_1_page/oc_ai_photo_1_score">
+        <label>Photo 1 Accuracy</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/oc_photo_2_page">
+      <upload ref="/data/oc_photo_2_page/oc_photo_2" mediatype="image/*">
+        <label>Photo 2</label>
+      </upload>
+      <input ref="/data/oc_photo_2_page/oc_ai_photo_2_label">
+        <label>Photo 2 Label</label>
+      </input>
+      <input ref="/data/oc_photo_2_page/oc_ai_photo_2_score">
+        <label>Photo 2 Accuracy</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/oc_photo_3_page">
+      <upload ref="/data/oc_photo_3_page/oc_photo_3" mediatype="image/*">
+        <label>Photo 3</label>
+      </upload>
+      <input ref="/data/oc_photo_3_page/oc_ai_photo_3_label">
+        <label>Photo 3 Label</label>
+      </input>
+      <input ref="/data/oc_photo_3_page/oc_ai_photo_3_score">
+        <label>Photo 3 Accuracy</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/oc_photo_4_page">
+      <upload ref="/data/oc_photo_4_page/oc_photo_4" mediatype="image/*">
+        <label>Photo 4</label>
+      </upload>
+      <input ref="/data/oc_photo_4_page/oc_ai_photo_4_label">
+        <label>Photo 4 Label</label>
+      </input>
+      <input ref="/data/oc_photo_4_page/oc_ai_photo_4_score">
+        <label>Photo 4 Accuracy</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/oc_photo_5_page">
+      <upload ref="/data/oc_photo_5_page/oc_photo_5" mediatype="image/*">
+        <label>Photo 5</label>
+      </upload>
+      <input ref="/data/oc_photo_5_page/oc_ai_photo_5_label">
+        <label>Photo 5 Label</label>
+      </input>
+      <input ref="/data/oc_photo_5_page/oc_ai_photo_5_score">
+        <label>Photo 5 Accuracy</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/oc_photo_6_page">
+      <upload ref="/data/oc_photo_6_page/oc_photo_6" mediatype="image/*">
+        <label>Photo 6</label>
+      </upload>
+      <input ref="/data/oc_photo_6_page/oc_ai_photo_6_label">
+        <label>Photo 6 Label</label>
+      </input>
+      <input ref="/data/oc_photo_6_page/oc_ai_photo_6_score">
+        <label>Photo 6 Accuracy</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/oc_photo_7_page">
+      <upload ref="/data/oc_photo_7_page/oc_photo_7" mediatype="image/*">
+        <label>Photo 7</label>
+      </upload>
+      <input ref="/data/oc_photo_7_page/oc_ai_photo_7_label">
+        <label>Photo 7 Label</label>
+      </input>
+      <input ref="/data/oc_photo_7_page/oc_ai_photo_7_score">
+        <label>Photo 7 Accuracy</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/oc_photo_8_page">
+      <upload ref="/data/oc_photo_8_page/oc_photo_8" mediatype="image/*">
+        <label>Photo 8</label>
+      </upload>
+      <input ref="/data/oc_photo_8_page/oc_ai_photo_8_label">
+        <label>Photo 8 Label</label>
+      </input>
+      <input ref="/data/oc_photo_8_page/oc_ai_photo_8_score">
+        <label>Photo 8 Accuracy</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/form_4_summary">
+      <label>Form 4 Summary</label>
+      <input ref="/data/form_4_summary/oc_completion_note">
+        <label>Oral Cancer Assessment completed!</label>
+      </input>
+      <group appearance="field-list" ref="/data/form_4_summary/grp_lbl_oc_filled_by">
+        <input ref="/data/form_4_summary/grp_lbl_oc_filled_by/lbl_oc_filled_by_lbl">
+          <label> **Filled by:** <output value=" /data/reporter_name "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_4_summary/grp_lbl_oc_patient">
+        <input ref="/data/form_4_summary/grp_lbl_oc_patient/lbl_oc_patient_lbl">
+          <label> **Patient:** <output value=" /data/patient_name "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_4_summary/grp_lbl_oc_state">
+        <input ref="/data/form_4_summary/grp_lbl_oc_state/lbl_oc_state_lbl">
+          <label> **State:** <output value=" /data/inputs/state "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_4_summary/grp_lbl_oc_district">
+        <input ref="/data/form_4_summary/grp_lbl_oc_district/lbl_oc_district_lbl">
+          <label> **District:** <output value=" /data/inputs/district "/></label>
+        </input>
+      </group>
+      <input ref="/data/form_4_summary/oc_ai_analysis_summary" appearance="hidden">
+        <label>Summary</label>
+      </input>
+      <input ref="/data/form_4_summary/oc_ai_analysis_status" appearance="hidden">
+        <label>Analysis Status</label>
+      </input>
+      <input ref="/data/form_4_summary/oc_ai_analysis_error" appearance="hidden">
+        <label>Error (if any)</label>
+      </input>
+    </group>
+  </h:body>
+</h:html>
