@@ -68,6 +68,9 @@ Level 3 (Leaf):  person              ← Individual People
 │ type = "person"      │
 │ name                 │
 │ phone                │
+│ role                 │   ← "chw", "chw_supervisor", "patient", "other"
+│ sex                  │
+│ date_of_birth        │
 │ parent._id ──────────┼──────► clinic._id  (or health_center or
 └──────────────────────┘                      district_hospital)
            │ *
@@ -157,6 +160,19 @@ curl -s "http://medic:password@localhost:5984/medic/_find" \
     "fields": ["_id","name","phone","parent"]
   }'
 ```
+
+### Fetch the associated contact person of a place
+```bash
+# 1. Get the place doc to find contact._id
+curl -s "http://medic:password@localhost:5984/medic/<place_id>" \
+  -H "Content-Type: application/json"
+
+# 2. Use contact._id to fetch the full person doc
+curl -s "http://medic:password@localhost:5984/medic/<contact._id>" \
+  -H "Content-Type: application/json"
+```
+
+**Note:** `contact` is either `{ "_id": "..." }` when linked, or `""` (empty string) when not set.
 
 ---
 
