@@ -15,6 +15,7 @@ Notes from exploring the CHT Core codebase and building a PHQ-9 form.
 | 07 | [07-ngrx-angular-flow.md](07-ngrx-angular-flow.md) | NgRx actions → effects → services → store flow |
 | 08 | [08-poc-project-structure.md](08-poc-project-structure.md) | POC repo structure, inputs group, form submission doc shape |
 | 09 | [09-tasks.md](09-tasks.md) | What tasks are, tasks.js schema, simple/complex examples, deploy & test |
+| 10 | [10-hierarchy-and-contact-types.md](10-hierarchy-and-contact-types.md) | Place hierarchy (district_hospital → health_center → clinic → person), ER diagram, CouchDB queries |
 
 ## Quick Reference
 
