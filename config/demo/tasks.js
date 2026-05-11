@@ -562,6 +562,41 @@ module.exports = [
     }],
   },
 
+  // Task 1b: CBAC NCD Screening — triggered alongside CBAC follow-up for high-risk patients
+  {
+    name: 'cbac.ncd_screening',
+    icon: 'icon-healthcare-generic-2',
+    title: 'task.cbac.ncd_screening.title',
+    appliesTo: 'reports',
+    appliesToType: ['cbac'],
+    appliesIf: function(contact, report) {
+      return getField(report, 'risk_category') === 'High Risk' && isAlive(contact);
+    },
+    resolvedIf: function(contact, report, event, dueDate) {
+      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);
+      const endTime = addDays(dueDate, event.end + 1).getTime();
+      return isFormArraySubmittedInWindow(contact.reports, ['ncd'], startTime, endTime);
+    },
+    actions: [{
+      type: 'report',
+      form: 'ncd',
+      label: 'NCD Screening',
+      // modifyContent: function(content, _contact, report) {
+      //   content.state    = getField(report, 'inputs.state');
+      //   content.district = getField(report, 'inputs.district');
+      // }
+    }],
+    events: [{
+      id: 'cbac-ncd-screening',
+      // Production: days: 5, start: 5, end: 7
+      // days: 5,
+      // start: 5,
+      days: 0,   // DEV: immediate
+      start: 0,  // DEV: immediate
+      end: 7,
+    }],
+  },
+
   // Task 2: CBAC Checkup Date Follow-up — triggered when patient agreed to checkup date
   {
     name: 'cbac.checkup_date_follow_up',
