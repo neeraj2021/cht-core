@@ -357,7 +357,9 @@ module.exports = [
     appliesIf: function(contact, report) {
       const systolic = parseInt(getField(report, 'hypertension.systolic'));
       const diastolic = parseInt(getField(report, 'hypertension.diastolic'));
-      return (systolic > 140 || diastolic > 90) && isAlive(contact);
+      const isSevere = systolic > 140 || diastolic > 90;
+      const isReferred = getField(report, 'bp_referral_page.bp_referral_decision') === 'refer_anyway';
+      return isSevere && isReferred && isAlive(contact);
     },
     resolvedIf: function(contact, report, event, dueDate) {
       // Resolve if a newer NCD report exists for this patient (re-assessment happened)
@@ -448,7 +450,9 @@ module.exports = [
     appliesToType: ['ncd'],
     appliesIf: function(contact, report) {
       const glucose = parseInt(getField(report, 'diabetes_section.rapid_glucose'));
-      return glucose > 140 && isAlive(contact);
+      const isHighGlucose = glucose > 140;
+      const isReferred = getField(report, 'glucose_referral_page.glucose_referral_decision') === 'refer_anyway';
+      return isHighGlucose && isReferred && isAlive(contact);
     },
     resolvedIf: function(contact, report, event, dueDate) {
       // Resolve if a newer NCD report exists for this patient (re-assessment happened)
