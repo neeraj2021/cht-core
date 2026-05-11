@@ -27,21 +27,30 @@
             <value>Date unknown</value>
           </text>
           <text id="roles-0">
-            <value>CHW</value>
+            <value>ASHA</value>
           </text>
           <text id="roles-1">
-            <value>CHW Supervisor</value>
+            <value>CHW</value>
           </text>
           <text id="roles-2">
-            <value>Nurse</value>
+            <value>ANM</value>
           </text>
           <text id="roles-3">
-            <value>Facility Manager</value>
+            <value>MPW</value>
           </text>
           <text id="roles-4">
-            <value>Patient</value>
+            <value>CHO</value>
           </text>
           <text id="roles-5">
+            <value>Medical Officer</value>
+          </text>
+          <text id="roles-6">
+            <value>Medical Supervisor</value>
+          </text>
+          <text id="roles-7">
+            <value>Patient</value>
+          </text>
+          <text id="roles-8">
             <value>Other</value>
           </text>
           <text id="place_type-0">
@@ -1085,26 +1094,38 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
         <root>
           <item>
             <itextId>roles-0</itextId>
-            <name>chw</name>
+            <name>asha</name>
           </item>
           <item>
             <itextId>roles-1</itextId>
-            <name>chw_supervisor</name>
+            <name>chw</name>
           </item>
           <item>
             <itextId>roles-2</itextId>
-            <name>nurse</name>
+            <name>anm</name>
           </item>
           <item>
             <itextId>roles-3</itextId>
-            <name>manager</name>
+            <name>mpw</name>
           </item>
           <item>
             <itextId>roles-4</itextId>
-            <name>patient</name>
+            <name>cho</name>
           </item>
           <item>
             <itextId>roles-5</itextId>
+            <name>medical_officer</name>
+          </item>
+          <item>
+            <itextId>roles-6</itextId>
+            <name>medical_supervisor</name>
+          </item>
+          <item>
+            <itextId>roles-7</itextId>
+            <name>patient</name>
+          </item>
+          <item>
+            <itextId>roles-8</itextId>
             <name>other</name>
           </item>
         </root>

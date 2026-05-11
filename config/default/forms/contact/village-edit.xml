@@ -18,22 +18,31 @@
             <value>Select an existing person</value>
           </text>
           <text id="roles-0">
-            <value>CHW</value>
+            <value>ASHA</value>
           </text>
           <text id="roles-1">
-            <value>CHW Supervisor</value>
+            <value>CHW</value>
           </text>
           <text id="roles-2">
-            <value>Nurse</value>
+            <value>ANM</value>
           </text>
           <text id="roles-3">
-            <value>Facility Manager</value>
+            <value>MPW</value>
           </text>
           <text id="roles-4">
-            <value>Other</value>
+            <value>CHO</value>
           </text>
           <text id="roles-5">
+            <value>Medical Officer</value>
+          </text>
+          <text id="roles-6">
+            <value>Medical Supervisor</value>
+          </text>
+          <text id="roles-7">
             <value>Patient</value>
+          </text>
+          <text id="roles-8">
+            <value>Other</value>
           </text>
           <text id="name_type-0">
             <value>Enter the name manually</value>
