@@ -570,7 +570,9 @@ module.exports = [
     appliesTo: 'reports',
     appliesToType: ['cbac'],
     appliesIf: function(contact, report) {
-      return getField(report, 'risk_category') === 'High Risk' && isAlive(contact);
+      return user.role === 'chw_supervisor' &&
+             getField(report, 'risk_category') === 'High Risk' &&
+             isAlive(contact);
     },
     resolvedIf: function(contact, report, event, dueDate) {
       const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);
@@ -581,10 +583,10 @@ module.exports = [
       type: 'report',
       form: 'ncd',
       label: 'NCD Screening',
-      // modifyContent: function(content, _contact, report) {
-      //   content.state    = getField(report, 'inputs.state');
-      //   content.district = getField(report, 'inputs.district');
-      // }
+      modifyContent: function(content, _contact, report) {
+        content.state    = getField(report, 'inputs.state');
+        content.district = getField(report, 'inputs.district');
+      }
     }],
     events: [{
       id: 'cbac-ncd-screening',
