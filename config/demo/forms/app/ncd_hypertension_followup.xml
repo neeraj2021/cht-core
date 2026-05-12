@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://www.opendatakit.org/xforms">
   <h:head>
-    <h:title>CBAC Follow Up</h:title>
+    <h:title>NCD Hypertension Follow-up</h:title>
     <model odk:xforms-version="1.0.0">
       <instance>
-        <data id="cbac_followup" prefix="J1!cbac_followup!" delimiter="#">
+        <data id="ncd_hypertension_followup" prefix="J1!ncd_hypertension_followup!" delimiter="#">
           <patient_id/>
           <patient_uuid/>
           <patient_name/>
@@ -30,15 +30,21 @@
               <patient_id/>
               <name/>
             </contact>
+            <t_systolic/>
+            <t_diastolic/>
           </inputs>
-          <ncd_followup>
-            <ncd_day_visited/>
-            <willing_for_checkup/>
-            <checkup_date/>
-            <t_ncd_day_visited/>
-            <t_willing_for_checkup/>
-            <t_checkup_date/>
-          </ncd_followup>
+          <followup>
+            <bp_note/>
+            <current_systolic/>
+            <current_diastolic/>
+            <medication_taken/>
+            <referred_to_phc/>
+            <notes/>
+            <t_current_systolic/>
+            <t_current_diastolic/>
+            <t_medication_taken/>
+            <t_referred_to_phc/>
+          </followup>
           <meta tag="hidden">
             <instanceID/>
             <instanceName/>
@@ -68,15 +74,21 @@
       <bind nodeset="/data/inputs/source_id" type="string"/>
       <bind nodeset="/data/inputs/user/name" type="string"/>
       <bind nodeset="/data/inputs/user/phone" type="string"/>
-      <bind nodeset="/data/inputs/contact/_id" type="string" readonly="true()"/>
+      <bind nodeset="/data/inputs/contact/_id" type="string" required="true()"/>
       <bind nodeset="/data/inputs/contact/patient_id" type="string"/>
       <bind nodeset="/data/inputs/contact/name" type="string"/>
-      <bind nodeset="/data/ncd_followup/ncd_day_visited" type="string"/>
-      <bind nodeset="/data/ncd_followup/willing_for_checkup" type="string" required=" /data/ncd_followup/ncd_day_visited  = 'no'" relevant=" /data/ncd_followup/ncd_day_visited  = 'no'"/>
-      <bind nodeset="/data/ncd_followup/checkup_date" type="date" required="true()" relevant=" /data/ncd_followup/willing_for_checkup  = 'yes'"/>
-      <bind nodeset="/data/ncd_followup/t_ncd_day_visited" type="string" calculate=" /data/ncd_followup/ncd_day_visited "/>
-      <bind nodeset="/data/ncd_followup/t_willing_for_checkup" type="string" calculate=" /data/ncd_followup/willing_for_checkup "/>
-      <bind nodeset="/data/ncd_followup/t_checkup_date" type="string" calculate=" /data/ncd_followup/checkup_date "/>
+      <bind nodeset="/data/inputs/t_systolic" type="string"/>
+      <bind nodeset="/data/inputs/t_diastolic" type="string"/>
+      <bind nodeset="/data/followup/bp_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/followup/current_systolic" type="int" required="true()"/>
+      <bind nodeset="/data/followup/current_diastolic" type="int" required="true()"/>
+      <bind nodeset="/data/followup/medication_taken" type="string" required="true()"/>
+      <bind nodeset="/data/followup/referred_to_phc" type="string" required="true()"/>
+      <bind nodeset="/data/followup/notes" type="string"/>
+      <bind nodeset="/data/followup/t_current_systolic" type="string" calculate=" /data/followup/current_systolic "/>
+      <bind nodeset="/data/followup/t_current_diastolic" type="string" calculate=" /data/followup/current_diastolic "/>
+      <bind nodeset="/data/followup/t_medication_taken" type="string" calculate=" /data/followup/medication_taken "/>
+      <bind nodeset="/data/followup/t_referred_to_phc" type="string" calculate=" /data/followup/referred_to_phc "/>
       <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
       <bind nodeset="/data/meta/instanceName" type="string" calculate=" /data/title "/>
     </model>
@@ -97,23 +109,35 @@
         </input>
       </group>
     </group>
-    <group appearance="field-list" ref="/data/ncd_followup">
-      <select1 ref="/data/ncd_followup/ncd_day_visited">
-        <label>Did the patient visit for NCD day?</label>
+    <group appearance="field-list" ref="/data/followup">
+      <label>Hypertension Follow-up</label>
+      <input ref="/data/followup/bp_note">
+        <label> **Previous BP Reading:** <output value=" /data/inputs/t_systolic "/> / <output value=" /data/inputs/t_diastolic "/> mmHg </label>
+      </input>
+      <input ref="/data/followup/current_systolic">
+        <label>Current Systolic (mmHg)</label>
+        <hint>Enter current systolic reading</hint>
+      </input>
+      <input ref="/data/followup/current_diastolic">
+        <label>Current Diastolic (mmHg)</label>
+        <hint>Enter current diastolic reading</hint>
+      </input>
+      <select1 ref="/data/followup/medication_taken">
+        <label>Is the patient taking prescribed medication?</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/ncd_followup/willing_for_checkup">
-        <label>Is the patient willing to go for checkup?</label>
+      <select1 ref="/data/followup/referred_to_phc">
+        <label>Has the patient been advised to visit the PHC?</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <input ref="/data/ncd_followup/checkup_date">
-        <label>When can the patient go for checkup?</label>
+      <input ref="/data/followup/notes">
+        <label>Additional Notes (optional)</label>
       </input>
     </group>
   </h:body>
