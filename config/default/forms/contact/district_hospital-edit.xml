@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://www.opendatakit.org/xforms">
   <h:head>
-    <h:title>Edit Health Facility</h:title>
+    <h:title>Edit District Hospital</h:title>
     <model odk:xforms-version="1.0.0">
       <itext>
         <translation lang="en">
@@ -21,27 +21,24 @@
             <value>ASHA</value>
           </text>
           <text id="roles-1">
-            <value>CHW</value>
-          </text>
-          <text id="roles-2">
             <value>ANM</value>
           </text>
-          <text id="roles-3">
+          <text id="roles-2">
             <value>MPW</value>
           </text>
-          <text id="roles-4">
+          <text id="roles-3">
             <value>CHO</value>
           </text>
-          <text id="roles-5">
+          <text id="roles-4">
             <value>Medical Officer</value>
           </text>
-          <text id="roles-6">
+          <text id="roles-5">
             <value>Medical Supervisor</value>
           </text>
-          <text id="roles-7">
+          <text id="roles-6">
             <value>Patient</value>
           </text>
-          <text id="roles-8">
+          <text id="roles-7">
             <value>Other</value>
           </text>
           <text id="name_type-0">
@@ -110,18 +107,15 @@
             <value>सामुदायिक स्वास्थ्य कर्मी</value>
           </text>
           <text id="roles-1">
-            <value>सामुदायिक स्वास्थ्य कर्मी के मैनेजर</value>
-          </text>
-          <text id="roles-2">
             <value>नर्स</value>
           </text>
-          <text id="roles-3">
+          <text id="roles-2">
             <value>स्वास्थ्य केंद्र के मैनजर</value>
           </text>
-          <text id="roles-4">
+          <text id="roles-3">
             <value>अन्य</value>
           </text>
-          <text id="roles-5">
+          <text id="roles-4">
             <value>मरीज़</value>
           </text>
           <text id="name_type-0">
@@ -190,18 +184,15 @@
             <value>Kader</value>
           </text>
           <text id="roles-1">
-            <value>Kader Pengawas</value>
-          </text>
-          <text id="roles-2">
             <value>Perawat</value>
           </text>
-          <text id="roles-3">
+          <text id="roles-2">
             <value>Manajer Fasilitas</value>
           </text>
-          <text id="roles-4">
+          <text id="roles-3">
             <value>Lain</value>
           </text>
-          <text id="roles-5">
+          <text id="roles-4">
             <value>Pasien</value>
           </text>
           <text id="name_type-0">
@@ -270,18 +261,15 @@
             <value>Mhudumu wa afya</value>
           </text>
           <text id="roles-1">
-            <value>Mkuu wa wahudumu wa afya</value>
-          </text>
-          <text id="roles-2">
             <value>Muuguzi</value>
           </text>
-          <text id="roles-3">
+          <text id="roles-2">
             <value>Meneja wa Kituo cha afya</value>
           </text>
-          <text id="roles-4">
+          <text id="roles-3">
             <value>Nyingine</value>
           </text>
-          <text id="roles-5">
+          <text id="roles-4">
             <value>Mgonjwa</value>
           </text>
           <text id="name_type-0">
@@ -350,18 +338,15 @@
             <value>महिला स्वास्थ्य स्वयम् सेविका</value>
           </text>
           <text id="roles-1">
-            <value>महिला स्वास्थ्य स्वयम् सेविकाको सुपरभाइजर</value>
-          </text>
-          <text id="roles-2">
             <value>नर्स</value>
           </text>
-          <text id="roles-3">
+          <text id="roles-2">
             <value>स्वास्थ्य संस्था प्रमुख</value>
           </text>
-          <text id="roles-4">
+          <text id="roles-3">
             <value>अन्य</value>
           </text>
-          <text id="roles-5">
+          <text id="roles-4">
             <value>बिरामी</value>
           </text>
           <text id="name_type-0">
@@ -430,18 +415,15 @@
             <value>ASC</value>
           </text>
           <text id="roles-1">
-            <value>Superviseur ASC</value>
-          </text>
-          <text id="roles-2">
             <value>Infirmier</value>
           </text>
-          <text id="roles-3">
+          <text id="roles-2">
             <value>Personnel Médical</value>
           </text>
-          <text id="roles-4">
+          <text id="roles-3">
             <value>Autre</value>
           </text>
-          <text id="roles-5">
+          <text id="roles-4">
             <value>Patient</value>
           </text>
           <text id="name_type-0">
@@ -577,38 +559,34 @@
           </item>
           <item>
             <itextId>roles-1</itextId>
-            <name>chw</name>
-          </item>
-          <item>
-            <itextId>roles-2</itextId>
             <name>anm</name>
           </item>
           <item>
-            <itextId>roles-3</itextId>
+            <itextId>roles-2</itextId>
             <name>mpw</name>
           </item>
           <item>
-            <itextId>roles-4</itextId>
+            <itextId>roles-3</itextId>
             <name>cho</name>
           </item>
           <item>
-            <itextId>roles-5</itextId>
+            <itextId>roles-4</itextId>
             <name>nurse</name>
           </item>
           <item>
-            <itextId>roles-6</itextId>
+            <itextId>roles-5</itextId>
             <name>medical_officer</name>
           </item>
           <item>
-            <itextId>roles-7</itextId>
+            <itextId>roles-6</itextId>
             <name>physician</name>
           </item>
           <item>
-            <itextId>roles-8</itextId>
+            <itextId>roles-7</itextId>
             <name>patient</name>
           </item>
           <item>
-            <itextId>roles-9</itextId>
+            <itextId>roles-8</itextId>
             <name>other</name>
           </item>
         </root>
