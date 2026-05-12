@@ -38,52 +38,71 @@
           </inputs>
           <instructions/>
           <total_question/>
-          <page_1>
-            <generated_note_name_30/>
+          <page_1a>
             <age_range/>
             <smoke_frequency/>
             <alcohol_frequency/>
+          </page_1a>
+          <page_1b>
             <waist_size/>
             <physical_activities_frequency/>
             <family_medical_history/>
-          </page_1>
-          <page_2>
-            <generated_note_name_42/>
-            <generated_note_name_43/>
+          </page_1b>
+          <total_score/>
+          <risk_category/>
+          <page_score>
+            <score_display/>
+            <risk_display/>
+            <score_high_note/>
+            <score_low_note/>
+          </page_score>
+          <page_2a>
             <shortness_of_breath/>
             <cough_more_than_2_weeks/>
             <blood_in_sputum/>
+          </page_2a>
+          <page_2b>
             <fever_more_than_2_weeks/>
             <loss_of_weight/>
             <night_sweats/>
+          </page_2b>
+          <page_2c>
             <current_anti_tb_drug/>
             <family_tb/>
             <history_of_tb/>
+          </page_2c>
+          <page_2d>
             <history_of_fits/>
             <difficulty_opening_mouth/>
             <mouth_ulcers_or_growth/>
+          </page_2d>
+          <page_2e>
             <voice_change/>
             <skin_patch_discoloration/>
             <difficulty_holding_objects/>
+          </page_2e>
+          <page_2f>
             <loss_of_sensation/>
-          </page_2>
-          <page_3>
-            <generated_note_name_64/>
-            <generated_note_name_65/>
+          </page_2f>
+          <page_3a>
             <breast_lump/>
             <nipple_discharge/>
             <breast_shape_size_change/>
+          </page_3a>
+          <page_3b>
             <bleeding_between_periods/>
             <post_menopause_bleeding/>
             <post_intercourse_bleeding/>
+          </page_3b>
+          <page_3c>
             <foul_smelling_vaginal_discharge/>
-          </page_3>
+          </page_3c>
+          <part_c_start_q/>
+          <part_c_q2/>
           <page_4>
             <fuel_type_for_cooking/>
             <occupational_exposure/>
           </page_4>
-          <total_score/>
-          <risk_category/>
           <group_summary>
             <summary_high_risk/>
             <summary_low_risk/>
@@ -439,11 +458,7 @@
           </item>
           <item>
             <name>working_in_industries</name>
-            <label>Working in industries with smoke</label>
-          </item>
-          <item>
-            <name>gas_and_dust_exposure</name>
-            <label>gas and dust exposure such as brick kilns and glass factories</label>
+            <label>Working in industries with smoke, gas and dust exposure such as brick kilns and glass factories etc.</label>
           </item>
         </root>
       </instance>
@@ -466,45 +481,48 @@
       <bind nodeset="/data/inputs/district" type="string" required="true()"/>
       <bind nodeset="/data/instructions" readonly="true()" type="string"/>
       <bind nodeset="/data/total_question" type="string" calculate="if( /data/inputs/contact/gender  = 'male', '22', '29')"/>
-      <bind nodeset="/data/page_1/generated_note_name_30" readonly="true()" type="string"/>
-      <bind nodeset="/data/page_1/age_range" type="string" required="true()"/>
-      <bind nodeset="/data/page_1/smoke_frequency" type="string" required="true()"/>
-      <bind nodeset="/data/page_1/alcohol_frequency" type="string" required="true()"/>
-      <bind nodeset="/data/page_1/waist_size" type="string" required="true()"/>
-      <bind nodeset="/data/page_1/physical_activities_frequency" type="string" required="true()"/>
-      <bind nodeset="/data/page_1/family_medical_history" type="string" required="true()"/>
-      <bind nodeset="/data/page_2/generated_note_name_42" readonly="true()" type="string"/>
-      <bind nodeset="/data/page_2/generated_note_name_43" readonly="true()" type="string"/>
-      <bind nodeset="/data/page_2/shortness_of_breath" type="string"/>
-      <bind nodeset="/data/page_2/cough_more_than_2_weeks" type="string"/>
-      <bind nodeset="/data/page_2/blood_in_sputum" type="string"/>
-      <bind nodeset="/data/page_2/fever_more_than_2_weeks" type="string"/>
-      <bind nodeset="/data/page_2/loss_of_weight" type="string"/>
-      <bind nodeset="/data/page_2/night_sweats" type="string"/>
-      <bind nodeset="/data/page_2/current_anti_tb_drug" type="string"/>
-      <bind nodeset="/data/page_2/family_tb" type="string"/>
-      <bind nodeset="/data/page_2/history_of_tb" type="string"/>
-      <bind nodeset="/data/page_2/history_of_fits" type="string"/>
-      <bind nodeset="/data/page_2/difficulty_opening_mouth" type="string"/>
-      <bind nodeset="/data/page_2/mouth_ulcers_or_growth" type="string"/>
-      <bind nodeset="/data/page_2/voice_change" type="string"/>
-      <bind nodeset="/data/page_2/skin_patch_discoloration" type="string"/>
-      <bind nodeset="/data/page_2/difficulty_holding_objects" type="string"/>
-      <bind nodeset="/data/page_2/loss_of_sensation" type="string"/>
-      <bind nodeset="/data/page_3" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/page_3/generated_note_name_64" readonly="true()" type="string"/>
-      <bind nodeset="/data/page_3/generated_note_name_65" readonly="true()" type="string"/>
-      <bind nodeset="/data/page_3/breast_lump" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/page_3/nipple_discharge" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/page_3/breast_shape_size_change" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/page_3/bleeding_between_periods" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/page_3/post_menopause_bleeding" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/page_3/post_intercourse_bleeding" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/page_3/foul_smelling_vaginal_discharge" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_1a/age_range" type="string" required="true()"/>
+      <bind nodeset="/data/page_1a/smoke_frequency" type="string" required="true()"/>
+      <bind nodeset="/data/page_1a/alcohol_frequency" type="string" required="true()"/>
+      <bind nodeset="/data/page_1b/waist_size" type="string" required="true()"/>
+      <bind nodeset="/data/page_1b/physical_activities_frequency" type="string" required="true()"/>
+      <bind nodeset="/data/page_1b/family_medical_history" type="string" required="true()"/>
+      <bind nodeset="/data/total_score" type="string" calculate=" /data/page_1a/age_range  +  /data/page_1a/smoke_frequency  +  /data/page_1a/alcohol_frequency  +  /data/page_1b/waist_size  +  /data/page_1b/physical_activities_frequency  +  /data/page_1b/family_medical_history "/>
+      <bind nodeset="/data/risk_category" type="string" calculate="if( /data/total_score  &gt; 4, 'High Risk', 'Low Risk')"/>
+      <bind nodeset="/data/page_score/score_display" readonly="true()" type="string"/>
+      <bind nodeset="/data/page_score/risk_display" readonly="true()" type="string"/>
+      <bind nodeset="/data/page_score/score_high_note" readonly="true()" type="string" relevant=" /data/total_score  &gt; 4"/>
+      <bind nodeset="/data/page_score/score_low_note" readonly="true()" type="string" relevant=" /data/total_score  &lt;= 4"/>
+      <bind nodeset="/data/page_2a/shortness_of_breath" type="string"/>
+      <bind nodeset="/data/page_2a/cough_more_than_2_weeks" type="string"/>
+      <bind nodeset="/data/page_2a/blood_in_sputum" type="string"/>
+      <bind nodeset="/data/page_2b/fever_more_than_2_weeks" type="string"/>
+      <bind nodeset="/data/page_2b/loss_of_weight" type="string"/>
+      <bind nodeset="/data/page_2b/night_sweats" type="string"/>
+      <bind nodeset="/data/page_2c/current_anti_tb_drug" type="string"/>
+      <bind nodeset="/data/page_2c/family_tb" type="string"/>
+      <bind nodeset="/data/page_2c/history_of_tb" type="string"/>
+      <bind nodeset="/data/page_2d/history_of_fits" type="string"/>
+      <bind nodeset="/data/page_2d/difficulty_opening_mouth" type="string"/>
+      <bind nodeset="/data/page_2d/mouth_ulcers_or_growth" type="string"/>
+      <bind nodeset="/data/page_2e/voice_change" type="string"/>
+      <bind nodeset="/data/page_2e/skin_patch_discoloration" type="string"/>
+      <bind nodeset="/data/page_2e/difficulty_holding_objects" type="string"/>
+      <bind nodeset="/data/page_2f/loss_of_sensation" type="string"/>
+      <bind nodeset="/data/page_3a" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3a/breast_lump" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3a/nipple_discharge" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3a/breast_shape_size_change" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3b" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3b/bleeding_between_periods" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3b/post_menopause_bleeding" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3b/post_intercourse_bleeding" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3c" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3c/foul_smelling_vaginal_discharge" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/part_c_start_q" type="string" calculate="if( /data/inputs/contact/gender  = 'male', 23, 30)"/>
+      <bind nodeset="/data/part_c_q2" type="string" calculate="if( /data/inputs/contact/gender  = 'male', 24, 31)"/>
       <bind nodeset="/data/page_4/fuel_type_for_cooking" type="string"/>
       <bind nodeset="/data/page_4/occupational_exposure" type="string"/>
-      <bind nodeset="/data/total_score" type="string" calculate=" /data/page_1/age_range  +  /data/page_1/smoke_frequency  +  /data/page_1/alcohol_frequency  +  /data/page_1/waist_size  +  /data/page_1/physical_activities_frequency  +  /data/page_1/family_medical_history "/>
-      <bind nodeset="/data/risk_category" type="string" calculate="if( /data/total_score  &gt; 4, 'High Risk', 'Low Risk')"/>
       <bind nodeset="/data/group_summary/summary_high_risk" readonly="true()" type="string" relevant=" /data/total_score  &gt; 4"/>
       <bind nodeset="/data/group_summary/summary_low_risk" readonly="true()" type="string" relevant=" /data/total_score  &lt;= 4"/>
       <bind nodeset="/data/group_summary/lbl_filled_by" readonly="true()" type="string" calculate=" /data/reporter_name "/>
@@ -562,174 +580,192 @@
     <input ref="/data/instructions">
       <label>A score above 4 indicates that the person may be at risk for these NCDs and needs to be prioritized for attending the weekly NCD day</label>
     </input>
-    <group appearance="field-list" ref="/data/page_1">
-      <label>Part A: Risk Assessment</label>
-      <input ref="/data/page_1/generated_note_name_30">
-        <label> &lt;i&gt; Questions 1 &amp; 6 of <output value=" /data/total_question "/> &lt;/i&gt; </label>
-      </input>
-      <select1 ref="/data/page_1/age_range">
+    <group appearance="field-list" ref="/data/page_1a">
+      <label>Part A: Risk Assessment (1 of 2)</label>
+      <select1 ref="/data/page_1a/age_range">
         <label>1. What is your age? (in complete years)</label>
-        <hint>Use ✓ to indicate your answer</hint>
         <itemset nodeset="instance('age_range')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_1/smoke_frequency">
+      <select1 ref="/data/page_1a/smoke_frequency">
         <label>2. Do you smoke or consume smokeless products such as gutka or khaini?</label>
-        <hint>Use ✓ to indicate your answer</hint>
         <itemset nodeset="instance('smoke_frequency')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_1/alcohol_frequency">
+      <select1 ref="/data/page_1a/alcohol_frequency">
         <label>3. Do you consume alcohol daily</label>
-        <hint>Use ✓ to indicate your answer</hint>
         <itemset nodeset="instance('alcohol_frequency')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_1/waist_size">
+    </group>
+    <group appearance="field-list" ref="/data/page_1b">
+      <label>Part A: Risk Assessment (2 of 2)</label>
+      <select1 ref="/data/page_1b/waist_size">
         <label>4. Measurement of waist (in cm)</label>
-        <hint>Use ✓ to indicate your answer</hint>
         <itemset nodeset="instance('waist_size')/root/item[filter =  /data/inputs/contact/gender ]">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_1/physical_activities_frequency">
+      <select1 ref="/data/page_1b/physical_activities_frequency">
         <label>5. Do you undertake any physical activities for minimum of 150 minutes in a week?</label>
-        <hint>Use ✓ to indicate your answer</hint>
         <itemset nodeset="instance('physical_activities_frequency')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_1/family_medical_history">
+      <select1 ref="/data/page_1b/family_medical_history">
         <label>6. Do you have a family history (any one of your parents or siblings) of high blood pressure, diabetes and heart disease?</label>
-        <hint>Use ✓ to indicate your answer</hint>
         <itemset nodeset="instance('family_medical_history')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
     </group>
-    <group appearance="field-list" ref="/data/page_2">
-      <label>Part B: Early Detection: Ask if Patient has any of these Symptoms</label>
-      <input ref="/data/page_2/generated_note_name_42">
-        <label>&lt;b&gt; B1: Women and Men &lt;/b&gt;</label>
+    <group appearance="field-list" ref="/data/page_score">
+      <label>Part A: Score Summary</label>
+      <input ref="/data/page_score/score_display">
+        <label> CBAC Total Score: <output value=" /data/total_score "/></label>
       </input>
-      <input ref="/data/page_2/generated_note_name_43">
-        <label> &lt;i&gt; Questions 2 &amp; 22 of <output value=" /data/total_question "/> &lt;/i&gt; </label>
+      <input ref="/data/page_score/risk_display">
+        <label> Risk Category: <output value=" /data/risk_category "/></label>
       </input>
-      <select1 ref="/data/page_2/shortness_of_breath">
+      <input ref="/data/page_score/score_high_note">
+        <label>Score is greater than 4. This person may be at risk for NCDs and should be prioritized for the weekly NCD day.</label>
+      </input>
+      <input ref="/data/page_score/score_low_note">
+        <label>Score is 4 or below. This person appears to be at low risk for NCDs at this time.</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/page_2a">
+      <label>Part B: Early Detection – B1: Women and Men (1 of 6)</label>
+      <select1 ref="/data/page_2a/shortness_of_breath">
         <label>7. Shortness of breath</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_2/cough_more_than_2_weeks">
+      <select1 ref="/data/page_2a/cough_more_than_2_weeks">
         <label>8. Coughing more than 2 weeks</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_2/blood_in_sputum">
+      <select1 ref="/data/page_2a/blood_in_sputum">
         <label>9. Blood in sputum</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_2/fever_more_than_2_weeks">
+    </group>
+    <group appearance="field-list" ref="/data/page_2b">
+      <label>Part B: Early Detection – B1: Women and Men (2 of 6)</label>
+      <select1 ref="/data/page_2b/fever_more_than_2_weeks">
         <label>10. Fever for more than 2 weeks</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_2/loss_of_weight">
+      <select1 ref="/data/page_2b/loss_of_weight">
         <label>11. Loss of weight</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_2/night_sweats">
+      <select1 ref="/data/page_2b/night_sweats">
         <label>12. Night Sweats</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_2/current_anti_tb_drug">
-        <label>13. Are you currently taking anti-TB drug</label>
+    </group>
+    <group appearance="field-list" ref="/data/page_2c">
+      <label>Part B: Early Detection – B1: Women and Men (3 of 6)</label>
+      <select1 ref="/data/page_2c/current_anti_tb_drug">
+        <label>13. Are you currently taking anti-TB drugs</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_2/family_tb">
+      <select1 ref="/data/page_2c/family_tb">
         <label>14. Anyone in family currently suffering from TB</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_2/history_of_tb">
+      <select1 ref="/data/page_2c/history_of_tb">
         <label>15. History of TB</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_2/history_of_fits">
+    </group>
+    <group appearance="field-list" ref="/data/page_2d">
+      <label>Part B: Early Detection – B1: Women and Men (4 of 6)</label>
+      <select1 ref="/data/page_2d/history_of_fits">
         <label>16. History of fits</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_2/difficulty_opening_mouth">
+      <select1 ref="/data/page_2d/difficulty_opening_mouth">
         <label>17. Difficulty in opening mouth</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_2/mouth_ulcers_or_growth">
+      <select1 ref="/data/page_2d/mouth_ulcers_or_growth">
         <label>18. Ulcers/patch/growth in mouth that has not healed in two weeks</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_2/voice_change">
+    </group>
+    <group appearance="field-list" ref="/data/page_2e">
+      <label>Part B: Early Detection – B1: Women and Men (5 of 6)</label>
+      <select1 ref="/data/page_2e/voice_change">
         <label>19. Any change in the tone of your voice</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_2/skin_patch_discoloration">
+      <select1 ref="/data/page_2e/skin_patch_discoloration">
         <label>20. Any patch or discoloration on skin</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_2/difficulty_holding_objects">
+      <select1 ref="/data/page_2e/difficulty_holding_objects">
         <label>21. Difficulty in holding objects with fingers</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_2/loss_of_sensation">
+    </group>
+    <group appearance="field-list" ref="/data/page_2f">
+      <label>Part B: Early Detection – B1: Women and Men (6 of 6)</label>
+      <select1 ref="/data/page_2f/loss_of_sensation">
         <label>22. Loss of sensation for cold/hot objects in palm or sole</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
@@ -737,57 +773,57 @@
         </itemset>
       </select1>
     </group>
-    <group appearance="field-list" ref="/data/page_3">
-      <label>Part B: Early Detection: Ask if Patient has any of these Symptoms</label>
-      <input ref="/data/page_3/generated_note_name_64">
-        <label>&lt;b&gt; B2: Women only &lt;/b&gt;</label>
-      </input>
-      <input ref="/data/page_3/generated_note_name_65">
-        <label> &lt;i&gt; Questions 23 &amp; 29 of <output value=" /data/total_question "/> &lt;/i&gt; </label>
-      </input>
-      <select1 ref="/data/page_3/breast_lump">
+    <group appearance="field-list" ref="/data/page_3a">
+      <label>Part B: Early Detection – B2: Women only (1 of 3)</label>
+      <select1 ref="/data/page_3a/breast_lump">
         <label>23. Lump in the breast</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_3/nipple_discharge">
+      <select1 ref="/data/page_3a/nipple_discharge">
         <label>24. Blood stained discharge from the nipple</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_3/breast_shape_size_change">
+      <select1 ref="/data/page_3a/breast_shape_size_change">
         <label>25. Change in shape and size of breast</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_3/bleeding_between_periods">
+    </group>
+    <group appearance="field-list" ref="/data/page_3b">
+      <label>Part B: Early Detection – B2: Women only (2 of 3)</label>
+      <select1 ref="/data/page_3b/bleeding_between_periods">
         <label>26. Bleeding between periods</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_3/post_menopause_bleeding">
+      <select1 ref="/data/page_3b/post_menopause_bleeding">
         <label>27. Bleeding after menopause</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_3/post_intercourse_bleeding">
+      <select1 ref="/data/page_3b/post_intercourse_bleeding">
         <label>28. Bleeding after intercourse</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_3/foul_smelling_vaginal_discharge">
+    </group>
+    <group appearance="field-list" ref="/data/page_3c">
+      <label>Part B: Early Detection – B2: Women only (3 of 3)</label>
+      <select1 ref="/data/page_3c/foul_smelling_vaginal_discharge">
         <label>29. Foul smelling vaginal discharge</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
@@ -798,14 +834,14 @@
     <group appearance="field-list" ref="/data/page_4">
       <label>Part C: Circle all that Apply</label>
       <select ref="/data/page_4/fuel_type_for_cooking">
-        <label>Type of Fuel used for cooking</label>
+        <label><output value=" /data/part_c_start_q "/>. Type of Fuel used for cooking </label>
         <itemset nodeset="instance('fuel_type')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select>
       <select ref="/data/page_4/occupational_exposure">
-        <label>Occupational exposure</label>
+        <label><output value=" /data/part_c_q2 "/>. Occupational exposure </label>
         <itemset nodeset="instance('occupational_exposure')/root/item">
           <value ref="name"/>
           <label ref="label"/>

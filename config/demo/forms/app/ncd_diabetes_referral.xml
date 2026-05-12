@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://www.opendatakit.org/xforms">
   <h:head>
-    <h:title>NCD Hypertension Follow-up</h:title>
+    <h:title>NCD Diabetes Referral</h:title>
     <model odk:xforms-version="1.0.0">
       <instance>
-        <data id="ncd_hypertension_followup" prefix="J1!ncd_hypertension_followup!" delimiter="#">
+        <data id="ncd_diabetes_referral" prefix="J1!ncd_diabetes_referral!" delimiter="#">
           <patient_id/>
           <patient_uuid/>
           <patient_name/>
@@ -30,21 +30,18 @@
               <patient_id/>
               <name/>
             </contact>
-            <t_systolic/>
-            <t_diastolic/>
+            <t_rapid_glucose/>
           </inputs>
-          <followup>
-            <bp_note/>
-            <current_systolic/>
-            <current_diastolic/>
-            <medication_taken/>
-            <referred_to_phc/>
-            <notes/>
-            <t_current_systolic/>
-            <t_current_diastolic/>
-            <t_medication_taken/>
-            <t_referred_to_phc/>
-          </followup>
+          <referral>
+            <glucose_note/>
+            <phc_visited/>
+            <willing_to_visit/>
+            <not_willing_note/>
+            <phc_visit_date/>
+            <t_phc_visited/>
+            <t_willing_to_visit/>
+            <t_phc_visit_date/>
+          </referral>
           <meta tag="hidden">
             <instanceID/>
             <instanceName/>
@@ -77,18 +74,15 @@
       <bind nodeset="/data/inputs/contact/_id" type="string" readonly="true()"/>
       <bind nodeset="/data/inputs/contact/patient_id" type="string"/>
       <bind nodeset="/data/inputs/contact/name" type="string"/>
-      <bind nodeset="/data/inputs/t_systolic" type="string"/>
-      <bind nodeset="/data/inputs/t_diastolic" type="string"/>
-      <bind nodeset="/data/followup/bp_note" readonly="true()" type="string"/>
-      <bind nodeset="/data/followup/current_systolic" type="int" required="true()"/>
-      <bind nodeset="/data/followup/current_diastolic" type="int" required="true()"/>
-      <bind nodeset="/data/followup/medication_taken" type="string" required="true()"/>
-      <bind nodeset="/data/followup/referred_to_phc" type="string" required="true()"/>
-      <bind nodeset="/data/followup/notes" type="string"/>
-      <bind nodeset="/data/followup/t_current_systolic" type="string" calculate=" /data/followup/current_systolic "/>
-      <bind nodeset="/data/followup/t_current_diastolic" type="string" calculate=" /data/followup/current_diastolic "/>
-      <bind nodeset="/data/followup/t_medication_taken" type="string" calculate=" /data/followup/medication_taken "/>
-      <bind nodeset="/data/followup/t_referred_to_phc" type="string" calculate=" /data/followup/referred_to_phc "/>
+      <bind nodeset="/data/inputs/t_rapid_glucose" type="string"/>
+      <bind nodeset="/data/referral/glucose_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/referral/phc_visited" type="string" required="true()"/>
+      <bind nodeset="/data/referral/willing_to_visit" type="string" required="true()" relevant=" /data/referral/phc_visited  = 'no'"/>
+      <bind nodeset="/data/referral/not_willing_note" readonly="true()" type="string" relevant=" /data/referral/phc_visited  = 'no' and  /data/referral/willing_to_visit  = 'no'"/>
+      <bind nodeset="/data/referral/phc_visit_date" type="date" required="true()" relevant=" /data/referral/phc_visited  = 'no' and  /data/referral/willing_to_visit  = 'yes'"/>
+      <bind nodeset="/data/referral/t_phc_visited" type="string" calculate=" /data/referral/phc_visited "/>
+      <bind nodeset="/data/referral/t_willing_to_visit" type="string" calculate=" /data/referral/willing_to_visit "/>
+      <bind nodeset="/data/referral/t_phc_visit_date" type="string" calculate=" /data/referral/phc_visit_date "/>
       <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
       <bind nodeset="/data/meta/instanceName" type="string" calculate=" /data/title "/>
     </model>
@@ -109,35 +103,30 @@
         </input>
       </group>
     </group>
-    <group appearance="field-list" ref="/data/followup">
-      <label>Hypertension Follow-up</label>
-      <input ref="/data/followup/bp_note">
-        <label> **Previous BP Reading:** <output value=" /data/inputs/t_systolic "/> / <output value=" /data/inputs/t_diastolic "/> mmHg </label>
+    <group appearance="field-list" ref="/data/referral">
+      <label>Diabetes PHC Referral</label>
+      <input ref="/data/referral/glucose_note">
+        <label> **Previous Rapid Glucose Reading:** <output value=" /data/inputs/t_rapid_glucose "/> mg/dL </label>
       </input>
-      <input ref="/data/followup/current_systolic">
-        <label>Current Systolic (mmHg)</label>
-        <hint>Enter current systolic reading</hint>
-      </input>
-      <input ref="/data/followup/current_diastolic">
-        <label>Current Diastolic (mmHg)</label>
-        <hint>Enter current diastolic reading</hint>
-      </input>
-      <select1 ref="/data/followup/medication_taken">
-        <label>Is the patient taking prescribed medication?</label>
+      <select1 ref="/data/referral/phc_visited">
+        <label>Did the patient visit the PHC?</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/followup/referred_to_phc">
-        <label>Has the patient been advised to visit the PHC?</label>
+      <select1 ref="/data/referral/willing_to_visit">
+        <label>Is the patient willing to visit the PHC?</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <input ref="/data/followup/notes">
-        <label>Additional Notes (optional)</label>
+      <input ref="/data/referral/not_willing_note">
+        <label>Patient is not willing to visit PHC.</label>
+      </input>
+      <input ref="/data/referral/phc_visit_date">
+        <label>When will the patient visit the PHC?</label>
       </input>
     </group>
   </h:body>
