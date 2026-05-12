@@ -1,6 +1,7 @@
 {
   "title": "NCD Diabetes Referral",
   "icon": "icon-healthcare-generic-2",
+  "show_in_reports": false,
   "context": {
     "person": true,
     "place": false,

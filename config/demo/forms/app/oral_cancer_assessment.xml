@@ -1,0 +1,692 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://www.opendatakit.org/xforms">
+  <h:head>
+    <h:title>Habit History Assessment</h:title>
+    <model odk:xforms-version="1.0.0">
+      <instance>
+        <data id="oral_cancer_assessment" version="2026-03-25" prefix="J1!oral_cancer_assessment!" delimiter="#">
+          <patient_id/>
+          <patient_uuid/>
+          <patient_name/>
+          <reporter_name/>
+          <reporter_place/>
+          <title/>
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source/>
+            <source_id/>
+            <user>
+              <name/>
+              <phone/>
+            </user>
+            <reporter_name_note/>
+            <contact>
+              <_id/>
+              <patient_id/>
+              <name/>
+            </contact>
+            <state/>
+            <district/>
+          </inputs>
+          <participant>
+            <age/>
+            <gender/>
+          </participant>
+          <habit_history>
+            <cigarette_bidi/>
+            <smokeless_tobacco/>
+            <areca_nut/>
+            <alcohol/>
+            <alcohol_frequency/>
+          </habit_history>
+          <photo_1_page>
+            <photo_1 type="binary"/>
+            <ai_photo_1_label/>
+            <ai_photo_1_score/>
+            <ai_photo_1_suspicion/>
+          </photo_1_page>
+          <photo_2_page>
+            <photo_2 type="binary"/>
+            <ai_photo_2_label/>
+            <ai_photo_2_score/>
+            <ai_photo_2_suspicion/>
+          </photo_2_page>
+          <photo_3_page>
+            <photo_3 type="binary"/>
+            <ai_photo_3_label/>
+            <ai_photo_3_score/>
+            <ai_photo_3_suspicion/>
+          </photo_3_page>
+          <photo_4_page>
+            <photo_4 type="binary"/>
+            <ai_photo_4_label/>
+            <ai_photo_4_score/>
+            <ai_photo_4_suspicion/>
+          </photo_4_page>
+          <photo_5_page>
+            <photo_5 type="binary"/>
+            <ai_photo_5_label/>
+            <ai_photo_5_score/>
+            <ai_photo_5_suspicion/>
+          </photo_5_page>
+          <photo_6_page>
+            <photo_6 type="binary"/>
+            <ai_photo_6_label/>
+            <ai_photo_6_score/>
+            <ai_photo_6_suspicion/>
+          </photo_6_page>
+          <photo_7_page>
+            <photo_7 type="binary"/>
+            <ai_photo_7_label/>
+            <ai_photo_7_score/>
+            <ai_photo_7_suspicion/>
+          </photo_7_page>
+          <photo_8_page>
+            <photo_8 type="binary"/>
+            <ai_photo_8_label/>
+            <ai_photo_8_score/>
+            <ai_photo_8_suspicion/>
+          </photo_8_page>
+          <final_ai_analysis_page>
+            <final_ai_suspicion/>
+            <final_ai_referral/>
+          </final_ai_analysis_page>
+          <state_final/>
+          <district_final/>
+          <group_summary>
+            <grp_lbl_filled_by>
+              <lbl_filled_by_lbl/>
+              <calc_reporter_name/>
+            </grp_lbl_filled_by>
+            <grp_lbl_patient>
+              <lbl_patient_lbl/>
+              <calc_patient_name/>
+            </grp_lbl_patient>
+            <grp_lbl_state>
+              <lbl_state_lbl/>
+              <calc_state/>
+            </grp_lbl_state>
+            <grp_lbl_district>
+              <lbl_district_lbl/>
+              <calc_district/>
+            </grp_lbl_district>
+            <ai_analysis_summary/>
+            <ai_analysis_status/>
+            <ai_analysis_error/>
+          </group_summary>
+          <meta tag="hidden">
+            <instanceID/>
+            <instanceName/>
+          </meta>
+        </data>
+      </instance>
+      <instance id="contact-summary"/>
+      <instance id="user-contact-summary"/>
+      <instance id="gender">
+        <root>
+          <item>
+            <name>male</name>
+            <label>Male</label>
+          </item>
+          <item>
+            <name>female</name>
+            <label>Female</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="history_status">
+        <root>
+          <item>
+            <name>past</name>
+            <label>Past</label>
+          </item>
+          <item>
+            <name>current</name>
+            <label>Current</label>
+          </item>
+          <item>
+            <name>never</name>
+            <label>Never</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="states">
+        <root>
+          <item>
+            <name>kerala</name>
+            <label>Kerala</label>
+          </item>
+          <item>
+            <name>tamil_nadu</name>
+            <label>Tamil Nadu</label>
+          </item>
+          <item>
+            <name>andhra_pradesh</name>
+            <label>Andhra Pradesh</label>
+          </item>
+          <item>
+            <name>telangana</name>
+            <label>Telangana</label>
+          </item>
+          <item>
+            <name>karnataka</name>
+            <label>Karnataka</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="districts">
+        <root>
+          <item>
+            <name>chennai</name>
+            <label>Chennai</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>thanjavur</name>
+            <label>Thanjavur</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>coimbatore</name>
+            <label>Coimbatore</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>madurai</name>
+            <label>Madurai</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>salem</name>
+            <label>Salem</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>tiruchirappalli</name>
+            <label>Tiruchirappalli</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>thiruvananthapuram</name>
+            <label>Thiruvananthapuram</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kochi</name>
+            <label>Kochi</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kozhikode</name>
+            <label>Kozhikode</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>thrissur</name>
+            <label>Thrissur</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kollam</name>
+            <label>Kollam</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>visakhapatnam</name>
+            <label>Visakhapatnam</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>vijayawada</name>
+            <label>Vijayawada</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>guntur</name>
+            <label>Guntur</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>tirupati</name>
+            <label>Tirupati</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>kurnool</name>
+            <label>Kurnool</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>hyderabad</name>
+            <label>Hyderabad</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>warangal</name>
+            <label>Warangal</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>nizamabad</name>
+            <label>Nizamabad</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>karimnagar</name>
+            <label>Karimnagar</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>khammam</name>
+            <label>Khammam</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>bengaluru</name>
+            <label>Bengaluru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>mysuru</name>
+            <label>Mysuru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>hubli</name>
+            <label>Hubli</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>mangaluru</name>
+            <label>Mangaluru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>belagavi</name>
+            <label>Belagavi</label>
+            <filter>karnataka</filter>
+          </item>
+        </root>
+      </instance>
+      <instance id="suspicion">
+        <root>
+          <item>
+            <name>suspicious</name>
+            <label>Suspicious</label>
+          </item>
+          <item>
+            <name>non_suspicious</name>
+            <label>Non-Suspicious</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="referral">
+        <root>
+          <item>
+            <name>do_not_refer</name>
+            <label>Don't Refer</label>
+          </item>
+          <item>
+            <name>refer_anyway</name>
+            <label>Refer Anyway</label>
+          </item>
+        </root>
+      </instance>
+      <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
+      <bind nodeset="/data/patient_uuid" type="string" calculate="../inputs/contact/_id"/>
+      <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
+      <bind nodeset="/data/reporter_name" type="string" calculate="../inputs/user/name"/>
+      <bind nodeset="/data/reporter_place" type="string" calculate="instance('user-contact-summary')/context/facility_name"/>
+      <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/inputs/source" type="string"/>
+      <bind nodeset="/data/inputs/source_id" type="string"/>
+      <bind nodeset="/data/inputs/user/name" type="string"/>
+      <bind nodeset="/data/inputs/user/phone" type="string"/>
+      <bind nodeset="/data/inputs/reporter_name_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/inputs/contact/_id" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/contact/patient_id" type="string"/>
+      <bind nodeset="/data/inputs/contact/name" type="string"/>
+      <bind nodeset="/data/inputs/state" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/district" type="string" required="true()"/>
+      <bind nodeset="/data/participant/age" type="int" required="true()" constraint=". &gt;= 0 and . &lt;= 120" jr:constraintMsg="Age must be between 0 and 120"/>
+      <bind nodeset="/data/participant/gender" type="string" required="true()"/>
+      <bind nodeset="/data/habit_history/cigarette_bidi" type="string" required="true()"/>
+      <bind nodeset="/data/habit_history/smokeless_tobacco" type="string" required="true()"/>
+      <bind nodeset="/data/habit_history/areca_nut" type="string" required="true()"/>
+      <bind nodeset="/data/habit_history/alcohol" type="string" required="true()"/>
+      <bind nodeset="/data/habit_history/alcohol_frequency" type="int" required="true()" relevant=" /data/habit_history/alcohol  = 'current'" constraint=". &gt;= 0 and . &lt;= 7" jr:constraintMsg="Enter a number from 0 to 7"/>
+      <bind nodeset="/data/photo_1_page/photo_1" type="binary" required="true()"/>
+      <bind nodeset="/data/photo_1_page/ai_photo_1_label" type="string"/>
+      <bind nodeset="/data/photo_1_page/ai_photo_1_score" type="string"/>
+      <bind nodeset="/data/photo_1_page/ai_photo_1_suspicion" type="string" required="true()"/>
+      <bind nodeset="/data/photo_2_page/photo_2" type="binary" required="true()"/>
+      <bind nodeset="/data/photo_2_page/ai_photo_2_label" type="string"/>
+      <bind nodeset="/data/photo_2_page/ai_photo_2_score" type="string"/>
+      <bind nodeset="/data/photo_2_page/ai_photo_2_suspicion" type="string" required="true()"/>
+      <bind nodeset="/data/photo_3_page/photo_3" type="binary" required="true()"/>
+      <bind nodeset="/data/photo_3_page/ai_photo_3_label" type="string"/>
+      <bind nodeset="/data/photo_3_page/ai_photo_3_score" type="string"/>
+      <bind nodeset="/data/photo_3_page/ai_photo_3_suspicion" type="string" required="true()"/>
+      <bind nodeset="/data/photo_4_page/photo_4" type="binary" required="true()"/>
+      <bind nodeset="/data/photo_4_page/ai_photo_4_label" type="string"/>
+      <bind nodeset="/data/photo_4_page/ai_photo_4_score" type="string"/>
+      <bind nodeset="/data/photo_4_page/ai_photo_4_suspicion" type="string" required="true()"/>
+      <bind nodeset="/data/photo_5_page/photo_5" type="binary" required="true()"/>
+      <bind nodeset="/data/photo_5_page/ai_photo_5_label" type="string"/>
+      <bind nodeset="/data/photo_5_page/ai_photo_5_score" type="string"/>
+      <bind nodeset="/data/photo_5_page/ai_photo_5_suspicion" type="string" required="true()"/>
+      <bind nodeset="/data/photo_6_page/photo_6" type="binary" required="true()"/>
+      <bind nodeset="/data/photo_6_page/ai_photo_6_label" type="string"/>
+      <bind nodeset="/data/photo_6_page/ai_photo_6_score" type="string"/>
+      <bind nodeset="/data/photo_6_page/ai_photo_6_suspicion" type="string" required="true()"/>
+      <bind nodeset="/data/photo_7_page/photo_7" type="binary" required="true()"/>
+      <bind nodeset="/data/photo_7_page/ai_photo_7_label" type="string"/>
+      <bind nodeset="/data/photo_7_page/ai_photo_7_score" type="string"/>
+      <bind nodeset="/data/photo_7_page/ai_photo_7_suspicion" type="string" required="true()"/>
+      <bind nodeset="/data/photo_8_page/photo_8" type="binary" required="true()"/>
+      <bind nodeset="/data/photo_8_page/ai_photo_8_label" type="string"/>
+      <bind nodeset="/data/photo_8_page/ai_photo_8_score" type="string"/>
+      <bind nodeset="/data/photo_8_page/ai_photo_8_suspicion" type="string" required="true()"/>
+      <bind nodeset="/data/final_ai_analysis_page/final_ai_suspicion" type="string"/>
+      <bind nodeset="/data/final_ai_analysis_page/final_ai_referral" type="string" relevant=" /data/final_ai_analysis_page/final_ai_suspicion  = 'non_suspicious'"/>
+      <bind nodeset="/data/state_final" type="string" calculate=" /data/inputs/state "/>
+      <bind nodeset="/data/district_final" type="string" calculate=" /data/inputs/district "/>
+      <bind nodeset="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_filled_by/calc_reporter_name" type="string" calculate=" /data/reporter_name "/>
+      <bind nodeset="/data/group_summary/grp_lbl_patient/lbl_patient_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_patient/calc_patient_name" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/group_summary/grp_lbl_state/lbl_state_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_state/calc_state" type="string" calculate=" /data/inputs/state "/>
+      <bind nodeset="/data/group_summary/grp_lbl_district/lbl_district_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_district/calc_district" type="string" calculate=" /data/inputs/district "/>
+      <bind nodeset="/data/group_summary/ai_analysis_summary" type="string"/>
+      <bind nodeset="/data/group_summary/ai_analysis_status" type="string"/>
+      <bind nodeset="/data/group_summary/ai_analysis_error" type="string"/>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
+      <bind nodeset="/data/meta/instanceName" type="string" calculate=" /data/title "/>
+    </model>
+  </h:head>
+  <h:body class="pages grid-layout">
+    <group appearance="field-list" ref="/data/inputs">
+      <label>Patient &amp; Reporter Info</label>
+      <group ref="/data/inputs/user"/>
+      <input ref="/data/inputs/reporter_name_note">
+        <label> Filled by: <output value=" /data/reporter_name "/></label>
+      </input>
+      <group ref="/data/inputs/contact">
+        <input ref="/data/inputs/contact/_id" appearance="select-contact type-person role-patient">
+          <label>Patient's Name</label>
+          <hint>Select the patient from your area</hint>
+        </input>
+        <input ref="/data/inputs/contact/patient_id" appearance="hidden">
+          <label>Medic ID</label>
+        </input>
+        <input ref="/data/inputs/contact/name" appearance="hidden">
+          <label>Patient Name</label>
+        </input>
+      </group>
+      <select1 ref="/data/inputs/state" appearance="minimal">
+        <label>State</label>
+        <itemset nodeset="instance('states')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/inputs/district" appearance="minimal">
+        <label>District</label>
+        <itemset nodeset="instance('districts')/root/item[filter =  /data/inputs/state ]">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/participant">
+      <label>Participant details</label>
+      <input ref="/data/participant/age">
+        <label>Age</label>
+        <hint>Enter age in completed years</hint>
+      </input>
+      <select1 ref="/data/participant/gender">
+        <label>Gender</label>
+        <itemset nodeset="instance('gender')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/habit_history">
+      <label>Habit history</label>
+      <select1 ref="/data/habit_history/cigarette_bidi">
+        <label>Cigarette / Bidi</label>
+        <itemset nodeset="instance('history_status')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/habit_history/smokeless_tobacco">
+        <label>Smokeless Tobacco</label>
+        <itemset nodeset="instance('history_status')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/habit_history/areca_nut">
+        <label>Areca Nut</label>
+        <itemset nodeset="instance('history_status')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/habit_history/alcohol">
+        <label>Alcohol</label>
+        <itemset nodeset="instance('history_status')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <input ref="/data/habit_history/alcohol_frequency">
+        <label>Alcohol frequency (days per week)</label>
+        <hint>Enter a whole number from 0 to 7</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/photo_1_page">
+      <upload ref="/data/photo_1_page/photo_1" mediatype="image/*">
+        <label>Photo 1 / 8</label>
+      </upload>
+      <input ref="/data/photo_1_page/ai_photo_1_label">
+        <label>Photo 1 Label</label>
+      </input>
+      <input ref="/data/photo_1_page/ai_photo_1_score">
+        <label>Photo 1 Accuracy</label>
+      </input>
+      <select1 ref="/data/photo_1_page/ai_photo_1_suspicion">
+        <label>Photo 1 Suspicion</label>
+        <itemset nodeset="instance('suspicion')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/photo_2_page">
+      <upload ref="/data/photo_2_page/photo_2" mediatype="image/*">
+        <label>Photo 2 / 8</label>
+      </upload>
+      <input ref="/data/photo_2_page/ai_photo_2_label">
+        <label>Photo 2 Label</label>
+      </input>
+      <input ref="/data/photo_2_page/ai_photo_2_score">
+        <label>Photo 2 Accuracy</label>
+      </input>
+      <select1 ref="/data/photo_2_page/ai_photo_2_suspicion">
+        <label>Photo 2 Suspicion</label>
+        <itemset nodeset="instance('suspicion')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/photo_3_page">
+      <upload ref="/data/photo_3_page/photo_3" mediatype="image/*">
+        <label>Photo 3 / 8</label>
+      </upload>
+      <input ref="/data/photo_3_page/ai_photo_3_label">
+        <label>Photo 3 Label</label>
+      </input>
+      <input ref="/data/photo_3_page/ai_photo_3_score">
+        <label>Photo 3 Accuracy</label>
+      </input>
+      <select1 ref="/data/photo_3_page/ai_photo_3_suspicion">
+        <label>Photo 3 Suspicion</label>
+        <itemset nodeset="instance('suspicion')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/photo_4_page">
+      <upload ref="/data/photo_4_page/photo_4" mediatype="image/*">
+        <label>Photo 4 / 8</label>
+      </upload>
+      <input ref="/data/photo_4_page/ai_photo_4_label">
+        <label>Photo 4 Label</label>
+      </input>
+      <input ref="/data/photo_4_page/ai_photo_4_score">
+        <label>Photo 4 Accuracy</label>
+      </input>
+      <select1 ref="/data/photo_4_page/ai_photo_4_suspicion">
+        <label>Photo 4 Suspicion</label>
+        <itemset nodeset="instance('suspicion')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/photo_5_page">
+      <upload ref="/data/photo_5_page/photo_5" mediatype="image/*">
+        <label>Photo 5 / 8</label>
+      </upload>
+      <input ref="/data/photo_5_page/ai_photo_5_label">
+        <label>Photo 5 Label</label>
+      </input>
+      <input ref="/data/photo_5_page/ai_photo_5_score">
+        <label>Photo 5 Accuracy</label>
+      </input>
+      <select1 ref="/data/photo_5_page/ai_photo_5_suspicion">
+        <label>Photo 5 Suspicion</label>
+        <itemset nodeset="instance('suspicion')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/photo_6_page">
+      <upload ref="/data/photo_6_page/photo_6" mediatype="image/*">
+        <label>Photo 6 / 8</label>
+      </upload>
+      <input ref="/data/photo_6_page/ai_photo_6_label">
+        <label>Photo 6 Label</label>
+      </input>
+      <input ref="/data/photo_6_page/ai_photo_6_score">
+        <label>Photo 6 Accuracy</label>
+      </input>
+      <select1 ref="/data/photo_6_page/ai_photo_6_suspicion">
+        <label>Photo 6 Suspicion</label>
+        <itemset nodeset="instance('suspicion')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/photo_7_page">
+      <upload ref="/data/photo_7_page/photo_7" mediatype="image/*">
+        <label>Photo 7 / 8</label>
+      </upload>
+      <input ref="/data/photo_7_page/ai_photo_7_label">
+        <label>Photo 7 Label</label>
+      </input>
+      <input ref="/data/photo_7_page/ai_photo_7_score">
+        <label>Photo 7 Accuracy</label>
+      </input>
+      <select1 ref="/data/photo_7_page/ai_photo_7_suspicion">
+        <label>Photo 7 Suspicion</label>
+        <itemset nodeset="instance('suspicion')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/photo_8_page">
+      <upload ref="/data/photo_8_page/photo_8" mediatype="image/*">
+        <label>Photo 8 / 8</label>
+      </upload>
+      <input ref="/data/photo_8_page/ai_photo_8_label">
+        <label>Photo 8 Label</label>
+      </input>
+      <input ref="/data/photo_8_page/ai_photo_8_score">
+        <label>Photo 8 Accuracy</label>
+      </input>
+      <select1 ref="/data/photo_8_page/ai_photo_8_suspicion">
+        <label>Photo 8 Suspicion</label>
+        <itemset nodeset="instance('suspicion')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/final_ai_analysis_page">
+      <select1 ref="/data/final_ai_analysis_page/final_ai_suspicion">
+        <label>Final AI Analysis</label>
+        <itemset nodeset="instance('suspicion')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/final_ai_analysis_page/final_ai_referral">
+        <label>Referral Decision</label>
+        <itemset nodeset="instance('referral')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/group_summary">
+      <label>Assessment Summary</label>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_filled_by">
+        <input ref="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_lbl">
+          <label> **Filled by:** <output value=" /data/reporter_name "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_patient">
+        <input ref="/data/group_summary/grp_lbl_patient/lbl_patient_lbl">
+          <label> **Patient:** <output value=" /data/patient_name "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_state">
+        <input ref="/data/group_summary/grp_lbl_state/lbl_state_lbl">
+          <label> **State:** <output value=" /data/inputs/state "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_district">
+        <input ref="/data/group_summary/grp_lbl_district/lbl_district_lbl">
+          <label> **District:** <output value=" /data/inputs/district "/></label>
+        </input>
+      </group>
+      <input ref="/data/group_summary/ai_analysis_summary" appearance="hidden">
+        <label>Summary</label>
+      </input>
+      <input ref="/data/group_summary/ai_analysis_status" appearance="hidden">
+        <label>Analysis Status</label>
+      </input>
+      <input ref="/data/group_summary/ai_analysis_error" appearance="hidden">
+        <label>Error (if any)</label>
+      </input>
+    </group>
+  </h:body>
+</h:html>

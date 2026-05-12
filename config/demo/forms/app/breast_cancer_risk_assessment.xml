@@ -1,0 +1,497 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://www.opendatakit.org/xforms">
+  <h:head>
+    <h:title>Breast Cancer Risk Assessment</h:title>
+    <model odk:xforms-version="1.0.0">
+      <instance>
+        <data id="breast_cancer_risk_assessment" version="2026.04.03" prefix="J1!breast_cancer_risk_assessment!" delimiter="#">
+          <patient_id/>
+          <patient_uuid/>
+          <patient_name/>
+          <reporter_name/>
+          <reporter_place/>
+          <title/>
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source/>
+            <source_id/>
+            <user>
+              <name/>
+              <phone/>
+            </user>
+            <reporter_name_note/>
+            <contact>
+              <_id/>
+              <patient_id/>
+              <name/>
+            </contact>
+            <state/>
+            <district/>
+          </inputs>
+          <intro_page>
+            <assessment_intro/>
+          </intro_page>
+          <symptoms_page_1>
+            <any_breast_related_symptoms/>
+            <lump_or_thickening_in_breast/>
+          </symptoms_page_1>
+          <symptoms_page_2>
+            <change_in_size/>
+            <change_in_shape_position/>
+          </symptoms_page_2>
+          <symptoms_page_3>
+            <any_retraction_of_nipple/>
+            <discharge_from_nipple/>
+          </symptoms_page_3>
+          <symptoms_page_4>
+            <puckering_or_dimpling/>
+            <swelling_lump_in_armpit/>
+          </symptoms_page_4>
+          <symptoms_page_5>
+            <constant_pain_breast_armpit/>
+            <redness_of_skin_over_breast/>
+          </symptoms_page_5>
+          <symptoms_page_6>
+            <erosions_of_nipple/>
+          </symptoms_page_6>
+          <remarks_page>
+            <remarks/>
+          </remarks_page>
+          <group_summary>
+            <grp_lbl_filled_by>
+              <lbl_filled_by_lbl/>
+              <calc_reporter_name/>
+            </grp_lbl_filled_by>
+            <grp_lbl_patient>
+              <lbl_patient_lbl/>
+              <calc_patient_name/>
+            </grp_lbl_patient>
+            <grp_lbl_state>
+              <lbl_state_lbl/>
+              <calc_state/>
+            </grp_lbl_state>
+            <grp_lbl_district>
+              <lbl_district_lbl/>
+              <calc_district/>
+            </grp_lbl_district>
+          </group_summary>
+          <meta tag="hidden">
+            <instanceID/>
+          </meta>
+        </data>
+      </instance>
+      <instance id="contact-summary"/>
+      <instance id="user-contact-summary"/>
+      <instance id="yes_no">
+        <root>
+          <item>
+            <name>yes</name>
+            <label>Yes</label>
+          </item>
+          <item>
+            <name>no</name>
+            <label>No</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="breastfeeding_history">
+        <root>
+          <item>
+            <name>lt24</name>
+            <label>Less than 24 months</label>
+          </item>
+          <item>
+            <name>gt24</name>
+            <label>Greater than 24 months</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="ethnicity_groups">
+        <root>
+          <item>
+            <name>group_general</name>
+            <label>General / Other</label>
+          </item>
+          <item>
+            <name>group_medium</name>
+            <label>Group B</label>
+          </item>
+          <item>
+            <name>group_high</name>
+            <label>Group A</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="states">
+        <root>
+          <item>
+            <name>kerala</name>
+            <label>Kerala</label>
+          </item>
+          <item>
+            <name>tamil_nadu</name>
+            <label>Tamil Nadu</label>
+          </item>
+          <item>
+            <name>andhra_pradesh</name>
+            <label>Andhra Pradesh</label>
+          </item>
+          <item>
+            <name>telangana</name>
+            <label>Telangana</label>
+          </item>
+          <item>
+            <name>karnataka</name>
+            <label>Karnataka</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="districts">
+        <root>
+          <item>
+            <name>chennai</name>
+            <label>Chennai</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>thanjavur</name>
+            <label>Thanjavur</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>coimbatore</name>
+            <label>Coimbatore</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>madurai</name>
+            <label>Madurai</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>salem</name>
+            <label>Salem</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>tiruchirappalli</name>
+            <label>Tiruchirappalli</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>thiruvananthapuram</name>
+            <label>Thiruvananthapuram</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kochi</name>
+            <label>Kochi</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kozhikode</name>
+            <label>Kozhikode</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>thrissur</name>
+            <label>Thrissur</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kollam</name>
+            <label>Kollam</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>visakhapatnam</name>
+            <label>Visakhapatnam</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>vijayawada</name>
+            <label>Vijayawada</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>guntur</name>
+            <label>Guntur</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>tirupati</name>
+            <label>Tirupati</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>kurnool</name>
+            <label>Kurnool</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>hyderabad</name>
+            <label>Hyderabad</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>warangal</name>
+            <label>Warangal</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>nizamabad</name>
+            <label>Nizamabad</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>karimnagar</name>
+            <label>Karimnagar</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>khammam</name>
+            <label>Khammam</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>bengaluru</name>
+            <label>Bengaluru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>mysuru</name>
+            <label>Mysuru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>hubli</name>
+            <label>Hubli</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>mangaluru</name>
+            <label>Mangaluru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>belagavi</name>
+            <label>Belagavi</label>
+            <filter>karnataka</filter>
+          </item>
+        </root>
+      </instance>
+      <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
+      <bind nodeset="/data/patient_uuid" type="string" calculate="../inputs/contact/_id"/>
+      <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
+      <bind nodeset="/data/reporter_name" type="string" calculate="../inputs/user/name"/>
+      <bind nodeset="/data/reporter_place" type="string" calculate="instance('user-contact-summary')/context/facility_name"/>
+      <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/inputs/source" type="string"/>
+      <bind nodeset="/data/inputs/source_id" type="string"/>
+      <bind nodeset="/data/inputs/user/name" type="string"/>
+      <bind nodeset="/data/inputs/user/phone" type="string"/>
+      <bind nodeset="/data/inputs/reporter_name_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/inputs/contact/_id" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/contact/patient_id" type="string"/>
+      <bind nodeset="/data/inputs/contact/name" type="string"/>
+      <bind nodeset="/data/inputs/state" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/district" type="string" required="true()"/>
+      <bind nodeset="/data/intro_page/assessment_intro" readonly="true()" type="string"/>
+      <bind nodeset="/data/symptoms_page_1/any_breast_related_symptoms" type="string" required="true()"/>
+      <bind nodeset="/data/symptoms_page_1/lump_or_thickening_in_breast" type="string" required="true()"/>
+      <bind nodeset="/data/symptoms_page_2/change_in_size" type="string" required="true()"/>
+      <bind nodeset="/data/symptoms_page_2/change_in_shape_position" type="string" required="true()"/>
+      <bind nodeset="/data/symptoms_page_3/any_retraction_of_nipple" type="string" required="true()"/>
+      <bind nodeset="/data/symptoms_page_3/discharge_from_nipple" type="string" required="true()"/>
+      <bind nodeset="/data/symptoms_page_4/puckering_or_dimpling" type="string" required="true()"/>
+      <bind nodeset="/data/symptoms_page_4/swelling_lump_in_armpit" type="string" required="true()"/>
+      <bind nodeset="/data/symptoms_page_5/constant_pain_breast_armpit" type="string" required="true()"/>
+      <bind nodeset="/data/symptoms_page_5/redness_of_skin_over_breast" type="string" required="true()"/>
+      <bind nodeset="/data/symptoms_page_6/erosions_of_nipple" type="string" required="true()"/>
+      <bind nodeset="/data/remarks_page/remarks" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_filled_by/calc_reporter_name" type="string" calculate=" /data/reporter_name "/>
+      <bind nodeset="/data/group_summary/grp_lbl_patient/lbl_patient_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_patient/calc_patient_name" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/group_summary/grp_lbl_state/lbl_state_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_state/calc_state" type="string" calculate=" /data/inputs/state "/>
+      <bind nodeset="/data/group_summary/grp_lbl_district/lbl_district_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_district/calc_district" type="string" calculate=" /data/inputs/district "/>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
+    </model>
+  </h:head>
+  <h:body class="pages grid-layout">
+    <group appearance="field-list" ref="/data/inputs">
+      <label>Patient &amp; Reporter Info</label>
+      <group ref="/data/inputs/user"/>
+      <input ref="/data/inputs/reporter_name_note">
+        <label> Filled by: <output value=" /data/reporter_name "/></label>
+      </input>
+      <group ref="/data/inputs/contact">
+        <input ref="/data/inputs/contact/_id" appearance="select-contact type-person role-patient">
+          <label>Patient's Name</label>
+          <hint>Select the patient from your area</hint>
+        </input>
+        <input ref="/data/inputs/contact/patient_id" appearance="hidden">
+          <label>Medic ID</label>
+        </input>
+        <input ref="/data/inputs/contact/name" appearance="hidden">
+          <label>Patient Name</label>
+        </input>
+      </group>
+      <select1 ref="/data/inputs/state" appearance="minimal">
+        <label>State</label>
+        <itemset nodeset="instance('states')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/inputs/district" appearance="minimal">
+        <label>District</label>
+        <itemset nodeset="instance('districts')/root/item[filter =  /data/inputs/state ]">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/intro_page">
+      <label>Breast Cancer Risk Assessment</label>
+      <input ref="/data/intro_page/assessment_intro">
+        <label>Breast Cancer Risk Assessment</label>
+        <hint>This assessment uses key risk factors to estimate your breast cancer risk level.</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/symptoms_page_1">
+      <label>Breast Symptoms (1–2)</label>
+      <select1 ref="/data/symptoms_page_1/any_breast_related_symptoms">
+        <label>Any Breast Related Symptoms?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/symptoms_page_1/lump_or_thickening_in_breast">
+        <label>Lump or Thickening in Breast?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/symptoms_page_2">
+      <label>Breast Symptoms (3–4)</label>
+      <select1 ref="/data/symptoms_page_2/change_in_size">
+        <label>Change in Size?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/symptoms_page_2/change_in_shape_position">
+        <label>Change in Shape &amp; Position of Nipple?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/symptoms_page_3">
+      <label>Breast Symptoms (5–6)</label>
+      <select1 ref="/data/symptoms_page_3/any_retraction_of_nipple">
+        <label>Any Retraction of Nipple?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/symptoms_page_3/discharge_from_nipple">
+        <label>Discharge from One or Both Nipples?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/symptoms_page_4">
+      <label>Breast Symptoms (7–8)</label>
+      <select1 ref="/data/symptoms_page_4/puckering_or_dimpling">
+        <label>Puckering or Dimpling?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/symptoms_page_4/swelling_lump_in_armpit">
+        <label>Swelling/Lump in Armpit?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/symptoms_page_5">
+      <label>Breast Symptoms (9–10)</label>
+      <select1 ref="/data/symptoms_page_5/constant_pain_breast_armpit">
+        <label>Constant Pain in Breast or Armpit?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/symptoms_page_5/redness_of_skin_over_breast">
+        <label>Redness of Skin over Breast or Any Ulcer?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/symptoms_page_6">
+      <label>Breast Symptoms (11)</label>
+      <select1 ref="/data/symptoms_page_6/erosions_of_nipple">
+        <label>Erosions of Nipple?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/remarks_page">
+      <label>Additional Remarks</label>
+      <input ref="/data/remarks_page/remarks">
+        <label>Remarks</label>
+        <hint>Optional: Add any additional notes or observations here.</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/group_summary">
+      <label>Assessment Summary</label>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_filled_by">
+        <input ref="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_lbl">
+          <label> **Filled by:** <output value=" /data/reporter_name "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_patient">
+        <input ref="/data/group_summary/grp_lbl_patient/lbl_patient_lbl">
+          <label> **Patient:** <output value=" /data/patient_name "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_state">
+        <input ref="/data/group_summary/grp_lbl_state/lbl_state_lbl">
+          <label> **State:** <output value=" /data/inputs/state "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_district">
+        <input ref="/data/group_summary/grp_lbl_district/lbl_district_lbl">
+          <label> **District:** <output value=" /data/inputs/district "/></label>
+        </input>
+      </group>
+    </group>
+  </h:body>
+</h:html>

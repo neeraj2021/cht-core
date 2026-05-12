@@ -1,0 +1,11 @@
+{
+  "title": "Physician Oral Cancer Photo Review",
+  "icon": "icon-disease-cancer",
+  "show_in_reports": false,
+  "context": {
+    "person": true,
+    "place": false,
+    "expression": "true"
+  },
+  "subject_key": "patient_name"
+}

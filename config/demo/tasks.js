@@ -532,7 +532,7 @@ module.exports = [
   },
 
   // Task 1: CBAC Follow-up — triggered after high-risk CBAC submission
-  {
+    {
     name: 'cbac.follow_up',
     icon: 'icon-healthcare',
     title: 'task.cbac.follow_up.title',
@@ -550,6 +550,12 @@ module.exports = [
       type: 'report',
       form: 'cbac_followup',
       label: 'CBAC Follow-up',
+      // modifyContent: function(content, contact) {
+      //   content['inputs/contact/_id']        = contact.contact._id;
+      //   content['inputs/contact/patient_id'] = contact.contact.patient_id;
+      //   content['inputs/contact/name']       = contact.contact.name;
+      //   content['inputs/contact/gender']     = contact.contact.gender;
+      // },
     }],
     events: [{
       id: 'cbac-follow-up',
@@ -562,6 +568,7 @@ module.exports = [
     }],
   },
 
+
   // Task 1b: CBAC NCD Screening — triggered alongside CBAC follow-up for high-risk patients
   {
     name: 'cbac.ncd_screening',
@@ -572,7 +579,7 @@ module.exports = [
     appliesIf: function(contact, report) {
       return user.role === 'chw_supervisor' &&
              getField(report, 'risk_category') === 'High Risk' &&
-             isAlive(contact);
+             isAlive(contact);     
     },
     resolvedIf: function(contact, report, event, dueDate) {
       const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);

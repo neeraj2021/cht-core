@@ -83,7 +83,12 @@
       "create_key": "contact.type.person.new",
       "edit_key": "contact.type.person.edit",
       "primary_contact_key": "clinic.field.contact",
-      "parents": ["village", "health_and_wellness_center", "primary_health_center", "community_health_center"],
+      "parents": [
+        "village",
+        "health_and_wellness_center",
+        "primary_health_center",
+        "community_health_center"
+      ],
       "icon": "medic-person",
       "create_form": "form:contact:person:create",
       "edit_form": "form:contact:person:edit",
@@ -92,11 +97,11 @@
   ],
   "roles": {
     "medical_officer": {
-      "name": "usertype.medical_supervisor",
+      "name": "usertype.medical_officer",
       "offline": false
     },
     "nurse": {
-      "name": "usertype.medical_officer",
+      "name": "usertype.nurse",
       "offline": false
     },
     "physician": {
@@ -113,10 +118,6 @@
     },
     "cho": {
       "name": "usertype.cho",
-      "offline": false
-    },
-    "chw": {
-      "name": "usertype.chw",
       "offline": false
     },
     "asha": {

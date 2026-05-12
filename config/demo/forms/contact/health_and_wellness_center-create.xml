@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://www.opendatakit.org/xforms">
   <h:head>
-    <h:title>New District Hospital</h:title>
+    <h:title>New Health And Wellness Center</h:title>
     <model odk:xforms-version="1.0.0">
       <itext>
         <translation lang="en">
@@ -154,16 +154,16 @@ DOB ISO: <output value=" /data/contact/ephemeral_dob/dob_iso "/></value>
           <text id="/data/contact/notes:label">
             <value>Notes</value>
           </text>
-          <text id="/data/district_hospital/is_name_generated:label">
+          <text id="/data/health_and_wellness_center/is_name_generated:label">
             <value> Would you like to name the place after the primary contact: "<output value=" /data/init/generated_name_translation "/>"?</value>
           </text>
-          <text id="/data/district_hospital/name:label">
+          <text id="/data/health_and_wellness_center/name:label">
             <value>Name</value>
           </text>
-          <text id="/data/district_hospital/external_id:label">
+          <text id="/data/health_and_wellness_center/external_id:label">
             <value>External ID</value>
           </text>
-          <text id="/data/district_hospital/notes:label">
+          <text id="/data/health_and_wellness_center/notes:label">
             <value>Notes</value>
           </text>
         </translation>
@@ -270,16 +270,16 @@ DOB ISO: <output value=" /data/contact/ephemeral_dob/dob_iso "/></value>
           <text id="/data/contact/notes:label">
             <value>नोट्स</value>
           </text>
-          <text id="/data/district_hospital/is_name_generated:label">
+          <text id="/data/health_and_wellness_center/is_name_generated:label">
             <value> क्या आप इस स्थान को प्राथमिक कॉंटॅक्ट का नाम देना चाहेंगे?: <output value=" /data/init/generated_name_translation "/></value>
           </text>
-          <text id="/data/district_hospital/name:label">
+          <text id="/data/health_and_wellness_center/name:label">
             <value>नाम</value>
           </text>
-          <text id="/data/district_hospital/external_id:label">
+          <text id="/data/health_and_wellness_center/external_id:label">
             <value>बाहरी ID</value>
           </text>
-          <text id="/data/district_hospital/notes:label">
+          <text id="/data/health_and_wellness_center/notes:label">
             <value>नोट्स</value>
           </text>
           <text id="select_dob_method-0">
@@ -425,16 +425,16 @@ DOB ISO: <output value=" /data/contact/ephemeral_dob/dob_iso "/></value>
           <text id="/data/contact/notes:label">
             <value>Catatan</value>
           </text>
-          <text id="/data/district_hospital/is_name_generated:label">
+          <text id="/data/health_and_wellness_center/is_name_generated:label">
             <value> Apakah Anda ingin nama tempat setelah kontak utama: "<output value=" /data/init/generated_name_translation "/>"?</value>
           </text>
-          <text id="/data/district_hospital/name:label">
+          <text id="/data/health_and_wellness_center/name:label">
             <value>Nama</value>
           </text>
-          <text id="/data/district_hospital/external_id:label">
+          <text id="/data/health_and_wellness_center/external_id:label">
             <value>Eksternal ID</value>
           </text>
-          <text id="/data/district_hospital/notes:label">
+          <text id="/data/health_and_wellness_center/notes:label">
             <value>Catatan</value>
           </text>
           <text id="select_dob_method-0">
@@ -580,16 +580,16 @@ DOB ISO: <output value=" /data/contact/ephemeral_dob/dob_iso "/></value>
           <text id="/data/contact/notes:label">
             <value>Maelezo</value>
           </text>
-          <text id="/data/district_hospital/is_name_generated:label">
+          <text id="/data/health_and_wellness_center/is_name_generated:label">
             <value> Je, Ungependa kuita eneo hii kama mwasilishi mkuu wa eneo hii? "<output value=" /data/init/generated_name_translation "/>"?</value>
           </text>
-          <text id="/data/district_hospital/name:label">
+          <text id="/data/health_and_wellness_center/name:label">
             <value>Jina</value>
           </text>
-          <text id="/data/district_hospital/external_id:label">
+          <text id="/data/health_and_wellness_center/external_id:label">
             <value>Namba ya nje</value>
           </text>
-          <text id="/data/district_hospital/notes:label">
+          <text id="/data/health_and_wellness_center/notes:label">
             <value>Maelezo</value>
           </text>
           <text id="select_dob_method-0">
@@ -735,16 +735,16 @@ DOB ISO: <output value=" /data/contact/ephemeral_dob/dob_iso "/></value>
           <text id="/data/contact/notes:label">
             <value>टिप्पणि</value>
           </text>
-          <text id="/data/district_hospital/is_name_generated:label">
+          <text id="/data/health_and_wellness_center/is_name_generated:label">
             <value> के तपाइ यस स्थानकाे प्राथमिक सम्पर्क नाम दिन चाहानु हुन्छ?:<output value=" /data/init/generated_name_translation "/></value>
           </text>
-          <text id="/data/district_hospital/name:label">
+          <text id="/data/health_and_wellness_center/name:label">
             <value>नाम</value>
           </text>
-          <text id="/data/district_hospital/external_id:label">
+          <text id="/data/health_and_wellness_center/external_id:label">
             <value>बाहिरि ID</value>
           </text>
-          <text id="/data/district_hospital/notes:label">
+          <text id="/data/health_and_wellness_center/notes:label">
             <value>टिप्पणि</value>
           </text>
           <text id="select_dob_method-0">
@@ -890,16 +890,16 @@ DOB ISO: <output value=" /data/contact/ephemeral_dob/dob_iso "/></value>
           <text id="/data/contact/notes:label">
             <value>Notes</value>
           </text>
-          <text id="/data/district_hospital/is_name_generated:label">
+          <text id="/data/health_and_wellness_center/is_name_generated:label">
             <value> Voulez-vous nommer l'endroit: "<output value=" /data/init/generated_name_translation "/>"?</value>
           </text>
-          <text id="/data/district_hospital/name:label">
+          <text id="/data/health_and_wellness_center/name:label">
             <value>Nom</value>
           </text>
-          <text id="/data/district_hospital/external_id:label">
+          <text id="/data/health_and_wellness_center/external_id:label">
             <value>Identifiant externe</value>
           </text>
-          <text id="/data/district_hospital/notes:label">
+          <text id="/data/health_and_wellness_center/notes:label">
             <value>Notes</value>
           </text>
           <text id="select_dob_method-0">
@@ -944,7 +944,7 @@ DOB ISO: <output value=" /data/contact/ephemeral_dob/dob_iso "/></value>
         </translation>
       </itext>
       <instance>
-        <data id="contact:district_hospital:create" version="2025-05-01 22-44" prefix="J1!contact:district_hospital:create!" delimiter="#">
+        <data id="contact:health_and_wellness_center:create" version="2025-05-01 22-44" prefix="J1!contact:health_and_wellness_center:create!" delimiter="#">
           <inputs>
             <meta>
               <location>
@@ -960,7 +960,7 @@ DOB ISO: <output value=" /data/contact/ephemeral_dob/dob_iso "/></value>
               <name/>
             </user>
           </inputs>
-          <district_hospital>
+          <health_and_wellness_center>
             <parent>PARENT</parent>
             <type/>
             <is_name_generated>true</is_name_generated>
@@ -974,7 +974,7 @@ DOB ISO: <output value=" /data/contact/ephemeral_dob/dob_iso "/></value>
               <created_by_person_uuid/>
               <created_by_place_uuid/>
             </meta>
-          </district_hospital>
+          </health_and_wellness_center>
           <init>
             <create_new_person/>
             <select_person/>
@@ -983,9 +983,9 @@ DOB ISO: <output value=" /data/contact/ephemeral_dob/dob_iso "/></value>
             <custom_place_name_label_translator/>
             <custom_place_name_label/>
             <custom_place_name/>
-            <place_type>district_hospital</place_type>
+            <place_type>health_and_wellness_center</place_type>
             <place_type_translation/>
-            <generated_name>district_hospital</generated_name>
+            <generated_name>health_and_wellness_center</generated_name>
             <generated_name_translation/>
           </init>
           <contact>
@@ -1131,7 +1131,7 @@ DOB ISO: <output value=" /data/contact/ephemeral_dob/dob_iso "/></value>
         <root>
           <item>
             <itextId>place_type-0</itextId>
-            <name>district_hospital</name>
+            <name>health_and_wellness_center</name>
           </item>
           <item>
             <itextId>place_type-1</itextId>
@@ -1147,7 +1147,7 @@ DOB ISO: <output value=" /data/contact/ephemeral_dob/dob_iso "/></value>
         <root>
           <item>
             <itextId>generated_name-0</itextId>
-            <name>district_hospital</name>
+            <name>health_and_wellness_center</name>
           </item>
           <item>
             <itextId>generated_name-1</itextId>
@@ -1175,9 +1175,9 @@ DOB ISO: <output value=" /data/contact/ephemeral_dob/dob_iso "/></value>
       <bind nodeset="/data/init/select_person" type="string" required="true()" relevant="selected( /data/init/create_new_person ,'old_person')"/>
       <bind nodeset="/data/init/name" type="string"/>
       <bind nodeset="/data/init/contact_name" type="string" calculate="coalesce(../../contact/name, ../name)"/>
-      <bind nodeset="/data/init/custom_place_name_label_translator" type="string" relevant="selected( /data/init/create_new_person ,'none') or selected( /data/district_hospital/is_name_generated , 'false')" calculate="&quot;name&quot;"/>
+      <bind nodeset="/data/init/custom_place_name_label_translator" type="string" relevant="selected( /data/init/create_new_person ,'none') or selected( /data/health_and_wellness_center/is_name_generated , 'false')" calculate="&quot;name&quot;"/>
       <bind nodeset="/data/init/custom_place_name_label" type="string" calculate="jr:choice-name( /data/init/custom_place_name_label_translator ,' /data/init/custom_place_name_label_translator ')"/>
-      <bind nodeset="/data/init/custom_place_name" type="string" required="true()" relevant="selected( /data/init/create_new_person ,'none') or selected( /data/district_hospital/is_name_generated , 'false')"/>
+      <bind nodeset="/data/init/custom_place_name" type="string" required="true()" relevant="selected( /data/init/create_new_person ,'none') or selected( /data/health_and_wellness_center/is_name_generated , 'false')"/>
       <bind nodeset="/data/init/place_type" type="string"/>
       <bind nodeset="/data/init/place_type_translation" type="string" calculate="jr:choice-name( /data/init/place_type ,' /data/init/place_type ')"/>
       <bind nodeset="/data/init/generated_name" type="string"/>
@@ -1209,17 +1209,17 @@ DOB ISO: <output value=" /data/contact/ephemeral_dob/dob_iso "/></value>
       <bind nodeset="/data/contact/meta/created_by" type="string" calculate="../../../inputs/user/name"/>
       <bind nodeset="/data/contact/meta/created_by_person_uuid" type="string" calculate="../../../inputs/user/contact_id"/>
       <bind nodeset="/data/contact/meta/created_by_place_uuid" type="string" calculate="../../../inputs/user/facility_id"/>
-      <bind nodeset="/data/district_hospital/parent" type="string"/>
-      <bind nodeset="/data/district_hospital/type" type="string"/>
-      <bind nodeset="/data/district_hospital/is_name_generated" type="string" required="true()" relevant="not(selected( /data/init/create_new_person ,'none'))"/>
-      <bind nodeset="/data/district_hospital/name" type="string" required="true()" calculate="if( ( selected( /data/district_hospital/is_name_generated , 'true') or selected( /data/district_hospital/is_name_generated , 'yes') ),  /data/init/generated_name_translation ,  /data/init/custom_place_name )"/>
-      <bind nodeset="/data/district_hospital/external_id" type="string"/>
-      <bind nodeset="/data/district_hospital/notes" type="string"/>
-      <bind nodeset="/data/district_hospital/contact" type="string" calculate="if(selected( /data/init/create_new_person ,'none'), &quot;&quot;, coalesce( /data/init/select_person ,&quot;NEW&quot;))"/>
-      <bind nodeset="/data/district_hospital/geolocation" type="string" calculate="concat(../../inputs/meta/location/lat, concat(' ', ../../inputs/meta/location/long))"/>
-      <bind nodeset="/data/district_hospital/meta/created_by" type="string" calculate="../../../inputs/user/name"/>
-      <bind nodeset="/data/district_hospital/meta/created_by_person_uuid" type="string" calculate="../../../inputs/user/contact_id"/>
-      <bind nodeset="/data/district_hospital/meta/created_by_place_uuid" type="string" calculate="../../../inputs/user/facility_id"/>
+      <bind nodeset="/data/health_and_wellness_center/parent" type="string"/>
+      <bind nodeset="/data/health_and_wellness_center/type" type="string"/>
+      <bind nodeset="/data/health_and_wellness_center/is_name_generated" type="string" required="true()" relevant="not(selected( /data/init/create_new_person ,'none'))"/>
+      <bind nodeset="/data/health_and_wellness_center/name" type="string" required="true()" calculate="if( ( selected( /data/health_and_wellness_center/is_name_generated , 'true') or selected( /data/health_and_wellness_center/is_name_generated , 'yes') ),  /data/init/generated_name_translation ,  /data/init/custom_place_name )"/>
+      <bind nodeset="/data/health_and_wellness_center/external_id" type="string"/>
+      <bind nodeset="/data/health_and_wellness_center/notes" type="string"/>
+      <bind nodeset="/data/health_and_wellness_center/contact" type="string" calculate="if(selected( /data/init/create_new_person ,'none'), &quot;&quot;, coalesce( /data/init/select_person ,&quot;NEW&quot;))"/>
+      <bind nodeset="/data/health_and_wellness_center/geolocation" type="string" calculate="concat(../../inputs/meta/location/lat, concat(' ', ../../inputs/meta/location/long))"/>
+      <bind nodeset="/data/health_and_wellness_center/meta/created_by" type="string" calculate="../../../inputs/user/name"/>
+      <bind nodeset="/data/health_and_wellness_center/meta/created_by_person_uuid" type="string" calculate="../../../inputs/user/contact_id"/>
+      <bind nodeset="/data/health_and_wellness_center/meta/created_by_place_uuid" type="string" calculate="../../../inputs/user/facility_id"/>
       <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
     </model>
   </h:head>
@@ -1328,9 +1328,9 @@ DOB ISO: <output value=" /data/contact/ephemeral_dob/dob_iso "/></value>
       <group ref="/data/contact/user_for_contact"/>
       <group appearance="hidden" ref="/data/contact/meta"/>
     </group>
-    <group appearance="field-list" ref="/data/district_hospital">
-      <select1 ref="/data/district_hospital/is_name_generated" appearance="columns-pack">
-        <label ref="jr:itext('/data/district_hospital/is_name_generated:label')"/>
+    <group appearance="field-list" ref="/data/health_and_wellness_center">
+      <select1 ref="/data/health_and_wellness_center/is_name_generated" appearance="columns-pack">
+        <label ref="jr:itext('/data/health_and_wellness_center/is_name_generated:label')"/>
         <itemset nodeset="instance('yes_no_generated_name')/root/item">
           <value ref="name"/>
           <label ref="jr:itext(itextId)"/>
@@ -1339,13 +1339,13 @@ DOB ISO: <output value=" /data/contact/ephemeral_dob/dob_iso "/></value>
       <input ref="/data/init/custom_place_name">
         <label ref="jr:itext('/data/init/custom_place_name:label')"/>
       </input>
-      <input ref="/data/district_hospital/external_id">
-        <label ref="jr:itext('/data/district_hospital/external_id:label')"/>
+      <input ref="/data/health_and_wellness_center/external_id">
+        <label ref="jr:itext('/data/health_and_wellness_center/external_id:label')"/>
       </input>
-      <input ref="/data/district_hospital/notes" appearance="multiline">
-        <label ref="jr:itext('/data/district_hospital/notes:label')"/>
+      <input ref="/data/health_and_wellness_center/notes" appearance="multiline">
+        <label ref="jr:itext('/data/health_and_wellness_center/notes:label')"/>
       </input>
-      <group appearance="hidden" ref="/data/district_hospital/meta"/>
+      <group appearance="hidden" ref="/data/health_and_wellness_center/meta"/>
     </group>
   </h:body>
 </h:html>

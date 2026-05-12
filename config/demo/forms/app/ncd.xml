@@ -177,45 +177,49 @@
           </form_3_summary>
           <fill_breast_cancer_form/>
           <intro_form_4/>
-          <bc_age_and_menarche>
-            <bc_current_age/>
-            <bc_age_at_first_period/>
-          </bc_age_and_menarche>
-          <bc_menstrual_and_childbirth>
-            <bc_irregular_menstrual_periods/>
-            <bc_age_at_first_childbirth/>
-          </bc_menstrual_and_childbirth>
-          <bc_breastfeeding_and_family_history>
-            <bc_breastfeeding_duration/>
-            <bc_family_history_of_breast_cancer/>
-          </bc_breastfeeding_and_family_history>
-          <bc_ethnic_background>
-            <bc_ethnicity_group/>
-          </bc_ethnic_background>
-          <bc_score_age/>
-          <bc_score_menarche/>
-          <bc_score_irregular_periods/>
-          <bc_score_childbirth_age/>
-          <bc_score_breastfeeding/>
-          <bc_score_family_history/>
-          <bc_score_ethnicity/>
-          <bc_total_risk_score/>
-          <bc_risk_category/>
+          <bc_symptoms_page_1>
+            <bc_any_breast_related_symptoms/>
+            <bc_lump_or_thickening_in_breast/>
+          </bc_symptoms_page_1>
+          <bc_symptoms_page_2>
+            <bc_change_in_size/>
+            <bc_change_in_shape_position/>
+          </bc_symptoms_page_2>
+          <bc_symptoms_page_3>
+            <bc_any_retraction_of_nipple/>
+            <bc_discharge_from_nipple/>
+          </bc_symptoms_page_3>
+          <bc_symptoms_page_4>
+            <bc_puckering_or_dimpling/>
+            <bc_swelling_lump_in_armpit/>
+          </bc_symptoms_page_4>
+          <bc_symptoms_page_5>
+            <bc_constant_pain_breast_armpit/>
+            <bc_redness_of_skin_over_breast/>
+          </bc_symptoms_page_5>
+          <bc_symptoms_page_6>
+            <bc_erosions_of_nipple/>
+          </bc_symptoms_page_6>
+          <bc_remarks_page>
+            <bc_remarks/>
+          </bc_remarks_page>
           <form_4_summary>
-            <bc_completion_note/>
+            <grp_lbl_bc_filled_by>
+              <lbl_bc_filled_by_lbl/>
+              <calc_bc_reporter_name/>
+            </grp_lbl_bc_filled_by>
             <grp_lbl_bc_patient>
               <lbl_bc_patient_lbl/>
               <calc_bc_patient_name/>
             </grp_lbl_bc_patient>
-            <grp_lbl_bc_score>
-              <lbl_bc_score_lbl/>
-              <calc_bc_risk_score/>
-            </grp_lbl_bc_score>
-            <grp_lbl_bc_risk_category>
-              <lbl_bc_risk_category_lbl/>
-              <calc_bc_risk_category/>
-            </grp_lbl_bc_risk_category>
-            <bc_risk_guide/>
+            <grp_lbl_bc_state>
+              <lbl_bc_state_lbl/>
+              <calc_bc_state/>
+            </grp_lbl_bc_state>
+            <grp_lbl_bc_district>
+              <lbl_bc_district_lbl/>
+              <calc_bc_district/>
+            </grp_lbl_bc_district>
           </form_4_summary>
           <fill_oral_cancer_form/>
           <intro_form_5/>
@@ -384,10 +388,6 @@
           <item>
             <name>female</name>
             <label>Female</label>
-          </item>
-          <item>
-            <name>other</name>
-            <label>Other</label>
           </item>
         </root>
       </instance>
@@ -608,8 +608,8 @@
       <bind nodeset="/data/inputs/state" type="string" required="true()"/>
       <bind nodeset="/data/inputs/district" type="string" required="true()"/>
       <bind nodeset="/data/intro_form_1" readonly="true()" type="string"/>
-      <bind nodeset="/data/form_1_personal_details/height_cm" type="decimal" required="true()"/>
-      <bind nodeset="/data/form_1_personal_details/weight_kg" type="decimal" required="true()"/>
+      <bind nodeset="/data/form_1_personal_details/height_cm" type="decimal" required="true()" constraint=". &gt;= 1 and . &lt;= 300" jr:constraintMsg="Height must be between 1 and 300 cm."/>
+      <bind nodeset="/data/form_1_personal_details/weight_kg" type="decimal" required="true()" constraint=". &gt;= 1 and . &lt;= 300" jr:constraintMsg="Weight must be between 1 and 300 cm."/>
       <bind nodeset="/data/form_1_personal_details/bmi" type="string" calculate="if( /data/form_1_personal_details/height_cm  &gt; 0 and  /data/form_1_personal_details/weight_kg  &gt; 0, round( /data/form_1_personal_details/weight_kg  div ( /data/form_1_personal_details/height_cm  *  /data/form_1_personal_details/height_cm  div 10000), 1), '')"/>
       <bind nodeset="/data/form_1_personal_details/bmi_display" readonly="true()" type="string" relevant=" /data/form_1_personal_details/height_cm  != '' and  /data/form_1_personal_details/weight_kg  != ''"/>
       <bind nodeset="/data/intro_personal_history" readonly="true()" type="string"/>
@@ -631,7 +631,7 @@
       <bind nodeset="/data/personal_history/treat_wound" type="string" required="true()" relevant=" /data/personal_history/diag_wound  = 'yes'"/>
       <bind nodeset="/data/personal_history/diag_oral_cancer" type="string" required="true()"/>
       <bind nodeset="/data/personal_history/treat_oral_cancer" type="string" required="true()" relevant=" /data/personal_history/diag_oral_cancer  = 'yes'"/>
-      <bind nodeset="/data/personal_history/other_disease" type="string"/>
+      <bind nodeset="/data/personal_history/other_disease" type="string" constraint="string-length(.) &lt;= 500" jr:constraintMsg="Maximum 500 characters allowed."/>
       <bind nodeset="/data/form_1_summary/grp_lbl_filled_by/lbl_filled_by_lbl" readonly="true()" type="string"/>
       <bind nodeset="/data/form_1_summary/grp_lbl_filled_by/calc_reporter_name" type="string" calculate=" /data/reporter_name "/>
       <bind nodeset="/data/form_1_summary/grp_lbl_patient/lbl_patient_lbl" readonly="true()" type="string"/>
@@ -695,35 +695,34 @@
       <bind nodeset="/data/form_3_summary/severity_guide" readonly="true()" type="string" relevant=" /data/fill_phq9_form  = 'yes'"/>
       <bind nodeset="/data/fill_breast_cancer_form" type="string" required="true()"/>
       <bind nodeset="/data/intro_form_4" readonly="true()" type="string" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
-      <bind nodeset="/data/bc_age_and_menarche" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
-      <bind nodeset="/data/bc_age_and_menarche/bc_current_age" type="int" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
-      <bind nodeset="/data/bc_age_and_menarche/bc_age_at_first_period" type="int" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
-      <bind nodeset="/data/bc_menstrual_and_childbirth" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
-      <bind nodeset="/data/bc_menstrual_and_childbirth/bc_irregular_menstrual_periods" type="string" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
-      <bind nodeset="/data/bc_menstrual_and_childbirth/bc_age_at_first_childbirth" type="int" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
-      <bind nodeset="/data/bc_breastfeeding_and_family_history" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
-      <bind nodeset="/data/bc_breastfeeding_and_family_history/bc_breastfeeding_duration" type="string" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
-      <bind nodeset="/data/bc_breastfeeding_and_family_history/bc_family_history_of_breast_cancer" type="string" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
-      <bind nodeset="/data/bc_ethnic_background" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
-      <bind nodeset="/data/bc_ethnic_background/bc_ethnicity_group" type="string" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
-      <bind nodeset="/data/bc_score_age" type="string" calculate="if( /data/fill_breast_cancer_form  = 'yes', if( /data/bc_age_and_menarche/bc_current_age  &gt;= 50, 2, if( /data/bc_age_and_menarche/bc_current_age  &gt;= 40, 1, 0)), '')"/>
-      <bind nodeset="/data/bc_score_menarche" type="string" calculate="if( /data/fill_breast_cancer_form  = 'yes', if( /data/bc_age_and_menarche/bc_age_at_first_period  &lt; 12, 1, 0), '')"/>
-      <bind nodeset="/data/bc_score_irregular_periods" type="string" calculate="if( /data/fill_breast_cancer_form  = 'yes', if( /data/bc_menstrual_and_childbirth/bc_irregular_menstrual_periods  = 'yes', 1, 0), '')"/>
-      <bind nodeset="/data/bc_score_childbirth_age" type="string" calculate="if( /data/fill_breast_cancer_form  = 'yes', if(string-length( /data/bc_menstrual_and_childbirth/bc_age_at_first_childbirth ) = 0, 0, if( /data/bc_menstrual_and_childbirth/bc_age_at_first_childbirth  &gt; 30, 1, 0)), '')"/>
-      <bind nodeset="/data/bc_score_breastfeeding" type="string" calculate="if( /data/fill_breast_cancer_form  = 'yes', if( /data/bc_breastfeeding_and_family_history/bc_breastfeeding_duration  = 'lt24', 1, 0), '')"/>
-      <bind nodeset="/data/bc_score_family_history" type="string" calculate="if( /data/fill_breast_cancer_form  = 'yes', if( /data/bc_breastfeeding_and_family_history/bc_family_history_of_breast_cancer  = 'yes', 2, 0), '')"/>
-      <bind nodeset="/data/bc_score_ethnicity" type="string" calculate="if( /data/fill_breast_cancer_form  = 'yes', if( /data/bc_ethnic_background/bc_ethnicity_group  = 'group_high', 1, if( /data/bc_ethnic_background/bc_ethnicity_group  = 'group_medium', 0.5, 0)), '')"/>
-      <bind nodeset="/data/bc_total_risk_score" type="string" calculate="if( /data/fill_breast_cancer_form  = 'yes',  /data/bc_score_age  +  /data/bc_score_menarche  +  /data/bc_score_irregular_periods  +  /data/bc_score_childbirth_age  +  /data/bc_score_breastfeeding  +  /data/bc_score_family_history  +  /data/bc_score_ethnicity , '')"/>
-      <bind nodeset="/data/bc_risk_category" type="string" calculate="if( /data/fill_breast_cancer_form  = 'yes', if( /data/bc_total_risk_score  &gt;= 6, 'High Risk', if( /data/bc_total_risk_score  &gt;= 3, 'Moderate Risk', 'Low Risk')), '')"/>
+      <bind nodeset="/data/bc_symptoms_page_1" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_symptoms_page_1/bc_any_breast_related_symptoms" type="string" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_symptoms_page_1/bc_lump_or_thickening_in_breast" type="string" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_symptoms_page_2" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_symptoms_page_2/bc_change_in_size" type="string" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_symptoms_page_2/bc_change_in_shape_position" type="string" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_symptoms_page_3" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_symptoms_page_3/bc_any_retraction_of_nipple" type="string" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_symptoms_page_3/bc_discharge_from_nipple" type="string" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_symptoms_page_4" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_symptoms_page_4/bc_puckering_or_dimpling" type="string" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_symptoms_page_4/bc_swelling_lump_in_armpit" type="string" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_symptoms_page_5" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_symptoms_page_5/bc_constant_pain_breast_armpit" type="string" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_symptoms_page_5/bc_redness_of_skin_over_breast" type="string" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_symptoms_page_6" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_symptoms_page_6/bc_erosions_of_nipple" type="string" required="true()" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_remarks_page" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/bc_remarks_page/bc_remarks" type="string" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
       <bind nodeset="/data/form_4_summary" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
-      <bind nodeset="/data/form_4_summary/bc_completion_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_4_summary/grp_lbl_bc_filled_by/lbl_bc_filled_by_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_4_summary/grp_lbl_bc_filled_by/calc_bc_reporter_name" type="string" calculate=" /data/reporter_name "/>
       <bind nodeset="/data/form_4_summary/grp_lbl_bc_patient/lbl_bc_patient_lbl" readonly="true()" type="string"/>
       <bind nodeset="/data/form_4_summary/grp_lbl_bc_patient/calc_bc_patient_name" type="string" calculate=" /data/patient_name "/>
-      <bind nodeset="/data/form_4_summary/grp_lbl_bc_score/lbl_bc_score_lbl" readonly="true()" type="string"/>
-      <bind nodeset="/data/form_4_summary/grp_lbl_bc_score/calc_bc_risk_score" type="string" calculate=" /data/bc_total_risk_score "/>
-      <bind nodeset="/data/form_4_summary/grp_lbl_bc_risk_category/lbl_bc_risk_category_lbl" readonly="true()" type="string"/>
-      <bind nodeset="/data/form_4_summary/grp_lbl_bc_risk_category/calc_bc_risk_category" type="string" calculate=" /data/bc_risk_category "/>
-      <bind nodeset="/data/form_4_summary/bc_risk_guide" readonly="true()" type="string" relevant=" /data/fill_breast_cancer_form  = 'yes'"/>
+      <bind nodeset="/data/form_4_summary/grp_lbl_bc_state/lbl_bc_state_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_4_summary/grp_lbl_bc_state/calc_bc_state" type="string" calculate=" /data/inputs/state "/>
+      <bind nodeset="/data/form_4_summary/grp_lbl_bc_district/lbl_bc_district_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_4_summary/grp_lbl_bc_district/calc_bc_district" type="string" calculate=" /data/inputs/district "/>
       <bind nodeset="/data/fill_oral_cancer_form" type="string" required="true()"/>
       <bind nodeset="/data/intro_form_5" readonly="true()" type="string" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
       <bind nodeset="/data/oc_participant" relevant=" /data/fill_oral_cancer_form  = 'yes'"/>
@@ -837,7 +836,7 @@
 Please complete your health examination details.</label>
     </input>
     <group appearance="field-list" ref="/data/form_1_personal_details">
-      <label>Personal Details</label>
+      <label>Personal Examination</label>
       <input ref="/data/form_1_personal_details/height_cm">
         <label>Height (cm)</label>
         <hint>Enter height in centimetres</hint>
@@ -1250,81 +1249,130 @@ Over the last 2 weeks, how often have you been bothered by any of the following 
       <label>## Form 4: Breast Cancer Risk Assessment
 This assessment uses key risk factors to estimate your breast cancer risk level.</label>
     </input>
-    <group appearance="field-list" ref="/data/bc_age_and_menarche">
-      <label>Age &amp; Menstrual History</label>
-      <input ref="/data/bc_age_and_menarche/bc_current_age">
-        <label>What is your current age?</label>
-        <hint>Enter age in years.</hint>
-      </input>
-      <input ref="/data/bc_age_and_menarche/bc_age_at_first_period">
-        <label>At what age did you have your first menstrual period (menarche)?</label>
-        <hint>Enter age in years.</hint>
-      </input>
-    </group>
-    <group appearance="field-list" ref="/data/bc_menstrual_and_childbirth">
-      <label>Menstrual &amp; Childbirth History</label>
-      <select1 ref="/data/bc_menstrual_and_childbirth/bc_irregular_menstrual_periods">
-        <label>Do you experience irregular menstrual periods?</label>
+    <group appearance="field-list" ref="/data/bc_symptoms_page_1">
+      <label>Breast Symptoms (1–2)</label>
+      <select1 ref="/data/bc_symptoms_page_1/bc_any_breast_related_symptoms">
+        <label>Any Breast Related Symptoms?</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <input ref="/data/bc_menstrual_and_childbirth/bc_age_at_first_childbirth">
-        <label>If you have given birth, how old were you at the time of your first childbirth?</label>
-        <hint>Leave blank if not applicable.</hint>
-      </input>
-    </group>
-    <group appearance="field-list" ref="/data/bc_breastfeeding_and_family_history">
-      <label>Breastfeeding &amp; Family History</label>
-      <select1 ref="/data/bc_breastfeeding_and_family_history/bc_breastfeeding_duration">
-        <label>Have you breastfed for more than 2 years in total (including all children)?</label>
-        <itemset nodeset="instance('breastfeeding_history')/root/item">
-          <value ref="name"/>
-          <label ref="label"/>
-        </itemset>
-      </select1>
-      <select1 ref="/data/bc_breastfeeding_and_family_history/bc_family_history_of_breast_cancer">
-        <label>Do you have a family history of breast cancer among close relatives?</label>
+      <select1 ref="/data/bc_symptoms_page_1/bc_lump_or_thickening_in_breast">
+        <label>Lump or Thickening in Breast?</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
     </group>
-    <group appearance="field-list" ref="/data/bc_ethnic_background">
-      <label>Ethnic Background</label>
-      <select1 ref="/data/bc_ethnic_background/bc_ethnicity_group" appearance="minimal">
-        <label>Which ethnic group do you identify with?</label>
-        <itemset nodeset="instance('ethnicity_groups')/root/item">
+    <group appearance="field-list" ref="/data/bc_symptoms_page_2">
+      <label>Breast Symptoms (3–4)</label>
+      <select1 ref="/data/bc_symptoms_page_2/bc_change_in_size">
+        <label>Change in Size?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
+      <select1 ref="/data/bc_symptoms_page_2/bc_change_in_shape_position">
+        <label>Change in Shape &amp; Position of Breast?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/bc_symptoms_page_3">
+      <label>Breast Symptoms (5–6)</label>
+      <select1 ref="/data/bc_symptoms_page_3/bc_any_retraction_of_nipple">
+        <label>Any Retraction of Nipple?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/bc_symptoms_page_3/bc_discharge_from_nipple">
+        <label>Discharge from One or Both Nipples?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/bc_symptoms_page_4">
+      <label>Breast Symptoms (7–8)</label>
+      <select1 ref="/data/bc_symptoms_page_4/bc_puckering_or_dimpling">
+        <label>Puckering or Dimpling?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/bc_symptoms_page_4/bc_swelling_lump_in_armpit">
+        <label>Swelling/Lump in Armpit?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/bc_symptoms_page_5">
+      <label>Breast Symptoms (9–10)</label>
+      <select1 ref="/data/bc_symptoms_page_5/bc_constant_pain_breast_armpit">
+        <label>Constant Pain in Breast or Armpit?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/bc_symptoms_page_5/bc_redness_of_skin_over_breast">
+        <label>Redness of Skin over Breast or Nipple?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/bc_symptoms_page_6">
+      <label>Breast Symptoms (11)</label>
+      <select1 ref="/data/bc_symptoms_page_6/bc_erosions_of_nipple">
+        <label>Erosions of Nipple?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/bc_remarks_page">
+      <label>Additional Remarks</label>
+      <input ref="/data/bc_remarks_page/bc_remarks">
+        <label>Remarks</label>
+        <hint>Optional: Add any additional notes or observations here.</hint>
+      </input>
     </group>
     <group appearance="field-list" ref="/data/form_4_summary">
-      <label>Form 4 Summary</label>
-      <input ref="/data/form_4_summary/bc_completion_note">
-        <label>Breast Cancer Risk Assessment completed!</label>
-      </input>
+      <label>Assessment Summary</label>
+      <group appearance="field-list" ref="/data/form_4_summary/grp_lbl_bc_filled_by">
+        <input ref="/data/form_4_summary/grp_lbl_bc_filled_by/lbl_bc_filled_by_lbl">
+          <label> **Filled by:** <output value=" /data/reporter_name "/></label>
+        </input>
+      </group>
       <group appearance="field-list" ref="/data/form_4_summary/grp_lbl_bc_patient">
         <input ref="/data/form_4_summary/grp_lbl_bc_patient/lbl_bc_patient_lbl">
           <label> **Patient:** <output value=" /data/patient_name "/></label>
         </input>
       </group>
-      <group appearance="field-list" ref="/data/form_4_summary/grp_lbl_bc_score">
-        <input ref="/data/form_4_summary/grp_lbl_bc_score/lbl_bc_score_lbl">
-          <label> **Risk Score:** <output value=" /data/bc_total_risk_score "/></label>
+      <group appearance="field-list" ref="/data/form_4_summary/grp_lbl_bc_state">
+        <input ref="/data/form_4_summary/grp_lbl_bc_state/lbl_bc_state_lbl">
+          <label> **State:** <output value=" /data/inputs/state "/></label>
         </input>
       </group>
-      <group appearance="field-list" ref="/data/form_4_summary/grp_lbl_bc_risk_category">
-        <input ref="/data/form_4_summary/grp_lbl_bc_risk_category/lbl_bc_risk_category_lbl">
-          <label> **Risk Category:** <output value=" /data/bc_risk_category "/></label>
+      <group appearance="field-list" ref="/data/form_4_summary/grp_lbl_bc_district">
+        <input ref="/data/form_4_summary/grp_lbl_bc_district/lbl_bc_district_lbl">
+          <label> **District:** <output value=" /data/inputs/district "/></label>
         </input>
       </group>
-      <input ref="/data/form_4_summary/bc_risk_guide">
-        <label>Score &lt; 3: Low Risk · Score 3–5: Moderate Risk · Score ≥ 6: High Risk</label>
-      </input>
     </group>
     <select1 ref="/data/fill_oral_cancer_form" appearance="radio">
       <label>Do you want to fill Oral Cancer Assessment form?</label>
@@ -1388,7 +1436,7 @@ Please complete the habit history and photo documentation.</label>
     </group>
     <group appearance="field-list" ref="/data/oc_photo_1_page">
       <upload ref="/data/oc_photo_1_page/oc_photo_1" mediatype="image/*">
-        <label>Photo 1</label>
+        <label>Photo 1 / 8</label>
       </upload>
       <input ref="/data/oc_photo_1_page/oc_ai_photo_1_label">
         <label>Photo 1 Label</label>
@@ -1406,7 +1454,7 @@ Please complete the habit history and photo documentation.</label>
     </group>
     <group appearance="field-list" ref="/data/oc_photo_2_page">
       <upload ref="/data/oc_photo_2_page/oc_photo_2" mediatype="image/*">
-        <label>Photo 2</label>
+        <label>Photo 2 / 8</label>
       </upload>
       <input ref="/data/oc_photo_2_page/oc_ai_photo_2_label">
         <label>Photo 2 Label</label>
@@ -1424,7 +1472,7 @@ Please complete the habit history and photo documentation.</label>
     </group>
     <group appearance="field-list" ref="/data/oc_photo_3_page">
       <upload ref="/data/oc_photo_3_page/oc_photo_3" mediatype="image/*">
-        <label>Photo 3</label>
+        <label>Photo 3 / 8</label>
       </upload>
       <input ref="/data/oc_photo_3_page/oc_ai_photo_3_label">
         <label>Photo 3 Label</label>
@@ -1442,7 +1490,7 @@ Please complete the habit history and photo documentation.</label>
     </group>
     <group appearance="field-list" ref="/data/oc_photo_4_page">
       <upload ref="/data/oc_photo_4_page/oc_photo_4" mediatype="image/*">
-        <label>Photo 4</label>
+        <label>Photo 4 / 8</label>
       </upload>
       <input ref="/data/oc_photo_4_page/oc_ai_photo_4_label">
         <label>Photo 4 Label</label>
@@ -1460,7 +1508,7 @@ Please complete the habit history and photo documentation.</label>
     </group>
     <group appearance="field-list" ref="/data/oc_photo_5_page">
       <upload ref="/data/oc_photo_5_page/oc_photo_5" mediatype="image/*">
-        <label>Photo 5</label>
+        <label>Photo 5 / 8</label>
       </upload>
       <input ref="/data/oc_photo_5_page/oc_ai_photo_5_label">
         <label>Photo 5 Label</label>
@@ -1478,7 +1526,7 @@ Please complete the habit history and photo documentation.</label>
     </group>
     <group appearance="field-list" ref="/data/oc_photo_6_page">
       <upload ref="/data/oc_photo_6_page/oc_photo_6" mediatype="image/*">
-        <label>Photo 6</label>
+        <label>Photo 6 / 8</label>
       </upload>
       <input ref="/data/oc_photo_6_page/oc_ai_photo_6_label">
         <label>Photo 6 Label</label>
@@ -1496,7 +1544,7 @@ Please complete the habit history and photo documentation.</label>
     </group>
     <group appearance="field-list" ref="/data/oc_photo_7_page">
       <upload ref="/data/oc_photo_7_page/oc_photo_7" mediatype="image/*">
-        <label>Photo 7</label>
+        <label>Photo 7 / 8</label>
       </upload>
       <input ref="/data/oc_photo_7_page/oc_ai_photo_7_label">
         <label>Photo 7 Label</label>
@@ -1514,7 +1562,7 @@ Please complete the habit history and photo documentation.</label>
     </group>
     <group appearance="field-list" ref="/data/oc_photo_8_page">
       <upload ref="/data/oc_photo_8_page/oc_photo_8" mediatype="image/*">
-        <label>Photo 8</label>
+        <label>Photo 8 / 8</label>
       </upload>
       <input ref="/data/oc_photo_8_page/oc_ai_photo_8_label">
         <label>Photo 8 Label</label>

@@ -1,0 +1,459 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://www.opendatakit.org/xforms">
+  <h:head>
+    <h:title>Physician Oral Cancer Review</h:title>
+    <model odk:xforms-version="1.0.0">
+      <instance>
+        <data id="physician_oral_cancer_review" prefix="J1!physician_oral_cancer_review!" delimiter="#">
+          <patient_id/>
+          <patient_uuid/>
+          <patient_name/>
+          <reporter_name/>
+          <title/>
+          <source_form_uuid/>
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source/>
+            <source_id/>
+            <user>
+              <name/>
+              <phone/>
+            </user>
+            <reporter_name_note/>
+            <contact>
+              <_id/>
+              <patient_id/>
+              <name/>
+            </contact>
+            <source_form_uuid_input/>
+            <photo_1_fetched/>
+            <photo_2_fetched/>
+            <photo_3_fetched/>
+            <photo_4_fetched/>
+            <photo_5_fetched/>
+            <photo_6_fetched/>
+            <photo_7_fetched/>
+            <photo_8_fetched/>
+          </inputs>
+          <photo_1_review_page>
+            <photo_1_display/>
+            <photo_1_suspicious/>
+            <photo_1_notes/>
+          </photo_1_review_page>
+          <photo_2_review_page>
+            <photo_2_display/>
+            <photo_2_suspicious/>
+            <photo_2_notes/>
+          </photo_2_review_page>
+          <photo_3_review_page>
+            <photo_3_display/>
+            <photo_3_suspicious/>
+            <photo_3_notes/>
+          </photo_3_review_page>
+          <photo_4_review_page>
+            <photo_4_display/>
+            <photo_4_suspicious/>
+            <photo_4_notes/>
+          </photo_4_review_page>
+          <photo_5_review_page>
+            <photo_5_display/>
+            <photo_5_suspicious/>
+            <photo_5_notes/>
+          </photo_5_review_page>
+          <photo_6_review_page>
+            <photo_6_display/>
+            <photo_6_suspicious/>
+            <photo_6_notes/>
+          </photo_6_review_page>
+          <photo_7_review_page>
+            <photo_7_display/>
+            <photo_7_suspicious/>
+            <photo_7_notes/>
+          </photo_7_review_page>
+          <photo_8_review_page>
+            <photo_8_display/>
+            <photo_8_suspicious/>
+            <photo_8_notes/>
+          </photo_8_review_page>
+          <final_diagnosis_page>
+            <final_diagnosis_intro/>
+            <identified_pmd_conditions/>
+            <physician_remarks/>
+          </final_diagnosis_page>
+          <group_summary>
+            <grp_patient>
+              <lbl_patient_lbl/>
+              <calc_patient_name/>
+            </grp_patient>
+            <grp_reporter>
+              <lbl_reporter_lbl/>
+              <calc_reporter_name/>
+            </grp_reporter>
+          </group_summary>
+          <meta tag="hidden">
+            <instanceID/>
+            <instanceName/>
+          </meta>
+        </data>
+      </instance>
+      <instance id="contact-summary"/>
+      <instance id="user-contact-summary"/>
+      <instance id="suspicious_status">
+        <root>
+          <item>
+            <name>suspicious</name>
+            <label>Suspicious</label>
+          </item>
+          <item>
+            <name>non_suspicious</name>
+            <label>Non-Suspicious</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="overall_risk">
+        <root>
+          <item>
+            <name>high</name>
+            <label>High Risk – Urgent Referral</label>
+          </item>
+          <item>
+            <name>moderate</name>
+            <label>Moderate Risk – Follow-up in 4 weeks</label>
+          </item>
+          <item>
+            <name>low</name>
+            <label>Low Risk – Routine Monitoring</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="pmd_conditions">
+        <root>
+          <item>
+            <name>leukoplakia</name>
+            <label>Leukoplakia</label>
+          </item>
+          <item>
+            <name>erythroplakia</name>
+            <label>Erythroplakia</label>
+          </item>
+          <item>
+            <name>erythroleukoplakia</name>
+            <label>Erythroleukoplakia (Speckled leukoplakia)</label>
+          </item>
+          <item>
+            <name>pvl</name>
+            <label>Proliferative Verrucous Leukoplakia (PVL)</label>
+          </item>
+          <item>
+            <name>osmf</name>
+            <label>Oral Submucous Fibrosis (OSMF)</label>
+          </item>
+          <item>
+            <name>olp</name>
+            <label>Oral Lichen Planus (OLP)</label>
+          </item>
+          <item>
+            <name>oll</name>
+            <label>Oral Lichenoid Lesions (OLLs)</label>
+          </item>
+          <item>
+            <name>actinic_cheilitis</name>
+            <label>Actinic Cheilitis (Actinic keratosis of the lip)</label>
+          </item>
+          <item>
+            <name>palatal_lesions</name>
+            <label>Palatal Lesions associated with Reverse Smoking</label>
+          </item>
+          <item>
+            <name>oral_lupus</name>
+            <label>Oral Lupus Erythematosus (including Discoid Lupus Erythematosus)</label>
+          </item>
+          <item>
+            <name>dyskeratosis_congenita</name>
+            <label>Dyskeratosis Congenita</label>
+          </item>
+          <item>
+            <name>gvhd</name>
+            <label>Oral Graft-versus-Host Disease (GVHD)</label>
+          </item>
+          <item>
+            <name>epidermolysis_bullosa</name>
+            <label>Epidermolysis Bullosa</label>
+          </item>
+          <item>
+            <name>xeroderma_pigmentosum</name>
+            <label>Xeroderma Pigmentosum</label>
+          </item>
+          <item>
+            <name>plummer_vinson</name>
+            <label>Plummer-Vinson Syndrome (Sideropenic dysphagia)</label>
+          </item>
+          <item>
+            <name>no_pmd</name>
+            <label>No PMD Identified</label>
+          </item>
+        </root>
+      </instance>
+      <bind nodeset="/data/patient_id" type="string" calculate="/data/inputs/contact/patient_id"/>
+      <bind nodeset="/data/patient_uuid" type="string" calculate="/data/inputs/contact/_id"/>
+      <bind nodeset="/data/patient_name" type="string" calculate="/data/inputs/contact/name"/>
+      <bind nodeset="/data/reporter_name" type="string" calculate="/data/inputs/user/name"/>
+      <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/source_form_uuid" type="string" calculate="/data/inputs/source_form_uuid_input"/>
+      <bind nodeset="/data/inputs/source" type="string"/>
+      <bind nodeset="/data/inputs/source_id" type="string"/>
+      <bind nodeset="/data/inputs/user/name" type="string"/>
+      <bind nodeset="/data/inputs/user/phone" type="string"/>
+      <bind nodeset="/data/inputs/reporter_name_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/inputs/contact/_id" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/contact/patient_id" type="string" calculate="/data/inputs/contact/patient_id"/>
+      <bind nodeset="/data/inputs/contact/name" type="string"/>
+      <bind nodeset="/data/inputs/source_form_uuid_input" type="string"/>
+      <bind nodeset="/data/inputs/photo_1_fetched" type="string"/>
+      <bind nodeset="/data/inputs/photo_2_fetched" type="string"/>
+      <bind nodeset="/data/inputs/photo_3_fetched" type="string"/>
+      <bind nodeset="/data/inputs/photo_4_fetched" type="string"/>
+      <bind nodeset="/data/inputs/photo_5_fetched" type="string"/>
+      <bind nodeset="/data/inputs/photo_6_fetched" type="string"/>
+      <bind nodeset="/data/inputs/photo_7_fetched" type="string"/>
+      <bind nodeset="/data/inputs/photo_8_fetched" type="string"/>
+      <bind nodeset="/data/photo_1_review_page/photo_1_display" readonly="true()" type="string" relevant=" /data/inputs/photo_1_fetched  != ''"/>
+      <bind nodeset="/data/photo_1_review_page/photo_1_suspicious" type="string" required="true()"/>
+      <bind nodeset="/data/photo_1_review_page/photo_1_notes" type="string"/>
+      <bind nodeset="/data/photo_2_review_page/photo_2_display" readonly="true()" type="string" relevant=" /data/inputs/photo_2_fetched  != ''"/>
+      <bind nodeset="/data/photo_2_review_page/photo_2_suspicious" type="string" required="true()"/>
+      <bind nodeset="/data/photo_2_review_page/photo_2_notes" type="string"/>
+      <bind nodeset="/data/photo_3_review_page/photo_3_display" readonly="true()" type="string" relevant=" /data/inputs/photo_3_fetched  != ''"/>
+      <bind nodeset="/data/photo_3_review_page/photo_3_suspicious" type="string" required="true()"/>
+      <bind nodeset="/data/photo_3_review_page/photo_3_notes" type="string"/>
+      <bind nodeset="/data/photo_4_review_page/photo_4_display" readonly="true()" type="string" relevant=" /data/inputs/photo_4_fetched  != ''"/>
+      <bind nodeset="/data/photo_4_review_page/photo_4_suspicious" type="string" required="true()"/>
+      <bind nodeset="/data/photo_4_review_page/photo_4_notes" type="string"/>
+      <bind nodeset="/data/photo_5_review_page/photo_5_display" readonly="true()" type="string" relevant=" /data/inputs/photo_5_fetched  != ''"/>
+      <bind nodeset="/data/photo_5_review_page/photo_5_suspicious" type="string" required="true()"/>
+      <bind nodeset="/data/photo_5_review_page/photo_5_notes" type="string"/>
+      <bind nodeset="/data/photo_6_review_page/photo_6_display" readonly="true()" type="string" relevant=" /data/inputs/photo_6_fetched  != ''"/>
+      <bind nodeset="/data/photo_6_review_page/photo_6_suspicious" type="string" required="true()"/>
+      <bind nodeset="/data/photo_6_review_page/photo_6_notes" type="string"/>
+      <bind nodeset="/data/photo_7_review_page/photo_7_display" readonly="true()" type="string" relevant=" /data/inputs/photo_7_fetched  != ''"/>
+      <bind nodeset="/data/photo_7_review_page/photo_7_suspicious" type="string" required="true()"/>
+      <bind nodeset="/data/photo_7_review_page/photo_7_notes" type="string"/>
+      <bind nodeset="/data/photo_8_review_page/photo_8_display" readonly="true()" type="string" relevant=" /data/inputs/photo_8_fetched  != ''"/>
+      <bind nodeset="/data/photo_8_review_page/photo_8_suspicious" type="string" required="true()"/>
+      <bind nodeset="/data/photo_8_review_page/photo_8_notes" type="string"/>
+      <bind nodeset="/data/final_diagnosis_page/final_diagnosis_intro" readonly="true()" type="string"/>
+      <bind nodeset="/data/final_diagnosis_page/identified_pmd_conditions" type="string" required="true()"/>
+      <bind nodeset="/data/final_diagnosis_page/physician_remarks" type="string"/>
+      <bind nodeset="/data/group_summary/grp_patient/lbl_patient_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_patient/calc_patient_name" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/group_summary/grp_reporter/lbl_reporter_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_reporter/calc_reporter_name" type="string" calculate=" /data/reporter_name "/>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
+      <bind nodeset="/data/meta/instanceName" type="string" calculate=" /data/title "/>
+    </model>
+  </h:head>
+  <h:body class="pages grid-layout @hiddenInReportsList">
+    <group appearance="field-list" ref="/data/inputs">
+      <label>Patient &amp; Reporter Info</label>
+      <group ref="/data/inputs/user"/>
+      <input ref="/data/inputs/reporter_name_note">
+        <label> Filled by: <output value=" /data/reporter_name "/></label>
+      </input>
+      <group ref="/data/inputs/contact">
+        <input ref="/data/inputs/contact/_id" appearance="select-contact type-person role-patient">
+          <label>Patient's Name</label>
+          <hint>Select the patient from your area</hint>
+        </input>
+        <input ref="/data/inputs/contact/patient_id" appearance="hidden">
+          <label>Medic ID</label>
+        </input>
+        <input ref="/data/inputs/contact/name" appearance="hidden">
+          <label>Patient Name</label>
+        </input>
+      </group>
+    </group>
+    <group appearance="field-list" ref="/data/photo_1_review_page">
+      <label>Photo 1</label>
+      <input ref="/data/photo_1_review_page/photo_1_display">
+        <label> [View Photo 1](http://medic:password@localhost:5984/medic/<output value=" /data/source_form_uuid "/>/<output value=" /data/inputs/photo_1_fetched "/>) </label>
+      </input>
+      <select1 ref="/data/photo_1_review_page/photo_1_suspicious">
+        <label>Photo 1 – Suspicion Level</label>
+        <hint>Mark based on visual examination</hint>
+        <itemset nodeset="instance('suspicious_status')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <input ref="/data/photo_1_review_page/photo_1_notes" appearance="multiline">
+        <label>Photo 1 – Notes</label>
+        <hint>Optional: describe lesion, site, size, colour, or texture</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/photo_2_review_page">
+      <label>Photo 2</label>
+      <input ref="/data/photo_2_review_page/photo_2_display">
+        <label> [View Photo 2](http://medic:password@localhost:5984/medic/<output value=" /data/source_form_uuid "/>/<output value=" /data/inputs/photo_2_fetched "/>) </label>
+      </input>
+      <select1 ref="/data/photo_2_review_page/photo_2_suspicious">
+        <label>Photo 2 – Suspicion Level</label>
+        <hint>Mark based on visual examination</hint>
+        <itemset nodeset="instance('suspicious_status')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <input ref="/data/photo_2_review_page/photo_2_notes" appearance="multiline">
+        <label>Photo 2 – Notes</label>
+        <hint>Optional: describe lesion, site, size, colour, or texture</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/photo_3_review_page">
+      <label>Photo 3</label>
+      <input ref="/data/photo_3_review_page/photo_3_display">
+        <label> [View Photo 3](http://medic:password@localhost:5984/medic/<output value=" /data/source_form_uuid "/>/<output value=" /data/inputs/photo_3_fetched "/>) </label>
+      </input>
+      <select1 ref="/data/photo_3_review_page/photo_3_suspicious">
+        <label>Photo 3 – Suspicion Level</label>
+        <hint>Mark based on visual examination</hint>
+        <itemset nodeset="instance('suspicious_status')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <input ref="/data/photo_3_review_page/photo_3_notes" appearance="multiline">
+        <label>Photo 3 – Notes</label>
+        <hint>Optional: describe lesion, site, size, colour, or texture</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/photo_4_review_page">
+      <label>Photo 4</label>
+      <input ref="/data/photo_4_review_page/photo_4_display">
+        <label> [View Photo 4](http://medic:password@localhost:5984/medic/<output value=" /data/source_form_uuid "/>/<output value=" /data/inputs/photo_4_fetched "/>) </label>
+      </input>
+      <select1 ref="/data/photo_4_review_page/photo_4_suspicious">
+        <label>Photo 4 – Suspicion Level</label>
+        <hint>Mark based on visual examination</hint>
+        <itemset nodeset="instance('suspicious_status')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <input ref="/data/photo_4_review_page/photo_4_notes" appearance="multiline">
+        <label>Photo 4 – Notes</label>
+        <hint>Optional: describe lesion, site, size, colour, or texture</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/photo_5_review_page">
+      <label>Photo 5</label>
+      <input ref="/data/photo_5_review_page/photo_5_display">
+        <label> [View Photo 5](http://medic:password@localhost:5984/medic/<output value=" /data/source_form_uuid "/>/<output value=" /data/inputs/photo_5_fetched "/>) </label>
+      </input>
+      <select1 ref="/data/photo_5_review_page/photo_5_suspicious">
+        <label>Photo 5 – Suspicion Level</label>
+        <hint>Mark based on visual examination</hint>
+        <itemset nodeset="instance('suspicious_status')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <input ref="/data/photo_5_review_page/photo_5_notes" appearance="multiline">
+        <label>Photo 5 – Notes</label>
+        <hint>Optional: describe lesion, site, size, colour, or texture</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/photo_6_review_page">
+      <label>Photo 6</label>
+      <input ref="/data/photo_6_review_page/photo_6_display">
+        <label> [View Photo 6](http://medic:password@localhost:5984/medic/<output value=" /data/source_form_uuid "/>/<output value=" /data/inputs/photo_6_fetched "/>) </label>
+      </input>
+      <select1 ref="/data/photo_6_review_page/photo_6_suspicious">
+        <label>Photo 6 – Suspicion Level</label>
+        <hint>Mark based on visual examination</hint>
+        <itemset nodeset="instance('suspicious_status')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <input ref="/data/photo_6_review_page/photo_6_notes" appearance="multiline">
+        <label>Photo 6 – Notes</label>
+        <hint>Optional: describe lesion, site, size, colour, or texture</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/photo_7_review_page">
+      <label>Photo 7</label>
+      <input ref="/data/photo_7_review_page/photo_7_display">
+        <label> [View Photo 7](http://medic:password@localhost:5984/medic/<output value=" /data/source_form_uuid "/>/<output value=" /data/inputs/photo_7_fetched "/>) </label>
+      </input>
+      <select1 ref="/data/photo_7_review_page/photo_7_suspicious">
+        <label>Photo 7 – Suspicion Level</label>
+        <hint>Mark based on visual examination</hint>
+        <itemset nodeset="instance('suspicious_status')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <input ref="/data/photo_7_review_page/photo_7_notes" appearance="multiline">
+        <label>Photo 7 – Notes</label>
+        <hint>Optional: describe lesion, site, size, colour, or texture</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/photo_8_review_page">
+      <label>Photo 8</label>
+      <input ref="/data/photo_8_review_page/photo_8_display">
+        <label> [View Photo 8](http://medic:password@localhost:5984/medic/<output value=" /data/source_form_uuid "/>/<output value=" /data/inputs/photo_8_fetched "/>) </label>
+      </input>
+      <select1 ref="/data/photo_8_review_page/photo_8_suspicious">
+        <label>Photo 8 – Suspicion Level</label>
+        <hint>Mark based on visual examination</hint>
+        <itemset nodeset="instance('suspicious_status')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <input ref="/data/photo_8_review_page/photo_8_notes" appearance="multiline">
+        <label>Photo 8 – Notes</label>
+        <hint>Optional: describe lesion, site, size, colour, or texture</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/final_diagnosis_page">
+      <label>Final Diagnosis</label>
+      <input ref="/data/final_diagnosis_page/final_diagnosis_intro">
+        <label>## Final Diagnosis
+Select all Potentially Malignant Disorders (PMDs) identified:</label>
+      </input>
+      <select ref="/data/final_diagnosis_page/identified_pmd_conditions">
+        <label>Identified PMDs</label>
+        <hint>Select all that apply</hint>
+        <itemset nodeset="instance('pmd_conditions')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select>
+      <input ref="/data/final_diagnosis_page/physician_remarks" appearance="multiline">
+        <label>Physician Remarks</label>
+        <hint>Additional clinical notes or recommendations</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/group_summary">
+      <label>Review Summary</label>
+      <group appearance="field-list" ref="/data/group_summary/grp_patient">
+        <input ref="/data/group_summary/grp_patient/lbl_patient_lbl">
+          <label> **Patient:** <output value=" /data/patient_name "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_reporter">
+        <input ref="/data/group_summary/grp_reporter/lbl_reporter_lbl">
+          <label> **Filled by:** <output value=" /data/reporter_name "/></label>
+        </input>
+      </group>
+    </group>
+  </h:body>
+</h:html>

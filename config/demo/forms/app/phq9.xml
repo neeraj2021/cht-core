@@ -1,0 +1,479 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://www.opendatakit.org/xforms">
+  <h:head>
+    <h:title>PHQ-9</h:title>
+    <model odk:xforms-version="1.0.0">
+      <instance>
+        <data id="phq9" prefix="J1!phq9!" delimiter="#">
+          <patient_id/>
+          <patient_uuid/>
+          <patient_name/>
+          <reporter_name/>
+          <reporter_place/>
+          <title/>
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source/>
+            <source_id/>
+            <user>
+              <name/>
+              <phone/>
+            </user>
+            <reporter_name_note/>
+            <contact>
+              <_id/>
+              <patient_id/>
+              <name/>
+            </contact>
+            <state/>
+            <district/>
+          </inputs>
+          <instructions/>
+          <page_1>
+            <little_interest_or_pleasure/>
+            <feeling_depressed_or_hopeless/>
+          </page_1>
+          <page_2>
+            <trouble_sleeping/>
+            <feeling_tired/>
+          </page_2>
+          <page_3>
+            <poor_appetite_or_overeating/>
+            <feeling_bad_about_yourself/>
+          </page_3>
+          <page_4>
+            <trouble_concentrating/>
+            <moving_or_speaking_slowly/>
+          </page_4>
+          <page_5>
+            <thoughts_of_self_harm/>
+          </page_5>
+          <total_score/>
+          <severity_category/>
+          <group_summary>
+            <grp_lbl_filled_by>
+              <lbl_filled_by_lbl/>
+              <calc_reporter_name/>
+            </grp_lbl_filled_by>
+            <grp_lbl_patient>
+              <lbl_patient_lbl/>
+              <calc_patient_name/>
+            </grp_lbl_patient>
+            <grp_lbl_state>
+              <lbl_state_lbl/>
+              <calc_state/>
+            </grp_lbl_state>
+            <grp_lbl_district>
+              <lbl_district_lbl/>
+              <calc_district/>
+            </grp_lbl_district>
+            <grp_lbl_score>
+              <lbl_score_lbl/>
+              <calc_total_score/>
+            </grp_lbl_score>
+            <grp_lbl_severity>
+              <lbl_severity_lbl/>
+              <calc_severity_category/>
+            </grp_lbl_severity>
+            <severity_guide/>
+          </group_summary>
+          <meta tag="hidden">
+            <instanceID/>
+            <instanceName/>
+          </meta>
+        </data>
+      </instance>
+      <instance id="contact-summary"/>
+      <instance id="user-contact-summary"/>
+      <instance id="frequency">
+        <root>
+          <item>
+            <name>0</name>
+            <label>Not at all</label>
+          </item>
+          <item>
+            <name>1</name>
+            <label>Several days</label>
+          </item>
+          <item>
+            <name>2</name>
+            <label>More than half the days</label>
+          </item>
+          <item>
+            <name>3</name>
+            <label>Nearly every day</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="states">
+        <root>
+          <item>
+            <name>kerala</name>
+            <label>Kerala</label>
+          </item>
+          <item>
+            <name>tamil_nadu</name>
+            <label>Tamil Nadu</label>
+          </item>
+          <item>
+            <name>andhra_pradesh</name>
+            <label>Andhra Pradesh</label>
+          </item>
+          <item>
+            <name>telangana</name>
+            <label>Telangana</label>
+          </item>
+          <item>
+            <name>karnataka</name>
+            <label>Karnataka</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="districts">
+        <root>
+          <item>
+            <name>chennai</name>
+            <label>Chennai</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>thanjavur</name>
+            <label>Thanjavur</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>coimbatore</name>
+            <label>Coimbatore</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>madurai</name>
+            <label>Madurai</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>salem</name>
+            <label>Salem</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>tiruchirappalli</name>
+            <label>Tiruchirappalli</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>thiruvananthapuram</name>
+            <label>Thiruvananthapuram</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kochi</name>
+            <label>Kochi</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kozhikode</name>
+            <label>Kozhikode</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>thrissur</name>
+            <label>Thrissur</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kollam</name>
+            <label>Kollam</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>visakhapatnam</name>
+            <label>Visakhapatnam</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>vijayawada</name>
+            <label>Vijayawada</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>guntur</name>
+            <label>Guntur</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>tirupati</name>
+            <label>Tirupati</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>kurnool</name>
+            <label>Kurnool</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>hyderabad</name>
+            <label>Hyderabad</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>warangal</name>
+            <label>Warangal</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>nizamabad</name>
+            <label>Nizamabad</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>karimnagar</name>
+            <label>Karimnagar</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>khammam</name>
+            <label>Khammam</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>bengaluru</name>
+            <label>Bengaluru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>mysuru</name>
+            <label>Mysuru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>hubli</name>
+            <label>Hubli</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>mangaluru</name>
+            <label>Mangaluru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>belagavi</name>
+            <label>Belagavi</label>
+            <filter>karnataka</filter>
+          </item>
+        </root>
+      </instance>
+      <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
+      <bind nodeset="/data/patient_uuid" type="string" calculate="../inputs/contact/_id"/>
+      <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
+      <bind nodeset="/data/reporter_name" type="string" calculate="../inputs/user/name"/>
+      <bind nodeset="/data/reporter_place" type="string" calculate="instance('user-contact-summary')/context/facility_name"/>
+      <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/inputs/source" type="string"/>
+      <bind nodeset="/data/inputs/source_id" type="string"/>
+      <bind nodeset="/data/inputs/user/name" type="string"/>
+      <bind nodeset="/data/inputs/user/phone" type="string"/>
+      <bind nodeset="/data/inputs/reporter_name_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/inputs/contact/_id" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/contact/patient_id" type="string"/>
+      <bind nodeset="/data/inputs/contact/name" type="string"/>
+      <bind nodeset="/data/inputs/state" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/district" type="string" required="true()"/>
+      <bind nodeset="/data/instructions" readonly="true()" type="string"/>
+      <bind nodeset="/data/page_1/little_interest_or_pleasure" type="string" required="true()"/>
+      <bind nodeset="/data/page_1/feeling_depressed_or_hopeless" type="string" required="true()"/>
+      <bind nodeset="/data/page_2/trouble_sleeping" type="string" required="true()"/>
+      <bind nodeset="/data/page_2/feeling_tired" type="string" required="true()"/>
+      <bind nodeset="/data/page_3/poor_appetite_or_overeating" type="string" required="true()"/>
+      <bind nodeset="/data/page_3/feeling_bad_about_yourself" type="string" required="true()"/>
+      <bind nodeset="/data/page_4/trouble_concentrating" type="string" required="true()"/>
+      <bind nodeset="/data/page_4/moving_or_speaking_slowly" type="string" required="true()"/>
+      <bind nodeset="/data/page_5/thoughts_of_self_harm" type="string" required="true()"/>
+      <bind nodeset="/data/total_score" type="string" calculate=" /data/page_1/little_interest_or_pleasure  +  /data/page_1/feeling_depressed_or_hopeless  +  /data/page_2/trouble_sleeping  +  /data/page_2/feeling_tired  +  /data/page_3/poor_appetite_or_overeating  +  /data/page_3/feeling_bad_about_yourself  +  /data/page_4/trouble_concentrating  +  /data/page_4/moving_or_speaking_slowly  +  /data/page_5/thoughts_of_self_harm "/>
+      <bind nodeset="/data/severity_category" type="string" calculate="if( /data/total_score  &lt;= 4, 'minimal', if( /data/total_score  &lt;= 9, 'mild', if( /data/total_score  &lt;= 14, 'moderate', if( /data/total_score  &lt;= 19, 'moderately_severe', 'severe'))))"/>
+      <bind nodeset="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_filled_by/calc_reporter_name" type="string" calculate=" /data/reporter_name "/>
+      <bind nodeset="/data/group_summary/grp_lbl_patient/lbl_patient_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_patient/calc_patient_name" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/group_summary/grp_lbl_state/lbl_state_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_state/calc_state" type="string" calculate=" /data/inputs/state "/>
+      <bind nodeset="/data/group_summary/grp_lbl_district/lbl_district_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_district/calc_district" type="string" calculate=" /data/inputs/district "/>
+      <bind nodeset="/data/group_summary/grp_lbl_score/lbl_score_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_score/calc_total_score" type="string" calculate=" /data/total_score "/>
+      <bind nodeset="/data/group_summary/grp_lbl_severity/lbl_severity_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_severity/calc_severity_category" type="string" calculate=" /data/severity_category "/>
+      <bind nodeset="/data/group_summary/severity_guide" readonly="true()" type="string"/>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
+      <bind nodeset="/data/meta/instanceName" type="string" calculate=" /data/title "/>
+    </model>
+  </h:head>
+  <h:body class="pages grid-layout">
+    <group appearance="field-list" ref="/data/inputs">
+      <label>Patient &amp; Reporter Info</label>
+      <group ref="/data/inputs/user"/>
+      <input ref="/data/inputs/reporter_name_note">
+        <label> Filled by: <output value=" /data/reporter_name "/></label>
+      </input>
+      <group ref="/data/inputs/contact">
+        <input ref="/data/inputs/contact/_id" appearance="select-contact type-person role-patient">
+          <label>Patient's Name</label>
+          <hint>Select the patient from your area</hint>
+        </input>
+        <input ref="/data/inputs/contact/patient_id" appearance="hidden">
+          <label>Medic ID</label>
+        </input>
+        <input ref="/data/inputs/contact/name" appearance="hidden">
+          <label>Patient Name</label>
+        </input>
+      </group>
+      <select1 ref="/data/inputs/state" appearance="minimal">
+        <label>State</label>
+        <itemset nodeset="instance('states')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/inputs/district" appearance="minimal">
+        <label>District</label>
+        <itemset nodeset="instance('districts')/root/item[filter =  /data/inputs/state ]">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <input ref="/data/instructions">
+      <label>PHQ-9: Patient Health Questionnaire Over the last 2 weeks, how often have you been bothered by any of the following problems? Answer all 9 questions. Each question is scored: Not at all=0, Several days=1, More than half the days=2, Nearly every day=3</label>
+    </input>
+    <group appearance="field-list" ref="/data/page_1">
+      <label>Questions 1 &amp; 2 of 9</label>
+      <select1 ref="/data/page_1/little_interest_or_pleasure">
+        <label>1. Little interest or pleasure in doing things</label>
+        <hint>Use ✓ to indicate your answer</hint>
+        <itemset nodeset="instance('frequency')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_1/feeling_depressed_or_hopeless">
+        <label>2. Feeling down, depressed, or hopeless</label>
+        <hint>Use ✓ to indicate your answer</hint>
+        <itemset nodeset="instance('frequency')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/page_2">
+      <label>Questions 3 &amp; 4 of 9</label>
+      <select1 ref="/data/page_2/trouble_sleeping">
+        <label>3. Trouble falling or staying asleep, or sleeping too much</label>
+        <hint>Use ✓ to indicate your answer</hint>
+        <itemset nodeset="instance('frequency')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_2/feeling_tired">
+        <label>4. Feeling tired or having little energy</label>
+        <hint>Use ✓ to indicate your answer</hint>
+        <itemset nodeset="instance('frequency')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/page_3">
+      <label>Questions 5 &amp; 6 of 9</label>
+      <select1 ref="/data/page_3/poor_appetite_or_overeating">
+        <label>5. Poor appetite or overeating</label>
+        <hint>Use ✓ to indicate your answer</hint>
+        <itemset nodeset="instance('frequency')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_3/feeling_bad_about_yourself">
+        <label>6. Feeling bad about yourself — or that you are a failure or have let yourself or your family down</label>
+        <hint>Use ✓ to indicate your answer</hint>
+        <itemset nodeset="instance('frequency')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/page_4">
+      <label>Questions 7 &amp; 8 of 9</label>
+      <select1 ref="/data/page_4/trouble_concentrating">
+        <label>7. Trouble concentrating on things, such as reading the newspaper or watching television</label>
+        <hint>Use ✓ to indicate your answer</hint>
+        <itemset nodeset="instance('frequency')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/page_4/moving_or_speaking_slowly">
+        <label>8. Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual</label>
+        <hint>Use ✓ to indicate your answer</hint>
+        <itemset nodeset="instance('frequency')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/page_5">
+      <label>Question 9 of 9</label>
+      <select1 ref="/data/page_5/thoughts_of_self_harm">
+        <label>9. Thoughts that you would be better off dead or of hurting yourself in some way</label>
+        <hint>Use ✓ to indicate your answer</hint>
+        <itemset nodeset="instance('frequency')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/group_summary">
+      <label>Assessment Summary</label>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_filled_by">
+        <input ref="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_lbl">
+          <label> **Filled by:** <output value=" /data/reporter_name "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_patient">
+        <input ref="/data/group_summary/grp_lbl_patient/lbl_patient_lbl">
+          <label> **Patient:** <output value=" /data/patient_name "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_state">
+        <input ref="/data/group_summary/grp_lbl_state/lbl_state_lbl">
+          <label> **State:** <output value=" /data/inputs/state "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_district">
+        <input ref="/data/group_summary/grp_lbl_district/lbl_district_lbl">
+          <label> **District:** <output value=" /data/inputs/district "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_score">
+        <input ref="/data/group_summary/grp_lbl_score/lbl_score_lbl">
+          <label> **PHQ-9 Total Score:** <output value=" /data/total_score "/> / 27 </label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_severity">
+        <input ref="/data/group_summary/grp_lbl_severity/lbl_severity_lbl">
+          <label> **Severity:** <output value=" /data/severity_category "/></label>
+        </input>
+      </group>
+      <input ref="/data/group_summary/severity_guide">
+        <label>0–4 Minimal · 5–9 Mild · 10–14 Moderate · 15–19 Mod. Severe · 20–27 Severe</label>
+      </input>
+    </group>
+  </h:body>
+</h:html>

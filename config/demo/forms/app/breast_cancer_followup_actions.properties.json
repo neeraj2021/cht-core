@@ -1,0 +1,10 @@
+{
+  "title": "Breast Cancer Follow-up Actions",
+  "icon": "icon-people-woman",
+  "show_in_reports": false,
+  "context": {
+    "person": true,
+    "place": false,
+    "expression": "false"
+  }
+}

@@ -1,10 +1,10 @@
 {
-  "title": "NCD Hypertension Referral",
+  "title": "PHQ-9 Follow-up Actions",
   "icon": "icon-healthcare-generic-2",
   "show_in_reports": false,
   "context": {
     "person": true,
     "place": false,
-    "expression": "true"
+    "expression": "false"
   }
 }
