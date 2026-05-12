@@ -1114,18 +1114,22 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
           </item>
           <item>
             <itextId>roles-5</itextId>
-            <name>medical_officer</name>
+            <name>nurse</name>
           </item>
           <item>
             <itextId>roles-6</itextId>
-            <name>medical_supervisor</name>
+            <name>medical_officer</name>
           </item>
           <item>
             <itextId>roles-7</itextId>
-            <name>patient</name>
+            <name>physician</name>
           </item>
           <item>
             <itextId>roles-8</itextId>
+            <name>patient</name>
+          </item>
+          <item>
+            <itextId>roles-9</itextId>
             <name>other</name>
           </item>
         </root>

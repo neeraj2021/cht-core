@@ -573,27 +573,43 @@
         <root>
           <item>
             <itextId>roles-0</itextId>
-            <name>chw</name>
+            <name>asha</name>
           </item>
           <item>
             <itextId>roles-1</itextId>
-            <name>chw_supervisor</name>
+            <name>chw</name>
           </item>
           <item>
             <itextId>roles-2</itextId>
-            <name>nurse</name>
+            <name>anm</name>
           </item>
           <item>
             <itextId>roles-3</itextId>
-            <name>manager</name>
+            <name>mpw</name>
           </item>
           <item>
             <itextId>roles-4</itextId>
-            <name>other</name>
+            <name>cho</name>
           </item>
           <item>
             <itextId>roles-5</itextId>
+            <name>nurse</name>
+          </item>
+          <item>
+            <itextId>roles-6</itextId>
+            <name>medical_officer</name>
+          </item>
+          <item>
+            <itextId>roles-7</itextId>
+            <name>physician</name>
+          </item>
+          <item>
+            <itextId>roles-8</itextId>
             <name>patient</name>
+          </item>
+          <item>
+            <itextId>roles-9</itextId>
+            <name>other</name>
           </item>
         </root>
       </instance>

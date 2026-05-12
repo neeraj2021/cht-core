@@ -45,15 +45,18 @@
             <value>CHO</value>
           </text>
           <text id="roles-5">
-            <value>Medical Officer</value>
+            <value>Nurse</value>
           </text>
           <text id="roles-6">
-            <value>Medical Supervisor</value>
+            <value>Medical Officer</value>
           </text>
           <text id="roles-7">
-            <value>Patient</value>
+            <value>Physician</value>
           </text>
           <text id="roles-8">
+            <value>Patient</value>
+          </text>
+          <text id="roles-9">
             <value>Other</value>
           </text>
           <text id="yes_no_generated_name-0">
@@ -1114,18 +1117,22 @@ DOB ISO: <output value=" /data/contact/ephemeral_dob/dob_iso "/></value>
           </item>
           <item>
             <itextId>roles-5</itextId>
-            <name>medical_officer</name>
+            <name>nurse</name>
           </item>
           <item>
             <itextId>roles-6</itextId>
-            <name>medical_supervisor</name>
+            <name>medical_officer</name>
           </item>
           <item>
             <itextId>roles-7</itextId>
-            <name>patient</name>
+            <name>physician</name>
           </item>
           <item>
             <itextId>roles-8</itextId>
+            <name>patient</name>
+          </item>
+          <item>
+            <itextId>roles-9</itextId>
             <name>other</name>
           </item>
         </root>
@@ -1220,7 +1227,7 @@ DOB ISO: <output value=" /data/contact/ephemeral_dob/dob_iso "/></value>
       <bind nodeset="/data/contact/role_other" type="string" required="true()" relevant="selected(  /data/contact/role ,'other')"/>
       <bind nodeset="/data/contact/external_id" type="string" relevant="selected( /data/init/create_new_person ,'new_person')"/>
       <bind nodeset="/data/contact/notes" type="string" relevant="selected( /data/init/create_new_person ,'new_person')"/>
-      <bind nodeset="/data/contact/user_for_contact/create" type="string" calculate=" /data/contact/phone  != '' and (selected(  /data/contact/role ,'chw') or selected(  /data/contact/role ,'chw_supervisor'))"/>
+      <bind nodeset="/data/contact/user_for_contact/create" type="string" calculate=" /data/contact/phone  != '' and (selected(  /data/contact/role ,'chw'))"/>
       <bind nodeset="/data/contact/meta/created_by" type="string" calculate="../../../inputs/user/name"/>
       <bind nodeset="/data/contact/meta/created_by_person_uuid" type="string" calculate="../../../inputs/user/contact_id"/>
       <bind nodeset="/data/contact/meta/created_by_place_uuid" type="string" calculate="../../../inputs/user/facility_id"/>
