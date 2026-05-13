@@ -310,7 +310,8 @@
             <oc_ai_analysis_status/>
             <oc_ai_analysis_error/>
           </form_5_summary>
-          <form_submit_timestamp/>
+          <form_submit_timestamp_iso/>
+          <form_submit_timestamp_display/>
           <meta tag="hidden">
             <instanceID/>
             <instanceName/>
@@ -792,7 +793,8 @@
       <bind nodeset="/data/form_5_summary/oc_ai_analysis_summary" type="string"/>
       <bind nodeset="/data/form_5_summary/oc_ai_analysis_status" type="string"/>
       <bind nodeset="/data/form_5_summary/oc_ai_analysis_error" type="string"/>
-      <bind nodeset="/data/form_submit_timestamp" type="string" calculate="if( /data/fill_oral_cancer_form  = 'yes', if( /data/oc_photo_8_page/oc_photo_8  != '', now(), ''), if( /data/fill_oral_cancer_form  = 'no', now(), ''))"/>
+      <bind nodeset="/data/form_submit_timestamp_iso" type="string" calculate="if( /data/fill_oral_cancer_form  = 'yes', if( /data/oc_photo_8_page/oc_photo_8  != '', format-date-time(now(), '%Y-%m-%dT%H:%M:%S+05:30'), ''), if( /data/fill_oral_cancer_form  = 'no', format-date-time(now(), '%Y-%m-%dT%H:%M:%S+05:30'), ''))"/>
+      <bind nodeset="/data/form_submit_timestamp_display" type="string" calculate="if( /data/fill_oral_cancer_form  = 'yes', if( /data/oc_photo_8_page/oc_photo_8  != '', format-date-time(now(), '%e-%b-%Y %H:%M:%S'), ''), if( /data/fill_oral_cancer_form  = 'no', format-date-time(now(), '%e-%b-%Y %H:%M:%S'), ''))"/>
       <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
       <bind nodeset="/data/meta/instanceName" type="string" calculate=" /data/title "/>
     </model>

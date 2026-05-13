@@ -125,7 +125,8 @@
             </grp_lbl_severity>
             <severity_guide/>
           </group_summary>
-          <form_submit_timestamp/>
+          <form_submit_timestamp_iso/>
+          <form_submit_timestamp_display/>
           <meta tag="hidden">
             <instanceID/>
             <instanceName/>
@@ -374,7 +375,8 @@
       <bind nodeset="/data/group_summary/grp_lbl_severity/lbl_severity_lbl" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_lbl_severity/calc_severity_category" type="string" calculate="if( /data/severity_category  = 'minimal', 'Minimal (0–4)', if( /data/severity_category  = 'mild', 'Mild (5–9)', if( /data/severity_category  = 'moderate', 'Moderate (10–14)', if( /data/severity_category  = 'moderately_severe', 'Moderately Severe (15–19)', if( /data/severity_category  = 'severe', 'Severe (20–27)',  /data/severity_category )))))"/>
       <bind nodeset="/data/group_summary/severity_guide" readonly="true()" type="string"/>
-      <bind nodeset="/data/form_submit_timestamp" type="string" calculate="now()"/>
+      <bind nodeset="/data/form_submit_timestamp_iso" type="string" calculate="format-date-time(now(), '%Y-%m-%dT%H:%M:%S+05:30')"/>
+      <bind nodeset="/data/form_submit_timestamp_display" type="string" calculate="format-date-time(now(), '%e-%b-%Y %H:%M:%S')"/>
       <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
       <bind nodeset="/data/meta/instanceName" type="string" calculate=" /data/title "/>
     </model>

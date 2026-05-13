@@ -41,7 +41,8 @@
             <t_willing_for_checkup/>
             <t_checkup_date/>
           </ncd_followup>
-          <form_submit_timestamp/>
+          <form_submit_timestamp_iso/>
+          <form_submit_timestamp_display/>
           <meta tag="hidden">
             <instanceID/>
             <instanceName/>
@@ -76,13 +77,14 @@
       <bind nodeset="/data/inputs/contact/_id" type="string" readonly="true()"/>
       <bind nodeset="/data/inputs/contact/patient_id" type="string"/>
       <bind nodeset="/data/inputs/contact/name" type="string"/>
-      <bind nodeset="/data/ncd_followup/ncd_day_visited" type="string"/>
+      <bind nodeset="/data/ncd_followup/ncd_day_visited" type="string" required="true()"/>
       <bind nodeset="/data/ncd_followup/willing_for_checkup" type="string" required=" /data/ncd_followup/ncd_day_visited  = 'no'" relevant=" /data/ncd_followup/ncd_day_visited  = 'no'"/>
       <bind nodeset="/data/ncd_followup/checkup_date" type="date" required="true()" relevant=" /data/ncd_followup/willing_for_checkup  = 'yes'"/>
       <bind nodeset="/data/ncd_followup/t_ncd_day_visited" type="string" calculate=" /data/ncd_followup/ncd_day_visited "/>
       <bind nodeset="/data/ncd_followup/t_willing_for_checkup" type="string" calculate=" /data/ncd_followup/willing_for_checkup "/>
       <bind nodeset="/data/ncd_followup/t_checkup_date" type="string" calculate=" /data/ncd_followup/checkup_date "/>
-      <bind nodeset="/data/form_submit_timestamp" type="string" calculate="now()"/>
+      <bind nodeset="/data/form_submit_timestamp_iso" type="string" calculate="format-date-time(now(), '%Y-%m-%dT%H:%M:%S+05:30')"/>
+      <bind nodeset="/data/form_submit_timestamp_display" type="string" calculate="format-date-time(now(), '%e-%b-%Y %H:%M:%S')"/>
       <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
       <bind nodeset="/data/meta/instanceName" type="string" calculate=" /data/title "/>
     </model>
