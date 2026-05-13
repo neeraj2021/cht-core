@@ -594,44 +594,44 @@
       <bind nodeset="/data/group_summary/grp_risk/calc_risk" type="string" calculate=" /data/risk_category "/>
       <bind nodeset="/data/group_summary/sum_hdr_a" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_q_age/q_age" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_q_age/calc_q_age" type="string" calculate=" /data/page_1a/age_range "/>
+      <bind nodeset="/data/group_summary/grp_q_age/calc_q_age" type="string" calculate="jr:choice-name( /data/page_1a/age_range , ' /data/page_1a/age_range ')"/>
       <bind nodeset="/data/group_summary/grp_q_smoke/q_smoke" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_q_smoke/calc_q_smoke" type="string" calculate=" /data/page_1a/smoke_frequency "/>
+      <bind nodeset="/data/group_summary/grp_q_smoke/calc_q_smoke" type="string" calculate="jr:choice-name( /data/page_1a/smoke_frequency , ' /data/page_1a/smoke_frequency ')"/>
       <bind nodeset="/data/group_summary/grp_q_alcohol/q_alcohol" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_q_alcohol/calc_q_alcohol" type="string" calculate=" /data/page_1a/alcohol_frequency "/>
+      <bind nodeset="/data/group_summary/grp_q_alcohol/calc_q_alcohol" type="string" calculate="jr:choice-name( /data/page_1a/alcohol_frequency , ' /data/page_1a/alcohol_frequency ')"/>
       <bind nodeset="/data/group_summary/grp_q_waist/q_waist" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_q_waist/calc_q_waist" type="string" calculate=" /data/page_1b/waist_size "/>
+      <bind nodeset="/data/group_summary/grp_q_waist/calc_q_waist" type="string" calculate="jr:choice-name( /data/page_1b/waist_size , ' /data/page_1b/waist_size ')"/>
       <bind nodeset="/data/group_summary/grp_q_physical/q_physical" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_q_physical/calc_q_physical" type="string" calculate=" /data/page_1b/physical_activities_frequency "/>
+      <bind nodeset="/data/group_summary/grp_q_physical/calc_q_physical" type="string" calculate="jr:choice-name( /data/page_1b/physical_activities_frequency , ' /data/page_1b/physical_activities_frequency ')"/>
       <bind nodeset="/data/group_summary/grp_q_family/q_family" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_q_family/calc_q_family" type="string" calculate=" /data/page_1b/family_medical_history "/>
+      <bind nodeset="/data/group_summary/grp_q_family/calc_q_family" type="string" calculate="jr:choice-name( /data/page_1b/family_medical_history , ' /data/page_1b/family_medical_history ')"/>
       <bind nodeset="/data/group_summary/sum_hdr_b" readonly="true()" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
       <bind nodeset="/data/group_summary/grp_q_breast_lump" relevant=" /data/inputs/contact/gender  = 'female'"/>
       <bind nodeset="/data/group_summary/grp_q_breast_lump/q_breast_lump" readonly="true()" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/group_summary/grp_q_breast_lump/calc_q_breast_lump" type="string" calculate=" /data/page_3a/breast_lump "/>
+      <bind nodeset="/data/group_summary/grp_q_breast_lump/calc_q_breast_lump" type="string" calculate="jr:choice-name( /data/page_3a/breast_lump , ' /data/page_3a/breast_lump ')"/>
       <bind nodeset="/data/group_summary/grp_q_nipple" relevant=" /data/inputs/contact/gender  = 'female'"/>
       <bind nodeset="/data/group_summary/grp_q_nipple/q_nipple" readonly="true()" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/group_summary/grp_q_nipple/calc_q_nipple" type="string" calculate=" /data/page_3a/nipple_discharge "/>
+      <bind nodeset="/data/group_summary/grp_q_nipple/calc_q_nipple" type="string" calculate="jr:choice-name( /data/page_3a/nipple_discharge , ' /data/page_3a/nipple_discharge ')"/>
       <bind nodeset="/data/group_summary/grp_q_breast_shape" relevant=" /data/inputs/contact/gender  = 'female'"/>
       <bind nodeset="/data/group_summary/grp_q_breast_shape/q_breast_shape" readonly="true()" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/group_summary/grp_q_breast_shape/calc_q_breast_shape" type="string" calculate=" /data/page_3a/breast_shape_size_change "/>
+      <bind nodeset="/data/group_summary/grp_q_breast_shape/calc_q_breast_shape" type="string" calculate="jr:choice-name( /data/page_3a/breast_shape_size_change , ' /data/page_3a/breast_shape_size_change ')"/>
       <bind nodeset="/data/group_summary/grp_q_bleeding_periods" relevant=" /data/inputs/contact/gender  = 'female'"/>
       <bind nodeset="/data/group_summary/grp_q_bleeding_periods/q_bleeding_periods" readonly="true()" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/group_summary/grp_q_bleeding_periods/calc_q_bleeding_periods" type="string" calculate=" /data/page_3b/bleeding_between_periods "/>
+      <bind nodeset="/data/group_summary/grp_q_bleeding_periods/calc_q_bleeding_periods" type="string" calculate="jr:choice-name( /data/page_3b/bleeding_between_periods , ' /data/page_3b/bleeding_between_periods ')"/>
       <bind nodeset="/data/group_summary/grp_q_menopause" relevant=" /data/inputs/contact/gender  = 'female'"/>
       <bind nodeset="/data/group_summary/grp_q_menopause/q_menopause" readonly="true()" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/group_summary/grp_q_menopause/calc_q_menopause" type="string" calculate=" /data/page_3b/post_menopause_bleeding "/>
+      <bind nodeset="/data/group_summary/grp_q_menopause/calc_q_menopause" type="string" calculate="jr:choice-name( /data/page_3b/post_menopause_bleeding , ' /data/page_3b/post_menopause_bleeding ')"/>
       <bind nodeset="/data/group_summary/grp_q_intercourse" relevant=" /data/inputs/contact/gender  = 'female'"/>
       <bind nodeset="/data/group_summary/grp_q_intercourse/q_intercourse" readonly="true()" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/group_summary/grp_q_intercourse/calc_q_intercourse" type="string" calculate=" /data/page_3b/post_intercourse_bleeding "/>
+      <bind nodeset="/data/group_summary/grp_q_intercourse/calc_q_intercourse" type="string" calculate="jr:choice-name( /data/page_3b/post_intercourse_bleeding , ' /data/page_3b/post_intercourse_bleeding ')"/>
       <bind nodeset="/data/group_summary/grp_q_discharge" relevant=" /data/inputs/contact/gender  = 'female'"/>
       <bind nodeset="/data/group_summary/grp_q_discharge/q_discharge" readonly="true()" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/group_summary/grp_q_discharge/calc_q_discharge" type="string" calculate=" /data/page_3c/foul_smelling_vaginal_discharge "/>
+      <bind nodeset="/data/group_summary/grp_q_discharge/calc_q_discharge" type="string" calculate="jr:choice-name( /data/page_3c/foul_smelling_vaginal_discharge , ' /data/page_3c/foul_smelling_vaginal_discharge ')"/>
       <bind nodeset="/data/group_summary/sum_hdr_d" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_q_phq1/q_phq1" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_q_phq1/calc_q_phq1" type="string" calculate=" /data/page_4_phq2/phq2_q1 "/>
+      <bind nodeset="/data/group_summary/grp_q_phq1/calc_q_phq1" type="string" calculate="jr:choice-name( /data/page_4_phq2/phq2_q1 , ' /data/page_4_phq2/phq2_q1 ')"/>
       <bind nodeset="/data/group_summary/grp_q_phq2/q_phq2" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_q_phq2/calc_q_phq2" type="string" calculate=" /data/page_4_phq2/phq2_q2 "/>
+      <bind nodeset="/data/group_summary/grp_q_phq2/calc_q_phq2" type="string" calculate="jr:choice-name( /data/page_4_phq2/phq2_q2 , ' /data/page_4_phq2/phq2_q2 ')"/>
       <bind nodeset="/data/group_summary/grp_q_phq_tot/q_phq_tot" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_q_phq_tot/calc_q_phq_tot" type="string" calculate=" /data/phq2_total "/>
       <bind nodeset="/data/group_summary/summary_high_risk" readonly="true()" type="string" relevant=" /data/total_score  &gt; 4"/>
@@ -877,32 +877,32 @@
       </input>
       <group appearance="field-list" ref="/data/group_summary/grp_q_age">
         <input ref="/data/group_summary/grp_q_age/q_age">
-          <label> 1. Age: <output value=" /data/page_1a/age_range "/></label>
+          <label> 1. Age: <output value=" /data/group_summary/grp_q_age/calc_q_age "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_q_smoke">
         <input ref="/data/group_summary/grp_q_smoke/q_smoke">
-          <label> 2. Smoke/Smokeless products: <output value=" /data/page_1a/smoke_frequency "/></label>
+          <label> 2. Smoke/Smokeless products: <output value=" /data/group_summary/grp_q_smoke/calc_q_smoke "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_q_alcohol">
         <input ref="/data/group_summary/grp_q_alcohol/q_alcohol">
-          <label> 3. Alcohol daily: <output value=" /data/page_1a/alcohol_frequency "/></label>
+          <label> 3. Alcohol daily: <output value=" /data/group_summary/grp_q_alcohol/calc_q_alcohol "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_q_waist">
         <input ref="/data/group_summary/grp_q_waist/q_waist">
-          <label> 4. Waist measurement: <output value=" /data/page_1b/waist_size "/></label>
+          <label> 4. Waist measurement: <output value=" /data/group_summary/grp_q_waist/calc_q_waist "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_q_physical">
         <input ref="/data/group_summary/grp_q_physical/q_physical">
-          <label> 5. Physical activity (150 min/week): <output value=" /data/page_1b/physical_activities_frequency "/></label>
+          <label> 5. Physical activity (150 min/week): <output value=" /data/group_summary/grp_q_physical/calc_q_physical "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_q_family">
         <input ref="/data/group_summary/grp_q_family/q_family">
-          <label> 6. Family history of BP/Diabetes/Heart disease: <output value=" /data/page_1b/family_medical_history "/></label>
+          <label> 6. Family history of BP/Diabetes/Heart disease: <output value=" /data/group_summary/grp_q_family/calc_q_family "/></label>
         </input>
       </group>
       <input ref="/data/group_summary/sum_hdr_b">
@@ -910,37 +910,37 @@
       </input>
       <group appearance="field-list" ref="/data/group_summary/grp_q_breast_lump">
         <input ref="/data/group_summary/grp_q_breast_lump/q_breast_lump">
-          <label> 7. Lump in the breast: <output value=" /data/page_3a/breast_lump "/></label>
+          <label> 7. Lump in the breast: <output value=" /data/group_summary/grp_q_breast_lump/calc_q_breast_lump "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_q_nipple">
         <input ref="/data/group_summary/grp_q_nipple/q_nipple">
-          <label> 8. Blood stained nipple discharge: <output value=" /data/page_3a/nipple_discharge "/></label>
+          <label> 8. Blood stained nipple discharge: <output value=" /data/group_summary/grp_q_nipple/calc_q_nipple "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_q_breast_shape">
         <input ref="/data/group_summary/grp_q_breast_shape/q_breast_shape">
-          <label> 9. Change in breast shape/size: <output value=" /data/page_3a/breast_shape_size_change "/></label>
+          <label> 9. Change in breast shape/size: <output value=" /data/group_summary/grp_q_breast_shape/calc_q_breast_shape "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_q_bleeding_periods">
         <input ref="/data/group_summary/grp_q_bleeding_periods/q_bleeding_periods">
-          <label> 10. Bleeding between periods: <output value=" /data/page_3b/bleeding_between_periods "/></label>
+          <label> 10. Bleeding between periods: <output value=" /data/group_summary/grp_q_bleeding_periods/calc_q_bleeding_periods "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_q_menopause">
         <input ref="/data/group_summary/grp_q_menopause/q_menopause">
-          <label> 11. Bleeding after menopause: <output value=" /data/page_3b/post_menopause_bleeding "/></label>
+          <label> 11. Bleeding after menopause: <output value=" /data/group_summary/grp_q_menopause/calc_q_menopause "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_q_intercourse">
         <input ref="/data/group_summary/grp_q_intercourse/q_intercourse">
-          <label> 12. Bleeding after intercourse: <output value=" /data/page_3b/post_intercourse_bleeding "/></label>
+          <label> 12. Bleeding after intercourse: <output value=" /data/group_summary/grp_q_intercourse/calc_q_intercourse "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_q_discharge">
         <input ref="/data/group_summary/grp_q_discharge/q_discharge">
-          <label> 13. Foul smelling vaginal discharge: <output value=" /data/page_3c/foul_smelling_vaginal_discharge "/></label>
+          <label> 13. Foul smelling vaginal discharge: <output value=" /data/group_summary/grp_q_discharge/calc_q_discharge "/></label>
         </input>
       </group>
       <input ref="/data/group_summary/sum_hdr_d">
@@ -948,12 +948,12 @@
       </input>
       <group appearance="field-list" ref="/data/group_summary/grp_q_phq1">
         <input ref="/data/group_summary/grp_q_phq1/q_phq1">
-          <label> 1. Little interest or pleasure in doing things: <output value=" /data/page_4_phq2/phq2_q1 "/></label>
+          <label> 1. Little interest or pleasure in doing things: <output value=" /data/group_summary/grp_q_phq1/calc_q_phq1 "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_q_phq2">
         <input ref="/data/group_summary/grp_q_phq2/q_phq2">
-          <label> 2. Feeling down, depressed or hopeless: <output value=" /data/page_4_phq2/phq2_q2 "/></label>
+          <label> 2. Feeling down, depressed or hopeless: <output value=" /data/group_summary/grp_q_phq2/calc_q_phq2 "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_q_phq_tot">
