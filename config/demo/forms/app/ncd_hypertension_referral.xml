@@ -10,6 +10,8 @@
           <patient_name/>
           <reporter_name/>
           <title/>
+          <form_start_timestamp/>
+          <form_sync_timestamp/>
           <inputs>
             <meta>
               <location>
@@ -43,6 +45,7 @@
             <t_willing_to_visit/>
             <t_phc_visit_date/>
           </referral>
+          <form_submit_timestamp/>
           <meta tag="hidden">
             <instanceID/>
             <instanceName/>
@@ -68,6 +71,8 @@
       <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
       <bind nodeset="/data/reporter_name" type="string" calculate="../inputs/user/name"/>
       <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/form_start_timestamp" type="string" calculate="once(if( /data/inputs/contact/_id  != '', now(), ''))"/>
+      <bind nodeset="/data/form_sync_timestamp" type="string"/>
       <bind nodeset="/data/inputs/source" type="string"/>
       <bind nodeset="/data/inputs/source_id" type="string"/>
       <bind nodeset="/data/inputs/user/name" type="string"/>
@@ -85,6 +90,7 @@
       <bind nodeset="/data/referral/t_phc_visited" type="string" calculate=" /data/referral/phc_visited "/>
       <bind nodeset="/data/referral/t_willing_to_visit" type="string" calculate=" /data/referral/willing_to_visit "/>
       <bind nodeset="/data/referral/t_phc_visit_date" type="string" calculate=" /data/referral/phc_visit_date "/>
+      <bind nodeset="/data/form_submit_timestamp" type="string" calculate="now()"/>
       <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
       <bind nodeset="/data/meta/instanceName" type="string" calculate=" /data/title "/>
     </model>

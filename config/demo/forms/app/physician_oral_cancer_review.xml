@@ -11,6 +11,8 @@
           <reporter_name/>
           <title/>
           <source_form_uuid/>
+          <form_start_timestamp/>
+          <form_sync_timestamp/>
           <inputs>
             <meta>
               <location>
@@ -97,6 +99,7 @@
               <calc_reporter_name/>
             </grp_reporter>
           </group_summary>
+          <form_submit_timestamp/>
           <meta tag="hidden">
             <instanceID/>
             <instanceName/>
@@ -207,12 +210,14 @@
       <bind nodeset="/data/reporter_name" type="string" calculate="/data/inputs/user/name"/>
       <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
       <bind nodeset="/data/source_form_uuid" type="string" calculate="/data/inputs/source_form_uuid_input"/>
+      <bind nodeset="/data/form_start_timestamp" type="string" calculate="once(if( /data/inputs/contact/_id  != '', now(), ''))"/>
+      <bind nodeset="/data/form_sync_timestamp" type="string"/>
       <bind nodeset="/data/inputs/source" type="string"/>
       <bind nodeset="/data/inputs/source_id" type="string"/>
       <bind nodeset="/data/inputs/user/name" type="string"/>
       <bind nodeset="/data/inputs/user/phone" type="string"/>
       <bind nodeset="/data/inputs/reporter_name_note" readonly="true()" type="string"/>
-      <bind nodeset="/data/inputs/contact/_id" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/contact/_id" type="string" readonly="true()"/>
       <bind nodeset="/data/inputs/contact/patient_id" type="string" calculate="/data/inputs/contact/patient_id"/>
       <bind nodeset="/data/inputs/contact/name" type="string"/>
       <bind nodeset="/data/inputs/source_form_uuid_input" type="string"/>
@@ -255,6 +260,7 @@
       <bind nodeset="/data/group_summary/grp_patient/calc_patient_name" type="string" calculate=" /data/patient_name "/>
       <bind nodeset="/data/group_summary/grp_reporter/lbl_reporter_lbl" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_reporter/calc_reporter_name" type="string" calculate=" /data/reporter_name "/>
+      <bind nodeset="/data/form_submit_timestamp" type="string" calculate="now()"/>
       <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
       <bind nodeset="/data/meta/instanceName" type="string" calculate=" /data/title "/>
     </model>

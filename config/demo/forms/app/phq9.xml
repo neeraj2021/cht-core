@@ -11,6 +11,11 @@
           <reporter_name/>
           <reporter_place/>
           <title/>
+          <form_start_timestamp/>
+          <form_sync_timestamp/>
+          <page_info>
+            <lbl_about_phq9/>
+          </page_info>
           <inputs>
             <meta>
               <location>
@@ -74,6 +79,42 @@
               <lbl_district_lbl/>
               <calc_district/>
             </grp_lbl_district>
+            <grp_lbl_q1>
+              <lbl_q1_lbl/>
+              <calc_q1/>
+            </grp_lbl_q1>
+            <grp_lbl_q2>
+              <lbl_q2_lbl/>
+              <calc_q2/>
+            </grp_lbl_q2>
+            <grp_lbl_q3>
+              <lbl_q3_lbl/>
+              <calc_q3/>
+            </grp_lbl_q3>
+            <grp_lbl_q4>
+              <lbl_q4_lbl/>
+              <calc_q4/>
+            </grp_lbl_q4>
+            <grp_lbl_q5>
+              <lbl_q5_lbl/>
+              <calc_q5/>
+            </grp_lbl_q5>
+            <grp_lbl_q6>
+              <lbl_q6_lbl/>
+              <calc_q6/>
+            </grp_lbl_q6>
+            <grp_lbl_q7>
+              <lbl_q7_lbl/>
+              <calc_q7/>
+            </grp_lbl_q7>
+            <grp_lbl_q8>
+              <lbl_q8_lbl/>
+              <calc_q8/>
+            </grp_lbl_q8>
+            <grp_lbl_q9>
+              <lbl_q9_lbl/>
+              <calc_q9/>
+            </grp_lbl_q9>
             <grp_lbl_score>
               <lbl_score_lbl/>
               <calc_total_score/>
@@ -84,6 +125,7 @@
             </grp_lbl_severity>
             <severity_guide/>
           </group_summary>
+          <form_submit_timestamp/>
           <meta tag="hidden">
             <instanceID/>
             <instanceName/>
@@ -276,6 +318,9 @@
       <bind nodeset="/data/reporter_name" type="string" calculate="../inputs/user/name"/>
       <bind nodeset="/data/reporter_place" type="string" calculate="instance('user-contact-summary')/context/facility_name"/>
       <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/form_start_timestamp" type="string" calculate="once(if( /data/inputs/contact/_id  != '', now(), ''))"/>
+      <bind nodeset="/data/form_sync_timestamp" type="string"/>
+      <bind nodeset="/data/page_info/lbl_about_phq9" readonly="true()" type="string"/>
       <bind nodeset="/data/inputs/source" type="string"/>
       <bind nodeset="/data/inputs/source_id" type="string"/>
       <bind nodeset="/data/inputs/user/name" type="string"/>
@@ -303,19 +348,44 @@
       <bind nodeset="/data/group_summary/grp_lbl_patient/lbl_patient_lbl" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_lbl_patient/calc_patient_name" type="string" calculate=" /data/patient_name "/>
       <bind nodeset="/data/group_summary/grp_lbl_state/lbl_state_lbl" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_lbl_state/calc_state" type="string" calculate=" /data/inputs/state "/>
+      <bind nodeset="/data/group_summary/grp_lbl_state/calc_state" type="string" calculate="jr:choice-name( /data/inputs/state , ' /data/inputs/state ')"/>
       <bind nodeset="/data/group_summary/grp_lbl_district/lbl_district_lbl" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_lbl_district/calc_district" type="string" calculate=" /data/inputs/district "/>
+      <bind nodeset="/data/group_summary/grp_lbl_district/calc_district" type="string" calculate="jr:choice-name( /data/inputs/district , ' /data/inputs/district ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_q1/lbl_q1_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_q1/calc_q1" type="string" calculate="jr:choice-name( /data/page_1/little_interest_or_pleasure , ' /data/page_1/little_interest_or_pleasure ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_q2/lbl_q2_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_q2/calc_q2" type="string" calculate="jr:choice-name( /data/page_1/feeling_depressed_or_hopeless , ' /data/page_1/feeling_depressed_or_hopeless ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_q3/lbl_q3_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_q3/calc_q3" type="string" calculate="jr:choice-name( /data/page_2/trouble_sleeping , ' /data/page_2/trouble_sleeping ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_q4/lbl_q4_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_q4/calc_q4" type="string" calculate="jr:choice-name( /data/page_2/feeling_tired , ' /data/page_2/feeling_tired ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_q5/lbl_q5_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_q5/calc_q5" type="string" calculate="jr:choice-name( /data/page_3/poor_appetite_or_overeating , ' /data/page_3/poor_appetite_or_overeating ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_q6/lbl_q6_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_q6/calc_q6" type="string" calculate="jr:choice-name( /data/page_3/feeling_bad_about_yourself , ' /data/page_3/feeling_bad_about_yourself ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_q7/lbl_q7_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_q7/calc_q7" type="string" calculate="jr:choice-name( /data/page_4/trouble_concentrating , ' /data/page_4/trouble_concentrating ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_q8/lbl_q8_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_q8/calc_q8" type="string" calculate="jr:choice-name( /data/page_4/moving_or_speaking_slowly , ' /data/page_4/moving_or_speaking_slowly ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_q9/lbl_q9_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_q9/calc_q9" type="string" calculate="jr:choice-name( /data/page_5/thoughts_of_self_harm , ' /data/page_5/thoughts_of_self_harm ')"/>
       <bind nodeset="/data/group_summary/grp_lbl_score/lbl_score_lbl" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_lbl_score/calc_total_score" type="string" calculate=" /data/total_score "/>
       <bind nodeset="/data/group_summary/grp_lbl_severity/lbl_severity_lbl" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_lbl_severity/calc_severity_category" type="string" calculate=" /data/severity_category "/>
+      <bind nodeset="/data/group_summary/grp_lbl_severity/calc_severity_category" type="string" calculate="if( /data/severity_category  = 'minimal', 'Minimal (0–4)', if( /data/severity_category  = 'mild', 'Mild (5–9)', if( /data/severity_category  = 'moderate', 'Moderate (10–14)', if( /data/severity_category  = 'moderately_severe', 'Moderately Severe (15–19)', if( /data/severity_category  = 'severe', 'Severe (20–27)',  /data/severity_category )))))"/>
       <bind nodeset="/data/group_summary/severity_guide" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_submit_timestamp" type="string" calculate="now()"/>
       <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
       <bind nodeset="/data/meta/instanceName" type="string" calculate=" /data/title "/>
     </model>
   </h:head>
   <h:body class="pages grid-layout">
+    <group appearance="field-list" ref="/data/page_info">
+      <label>About PHQ-9</label>
+      <input ref="/data/page_info/lbl_about_phq9">
+        <label>PHQ-9 is used for screening for depression</label>
+      </input>
+    </group>
     <group appearance="field-list" ref="/data/inputs">
       <label>Patient &amp; Reporter Info</label>
       <group ref="/data/inputs/user"/>
@@ -453,12 +523,57 @@
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_state">
         <input ref="/data/group_summary/grp_lbl_state/lbl_state_lbl">
-          <label> **State:** <output value=" /data/inputs/state "/></label>
+          <label> **State:** <output value=" /data/group_summary/grp_lbl_state/calc_state "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_district">
         <input ref="/data/group_summary/grp_lbl_district/lbl_district_lbl">
-          <label> **District:** <output value=" /data/inputs/district "/></label>
+          <label> **District:** <output value=" /data/group_summary/grp_lbl_district/calc_district "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_q1">
+        <input ref="/data/group_summary/grp_lbl_q1/lbl_q1_lbl">
+          <label> **1. Little interest or pleasure in doing things:** <output value=" /data/group_summary/grp_lbl_q1/calc_q1 "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_q2">
+        <input ref="/data/group_summary/grp_lbl_q2/lbl_q2_lbl">
+          <label> **2. Feeling down, depressed, or hopeless:** <output value=" /data/group_summary/grp_lbl_q2/calc_q2 "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_q3">
+        <input ref="/data/group_summary/grp_lbl_q3/lbl_q3_lbl">
+          <label> **3. Trouble falling or staying asleep, or sleeping too much:** <output value=" /data/group_summary/grp_lbl_q3/calc_q3 "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_q4">
+        <input ref="/data/group_summary/grp_lbl_q4/lbl_q4_lbl">
+          <label> **4. Feeling tired or having little energy:** <output value=" /data/group_summary/grp_lbl_q4/calc_q4 "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_q5">
+        <input ref="/data/group_summary/grp_lbl_q5/lbl_q5_lbl">
+          <label> **5. Poor appetite or overeating:** <output value=" /data/group_summary/grp_lbl_q5/calc_q5 "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_q6">
+        <input ref="/data/group_summary/grp_lbl_q6/lbl_q6_lbl">
+          <label> **6. Feeling bad about yourself — or that you are a failure or have let yourself or your family down:** <output value=" /data/group_summary/grp_lbl_q6/calc_q6 "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_q7">
+        <input ref="/data/group_summary/grp_lbl_q7/lbl_q7_lbl">
+          <label> **7. Trouble concentrating on things, such as reading the newspaper or watching television:** <output value=" /data/group_summary/grp_lbl_q7/calc_q7 "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_q8">
+        <input ref="/data/group_summary/grp_lbl_q8/lbl_q8_lbl">
+          <label> **8. Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual:** <output value=" /data/group_summary/grp_lbl_q8/calc_q8 "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_q9">
+        <input ref="/data/group_summary/grp_lbl_q9/lbl_q9_lbl">
+          <label> **9. Thoughts that you would be better off dead or of hurting yourself in some way:** <output value=" /data/group_summary/grp_lbl_q9/calc_q9 "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_score">
@@ -468,7 +583,7 @@
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_severity">
         <input ref="/data/group_summary/grp_lbl_severity/lbl_severity_lbl">
-          <label> **Severity:** <output value=" /data/severity_category "/></label>
+          <label> **Severity:** <output value=" /data/group_summary/grp_lbl_severity/calc_severity_category "/></label>
         </input>
       </group>
       <input ref="/data/group_summary/severity_guide">
