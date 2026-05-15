@@ -92,7 +92,7 @@
       <label>Patient &amp; CHW Info</label>
       <group ref="/data/inputs/user"/>
       <group ref="/data/inputs/contact">
-        <input ref="/data/inputs/contact/_id" appearance="select-contact type-person role-patient">
+        <input ref="/data/inputs/contact/_id" appearance="select-contact type-patient">
           <label>Patient's Name</label>
         </input>
         <input ref="/data/inputs/contact/patient_id" appearance="hidden">
