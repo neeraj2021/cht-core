@@ -1,0 +1,766 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://www.opendatakit.org/xforms">
+  <h:head>
+    <h:title>Personal Examination</h:title>
+    <model odk:xforms-version="1.0.0">
+      <instance>
+        <data id="personal_examination" prefix="J1!personal_examination!" delimiter="#">
+          <patient_id/>
+          <patient_uuid/>
+          <patient_name/>
+          <reporter_name/>
+          <reporter_place/>
+          <title/>
+          <about_intro>
+            <about_intro_note/>
+          </about_intro>
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source/>
+            <source_id/>
+            <user>
+              <name/>
+              <phone/>
+            </user>
+            <reporter_name_note/>
+            <contact>
+              <_id/>
+              <patient_id/>
+              <name/>
+            </contact>
+            <state/>
+            <district/>
+          </inputs>
+          <intro_form_1/>
+          <form_1_personal_details>
+            <height_cm/>
+            <weight_kg/>
+            <bmi/>
+            <bmi_display/>
+          </form_1_personal_details>
+          <intro_personal_history/>
+          <personal_history>
+            <diag_diabetes/>
+            <treat_diabetes/>
+            <diag_bp/>
+            <treat_bp/>
+            <diag_heart/>
+            <treat_heart/>
+            <diag_stroke/>
+            <treat_stroke/>
+            <diag_kidney/>
+            <treat_kidney/>
+            <diag_copd/>
+            <treat_copd/>
+            <diag_asthma/>
+            <treat_asthma/>
+            <diag_wound/>
+            <treat_wound/>
+            <diag_oral_cancer/>
+            <treat_oral_cancer/>
+            <other_disease/>
+          </personal_history>
+          <form_1_summary>
+            <grp_lbl_filled_by>
+              <lbl_filled_by/>
+              <calc_reporter_name/>
+            </grp_lbl_filled_by>
+            <grp_lbl_patient>
+              <lbl_patient/>
+              <calc_patient_name/>
+            </grp_lbl_patient>
+            <grp_lbl_state>
+              <lbl_state/>
+              <calc_state_lbl/>
+            </grp_lbl_state>
+            <grp_lbl_district>
+              <lbl_district/>
+              <calc_district_lbl/>
+            </grp_lbl_district>
+            <grp_lbl_bmi>
+              <lbl_bmi/>
+              <calc_bmi/>
+            </grp_lbl_bmi>
+            <grp_lbl_diabetes_diag>
+              <lbl_diabetes_diag/>
+              <calc_diabetes_diag_lbl/>
+            </grp_lbl_diabetes_diag>
+            <grp_lbl_diabetes_treat>
+              <lbl_diabetes_treat/>
+              <calc_diabetes_treat_lbl/>
+            </grp_lbl_diabetes_treat>
+            <grp_lbl_bp_diag>
+              <lbl_bp_diag/>
+              <calc_bp_diag_lbl/>
+            </grp_lbl_bp_diag>
+            <grp_lbl_bp_treat>
+              <lbl_bp_treat/>
+              <calc_bp_treat_lbl/>
+            </grp_lbl_bp_treat>
+            <grp_lbl_heart_diag>
+              <lbl_heart_diag/>
+              <calc_heart_diag_lbl/>
+            </grp_lbl_heart_diag>
+            <grp_lbl_heart_treat>
+              <lbl_heart_treat/>
+              <calc_heart_treat_lbl/>
+            </grp_lbl_heart_treat>
+            <grp_lbl_stroke_diag>
+              <lbl_stroke_diag/>
+              <calc_stroke_diag_lbl/>
+            </grp_lbl_stroke_diag>
+            <grp_lbl_stroke_treat>
+              <lbl_stroke_treat/>
+              <calc_stroke_treat_lbl/>
+            </grp_lbl_stroke_treat>
+            <grp_lbl_kidney_diag>
+              <lbl_kidney_diag/>
+              <calc_kidney_diag_lbl/>
+            </grp_lbl_kidney_diag>
+            <grp_lbl_kidney_treat>
+              <lbl_kidney_treat/>
+              <calc_kidney_treat_lbl/>
+            </grp_lbl_kidney_treat>
+            <grp_lbl_copd_diag>
+              <lbl_copd_diag/>
+              <calc_copd_diag_lbl/>
+            </grp_lbl_copd_diag>
+            <grp_lbl_copd_treat>
+              <lbl_copd_treat/>
+              <calc_copd_treat_lbl/>
+            </grp_lbl_copd_treat>
+            <grp_lbl_asthma_diag>
+              <lbl_asthma_diag/>
+              <calc_asthma_diag_lbl/>
+            </grp_lbl_asthma_diag>
+            <grp_lbl_asthma_treat>
+              <lbl_asthma_treat/>
+              <calc_asthma_treat_lbl/>
+            </grp_lbl_asthma_treat>
+            <grp_lbl_wound_diag>
+              <lbl_wound_diag/>
+              <calc_wound_diag_lbl/>
+            </grp_lbl_wound_diag>
+            <grp_lbl_wound_treat>
+              <lbl_wound_treat/>
+              <calc_wound_treat_lbl/>
+            </grp_lbl_wound_treat>
+            <grp_lbl_oral_cancer_diag>
+              <lbl_oral_cancer_diag/>
+              <calc_oral_cancer_diag_lbl/>
+            </grp_lbl_oral_cancer_diag>
+            <grp_lbl_oral_cancer_treat>
+              <lbl_oral_cancer_treat/>
+              <calc_oral_cancer_treat_lbl/>
+            </grp_lbl_oral_cancer_treat>
+            <grp_lbl_other_disease>
+              <lbl_other_disease/>
+              <calc_other_disease/>
+            </grp_lbl_other_disease>
+          </form_1_summary>
+          <meta tag="hidden">
+            <instanceID/>
+            <instanceName/>
+          </meta>
+        </data>
+      </instance>
+      <instance id="contact-summary"/>
+      <instance id="user-contact-summary"/>
+      <instance id="yes_no">
+        <root>
+          <item>
+            <name>yes</name>
+            <label>Yes</label>
+          </item>
+          <item>
+            <name>no</name>
+            <label>No</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="states">
+        <root>
+          <item>
+            <name>kerala</name>
+            <label>Kerala</label>
+          </item>
+          <item>
+            <name>tamil_nadu</name>
+            <label>Tamil Nadu</label>
+          </item>
+          <item>
+            <name>andhra_pradesh</name>
+            <label>Andhra Pradesh</label>
+          </item>
+          <item>
+            <name>telangana</name>
+            <label>Telangana</label>
+          </item>
+          <item>
+            <name>karnataka</name>
+            <label>Karnataka</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="districts">
+        <root>
+          <item>
+            <name>chennai</name>
+            <label>Chennai</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>thanjavur</name>
+            <label>Thanjavur</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>coimbatore</name>
+            <label>Coimbatore</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>madurai</name>
+            <label>Madurai</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>salem</name>
+            <label>Salem</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>tiruchirappalli</name>
+            <label>Tiruchirappalli</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>thiruvananthapuram</name>
+            <label>Thiruvananthapuram</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kochi</name>
+            <label>Kochi</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kozhikode</name>
+            <label>Kozhikode</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>thrissur</name>
+            <label>Thrissur</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kollam</name>
+            <label>Kollam</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>visakhapatnam</name>
+            <label>Visakhapatnam</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>vijayawada</name>
+            <label>Vijayawada</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>guntur</name>
+            <label>Guntur</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>tirupati</name>
+            <label>Tirupati</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>kurnool</name>
+            <label>Kurnool</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>hyderabad</name>
+            <label>Hyderabad</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>warangal</name>
+            <label>Warangal</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>nizamabad</name>
+            <label>Nizamabad</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>karimnagar</name>
+            <label>Karimnagar</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>khammam</name>
+            <label>Khammam</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>bengaluru</name>
+            <label>Bengaluru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>mysuru</name>
+            <label>Mysuru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>hubli</name>
+            <label>Hubli-Dharwad</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>mangaluru</name>
+            <label>Mangaluru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>belagavi</name>
+            <label>Belagavi</label>
+            <filter>karnataka</filter>
+          </item>
+        </root>
+      </instance>
+      <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
+      <bind nodeset="/data/patient_uuid" type="string" calculate="../inputs/contact/_id"/>
+      <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
+      <bind nodeset="/data/reporter_name" type="string" calculate="../inputs/user/name"/>
+      <bind nodeset="/data/reporter_place" type="string" calculate="instance('user-contact-summary')/context/facility_name"/>
+      <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/about_intro/about_intro_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/inputs/source" type="string"/>
+      <bind nodeset="/data/inputs/source_id" type="string"/>
+      <bind nodeset="/data/inputs/user/name" type="string"/>
+      <bind nodeset="/data/inputs/user/phone" type="string"/>
+      <bind nodeset="/data/inputs/reporter_name_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/inputs/contact/_id" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/contact/patient_id" type="string"/>
+      <bind nodeset="/data/inputs/contact/name" type="string"/>
+      <bind nodeset="/data/inputs/state" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/district" type="string" required="true()"/>
+      <bind nodeset="/data/intro_form_1" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_personal_details/height_cm" type="decimal" required="true()" constraint=". &gt;= 1 and . &lt;= 230" jr:constraintMsg="Height must be between 1 and 230 cm."/>
+      <bind nodeset="/data/form_1_personal_details/weight_kg" type="decimal" required="true()" constraint=". &gt;= 1 and . &lt;= 300" jr:constraintMsg="Weight must be between 1 and 300 kg."/>
+      <bind nodeset="/data/form_1_personal_details/bmi" type="string" calculate="if( /data/form_1_personal_details/height_cm  &gt; 0 and  /data/form_1_personal_details/weight_kg  &gt; 0, round( /data/form_1_personal_details/weight_kg  div ( /data/form_1_personal_details/height_cm  *  /data/form_1_personal_details/height_cm  div 10000), 1), '')"/>
+      <bind nodeset="/data/form_1_personal_details/bmi_display" readonly="true()" type="string" relevant=" /data/form_1_personal_details/height_cm  != '' and  /data/form_1_personal_details/weight_kg  != ''"/>
+      <bind nodeset="/data/intro_personal_history" readonly="true()" type="string"/>
+      <bind nodeset="/data/personal_history/diag_diabetes" type="string" required="true()"/>
+      <bind nodeset="/data/personal_history/treat_diabetes" type="string" required="true()" relevant=" /data/personal_history/diag_diabetes  = 'yes'"/>
+      <bind nodeset="/data/personal_history/diag_bp" type="string" required="true()"/>
+      <bind nodeset="/data/personal_history/treat_bp" type="string" required="true()" relevant=" /data/personal_history/diag_bp  = 'yes'"/>
+      <bind nodeset="/data/personal_history/diag_heart" type="string" required="true()"/>
+      <bind nodeset="/data/personal_history/treat_heart" type="string" required="true()" relevant=" /data/personal_history/diag_heart  = 'yes'"/>
+      <bind nodeset="/data/personal_history/diag_stroke" type="string" required="true()"/>
+      <bind nodeset="/data/personal_history/treat_stroke" type="string" required="true()" relevant=" /data/personal_history/diag_stroke  = 'yes'"/>
+      <bind nodeset="/data/personal_history/diag_kidney" type="string" required="true()"/>
+      <bind nodeset="/data/personal_history/treat_kidney" type="string" required="true()" relevant=" /data/personal_history/diag_kidney  = 'yes'"/>
+      <bind nodeset="/data/personal_history/diag_copd" type="string" required="true()"/>
+      <bind nodeset="/data/personal_history/treat_copd" type="string" required="true()" relevant=" /data/personal_history/diag_copd  = 'yes'"/>
+      <bind nodeset="/data/personal_history/diag_asthma" type="string" required="true()"/>
+      <bind nodeset="/data/personal_history/treat_asthma" type="string" required="true()" relevant=" /data/personal_history/diag_asthma  = 'yes'"/>
+      <bind nodeset="/data/personal_history/diag_wound" type="string" required="true()"/>
+      <bind nodeset="/data/personal_history/treat_wound" type="string" required="true()" relevant=" /data/personal_history/diag_wound  = 'yes'"/>
+      <bind nodeset="/data/personal_history/diag_oral_cancer" type="string" required="true()"/>
+      <bind nodeset="/data/personal_history/treat_oral_cancer" type="string" required="true()" relevant=" /data/personal_history/diag_oral_cancer  = 'yes'"/>
+      <bind nodeset="/data/personal_history/other_disease" type="string" constraint="string-length(.) &lt;= 500" jr:constraintMsg="Maximum 500 characters allowed."/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_filled_by/lbl_filled_by" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_filled_by/calc_reporter_name" type="string" calculate=" /data/reporter_name "/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_patient/lbl_patient" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_patient/calc_patient_name" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_state/lbl_state" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_state/calc_state_lbl" type="string" calculate="jr:choice-name( /data/inputs/state ,' /data/inputs/state ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_district/lbl_district" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_district/calc_district_lbl" type="string" calculate="jr:choice-name( /data/inputs/district ,' /data/inputs/district ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_bmi/lbl_bmi" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_bmi/calc_bmi" type="string" calculate=" /data/form_1_personal_details/bmi "/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_diabetes_diag/lbl_diabetes_diag" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_diabetes_diag/calc_diabetes_diag_lbl" type="string" calculate="jr:choice-name( /data/personal_history/diag_diabetes ,' /data/personal_history/diag_diabetes ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_diabetes_treat" relevant=" /data/personal_history/diag_diabetes  = 'yes'"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_diabetes_treat/lbl_diabetes_treat" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_diabetes_treat/calc_diabetes_treat_lbl" type="string" calculate="jr:choice-name( /data/personal_history/treat_diabetes ,' /data/personal_history/treat_diabetes ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_bp_diag/lbl_bp_diag" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_bp_diag/calc_bp_diag_lbl" type="string" calculate="jr:choice-name( /data/personal_history/diag_bp ,' /data/personal_history/diag_bp ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_bp_treat" relevant=" /data/personal_history/diag_bp  = 'yes'"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_bp_treat/lbl_bp_treat" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_bp_treat/calc_bp_treat_lbl" type="string" calculate="jr:choice-name( /data/personal_history/treat_bp ,' /data/personal_history/treat_bp ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_heart_diag/lbl_heart_diag" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_heart_diag/calc_heart_diag_lbl" type="string" calculate="jr:choice-name( /data/personal_history/diag_heart ,' /data/personal_history/diag_heart ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_heart_treat" relevant=" /data/personal_history/diag_heart  = 'yes'"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_heart_treat/lbl_heart_treat" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_heart_treat/calc_heart_treat_lbl" type="string" calculate="jr:choice-name( /data/personal_history/treat_heart ,' /data/personal_history/treat_heart ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_stroke_diag/lbl_stroke_diag" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_stroke_diag/calc_stroke_diag_lbl" type="string" calculate="jr:choice-name( /data/personal_history/diag_stroke ,' /data/personal_history/diag_stroke ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_stroke_treat" relevant=" /data/personal_history/diag_stroke  = 'yes'"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_stroke_treat/lbl_stroke_treat" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_stroke_treat/calc_stroke_treat_lbl" type="string" calculate="jr:choice-name( /data/personal_history/treat_stroke ,' /data/personal_history/treat_stroke ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_kidney_diag/lbl_kidney_diag" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_kidney_diag/calc_kidney_diag_lbl" type="string" calculate="jr:choice-name( /data/personal_history/diag_kidney ,' /data/personal_history/diag_kidney ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_kidney_treat" relevant=" /data/personal_history/diag_kidney  = 'yes'"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_kidney_treat/lbl_kidney_treat" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_kidney_treat/calc_kidney_treat_lbl" type="string" calculate="jr:choice-name( /data/personal_history/treat_kidney ,' /data/personal_history/treat_kidney ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_copd_diag/lbl_copd_diag" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_copd_diag/calc_copd_diag_lbl" type="string" calculate="jr:choice-name( /data/personal_history/diag_copd ,' /data/personal_history/diag_copd ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_copd_treat" relevant=" /data/personal_history/diag_copd  = 'yes'"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_copd_treat/lbl_copd_treat" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_copd_treat/calc_copd_treat_lbl" type="string" calculate="jr:choice-name( /data/personal_history/treat_copd ,' /data/personal_history/treat_copd ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_asthma_diag/lbl_asthma_diag" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_asthma_diag/calc_asthma_diag_lbl" type="string" calculate="jr:choice-name( /data/personal_history/diag_asthma ,' /data/personal_history/diag_asthma ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_asthma_treat" relevant=" /data/personal_history/diag_asthma  = 'yes'"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_asthma_treat/lbl_asthma_treat" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_asthma_treat/calc_asthma_treat_lbl" type="string" calculate="jr:choice-name( /data/personal_history/treat_asthma ,' /data/personal_history/treat_asthma ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_wound_diag/lbl_wound_diag" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_wound_diag/calc_wound_diag_lbl" type="string" calculate="jr:choice-name( /data/personal_history/diag_wound ,' /data/personal_history/diag_wound ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_wound_treat" relevant=" /data/personal_history/diag_wound  = 'yes'"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_wound_treat/lbl_wound_treat" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_wound_treat/calc_wound_treat_lbl" type="string" calculate="jr:choice-name( /data/personal_history/treat_wound ,' /data/personal_history/treat_wound ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_oral_cancer_diag/lbl_oral_cancer_diag" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_oral_cancer_diag/calc_oral_cancer_diag_lbl" type="string" calculate="jr:choice-name( /data/personal_history/diag_oral_cancer ,' /data/personal_history/diag_oral_cancer ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_oral_cancer_treat" relevant=" /data/personal_history/diag_oral_cancer  = 'yes'"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_oral_cancer_treat/lbl_oral_cancer_treat" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_oral_cancer_treat/calc_oral_cancer_treat_lbl" type="string" calculate="jr:choice-name( /data/personal_history/treat_oral_cancer ,' /data/personal_history/treat_oral_cancer ')"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_other_disease/lbl_other_disease" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_1_summary/grp_lbl_other_disease/calc_other_disease" type="string" calculate=" /data/personal_history/other_disease "/>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
+      <bind nodeset="/data/meta/instanceName" type="string" calculate=" /data/title "/>
+    </model>
+  </h:head>
+  <h:body class="pages grid-layout">
+    <group ref="/data/about_intro">
+      <label>Personal Examination</label>
+      <input ref="/data/about_intro/about_intro_note">
+        <label>You will now fill the Personal Examination form. This will take 5 – 10 minutes.</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/inputs">
+      <label>Patient &amp; Reporter Info</label>
+      <group ref="/data/inputs/user"/>
+      <input ref="/data/inputs/reporter_name_note">
+        <label> Filled by: <output value=" /data/reporter_name "/></label>
+      </input>
+      <group ref="/data/inputs/contact">
+        <input ref="/data/inputs/contact/_id" appearance="select-contact type-person role-patient">
+          <label>Patient's Name</label>
+          <hint>Select the patient from your area</hint>
+        </input>
+        <input ref="/data/inputs/contact/patient_id" appearance="hidden">
+          <label>Medic ID</label>
+        </input>
+        <input ref="/data/inputs/contact/name" appearance="hidden">
+          <label>Patient Name</label>
+        </input>
+      </group>
+      <select1 ref="/data/inputs/state" appearance="minimal">
+        <label>State</label>
+        <itemset nodeset="instance('states')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/inputs/district" appearance="minimal">
+        <label>District</label>
+        <itemset nodeset="instance('districts')/root/item[filter =  /data/inputs/state ]">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <input ref="/data/intro_form_1">
+      <label>Section 1: Personal Examination. Please complete your health examination details.</label>
+    </input>
+    <group appearance="field-list" ref="/data/form_1_personal_details">
+      <label>Personal Examination</label>
+      <input ref="/data/form_1_personal_details/height_cm">
+        <label>Height (cm)</label>
+        <hint>Enter height in centimetres</hint>
+      </input>
+      <input ref="/data/form_1_personal_details/weight_kg">
+        <label>Weight (kg)</label>
+        <hint>Enter weight in kilograms</hint>
+      </input>
+      <input ref="/data/form_1_personal_details/bmi_display">
+        <label> **BMI:** <output value=" /data/form_1_personal_details/bmi "/></label>
+      </input>
+    </group>
+    <input ref="/data/intro_personal_history">
+      <label>Section 2: Personal History. Please answer each question about your medical history.</label>
+    </input>
+    <group appearance="field-list" ref="/data/personal_history">
+      <label>Personal History</label>
+      <select1 ref="/data/personal_history/diag_diabetes">
+        <label>Diabetes – Diagnosed?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/treat_diabetes">
+        <label>Diabetes – Under Treatment?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/diag_bp">
+        <label>BP – Diagnosed?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/treat_bp">
+        <label>BP – Under Treatment?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/diag_heart">
+        <label>Heart Diseases – Diagnosed?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/treat_heart">
+        <label>Heart Diseases – Under Treatment?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/diag_stroke">
+        <label>Stroke – Diagnosed?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/treat_stroke">
+        <label>Stroke – Under Treatment?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/diag_kidney">
+        <label>Kidney Failure – Diagnosed?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/treat_kidney">
+        <label>Kidney Failure – Under Treatment?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/diag_copd">
+        <label>COPD – Diagnosed?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/treat_copd">
+        <label>COPD – Under Treatment?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/diag_asthma">
+        <label>Asthma – Diagnosed?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/treat_asthma">
+        <label>Asthma – Under Treatment?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/diag_wound">
+        <label>Non-healing Wound – Diagnosed?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/treat_wound">
+        <label>Non-healing Wound – Under Treatment?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/diag_oral_cancer">
+        <label>Oral Cancer – Diagnosed?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/personal_history/treat_oral_cancer">
+        <label>Oral Cancer – Under Treatment?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <input ref="/data/personal_history/other_disease">
+        <label>Other Disease (if any)</label>
+        <hint>Describe any additional disease</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/form_1_summary">
+      <label>Assessment Summary for Personal Examination</label>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_filled_by">
+        <input ref="/data/form_1_summary/grp_lbl_filled_by/lbl_filled_by">
+          <label> **Filled by:** <output value=" /data/reporter_name "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_patient">
+        <input ref="/data/form_1_summary/grp_lbl_patient/lbl_patient">
+          <label> **Patient:** <output value=" /data/patient_name "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_state">
+        <input ref="/data/form_1_summary/grp_lbl_state/lbl_state">
+          <label> **State:** <output value=" /data/form_1_summary/grp_lbl_state/calc_state_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_district">
+        <input ref="/data/form_1_summary/grp_lbl_district/lbl_district">
+          <label> **District:** <output value=" /data/form_1_summary/grp_lbl_district/calc_district_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_bmi">
+        <input ref="/data/form_1_summary/grp_lbl_bmi/lbl_bmi">
+          <label> **BMI:** <output value=" /data/form_1_personal_details/bmi "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_diabetes_diag">
+        <input ref="/data/form_1_summary/grp_lbl_diabetes_diag/lbl_diabetes_diag">
+          <label> **Diabetes – Diagnosed?** <output value=" /data/form_1_summary/grp_lbl_diabetes_diag/calc_diabetes_diag_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_diabetes_treat">
+        <input ref="/data/form_1_summary/grp_lbl_diabetes_treat/lbl_diabetes_treat">
+          <label> **Diabetes – Under Treatment?** <output value=" /data/form_1_summary/grp_lbl_diabetes_treat/calc_diabetes_treat_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_bp_diag">
+        <input ref="/data/form_1_summary/grp_lbl_bp_diag/lbl_bp_diag">
+          <label> **BP – Diagnosed?** <output value=" /data/form_1_summary/grp_lbl_bp_diag/calc_bp_diag_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_bp_treat">
+        <input ref="/data/form_1_summary/grp_lbl_bp_treat/lbl_bp_treat">
+          <label> **BP – Under Treatment?** <output value=" /data/form_1_summary/grp_lbl_bp_treat/calc_bp_treat_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_heart_diag">
+        <input ref="/data/form_1_summary/grp_lbl_heart_diag/lbl_heart_diag">
+          <label> **Heart Diseases – Diagnosed?** <output value=" /data/form_1_summary/grp_lbl_heart_diag/calc_heart_diag_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_heart_treat">
+        <input ref="/data/form_1_summary/grp_lbl_heart_treat/lbl_heart_treat">
+          <label> **Heart Diseases – Under Treatment?** <output value=" /data/form_1_summary/grp_lbl_heart_treat/calc_heart_treat_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_stroke_diag">
+        <input ref="/data/form_1_summary/grp_lbl_stroke_diag/lbl_stroke_diag">
+          <label> **Stroke – Diagnosed?** <output value=" /data/form_1_summary/grp_lbl_stroke_diag/calc_stroke_diag_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_stroke_treat">
+        <input ref="/data/form_1_summary/grp_lbl_stroke_treat/lbl_stroke_treat">
+          <label> **Stroke – Under Treatment?** <output value=" /data/form_1_summary/grp_lbl_stroke_treat/calc_stroke_treat_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_kidney_diag">
+        <input ref="/data/form_1_summary/grp_lbl_kidney_diag/lbl_kidney_diag">
+          <label> **Kidney Failure – Diagnosed?** <output value=" /data/form_1_summary/grp_lbl_kidney_diag/calc_kidney_diag_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_kidney_treat">
+        <input ref="/data/form_1_summary/grp_lbl_kidney_treat/lbl_kidney_treat">
+          <label> **Kidney Failure – Under Treatment?** <output value=" /data/form_1_summary/grp_lbl_kidney_treat/calc_kidney_treat_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_copd_diag">
+        <input ref="/data/form_1_summary/grp_lbl_copd_diag/lbl_copd_diag">
+          <label> **COPD – Diagnosed?** <output value=" /data/form_1_summary/grp_lbl_copd_diag/calc_copd_diag_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_copd_treat">
+        <input ref="/data/form_1_summary/grp_lbl_copd_treat/lbl_copd_treat">
+          <label> **COPD – Under Treatment?** <output value=" /data/form_1_summary/grp_lbl_copd_treat/calc_copd_treat_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_asthma_diag">
+        <input ref="/data/form_1_summary/grp_lbl_asthma_diag/lbl_asthma_diag">
+          <label> **Asthma – Diagnosed?** <output value=" /data/form_1_summary/grp_lbl_asthma_diag/calc_asthma_diag_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_asthma_treat">
+        <input ref="/data/form_1_summary/grp_lbl_asthma_treat/lbl_asthma_treat">
+          <label> **Asthma – Under Treatment?** <output value=" /data/form_1_summary/grp_lbl_asthma_treat/calc_asthma_treat_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_wound_diag">
+        <input ref="/data/form_1_summary/grp_lbl_wound_diag/lbl_wound_diag">
+          <label> **Non-healing Wound – Diagnosed?** <output value=" /data/form_1_summary/grp_lbl_wound_diag/calc_wound_diag_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_wound_treat">
+        <input ref="/data/form_1_summary/grp_lbl_wound_treat/lbl_wound_treat">
+          <label> **Non-healing Wound – Under Treatment?** <output value=" /data/form_1_summary/grp_lbl_wound_treat/calc_wound_treat_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_oral_cancer_diag">
+        <input ref="/data/form_1_summary/grp_lbl_oral_cancer_diag/lbl_oral_cancer_diag">
+          <label> **Oral Cancer – Diagnosed?** <output value=" /data/form_1_summary/grp_lbl_oral_cancer_diag/calc_oral_cancer_diag_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_oral_cancer_treat">
+        <input ref="/data/form_1_summary/grp_lbl_oral_cancer_treat/lbl_oral_cancer_treat">
+          <label> **Oral Cancer – Under Treatment?** <output value=" /data/form_1_summary/grp_lbl_oral_cancer_treat/calc_oral_cancer_treat_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_1_summary/grp_lbl_other_disease">
+        <input ref="/data/form_1_summary/grp_lbl_other_disease/lbl_other_disease">
+          <label> **Other Disease:** <output value=" /data/personal_history/other_disease "/></label>
+        </input>
+      </group>
+    </group>
+  </h:body>
+</h:html>

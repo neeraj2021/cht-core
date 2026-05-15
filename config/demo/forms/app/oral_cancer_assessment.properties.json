@@ -1,10 +1,9 @@
 {
   "title": "Oral Cancer Assessment",
   "icon": "icon-disease-cancer",
-  "show_in_reports": false,
   "context": {
     "person": true,
     "place": false,
-    "expression": "true"
+    "permission": "can_view_oral_cancer_assessment_form"
   }
 }

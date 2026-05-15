@@ -71,6 +71,9 @@
           <text id="/data/inputs/user/name:label">
             <value>Name of the logged in user</value>
           </text>
+          <text id="/data/inputs/user/roles:label">
+            <value>Role of the logged in user</value>
+          </text>
           <text id="/data/init/parent_id:label">
             <value>Belongs To</value>
           </text>
@@ -139,6 +142,9 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
           <text id="/data/person/phone_alternate:label">
             <value>Alternate Phone Number</value>
           </text>
+          <text id="/data/person/display_user_role:label">
+            <value> Logged in as: <output value=" /data/person/created_by_role "/></value>
+          </text>
           <text id="/data/person/role:label">
             <value>Role</value>
           </text>
@@ -178,18 +184,30 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
             <value>जन्म की तारीख का पता नहीं</value>
           </text>
           <text id="roles-0">
-            <value>सामुदायिक स्वास्थ्यकर्मी</value>
+            <value>आशा</value>
           </text>
           <text id="roles-1">
-            <value>नर्स</value>
+            <value>एएनएम</value>
           </text>
           <text id="roles-2">
-            <value>स्वास्थ्य केंद्र के मैनजर</value>
+            <value>एमपीडब्लू</value>
           </text>
           <text id="roles-3">
-            <value>मरीज़</value>
+            <value>सीएचओ</value>
           </text>
           <text id="roles-4">
+            <value>नर्स</value>
+          </text>
+          <text id="roles-5">
+            <value>मेडिकल ऑफिसर</value>
+          </text>
+          <text id="roles-6">
+            <value>चिकित्सक</value>
+          </text>
+          <text id="roles-7">
+            <value>मरीज़</value>
+          </text>
+          <text id="roles-8">
             <value>अन्य</value>
           </text>
           <text id="place_type-0">
@@ -209,6 +227,9 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
           </text>
           <text id="/data/inputs/user/name:label">
             <value>लॉग इन यूज़र का नाम</value>
+          </text>
+          <text id="/data/inputs/user/roles:label">
+            <value>लॉग इन यूज़र की भूमिका</value>
           </text>
           <text id="/data/init/parent_id:label">
             <value>यह व्यक्ति इस जगह से जुड़ा है</value>
@@ -239,6 +260,9 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
           </text>
           <text id="/data/person/phone_alternate:label">
             <value>अन्य फोन नंबर</value>
+          </text>
+          <text id="/data/person/display_user_role:label">
+            <value> लॉग इन भूमिका: <output value=" /data/person/created_by_role "/></value>
           </text>
           <text id="/data/person/role:label">
             <value>भूमिका</value>
@@ -321,18 +345,30 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
             <value>Tanggal tidak diketahui lahir</value>
           </text>
           <text id="roles-0">
-            <value>Kader</value>
+            <value>ASHA</value>
           </text>
           <text id="roles-1">
-            <value>Perawat</value>
+            <value>ANM</value>
           </text>
           <text id="roles-2">
-            <value>Manajer Fasilitas</value>
+            <value>MPW</value>
           </text>
           <text id="roles-3">
-            <value>Pasien</value>
+            <value>CHO</value>
           </text>
           <text id="roles-4">
+            <value>Perawat</value>
+          </text>
+          <text id="roles-5">
+            <value>Petugas Medis</value>
+          </text>
+          <text id="roles-6">
+            <value>Dokter</value>
+          </text>
+          <text id="roles-7">
+            <value>Pasien</value>
+          </text>
+          <text id="roles-8">
             <value>Lain</value>
           </text>
           <text id="place_type-0">
@@ -352,6 +388,9 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
           </text>
           <text id="/data/inputs/user/name:label">
             <value>Nama dari login user</value>
+          </text>
+          <text id="/data/inputs/user/roles:label">
+            <value>Peran dari login user</value>
           </text>
           <text id="/data/init/parent_id:label">
             <value>Orang ini terhubung ke tempat ini</value>
@@ -376,6 +415,9 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
           </text>
           <text id="/data/person/phone_alternate:label">
             <value>Nomor Telepon Alternatif</value>
+          </text>
+          <text id="/data/person/display_user_role:label">
+            <value> Masuk sebagai: <output value=" /data/person/created_by_role "/></value>
           </text>
           <text id="/data/person/role:label">
             <value>Peran</value>
@@ -464,19 +506,31 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
             <value>Tarehe ya Kuzaliwa</value>
           </text>
           <text id="roles-0">
-            <value>Mhudumu wa afya</value>
+            <value>ASHA</value>
           </text>
           <text id="roles-1">
-            <value>Muuguzi</value>
+            <value>ANM</value>
           </text>
           <text id="roles-2">
-            <value>Meneja wa Kituo cha afya</value>
+            <value>MPW</value>
           </text>
           <text id="roles-3">
-            <value>mgonjwa</value>
+            <value>CHO</value>
           </text>
           <text id="roles-4">
-            <value>Ingine</value>
+            <value>Muuguzi</value>
+          </text>
+          <text id="roles-5">
+            <value>Afisa wa Matibabu</value>
+          </text>
+          <text id="roles-6">
+            <value>Daktari</value>
+          </text>
+          <text id="roles-7">
+            <value>Mgonjwa</value>
+          </text>
+          <text id="roles-8">
+            <value>Nyingine</value>
           </text>
           <text id="place_type-0">
             <value>Wilaya</value>
@@ -495,6 +549,9 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
           </text>
           <text id="/data/inputs/user/name:label">
             <value>Jina ya mtumizi</value>
+          </text>
+          <text id="/data/inputs/user/roles:label">
+            <value>Jukumu la mtumizi</value>
           </text>
           <text id="/data/init/parent_id:label">
             <value>Ni wa</value>
@@ -519,6 +576,9 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
           </text>
           <text id="/data/person/phone_alternate:label">
             <value>nambari nyingine ya simu</value>
+          </text>
+          <text id="/data/person/display_user_role:label">
+            <value> Umeingia kama: <output value=" /data/person/created_by_role "/></value>
           </text>
           <text id="/data/person/role:label">
             <value>Jukumu</value>
@@ -607,18 +667,30 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
             <value>जन्म मिती थाहा नभएको</value>
           </text>
           <text id="roles-0">
-            <value>महिला स्वास्थ्य स्वयम् सेविका</value>
+            <value>आशा</value>
           </text>
           <text id="roles-1">
-            <value>नर्स</value>
+            <value>एएनएम</value>
           </text>
           <text id="roles-2">
-            <value>स्वास्थ्य संस्था प्रमुख</value>
+            <value>एमपीडब्लू</value>
           </text>
           <text id="roles-3">
-            <value>बिरामी</value>
+            <value>सीएचओ</value>
           </text>
           <text id="roles-4">
+            <value>नर्स</value>
+          </text>
+          <text id="roles-5">
+            <value>मेडिकल अफिसर</value>
+          </text>
+          <text id="roles-6">
+            <value>चिकित्सक</value>
+          </text>
+          <text id="roles-7">
+            <value>बिरामी</value>
+          </text>
+          <text id="roles-8">
             <value>अन्य</value>
           </text>
           <text id="place_type-0">
@@ -639,6 +711,9 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
           <text id="/data/inputs/user/name:label">
             <value>लग इन गरेको प्रयोगकर्ताको नाम</value>
           </text>
+          <text id="/data/inputs/user/roles:label">
+            <value>लग इन गरेको प्रयोगकर्ताको भूमिका</value>
+          </text>
           <text id="/data/init/parent_id:label">
             <value>यो व्यक्ति यस ठाउँसँग सम्बन्धित छ</value>
           </text>
@@ -656,6 +731,9 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
           </text>
           <text id="/data/person/phone_alternate:label">
             <value>अन्य फोन नम्बर</value>
+          </text>
+          <text id="/data/person/display_user_role:label">
+            <value> लग इन भूमिका: <output value=" /data/person/created_by_role "/></value>
           </text>
           <text id="/data/person/role:label">
             <value>भूमिका</value>
@@ -750,18 +828,30 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
             <value>Date de naissance inconnue</value>
           </text>
           <text id="roles-0">
-            <value>ASC</value>
+            <value>ASHA</value>
           </text>
           <text id="roles-1">
-            <value>Infirmier</value>
+            <value>ANM</value>
           </text>
           <text id="roles-2">
-            <value>Personnel médical</value>
+            <value>MPW</value>
           </text>
           <text id="roles-3">
-            <value>Patient</value>
+            <value>CHO</value>
           </text>
           <text id="roles-4">
+            <value>Infirmier</value>
+          </text>
+          <text id="roles-5">
+            <value>Officier Médical</value>
+          </text>
+          <text id="roles-6">
+            <value>Médecin</value>
+          </text>
+          <text id="roles-7">
+            <value>Patient</value>
+          </text>
+          <text id="roles-8">
             <value>Autre</value>
           </text>
           <text id="place_type-0">
@@ -781,6 +871,9 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
           </text>
           <text id="/data/inputs/user/name:label">
             <value>Nom</value>
+          </text>
+          <text id="/data/inputs/user/roles:label">
+            <value>Rôle de l'utilisateur connecté</value>
           </text>
           <text id="/data/init/parent_id:label">
             <value>Associé avec</value>
@@ -811,6 +904,9 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
           </text>
           <text id="/data/person/phone_alternate:label">
             <value>Téléphone alternatif</value>
+          </text>
+          <text id="/data/person/display_user_role:label">
+            <value> Connecté en tant que: <output value=" /data/person/created_by_role "/></value>
           </text>
           <text id="/data/person/role:label">
             <value>Rôle</value>
@@ -872,7 +968,7 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
         </translation>
       </itext>
       <instance>
-        <data id="contact:person:create" version="2025-05-01 22-35" prefix="J1!contact:person:create!" delimiter="#">
+        <data id="contact:person:create" prefix="J1!contact:person:create!" delimiter="#">
           <inputs>
             <meta>
               <location>
@@ -886,11 +982,13 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
               <contact_id/>
               <facility_id/>
               <name/>
+              <roles/>
             </user>
           </inputs>
           <person>
             <parent>PARENT</parent>
             <type>person</type>
+            <created_by_role/>
             <name/>
             <short_name/>
             <date_of_birth/>
@@ -909,6 +1007,7 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
             <sex/>
             <phone/>
             <phone_alternate/>
+            <display_user_role/>
             <role/>
             <role_other/>
             <external_id/>
@@ -983,38 +1082,47 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
           <item>
             <itextId>roles-0</itextId>
             <name>asha</name>
+            <creator_role>cho anm mpw nurse physician medical_officer</creator_role>
           </item>
           <item>
             <itextId>roles-1</itextId>
             <name>anm</name>
+            <creator_role>cho anm mpw nurse physician medical_officer</creator_role>
           </item>
           <item>
             <itextId>roles-2</itextId>
             <name>mpw</name>
+            <creator_role>cho anm mpw nurse physician medical_officer</creator_role>
           </item>
           <item>
             <itextId>roles-3</itextId>
             <name>cho</name>
+            <creator_role>nurse physician medical_officer</creator_role>
           </item>
           <item>
             <itextId>roles-4</itextId>
             <name>nurse</name>
+            <creator_role>physician medical_officer</creator_role>
           </item>
           <item>
             <itextId>roles-5</itextId>
             <name>medical_officer</name>
+            <creator_role>medical_officer</creator_role>
           </item>
           <item>
             <itextId>roles-6</itextId>
             <name>physician</name>
+            <creator_role>medical_officer</creator_role>
           </item>
           <item>
             <itextId>roles-7</itextId>
             <name>patient</name>
+            <creator_role>asha cho anm mpw nurse physician medical_officer</creator_role>
           </item>
           <item>
             <itextId>roles-8</itextId>
             <name>other</name>
+            <creator_role>asha cho anm mpw nurse physician medical_officer</creator_role>
           </item>
         </root>
       </instance>
@@ -1038,6 +1146,7 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
       <bind nodeset="/data/inputs/user/contact_id" type="string"/>
       <bind nodeset="/data/inputs/user/facility_id" type="string"/>
       <bind nodeset="/data/inputs/user/name" type="string"/>
+      <bind nodeset="/data/inputs/user/roles" type="string"/>
       <bind nodeset="/data/init/parent_id" type="string" readonly="true()" calculate=" /data/person/parent "/>
       <bind nodeset="/data/init/name" type="string"/>
       <bind nodeset="/data/init/type" type="string"/>
@@ -1045,6 +1154,7 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
       <bind nodeset="/data/init/type_label" type="string" calculate="jr:choice-name( /data/init/type_selector ,' /data/init/type_selector ')"/>
       <bind nodeset="/data/person/parent" type="string"/>
       <bind nodeset="/data/person/type" type="string"/>
+      <bind nodeset="/data/person/created_by_role" type="string" calculate="/data/inputs/user/roles"/>
       <bind nodeset="/data/person/name" type="string" required="true()"/>
       <bind nodeset="/data/person/short_name" type="string" required="false()" constraint="string-length(.) &lt;= 10" jr:constraintMsg="jr:itext('/data/person/short_name:jr:constraintMsg')"/>
       <bind nodeset="/data/person/date_of_birth" type="string" required="true()" calculate="../ephemeral_dob/dob_iso"/>
@@ -1061,6 +1171,7 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
       <bind nodeset="/data/person/sex" type="string" required="true()"/>
       <bind nodeset="/data/person/phone" type="tel" constraint="true()" jr:constraintMsg="jr:itext('/data/person/phone:jr:constraintMsg')"/>
       <bind nodeset="/data/person/phone_alternate" type="tel" constraint="true()" jr:constraintMsg="jr:itext('/data/person/phone_alternate:jr:constraintMsg')"/>
+      <bind nodeset="/data/person/display_user_role" readonly="true()" type="string" relevant="false()"/>
       <bind nodeset="/data/person/role" type="string"/>
       <bind nodeset="/data/person/role_other" type="string" required="true()" relevant="selected(  /data/person/role ,'other')"/>
       <bind nodeset="/data/person/external_id" type="string"/>
@@ -1083,6 +1194,9 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
         </input>
         <input ref="/data/inputs/user/name">
           <label ref="jr:itext('/data/inputs/user/name:label')"/>
+        </input>
+        <input ref="/data/inputs/user/roles">
+          <label ref="jr:itext('/data/inputs/user/roles:label')"/>
         </input>
       </group>
     </group>
@@ -1145,10 +1259,13 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
       <input ref="/data/person/phone_alternate">
         <label ref="jr:itext('/data/person/phone_alternate:label')"/>
       </input>
+      <input ref="/data/person/display_user_role">
+        <label ref="jr:itext('/data/person/display_user_role:label')"/>
+      </input>
       <select1 ref="/data/person/role">
         <label ref="jr:itext('/data/person/role:label')"/>
         <hint ref="jr:itext('/data/person/role:hint')"/>
-        <itemset nodeset="instance('roles')/root/item">
+        <itemset nodeset="instance('roles')/root/item[selected(creator_role,  /data/person/created_by_role )]">
           <value ref="name"/>
           <label ref="jr:itext(itextId)"/>
         </itemset>

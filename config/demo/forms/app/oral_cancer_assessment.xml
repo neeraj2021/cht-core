@@ -1,18 +1,27 @@
 <?xml version="1.0"?>
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://www.opendatakit.org/xforms">
   <h:head>
-    <h:title>Habit History Assessment</h:title>
+    <h:title>Oral Cancer Assessment</h:title>
     <model odk:xforms-version="1.0.0">
+      <itext>
+        <translation lang="en">
+          <text id="/data/oral_intro_page/oral_intro_note:label">
+            <value>You will now ask questions and if needed take 8 photos of the oral cavity.</value>
+            <value form="image">jr://images/21056-oral-cancer-screening.jpg</value>
+          </text>
+        </translation>
+      </itext>
       <instance>
-        <data id="oral_cancer_assessment" version="2026-03-25" prefix="J1!oral_cancer_assessment!" delimiter="#">
+        <data id="oral_cancer_assessment" version="2026.05.13" prefix="J1!oral_cancer_assessment!" delimiter="#">
           <patient_id/>
           <patient_uuid/>
           <patient_name/>
           <reporter_name/>
           <reporter_place/>
           <title/>
-          <form_start_timestamp/>
-          <form_sync_timestamp/>
+          <oral_intro_page>
+            <oral_intro_note/>
+          </oral_intro_page>
           <inputs>
             <meta>
               <location>
@@ -48,52 +57,43 @@
             <alcohol/>
             <alcohol_frequency/>
           </habit_history>
+          <all_habits_never/>
+          <photo_no_intro_page>
+            <photo_no_intro_note/>
+          </photo_no_intro_page>
+          <photo_intro_page>
+            <photo_intro_note/>
+          </photo_intro_page>
           <photo_1_page>
             <photo_1 type="binary"/>
-            <ai_photo_1_label/>
-            <ai_photo_1_score/>
             <ai_photo_1_suspicion/>
           </photo_1_page>
           <photo_2_page>
             <photo_2 type="binary"/>
-            <ai_photo_2_label/>
-            <ai_photo_2_score/>
             <ai_photo_2_suspicion/>
           </photo_2_page>
           <photo_3_page>
             <photo_3 type="binary"/>
-            <ai_photo_3_label/>
-            <ai_photo_3_score/>
             <ai_photo_3_suspicion/>
           </photo_3_page>
           <photo_4_page>
             <photo_4 type="binary"/>
-            <ai_photo_4_label/>
-            <ai_photo_4_score/>
             <ai_photo_4_suspicion/>
           </photo_4_page>
           <photo_5_page>
             <photo_5 type="binary"/>
-            <ai_photo_5_label/>
-            <ai_photo_5_score/>
             <ai_photo_5_suspicion/>
           </photo_5_page>
           <photo_6_page>
             <photo_6 type="binary"/>
-            <ai_photo_6_label/>
-            <ai_photo_6_score/>
             <ai_photo_6_suspicion/>
           </photo_6_page>
           <photo_7_page>
             <photo_7 type="binary"/>
-            <ai_photo_7_label/>
-            <ai_photo_7_score/>
             <ai_photo_7_suspicion/>
           </photo_7_page>
           <photo_8_page>
             <photo_8 type="binary"/>
-            <ai_photo_8_label/>
-            <ai_photo_8_score/>
             <ai_photo_8_suspicion/>
           </photo_8_page>
           <final_ai_analysis_page>
@@ -104,27 +104,95 @@
           <district_final/>
           <group_summary>
             <grp_lbl_filled_by>
-              <lbl_filled_by_lbl/>
+              <lbl_filled_by/>
               <calc_reporter_name/>
             </grp_lbl_filled_by>
             <grp_lbl_patient>
-              <lbl_patient_lbl/>
+              <lbl_patient/>
               <calc_patient_name/>
             </grp_lbl_patient>
             <grp_lbl_state>
-              <lbl_state_lbl/>
-              <calc_state/>
+              <lbl_state/>
+              <calc_state_lbl/>
             </grp_lbl_state>
             <grp_lbl_district>
-              <lbl_district_lbl/>
-              <calc_district/>
+              <lbl_district/>
+              <calc_district_lbl/>
             </grp_lbl_district>
+            <grp_lbl_age>
+              <lbl_age/>
+            </grp_lbl_age>
+            <grp_lbl_gender>
+              <lbl_gender/>
+              <calc_gender_lbl/>
+            </grp_lbl_gender>
+            <grp_lbl_hh_q1>
+              <lbl_hh_q1/>
+              <calc_cigarette_lbl/>
+            </grp_lbl_hh_q1>
+            <grp_lbl_hh_q2>
+              <lbl_hh_q2/>
+              <calc_smokeless_lbl/>
+            </grp_lbl_hh_q2>
+            <grp_lbl_hh_q3>
+              <lbl_hh_q3/>
+              <calc_areca_lbl/>
+            </grp_lbl_hh_q3>
+            <grp_lbl_hh_q4>
+              <lbl_hh_q4/>
+              <calc_alcohol_lbl/>
+            </grp_lbl_hh_q4>
+            <grp_lbl_hh_q5>
+              <lbl_hh_q5/>
+            </grp_lbl_hh_q5>
+            <grp_lbl_photo_1>
+              <lbl_photo_1_suspicion/>
+              <calc_photo_1_suspicion_lbl/>
+            </grp_lbl_photo_1>
+            <grp_lbl_photo_2>
+              <lbl_photo_2_suspicion/>
+              <calc_photo_2_suspicion_lbl/>
+            </grp_lbl_photo_2>
+            <grp_lbl_photo_3>
+              <lbl_photo_3_suspicion/>
+              <calc_photo_3_suspicion_lbl/>
+            </grp_lbl_photo_3>
+            <grp_lbl_photo_4>
+              <lbl_photo_4_suspicion/>
+              <calc_photo_4_suspicion_lbl/>
+            </grp_lbl_photo_4>
+            <grp_lbl_photo_5>
+              <lbl_photo_5_suspicion/>
+              <calc_photo_5_suspicion_lbl/>
+            </grp_lbl_photo_5>
+            <grp_lbl_photo_6>
+              <lbl_photo_6_suspicion/>
+              <calc_photo_6_suspicion_lbl/>
+            </grp_lbl_photo_6>
+            <grp_lbl_photo_7>
+              <lbl_photo_7_suspicion/>
+              <calc_photo_7_suspicion_lbl/>
+            </grp_lbl_photo_7>
+            <grp_lbl_photo_8>
+              <lbl_photo_8_suspicion/>
+              <calc_photo_8_suspicion_lbl/>
+            </grp_lbl_photo_8>
+            <grp_lbl_final_suspicion>
+              <lbl_final_suspicion/>
+              <calc_final_suspicion_lbl/>
+            </grp_lbl_final_suspicion>
+            <grp_lbl_final_referral>
+              <lbl_final_referral/>
+              <calc_final_referral_lbl/>
+            </grp_lbl_final_referral>
+            <grp_lbl_habit_status>
+              <lbl_habit_status/>
+              <calc_habit_status_lbl/>
+            </grp_lbl_habit_status>
             <ai_analysis_summary/>
             <ai_analysis_status/>
             <ai_analysis_error/>
           </group_summary>
-          <form_submit_timestamp_iso/>
-          <form_submit_timestamp_display/>
           <meta tag="hidden">
             <instanceID/>
             <instanceName/>
@@ -336,10 +404,17 @@
           <item>
             <name>do_not_refer</name>
             <label>Don't Refer</label>
+            <suspicion_type>non_suspicious</suspicion_type>
           </item>
           <item>
             <name>refer_anyway</name>
             <label>Refer Anyway</label>
+            <suspicion_type>non_suspicious</suspicion_type>
+          </item>
+          <item>
+            <name>refer</name>
+            <label>Refer</label>
+            <suspicion_type>suspicious</suspicion_type>
           </item>
         </root>
       </instance>
@@ -349,8 +424,7 @@
       <bind nodeset="/data/reporter_name" type="string" calculate="../inputs/user/name"/>
       <bind nodeset="/data/reporter_place" type="string" calculate="instance('user-contact-summary')/context/facility_name"/>
       <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
-      <bind nodeset="/data/form_start_timestamp" type="string" calculate="once(if( /data/inputs/contact/_id  != '', now(), ''))"/>
-      <bind nodeset="/data/form_sync_timestamp" type="string"/>
+      <bind nodeset="/data/oral_intro_page/oral_intro_note" readonly="true()" type="string"/>
       <bind nodeset="/data/inputs/source" type="string"/>
       <bind nodeset="/data/inputs/source_id" type="string"/>
       <bind nodeset="/data/inputs/user/name" type="string"/>
@@ -368,60 +442,107 @@
       <bind nodeset="/data/habit_history/areca_nut" type="string" required="true()"/>
       <bind nodeset="/data/habit_history/alcohol" type="string" required="true()"/>
       <bind nodeset="/data/habit_history/alcohol_frequency" type="int" required="true()" relevant=" /data/habit_history/alcohol  = 'current'" constraint=". &gt;= 0 and . &lt;= 7" jr:constraintMsg="Enter a number from 0 to 7"/>
+      <bind nodeset="/data/all_habits_never" type="string" calculate="if( /data/habit_history/cigarette_bidi  = 'never' and  /data/habit_history/smokeless_tobacco  = 'never' and  /data/habit_history/areca_nut  = 'never' and  /data/habit_history/alcohol  = 'never','yes','no')"/>
+      <bind nodeset="/data/photo_no_intro_page" relevant=" /data/all_habits_never  = 'yes'"/>
+      <bind nodeset="/data/photo_no_intro_page/photo_no_intro_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/photo_intro_page" relevant=" /data/all_habits_never  = 'no'"/>
+      <bind nodeset="/data/photo_intro_page/photo_intro_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/photo_1_page" relevant=" /data/all_habits_never  = 'no'"/>
       <bind nodeset="/data/photo_1_page/photo_1" type="binary" required="true()"/>
-      <bind nodeset="/data/photo_1_page/ai_photo_1_label" type="string"/>
-      <bind nodeset="/data/photo_1_page/ai_photo_1_score" type="string"/>
       <bind nodeset="/data/photo_1_page/ai_photo_1_suspicion" type="string" required="true()"/>
+      <bind nodeset="/data/photo_2_page" relevant=" /data/all_habits_never  = 'no'"/>
       <bind nodeset="/data/photo_2_page/photo_2" type="binary" required="true()"/>
-      <bind nodeset="/data/photo_2_page/ai_photo_2_label" type="string"/>
-      <bind nodeset="/data/photo_2_page/ai_photo_2_score" type="string"/>
       <bind nodeset="/data/photo_2_page/ai_photo_2_suspicion" type="string" required="true()"/>
+      <bind nodeset="/data/photo_3_page" relevant=" /data/all_habits_never  = 'no'"/>
       <bind nodeset="/data/photo_3_page/photo_3" type="binary" required="true()"/>
-      <bind nodeset="/data/photo_3_page/ai_photo_3_label" type="string"/>
-      <bind nodeset="/data/photo_3_page/ai_photo_3_score" type="string"/>
       <bind nodeset="/data/photo_3_page/ai_photo_3_suspicion" type="string" required="true()"/>
+      <bind nodeset="/data/photo_4_page" relevant=" /data/all_habits_never  = 'no'"/>
       <bind nodeset="/data/photo_4_page/photo_4" type="binary" required="true()"/>
-      <bind nodeset="/data/photo_4_page/ai_photo_4_label" type="string"/>
-      <bind nodeset="/data/photo_4_page/ai_photo_4_score" type="string"/>
       <bind nodeset="/data/photo_4_page/ai_photo_4_suspicion" type="string" required="true()"/>
+      <bind nodeset="/data/photo_5_page" relevant=" /data/all_habits_never  = 'no'"/>
       <bind nodeset="/data/photo_5_page/photo_5" type="binary" required="true()"/>
-      <bind nodeset="/data/photo_5_page/ai_photo_5_label" type="string"/>
-      <bind nodeset="/data/photo_5_page/ai_photo_5_score" type="string"/>
       <bind nodeset="/data/photo_5_page/ai_photo_5_suspicion" type="string" required="true()"/>
+      <bind nodeset="/data/photo_6_page" relevant=" /data/all_habits_never  = 'no'"/>
       <bind nodeset="/data/photo_6_page/photo_6" type="binary" required="true()"/>
-      <bind nodeset="/data/photo_6_page/ai_photo_6_label" type="string"/>
-      <bind nodeset="/data/photo_6_page/ai_photo_6_score" type="string"/>
       <bind nodeset="/data/photo_6_page/ai_photo_6_suspicion" type="string" required="true()"/>
+      <bind nodeset="/data/photo_7_page" relevant=" /data/all_habits_never  = 'no'"/>
       <bind nodeset="/data/photo_7_page/photo_7" type="binary" required="true()"/>
-      <bind nodeset="/data/photo_7_page/ai_photo_7_label" type="string"/>
-      <bind nodeset="/data/photo_7_page/ai_photo_7_score" type="string"/>
       <bind nodeset="/data/photo_7_page/ai_photo_7_suspicion" type="string" required="true()"/>
+      <bind nodeset="/data/photo_8_page" relevant=" /data/all_habits_never  = 'no'"/>
       <bind nodeset="/data/photo_8_page/photo_8" type="binary" required="true()"/>
-      <bind nodeset="/data/photo_8_page/ai_photo_8_label" type="string"/>
-      <bind nodeset="/data/photo_8_page/ai_photo_8_score" type="string"/>
       <bind nodeset="/data/photo_8_page/ai_photo_8_suspicion" type="string" required="true()"/>
+      <bind nodeset="/data/final_ai_analysis_page" relevant=" /data/all_habits_never  = 'no'"/>
       <bind nodeset="/data/final_ai_analysis_page/final_ai_suspicion" type="string"/>
-      <bind nodeset="/data/final_ai_analysis_page/final_ai_referral" type="string" relevant=" /data/final_ai_analysis_page/final_ai_suspicion  = 'non_suspicious'"/>
+      <bind nodeset="/data/final_ai_analysis_page/final_ai_referral" type="string" relevant=" /data/final_ai_analysis_page/final_ai_suspicion  = 'suspicious' or  /data/final_ai_analysis_page/final_ai_suspicion  = 'non_suspicious'"/>
       <bind nodeset="/data/state_final" type="string" calculate=" /data/inputs/state "/>
       <bind nodeset="/data/district_final" type="string" calculate=" /data/inputs/district "/>
-      <bind nodeset="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_filled_by/lbl_filled_by" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_lbl_filled_by/calc_reporter_name" type="string" calculate=" /data/reporter_name "/>
-      <bind nodeset="/data/group_summary/grp_lbl_patient/lbl_patient_lbl" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_patient/lbl_patient" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_lbl_patient/calc_patient_name" type="string" calculate=" /data/patient_name "/>
-      <bind nodeset="/data/group_summary/grp_lbl_state/lbl_state_lbl" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_lbl_state/calc_state" type="string" calculate=" /data/inputs/state "/>
-      <bind nodeset="/data/group_summary/grp_lbl_district/lbl_district_lbl" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_lbl_district/calc_district" type="string" calculate=" /data/inputs/district "/>
+      <bind nodeset="/data/group_summary/grp_lbl_state/lbl_state" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_state/calc_state_lbl" type="string" calculate="jr:choice-name( /data/inputs/state ,' /data/inputs/state ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_district/lbl_district" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_district/calc_district_lbl" type="string" calculate="jr:choice-name( /data/inputs/district ,' /data/inputs/district ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_age/lbl_age" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_gender/lbl_gender" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_gender/calc_gender_lbl" type="string" calculate="jr:choice-name( /data/participant/gender ,' /data/participant/gender ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_hh_q1/lbl_hh_q1" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_hh_q1/calc_cigarette_lbl" type="string" calculate="jr:choice-name( /data/habit_history/cigarette_bidi ,' /data/habit_history/cigarette_bidi ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_hh_q2/lbl_hh_q2" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_hh_q2/calc_smokeless_lbl" type="string" calculate="jr:choice-name( /data/habit_history/smokeless_tobacco ,' /data/habit_history/smokeless_tobacco ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_hh_q3/lbl_hh_q3" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_hh_q3/calc_areca_lbl" type="string" calculate="jr:choice-name( /data/habit_history/areca_nut ,' /data/habit_history/areca_nut ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_hh_q4/lbl_hh_q4" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_hh_q4/calc_alcohol_lbl" type="string" calculate="jr:choice-name( /data/habit_history/alcohol ,' /data/habit_history/alcohol ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_hh_q5" relevant=" /data/habit_history/alcohol  = 'current'"/>
+      <bind nodeset="/data/group_summary/grp_lbl_hh_q5/lbl_hh_q5" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_1" relevant=" /data/all_habits_never  = 'no'"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_1/lbl_photo_1_suspicion" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_1/calc_photo_1_suspicion_lbl" type="string" calculate="jr:choice-name( /data/photo_1_page/ai_photo_1_suspicion ,' /data/photo_1_page/ai_photo_1_suspicion ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_2" relevant=" /data/all_habits_never  = 'no'"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_2/lbl_photo_2_suspicion" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_2/calc_photo_2_suspicion_lbl" type="string" calculate="jr:choice-name( /data/photo_2_page/ai_photo_2_suspicion ,' /data/photo_2_page/ai_photo_2_suspicion ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_3" relevant=" /data/all_habits_never  = 'no'"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_3/lbl_photo_3_suspicion" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_3/calc_photo_3_suspicion_lbl" type="string" calculate="jr:choice-name( /data/photo_3_page/ai_photo_3_suspicion ,' /data/photo_3_page/ai_photo_3_suspicion ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_4" relevant=" /data/all_habits_never  = 'no'"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_4/lbl_photo_4_suspicion" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_4/calc_photo_4_suspicion_lbl" type="string" calculate="jr:choice-name( /data/photo_4_page/ai_photo_4_suspicion ,' /data/photo_4_page/ai_photo_4_suspicion ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_5" relevant=" /data/all_habits_never  = 'no'"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_5/lbl_photo_5_suspicion" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_5/calc_photo_5_suspicion_lbl" type="string" calculate="jr:choice-name( /data/photo_5_page/ai_photo_5_suspicion ,' /data/photo_5_page/ai_photo_5_suspicion ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_6" relevant=" /data/all_habits_never  = 'no'"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_6/lbl_photo_6_suspicion" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_6/calc_photo_6_suspicion_lbl" type="string" calculate="jr:choice-name( /data/photo_6_page/ai_photo_6_suspicion ,' /data/photo_6_page/ai_photo_6_suspicion ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_7" relevant=" /data/all_habits_never  = 'no'"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_7/lbl_photo_7_suspicion" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_7/calc_photo_7_suspicion_lbl" type="string" calculate="jr:choice-name( /data/photo_7_page/ai_photo_7_suspicion ,' /data/photo_7_page/ai_photo_7_suspicion ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_8" relevant=" /data/all_habits_never  = 'no'"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_8/lbl_photo_8_suspicion" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_photo_8/calc_photo_8_suspicion_lbl" type="string" calculate="jr:choice-name( /data/photo_8_page/ai_photo_8_suspicion ,' /data/photo_8_page/ai_photo_8_suspicion ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_final_suspicion" relevant=" /data/all_habits_never  = 'no'"/>
+      <bind nodeset="/data/group_summary/grp_lbl_final_suspicion/lbl_final_suspicion" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_final_suspicion/calc_final_suspicion_lbl" type="string" calculate="jr:choice-name( /data/final_ai_analysis_page/final_ai_suspicion ,' /data/final_ai_analysis_page/final_ai_suspicion ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_final_referral" relevant=" /data/all_habits_never  = 'no' and ( /data/final_ai_analysis_page/final_ai_suspicion  = 'non_suspicious' or  /data/final_ai_analysis_page/final_ai_suspicion  = 'suspicious')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_final_referral/lbl_final_referral" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_final_referral/calc_final_referral_lbl" type="string" calculate="jr:choice-name( /data/final_ai_analysis_page/final_ai_referral ,' /data/final_ai_analysis_page/final_ai_referral ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_habit_status/lbl_habit_status" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_habit_status/calc_habit_status_lbl" type="string" calculate="if( /data/all_habits_never  = 'yes','As per Habit History, nothing suspicious is found. So no need of Oral Visual Examination ','Patient has habit history. Photos are captured for Oral Exam.')"/>
       <bind nodeset="/data/group_summary/ai_analysis_summary" type="string"/>
       <bind nodeset="/data/group_summary/ai_analysis_status" type="string"/>
       <bind nodeset="/data/group_summary/ai_analysis_error" type="string"/>
-      <bind nodeset="/data/form_submit_timestamp_iso" type="string" calculate="format-date-time(now(), '%Y-%m-%dT%H:%M:%S+05:30')"/>
-      <bind nodeset="/data/form_submit_timestamp_display" type="string" calculate="format-date-time(now(), '%e-%b-%Y %H:%M:%S')"/>
       <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
       <bind nodeset="/data/meta/instanceName" type="string" calculate=" /data/title "/>
     </model>
   </h:head>
   <h:body class="pages grid-layout">
+    <group appearance="field-list" ref="/data/oral_intro_page">
+      <label>Oral Cancer Screening</label>
+      <input ref="/data/oral_intro_page/oral_intro_note">
+        <label ref="jr:itext('/data/oral_intro_page/oral_intro_note:label')"/>
+      </input>
+    </group>
     <group appearance="field-list" ref="/data/inputs">
       <label>Patient &amp; Reporter Info</label>
       <group ref="/data/inputs/user"/>
@@ -504,16 +625,22 @@
         <hint>Enter a whole number from 0 to 7</hint>
       </input>
     </group>
+    <group appearance="field-list" ref="/data/photo_no_intro_page">
+      <label>No Oral Visual Exam</label>
+      <input ref="/data/photo_no_intro_page/photo_no_intro_note">
+        <label>No oral cancer risk detected based on habit history. Oral Visual Exam Not Needed.</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/photo_intro_page">
+      <label>Oral Photo Instructions</label>
+      <input ref="/data/photo_intro_page/photo_intro_note">
+        <label>You will now take 8 photos of the oral cavity to identify lesions.</label>
+      </input>
+    </group>
     <group appearance="field-list" ref="/data/photo_1_page">
       <upload ref="/data/photo_1_page/photo_1" mediatype="image/*">
         <label>Photo 1 / 8</label>
       </upload>
-      <input ref="/data/photo_1_page/ai_photo_1_label">
-        <label>Photo 1 Label</label>
-      </input>
-      <input ref="/data/photo_1_page/ai_photo_1_score">
-        <label>Photo 1 Accuracy</label>
-      </input>
       <select1 ref="/data/photo_1_page/ai_photo_1_suspicion">
         <label>Photo 1 Suspicion</label>
         <itemset nodeset="instance('suspicion')/root/item">
@@ -526,12 +653,6 @@
       <upload ref="/data/photo_2_page/photo_2" mediatype="image/*">
         <label>Photo 2 / 8</label>
       </upload>
-      <input ref="/data/photo_2_page/ai_photo_2_label">
-        <label>Photo 2 Label</label>
-      </input>
-      <input ref="/data/photo_2_page/ai_photo_2_score">
-        <label>Photo 2 Accuracy</label>
-      </input>
       <select1 ref="/data/photo_2_page/ai_photo_2_suspicion">
         <label>Photo 2 Suspicion</label>
         <itemset nodeset="instance('suspicion')/root/item">
@@ -544,12 +665,6 @@
       <upload ref="/data/photo_3_page/photo_3" mediatype="image/*">
         <label>Photo 3 / 8</label>
       </upload>
-      <input ref="/data/photo_3_page/ai_photo_3_label">
-        <label>Photo 3 Label</label>
-      </input>
-      <input ref="/data/photo_3_page/ai_photo_3_score">
-        <label>Photo 3 Accuracy</label>
-      </input>
       <select1 ref="/data/photo_3_page/ai_photo_3_suspicion">
         <label>Photo 3 Suspicion</label>
         <itemset nodeset="instance('suspicion')/root/item">
@@ -562,12 +677,6 @@
       <upload ref="/data/photo_4_page/photo_4" mediatype="image/*">
         <label>Photo 4 / 8</label>
       </upload>
-      <input ref="/data/photo_4_page/ai_photo_4_label">
-        <label>Photo 4 Label</label>
-      </input>
-      <input ref="/data/photo_4_page/ai_photo_4_score">
-        <label>Photo 4 Accuracy</label>
-      </input>
       <select1 ref="/data/photo_4_page/ai_photo_4_suspicion">
         <label>Photo 4 Suspicion</label>
         <itemset nodeset="instance('suspicion')/root/item">
@@ -580,12 +689,6 @@
       <upload ref="/data/photo_5_page/photo_5" mediatype="image/*">
         <label>Photo 5 / 8</label>
       </upload>
-      <input ref="/data/photo_5_page/ai_photo_5_label">
-        <label>Photo 5 Label</label>
-      </input>
-      <input ref="/data/photo_5_page/ai_photo_5_score">
-        <label>Photo 5 Accuracy</label>
-      </input>
       <select1 ref="/data/photo_5_page/ai_photo_5_suspicion">
         <label>Photo 5 Suspicion</label>
         <itemset nodeset="instance('suspicion')/root/item">
@@ -598,12 +701,6 @@
       <upload ref="/data/photo_6_page/photo_6" mediatype="image/*">
         <label>Photo 6 / 8</label>
       </upload>
-      <input ref="/data/photo_6_page/ai_photo_6_label">
-        <label>Photo 6 Label</label>
-      </input>
-      <input ref="/data/photo_6_page/ai_photo_6_score">
-        <label>Photo 6 Accuracy</label>
-      </input>
       <select1 ref="/data/photo_6_page/ai_photo_6_suspicion">
         <label>Photo 6 Suspicion</label>
         <itemset nodeset="instance('suspicion')/root/item">
@@ -616,12 +713,6 @@
       <upload ref="/data/photo_7_page/photo_7" mediatype="image/*">
         <label>Photo 7 / 8</label>
       </upload>
-      <input ref="/data/photo_7_page/ai_photo_7_label">
-        <label>Photo 7 Label</label>
-      </input>
-      <input ref="/data/photo_7_page/ai_photo_7_score">
-        <label>Photo 7 Accuracy</label>
-      </input>
       <select1 ref="/data/photo_7_page/ai_photo_7_suspicion">
         <label>Photo 7 Suspicion</label>
         <itemset nodeset="instance('suspicion')/root/item">
@@ -634,12 +725,6 @@
       <upload ref="/data/photo_8_page/photo_8" mediatype="image/*">
         <label>Photo 8 / 8</label>
       </upload>
-      <input ref="/data/photo_8_page/ai_photo_8_label">
-        <label>Photo 8 Label</label>
-      </input>
-      <input ref="/data/photo_8_page/ai_photo_8_score">
-        <label>Photo 8 Accuracy</label>
-      </input>
       <select1 ref="/data/photo_8_page/ai_photo_8_suspicion">
         <label>Photo 8 Suspicion</label>
         <itemset nodeset="instance('suspicion')/root/item">
@@ -650,7 +735,7 @@
     </group>
     <group appearance="field-list" ref="/data/final_ai_analysis_page">
       <select1 ref="/data/final_ai_analysis_page/final_ai_suspicion">
-        <label>Final AI Analysis</label>
+        <label>Final AI Recommendation</label>
         <itemset nodeset="instance('suspicion')/root/item">
           <value ref="name"/>
           <label ref="label"/>
@@ -658,32 +743,122 @@
       </select1>
       <select1 ref="/data/final_ai_analysis_page/final_ai_referral">
         <label>Referral Decision</label>
-        <itemset nodeset="instance('referral')/root/item">
+        <itemset nodeset="instance('referral')/root/item[suspicion_type =  /data/final_ai_analysis_page/final_ai_suspicion ]">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
     </group>
     <group appearance="field-list" ref="/data/group_summary">
-      <label>Assessment Summary</label>
+      <label>Assessment Summary for Oral Cancer Assessment</label>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_filled_by">
-        <input ref="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_lbl">
+        <input ref="/data/group_summary/grp_lbl_filled_by/lbl_filled_by">
           <label> **Filled by:** <output value=" /data/reporter_name "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_patient">
-        <input ref="/data/group_summary/grp_lbl_patient/lbl_patient_lbl">
+        <input ref="/data/group_summary/grp_lbl_patient/lbl_patient">
           <label> **Patient:** <output value=" /data/patient_name "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_state">
-        <input ref="/data/group_summary/grp_lbl_state/lbl_state_lbl">
-          <label> **State:** <output value=" /data/inputs/state "/></label>
+        <input ref="/data/group_summary/grp_lbl_state/lbl_state">
+          <label> **State:** <output value=" /data/group_summary/grp_lbl_state/calc_state_lbl "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_district">
-        <input ref="/data/group_summary/grp_lbl_district/lbl_district_lbl">
-          <label> **District:** <output value=" /data/inputs/district "/></label>
+        <input ref="/data/group_summary/grp_lbl_district/lbl_district">
+          <label> **District:** <output value=" /data/group_summary/grp_lbl_district/calc_district_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_age">
+        <input ref="/data/group_summary/grp_lbl_age/lbl_age">
+          <label> **Age:** <output value=" /data/participant/age "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_gender">
+        <input ref="/data/group_summary/grp_lbl_gender/lbl_gender">
+          <label> **Gender:** <output value=" /data/group_summary/grp_lbl_gender/calc_gender_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_hh_q1">
+        <input ref="/data/group_summary/grp_lbl_hh_q1/lbl_hh_q1">
+          <label> **1. Cigarette / Bidi:** <output value=" /data/group_summary/grp_lbl_hh_q1/calc_cigarette_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_hh_q2">
+        <input ref="/data/group_summary/grp_lbl_hh_q2/lbl_hh_q2">
+          <label> **2. Smokeless Tobacco:** <output value=" /data/group_summary/grp_lbl_hh_q2/calc_smokeless_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_hh_q3">
+        <input ref="/data/group_summary/grp_lbl_hh_q3/lbl_hh_q3">
+          <label> **3. Areca Nut:** <output value=" /data/group_summary/grp_lbl_hh_q3/calc_areca_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_hh_q4">
+        <input ref="/data/group_summary/grp_lbl_hh_q4/lbl_hh_q4">
+          <label> **4. Alcohol:** <output value=" /data/group_summary/grp_lbl_hh_q4/calc_alcohol_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_hh_q5">
+        <input ref="/data/group_summary/grp_lbl_hh_q5/lbl_hh_q5">
+          <label> **5. Alcohol Frequency (days/week):** <output value=" /data/habit_history/alcohol_frequency "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_photo_1">
+        <input ref="/data/group_summary/grp_lbl_photo_1/lbl_photo_1_suspicion">
+          <label> **Photo 1 Suspicion:** <output value=" /data/group_summary/grp_lbl_photo_1/calc_photo_1_suspicion_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_photo_2">
+        <input ref="/data/group_summary/grp_lbl_photo_2/lbl_photo_2_suspicion">
+          <label> **Photo 2 Suspicion:** <output value=" /data/group_summary/grp_lbl_photo_2/calc_photo_2_suspicion_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_photo_3">
+        <input ref="/data/group_summary/grp_lbl_photo_3/lbl_photo_3_suspicion">
+          <label> **Photo 3 Suspicion:** <output value=" /data/group_summary/grp_lbl_photo_3/calc_photo_3_suspicion_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_photo_4">
+        <input ref="/data/group_summary/grp_lbl_photo_4/lbl_photo_4_suspicion">
+          <label> **Photo 4 Suspicion:** <output value=" /data/group_summary/grp_lbl_photo_4/calc_photo_4_suspicion_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_photo_5">
+        <input ref="/data/group_summary/grp_lbl_photo_5/lbl_photo_5_suspicion">
+          <label> **Photo 5 Suspicion:** <output value=" /data/group_summary/grp_lbl_photo_5/calc_photo_5_suspicion_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_photo_6">
+        <input ref="/data/group_summary/grp_lbl_photo_6/lbl_photo_6_suspicion">
+          <label> **Photo 6 Suspicion:** <output value=" /data/group_summary/grp_lbl_photo_6/calc_photo_6_suspicion_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_photo_7">
+        <input ref="/data/group_summary/grp_lbl_photo_7/lbl_photo_7_suspicion">
+          <label> **Photo 7 Suspicion:** <output value=" /data/group_summary/grp_lbl_photo_7/calc_photo_7_suspicion_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_photo_8">
+        <input ref="/data/group_summary/grp_lbl_photo_8/lbl_photo_8_suspicion">
+          <label> **Photo 8 Suspicion:** <output value=" /data/group_summary/grp_lbl_photo_8/calc_photo_8_suspicion_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_final_suspicion">
+        <input ref="/data/group_summary/grp_lbl_final_suspicion/lbl_final_suspicion">
+          <label> **Final AI Recommendation:** <output value=" /data/group_summary/grp_lbl_final_suspicion/calc_final_suspicion_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_final_referral">
+        <input ref="/data/group_summary/grp_lbl_final_referral/lbl_final_referral">
+          <label> **Referral Decision:** <output value=" /data/group_summary/grp_lbl_final_referral/calc_final_referral_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_lbl_habit_status">
+        <input ref="/data/group_summary/grp_lbl_habit_status/lbl_habit_status">
+          <label> **Habit Status:** <output value=" /data/group_summary/grp_lbl_habit_status/calc_habit_status_lbl "/></label>
         </input>
       </group>
       <input ref="/data/group_summary/ai_analysis_summary" appearance="hidden">

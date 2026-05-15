@@ -1,10 +1,9 @@
 {
   "title": "Breast Cancer Risk Assessment",
   "icon": "icon-people-woman",
-  "show_in_reports": false,
   "context": {
     "person": true,
     "place": false,
-    "expression": "true"
+    "permission": "can_view_breast_cancer_risk_assessment_form"
   }
 }

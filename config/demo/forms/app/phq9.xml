@@ -11,8 +11,6 @@
           <reporter_name/>
           <reporter_place/>
           <title/>
-          <form_start_timestamp/>
-          <form_sync_timestamp/>
           <page_info>
             <lbl_about_phq9/>
           </page_info>
@@ -40,7 +38,14 @@
             <state/>
             <district/>
           </inputs>
-          <instructions/>
+          <instructions>
+            <instructions_1/>
+            <Instructions_2/>
+            <Instructions_3/>
+            <Instructions_4/>
+            <Instructions_5/>
+            <Instructions_6/>
+          </instructions>
           <page_1>
             <little_interest_or_pleasure/>
             <feeling_depressed_or_hopeless/>
@@ -125,8 +130,6 @@
             </grp_lbl_severity>
             <severity_guide/>
           </group_summary>
-          <form_submit_timestamp_iso/>
-          <form_submit_timestamp_display/>
           <meta tag="hidden">
             <instanceID/>
             <instanceName/>
@@ -319,8 +322,6 @@
       <bind nodeset="/data/reporter_name" type="string" calculate="../inputs/user/name"/>
       <bind nodeset="/data/reporter_place" type="string" calculate="instance('user-contact-summary')/context/facility_name"/>
       <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
-      <bind nodeset="/data/form_start_timestamp" type="string" calculate="once(if( /data/inputs/contact/_id  != '', now(), ''))"/>
-      <bind nodeset="/data/form_sync_timestamp" type="string"/>
       <bind nodeset="/data/page_info/lbl_about_phq9" readonly="true()" type="string"/>
       <bind nodeset="/data/inputs/source" type="string"/>
       <bind nodeset="/data/inputs/source_id" type="string"/>
@@ -332,7 +333,12 @@
       <bind nodeset="/data/inputs/contact/name" type="string"/>
       <bind nodeset="/data/inputs/state" type="string" required="true()"/>
       <bind nodeset="/data/inputs/district" type="string" required="true()"/>
-      <bind nodeset="/data/instructions" readonly="true()" type="string"/>
+      <bind nodeset="/data/instructions/instructions_1" readonly="true()" type="string"/>
+      <bind nodeset="/data/instructions/Instructions_2" readonly="true()" type="string"/>
+      <bind nodeset="/data/instructions/Instructions_3" readonly="true()" type="string"/>
+      <bind nodeset="/data/instructions/Instructions_4" readonly="true()" type="string"/>
+      <bind nodeset="/data/instructions/Instructions_5" readonly="true()" type="string"/>
+      <bind nodeset="/data/instructions/Instructions_6" readonly="true()" type="string"/>
       <bind nodeset="/data/page_1/little_interest_or_pleasure" type="string" required="true()"/>
       <bind nodeset="/data/page_1/feeling_depressed_or_hopeless" type="string" required="true()"/>
       <bind nodeset="/data/page_2/trouble_sleeping" type="string" required="true()"/>
@@ -375,8 +381,6 @@
       <bind nodeset="/data/group_summary/grp_lbl_severity/lbl_severity_lbl" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_lbl_severity/calc_severity_category" type="string" calculate="if( /data/severity_category  = 'minimal', 'Minimal (0–4)', if( /data/severity_category  = 'mild', 'Mild (5–9)', if( /data/severity_category  = 'moderate', 'Moderate (10–14)', if( /data/severity_category  = 'moderately_severe', 'Moderately Severe (15–19)', if( /data/severity_category  = 'severe', 'Severe (20–27)',  /data/severity_category )))))"/>
       <bind nodeset="/data/group_summary/severity_guide" readonly="true()" type="string"/>
-      <bind nodeset="/data/form_submit_timestamp_iso" type="string" calculate="format-date-time(now(), '%Y-%m-%dT%H:%M:%S+05:30')"/>
-      <bind nodeset="/data/form_submit_timestamp_display" type="string" calculate="format-date-time(now(), '%e-%b-%Y %H:%M:%S')"/>
       <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
       <bind nodeset="/data/meta/instanceName" type="string" calculate=" /data/title "/>
     </model>
@@ -421,9 +425,26 @@
         </itemset>
       </select1>
     </group>
-    <input ref="/data/instructions">
-      <label>PHQ-9: Patient Health Questionnaire Over the last 2 weeks, how often have you been bothered by any of the following problems? Answer all 9 questions. Each question is scored: Not at all=0, Several days=1, More than half the days=2, Nearly every day=3</label>
-    </input>
+    <group appearance="field-list" ref="/data/instructions">
+      <input ref="/data/instructions/instructions_1">
+        <label>PHQ-9: Patient Health Questionnaire</label>
+      </input>
+      <input ref="/data/instructions/Instructions_2">
+        <label>Over the last 2 weeks, how often have you been bothered by any of the following problems? Answer all 9 questions. Each question is scored:</label>
+      </input>
+      <input ref="/data/instructions/Instructions_3">
+        <label>Not at all=0,</label>
+      </input>
+      <input ref="/data/instructions/Instructions_4">
+        <label>Several days=1,</label>
+      </input>
+      <input ref="/data/instructions/Instructions_5">
+        <label>More than half the days=2,</label>
+      </input>
+      <input ref="/data/instructions/Instructions_6">
+        <label>Nearly every day=3</label>
+      </input>
+    </group>
     <group appearance="field-list" ref="/data/page_1">
       <label>Questions 1 &amp; 2 of 9</label>
       <select1 ref="/data/page_1/little_interest_or_pleasure">
@@ -512,7 +533,7 @@
       </select1>
     </group>
     <group appearance="field-list" ref="/data/group_summary">
-      <label>Assessment Summary</label>
+      <label>Assessment Summary for Mental Health Form</label>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_filled_by">
         <input ref="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_lbl">
           <label> **Filled by:** <output value=" /data/reporter_name "/></label>

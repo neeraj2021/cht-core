@@ -1,0 +1,561 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://www.opendatakit.org/xforms">
+  <h:head>
+    <h:title>Hypertension Screening and Diabetes Assessment</h:title>
+    <model odk:xforms-version="1.0.0">
+      <instance>
+        <data id="hypertension_diabetes" prefix="J1!hypertension_diabetes!" delimiter="#">
+          <patient_id/>
+          <patient_uuid/>
+          <patient_name/>
+          <reporter_name/>
+          <reporter_place/>
+          <title/>
+          <about_intro>
+            <about_intro_note/>
+          </about_intro>
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source/>
+            <source_id/>
+            <user>
+              <name/>
+              <phone/>
+            </user>
+            <reporter_name_note/>
+            <contact>
+              <_id/>
+              <patient_id/>
+              <name/>
+            </contact>
+            <state/>
+            <district/>
+          </inputs>
+          <intro_form_2/>
+          <hypertension>
+            <systolic/>
+            <diastolic/>
+          </hypertension>
+          <bp_referral_page>
+            <bp_referral_note/>
+            <bp_referral_decision/>
+          </bp_referral_page>
+          <bp_lifestyle_page>
+            <bp_lifestyle_note/>
+          </bp_lifestyle_page>
+          <bp_normal_page>
+            <bp_normal_note/>
+            <bp_referral_decision_normal/>
+          </bp_normal_page>
+          <diabetes_section>
+            <rapid_glucose/>
+          </diabetes_section>
+          <glucose_referral_page>
+            <glucose_referral_note/>
+            <glucose_referral_decision/>
+          </glucose_referral_page>
+          <glucose_normal_page>
+            <glucose_normal_note/>
+            <glucose_referral_decision_normal/>
+          </glucose_normal_page>
+          <calc_state_lbl/>
+          <calc_district_lbl/>
+          <calc_bp_referral_lbl/>
+          <calc_glucose_referral_lbl/>
+          <form_2_summary>
+            <grp_lbl_filled_by>
+              <lbl_filled_by/>
+              <calc_reporter_name/>
+            </grp_lbl_filled_by>
+            <grp_lbl_patient>
+              <lbl_patient/>
+              <calc_patient_name/>
+            </grp_lbl_patient>
+            <grp_lbl_state>
+              <lbl_state/>
+              <calc_state_sum/>
+            </grp_lbl_state>
+            <grp_lbl_district>
+              <lbl_district/>
+              <calc_district_sum/>
+            </grp_lbl_district>
+            <grp_lbl_systolic>
+              <lbl_systolic/>
+              <calc_systolic/>
+            </grp_lbl_systolic>
+            <grp_lbl_diastolic>
+              <lbl_diastolic/>
+              <calc_diastolic/>
+            </grp_lbl_diastolic>
+            <grp_lbl_bp_status>
+              <lbl_bp_status/>
+              <calc_bp_status_lbl/>
+            </grp_lbl_bp_status>
+            <grp_lbl_bp_referral>
+              <lbl_bp_referral/>
+              <calc_bp_referral_sum/>
+            </grp_lbl_bp_referral>
+            <grp_lbl_glucose>
+              <lbl_glucose/>
+              <calc_rapid_glucose/>
+            </grp_lbl_glucose>
+            <grp_lbl_glucose_status>
+              <lbl_glucose_status/>
+              <calc_glucose_status_lbl/>
+            </grp_lbl_glucose_status>
+            <grp_lbl_glucose_referral>
+              <lbl_glucose_referral/>
+              <calc_glucose_referral_sum/>
+            </grp_lbl_glucose_referral>
+          </form_2_summary>
+          <meta tag="hidden">
+            <instanceID/>
+            <instanceName/>
+          </meta>
+        </data>
+      </instance>
+      <instance id="contact-summary"/>
+      <instance id="user-contact-summary"/>
+      <instance id="yes_no">
+        <root>
+          <item>
+            <name>yes</name>
+            <label>Yes</label>
+          </item>
+          <item>
+            <name>no</name>
+            <label>No</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="referral">
+        <root>
+          <item>
+            <name>do_not_refer</name>
+            <label>Don't Refer</label>
+          </item>
+          <item>
+            <name>refer_anyway</name>
+            <label>Refer Anyway</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="refer_only">
+        <root>
+          <item>
+            <name>refer_anyway</name>
+            <label>Refer</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="states">
+        <root>
+          <item>
+            <name>kerala</name>
+            <label>Kerala</label>
+          </item>
+          <item>
+            <name>tamil_nadu</name>
+            <label>Tamil Nadu</label>
+          </item>
+          <item>
+            <name>andhra_pradesh</name>
+            <label>Andhra Pradesh</label>
+          </item>
+          <item>
+            <name>telangana</name>
+            <label>Telangana</label>
+          </item>
+          <item>
+            <name>karnataka</name>
+            <label>Karnataka</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="districts">
+        <root>
+          <item>
+            <name>chennai</name>
+            <label>Chennai</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>thanjavur</name>
+            <label>Thanjavur</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>coimbatore</name>
+            <label>Coimbatore</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>madurai</name>
+            <label>Madurai</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>salem</name>
+            <label>Salem</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>tiruchirappalli</name>
+            <label>Tiruchirappalli</label>
+            <filter>tamil_nadu</filter>
+          </item>
+          <item>
+            <name>thiruvananthapuram</name>
+            <label>Thiruvananthapuram</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kochi</name>
+            <label>Kochi</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kozhikode</name>
+            <label>Kozhikode</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>thrissur</name>
+            <label>Thrissur</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>kollam</name>
+            <label>Kollam</label>
+            <filter>kerala</filter>
+          </item>
+          <item>
+            <name>visakhapatnam</name>
+            <label>Visakhapatnam</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>vijayawada</name>
+            <label>Vijayawada</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>guntur</name>
+            <label>Guntur</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>tirupati</name>
+            <label>Tirupati</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>kurnool</name>
+            <label>Kurnool</label>
+            <filter>andhra_pradesh</filter>
+          </item>
+          <item>
+            <name>hyderabad</name>
+            <label>Hyderabad</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>warangal</name>
+            <label>Warangal</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>nizamabad</name>
+            <label>Nizamabad</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>karimnagar</name>
+            <label>Karimnagar</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>khammam</name>
+            <label>Khammam</label>
+            <filter>telangana</filter>
+          </item>
+          <item>
+            <name>bengaluru</name>
+            <label>Bengaluru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>mysuru</name>
+            <label>Mysuru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>hubli</name>
+            <label>Hubli-Dharwad</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>mangaluru</name>
+            <label>Mangaluru</label>
+            <filter>karnataka</filter>
+          </item>
+          <item>
+            <name>belagavi</name>
+            <label>Belagavi</label>
+            <filter>karnataka</filter>
+          </item>
+        </root>
+      </instance>
+      <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
+      <bind nodeset="/data/patient_uuid" type="string" calculate="../inputs/contact/_id"/>
+      <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
+      <bind nodeset="/data/reporter_name" type="string" calculate="../inputs/user/name"/>
+      <bind nodeset="/data/reporter_place" type="string" calculate="instance('user-contact-summary')/context/facility_name"/>
+      <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/about_intro/about_intro_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/inputs/source" type="string"/>
+      <bind nodeset="/data/inputs/source_id" type="string"/>
+      <bind nodeset="/data/inputs/user/name" type="string"/>
+      <bind nodeset="/data/inputs/user/phone" type="string"/>
+      <bind nodeset="/data/inputs/reporter_name_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/inputs/contact/_id" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/contact/patient_id" type="string"/>
+      <bind nodeset="/data/inputs/contact/name" type="string"/>
+      <bind nodeset="/data/inputs/state" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/district" type="string" required="true()"/>
+      <bind nodeset="/data/intro_form_2" readonly="true()" type="string"/>
+      <bind nodeset="/data/hypertension/systolic" type="int" required="true()" constraint=". &gt;= 60 and . &lt;= 300" jr:constraintMsg="Systolic must be between 60 and 300 mmHg."/>
+      <bind nodeset="/data/hypertension/diastolic" type="int" required="true()" constraint=". &gt;= 40 and . &lt;= 200" jr:constraintMsg="Diastolic must be between 40 and 200 mmHg."/>
+      <bind nodeset="/data/bp_referral_page" relevant=" /data/hypertension/systolic  &gt; 140 or  /data/hypertension/diastolic  &gt; 90"/>
+      <bind nodeset="/data/bp_referral_page/bp_referral_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/bp_referral_page/bp_referral_decision" type="string" required="true()" relevant=" /data/hypertension/systolic  &gt; 140 or  /data/hypertension/diastolic  &gt; 90"/>
+      <bind nodeset="/data/bp_lifestyle_page" relevant="not( /data/hypertension/systolic  &gt; 140 or  /data/hypertension/diastolic  &gt; 90) and ( /data/hypertension/systolic  &gt; 120 and  /data/hypertension/diastolic  &gt; 80)"/>
+      <bind nodeset="/data/bp_lifestyle_page/bp_lifestyle_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/bp_normal_page" relevant="not( /data/hypertension/systolic  &gt; 140 or  /data/hypertension/diastolic  &gt; 90) and not( /data/hypertension/systolic  &gt; 120 and  /data/hypertension/diastolic  &gt; 80)"/>
+      <bind nodeset="/data/bp_normal_page/bp_normal_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/bp_normal_page/bp_referral_decision_normal" type="string" required="true()" relevant="not( /data/hypertension/systolic  &gt; 140 or  /data/hypertension/diastolic  &gt; 90) and not( /data/hypertension/systolic  &gt; 120 and  /data/hypertension/diastolic  &gt; 80)"/>
+      <bind nodeset="/data/diabetes_section/rapid_glucose" type="int" required="true()" constraint=". &gt;= 20 and . &lt;= 600" jr:constraintMsg="Rapid glucose must be between 20 and 600 mg/dL."/>
+      <bind nodeset="/data/glucose_referral_page" relevant=" /data/diabetes_section/rapid_glucose  &gt; 140"/>
+      <bind nodeset="/data/glucose_referral_page/glucose_referral_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/glucose_referral_page/glucose_referral_decision" type="string" required="true()" relevant=" /data/diabetes_section/rapid_glucose  &gt; 140"/>
+      <bind nodeset="/data/glucose_normal_page" relevant="not( /data/diabetes_section/rapid_glucose  &gt; 140)"/>
+      <bind nodeset="/data/glucose_normal_page/glucose_normal_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/glucose_normal_page/glucose_referral_decision_normal" type="string" required="true()" relevant="not( /data/diabetes_section/rapid_glucose  &gt; 140)"/>
+      <bind nodeset="/data/calc_state_lbl" type="string" calculate="jr:choice-name( /data/inputs/state ,' /data/inputs/state ')"/>
+      <bind nodeset="/data/calc_district_lbl" type="string" calculate="jr:choice-name( /data/inputs/district ,' /data/inputs/district ')"/>
+      <bind nodeset="/data/calc_bp_referral_lbl" type="string" calculate="if( /data/hypertension/systolic  &gt; 140 or  /data/hypertension/diastolic  &gt; 90, jr:choice-name( /data/bp_referral_page/bp_referral_decision ,' /data/bp_referral_page/bp_referral_decision '), if(not( /data/hypertension/systolic  &gt; 120 and  /data/hypertension/diastolic  &gt; 80), jr:choice-name( /data/bp_normal_page/bp_referral_decision_normal ,' /data/bp_normal_page/bp_referral_decision_normal '), ''))"/>
+      <bind nodeset="/data/calc_glucose_referral_lbl" type="string" calculate="if( /data/diabetes_section/rapid_glucose  &gt; 140, jr:choice-name( /data/glucose_referral_page/glucose_referral_decision ,' /data/glucose_referral_page/glucose_referral_decision '), jr:choice-name( /data/glucose_normal_page/glucose_referral_decision_normal ,' /data/glucose_normal_page/glucose_referral_decision_normal '))"/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_filled_by/lbl_filled_by" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_filled_by/calc_reporter_name" type="string" calculate=" /data/reporter_name "/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_patient/lbl_patient" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_patient/calc_patient_name" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_state/lbl_state" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_state/calc_state_sum" type="string" calculate=" /data/calc_state_lbl "/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_district/lbl_district" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_district/calc_district_sum" type="string" calculate=" /data/calc_district_lbl "/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_systolic/lbl_systolic" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_systolic/calc_systolic" type="string" calculate=" /data/hypertension/systolic "/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_diastolic/lbl_diastolic" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_diastolic/calc_diastolic" type="string" calculate=" /data/hypertension/diastolic "/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_bp_status/lbl_bp_status" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_bp_status/calc_bp_status_lbl" type="string" calculate="if( /data/hypertension/systolic  &gt; 140 or  /data/hypertension/diastolic  &gt; 90, 'High Blood Pressure – Referral Required', if( /data/hypertension/systolic  &gt; 120 and  /data/hypertension/diastolic  &gt; 80, 'Lifestyle Modification Recommended', 'Normal'))"/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_bp_referral" relevant="not( /data/hypertension/systolic  &gt; 120 and  /data/hypertension/diastolic  &gt; 80) or ( /data/hypertension/systolic  &gt; 140 or  /data/hypertension/diastolic  &gt; 90)"/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_bp_referral/lbl_bp_referral" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_bp_referral/calc_bp_referral_sum" type="string" calculate=" /data/calc_bp_referral_lbl "/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_glucose/lbl_glucose" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_glucose/calc_rapid_glucose" type="string" calculate=" /data/diabetes_section/rapid_glucose "/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_glucose_status/lbl_glucose_status" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_glucose_status/calc_glucose_status_lbl" type="string" calculate="if( /data/diabetes_section/rapid_glucose  &gt; 140, 'High Blood Glucose – Referral Required', 'Normal')"/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_glucose_referral/lbl_glucose_referral" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_2_summary/grp_lbl_glucose_referral/calc_glucose_referral_sum" type="string" calculate=" /data/calc_glucose_referral_lbl "/>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
+      <bind nodeset="/data/meta/instanceName" type="string" calculate=" /data/title "/>
+    </model>
+  </h:head>
+  <h:body class="pages grid-layout">
+    <group ref="/data/about_intro">
+      <label>Hypertension Screening and Diabetes Form</label>
+      <input ref="/data/about_intro/about_intro_note">
+        <label>You will now fill Hypertension Screening and Diabetes Form. This will take 5 – 10 minutes</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/inputs">
+      <label>Patient &amp; Reporter Info</label>
+      <group ref="/data/inputs/user"/>
+      <input ref="/data/inputs/reporter_name_note">
+        <label> Filled by: <output value=" /data/reporter_name "/></label>
+      </input>
+      <group ref="/data/inputs/contact">
+        <input ref="/data/inputs/contact/_id" appearance="select-contact type-person role-patient">
+          <label>Patient's Name</label>
+          <hint>Select the patient from your area</hint>
+        </input>
+        <input ref="/data/inputs/contact/patient_id" appearance="hidden">
+          <label>Medic ID</label>
+        </input>
+        <input ref="/data/inputs/contact/name" appearance="hidden">
+          <label>Patient Name</label>
+        </input>
+      </group>
+      <select1 ref="/data/inputs/state" appearance="minimal">
+        <label>State</label>
+        <itemset nodeset="instance('states')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/inputs/district" appearance="minimal">
+        <label>District</label>
+        <itemset nodeset="instance('districts')/root/item[filter =  /data/inputs/state ]">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <input ref="/data/intro_form_2">
+      <label>## Hypertension Screening and Diabetes Assessment
+Please enter your blood pressure and blood glucose readings.</label>
+    </input>
+    <group appearance="field-list" ref="/data/hypertension">
+      <label>Hypertension Screening</label>
+      <input ref="/data/hypertension/systolic">
+        <label>Systolic (mmHg)</label>
+        <hint>Enter systolic pressure</hint>
+      </input>
+      <input ref="/data/hypertension/diastolic">
+        <label>Diastolic (mmHg)</label>
+        <hint>Enter diastolic pressure</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/bp_referral_page">
+      <label>BP Referral</label>
+      <input ref="/data/bp_referral_page/bp_referral_note">
+        <label>**High Blood Pressure Detected** Systolic &gt; 140 mmHg or Diastolic &gt; 90 mmHg. Referral is required.</label>
+      </input>
+      <select1 ref="/data/bp_referral_page/bp_referral_decision" appearance="radio">
+        <label>Referral Decision</label>
+        <itemset nodeset="instance('refer_only')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/bp_lifestyle_page">
+      <label>Lifestyle Modification</label>
+      <input ref="/data/bp_lifestyle_page/bp_lifestyle_note">
+        <label>**Lifestyle Modification Recommended** Systolic &gt; 120 mmHg and Diastolic &gt; 80 mmHg. Please follow diet and lifestyle modification guidelines.</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/bp_normal_page">
+      <label>BP Assessment</label>
+      <input ref="/data/bp_normal_page/bp_normal_note">
+        <label>**Blood Pressure Normal** Systolic ≤ 120 mmHg and Diastolic ≤ 80 mmHg.</label>
+      </input>
+      <select1 ref="/data/bp_normal_page/bp_referral_decision_normal" appearance="radio">
+        <label>Referral Decision</label>
+        <itemset nodeset="instance('referral')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/diabetes_section">
+      <label>Diabetes Assessment</label>
+      <input ref="/data/diabetes_section/rapid_glucose">
+        <label>Rapid Glucose Test (mg/dL)</label>
+        <hint>Enter blood glucose value</hint>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/glucose_referral_page">
+      <label>Glucose Referral</label>
+      <input ref="/data/glucose_referral_page/glucose_referral_note">
+        <label>**High Blood Glucose Detected** Rapid Glucose &gt; 140 mg/dL. Referral is required.</label>
+      </input>
+      <select1 ref="/data/glucose_referral_page/glucose_referral_decision" appearance="radio">
+        <label>Referral Decision</label>
+        <itemset nodeset="instance('refer_only')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/glucose_normal_page">
+      <label>Glucose Assessment</label>
+      <input ref="/data/glucose_normal_page/glucose_normal_note">
+        <label>**Blood Glucose Normal** Rapid Glucose ≤ 140 mg/dL.</label>
+      </input>
+      <select1 ref="/data/glucose_normal_page/glucose_referral_decision_normal" appearance="radio">
+        <label>Referral Decision</label>
+        <itemset nodeset="instance('referral')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/form_2_summary">
+      <label>Assessment Summary for Hypertension Screening and Diabetes Assessment</label>
+      <group appearance="field-list" ref="/data/form_2_summary/grp_lbl_filled_by">
+        <input ref="/data/form_2_summary/grp_lbl_filled_by/lbl_filled_by">
+          <label> **Filled by:** <output value=" /data/reporter_name "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_2_summary/grp_lbl_patient">
+        <input ref="/data/form_2_summary/grp_lbl_patient/lbl_patient">
+          <label> **Patient:** <output value=" /data/patient_name "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_2_summary/grp_lbl_state">
+        <input ref="/data/form_2_summary/grp_lbl_state/lbl_state">
+          <label> **State:** <output value=" /data/calc_state_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_2_summary/grp_lbl_district">
+        <input ref="/data/form_2_summary/grp_lbl_district/lbl_district">
+          <label> **District:** <output value=" /data/calc_district_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_2_summary/grp_lbl_systolic">
+        <input ref="/data/form_2_summary/grp_lbl_systolic/lbl_systolic">
+          <label> **Systolic (mmHg):** <output value=" /data/hypertension/systolic "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_2_summary/grp_lbl_diastolic">
+        <input ref="/data/form_2_summary/grp_lbl_diastolic/lbl_diastolic">
+          <label> **Diastolic (mmHg):** <output value=" /data/hypertension/diastolic "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_2_summary/grp_lbl_bp_status">
+        <input ref="/data/form_2_summary/grp_lbl_bp_status/lbl_bp_status">
+          <label> **BP Status:** <output value=" /data/form_2_summary/grp_lbl_bp_status/calc_bp_status_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_2_summary/grp_lbl_bp_referral">
+        <input ref="/data/form_2_summary/grp_lbl_bp_referral/lbl_bp_referral">
+          <label> **BP Referral Decision:** <output value=" /data/calc_bp_referral_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_2_summary/grp_lbl_glucose">
+        <input ref="/data/form_2_summary/grp_lbl_glucose/lbl_glucose">
+          <label> **Rapid Glucose Test (mg/dL):** <output value=" /data/diabetes_section/rapid_glucose "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_2_summary/grp_lbl_glucose_status">
+        <input ref="/data/form_2_summary/grp_lbl_glucose_status/lbl_glucose_status">
+          <label> **Glucose Status:** <output value=" /data/form_2_summary/grp_lbl_glucose_status/calc_glucose_status_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/form_2_summary/grp_lbl_glucose_referral">
+        <input ref="/data/form_2_summary/grp_lbl_glucose_referral/lbl_glucose_referral">
+          <label> **Glucose Referral Decision:** <output value=" /data/calc_glucose_referral_lbl "/></label>
+        </input>
+      </group>
+    </group>
+  </h:body>
+</h:html>

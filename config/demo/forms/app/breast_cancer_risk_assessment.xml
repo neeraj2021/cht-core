@@ -3,6 +3,18 @@
   <h:head>
     <h:title>Breast Cancer Risk Assessment</h:title>
     <model odk:xforms-version="1.0.0">
+      <itext>
+        <translation lang="default">
+          <text id="/data/section1_intro_page/section1_intro_note:label">
+            <value>## Section 1: Breast Symptom Exam</value>
+            <value form="image">jr://images/Breast_Cancer_Symptoms.png</value>
+          </text>
+          <text id="/data/section2_intro_page/section2_intro_note:label">
+            <value>## Section 2: Clinical Breast Exam</value>
+            <value form="image">jr://images/Clinical_Breast_Exam.png</value>
+          </text>
+        </translation>
+      </itext>
       <instance>
         <data id="breast_cancer_risk_assessment" version="2026.04.03" prefix="J1!breast_cancer_risk_assessment!" delimiter="#">
           <patient_id/>
@@ -11,8 +23,9 @@
           <reporter_name/>
           <reporter_place/>
           <title/>
-          <form_start_timestamp/>
-          <form_sync_timestamp/>
+          <intro_page>
+            <intro_note/>
+          </intro_page>
           <inputs>
             <meta>
               <location>
@@ -37,9 +50,9 @@
             <state/>
             <district/>
           </inputs>
-          <intro_page>
-            <assessment_intro/>
-          </intro_page>
+          <section1_intro_page>
+            <section1_intro_note/>
+          </section1_intro_page>
           <symptoms_page_1>
             <any_breast_related_symptoms/>
             <lump_or_thickening_in_breast/>
@@ -50,7 +63,7 @@
           </symptoms_page_2>
           <symptoms_page_3>
             <any_retraction_of_nipple/>
-            <discharge_from_nipple/>
+            <discharge_from_nipple_s1/>
           </symptoms_page_3>
           <symptoms_page_4>
             <puckering_or_dimpling/>
@@ -63,29 +76,141 @@
           <symptoms_page_6>
             <erosions_of_nipple/>
           </symptoms_page_6>
-          <remarks_page>
-            <remarks/>
-          </remarks_page>
-          <group_summary>
-            <grp_lbl_filled_by>
-              <lbl_filled_by_lbl/>
-              <calc_reporter_name/>
-            </grp_lbl_filled_by>
-            <grp_lbl_patient>
-              <lbl_patient_lbl/>
-              <calc_patient_name/>
-            </grp_lbl_patient>
-            <grp_lbl_state>
-              <lbl_state_lbl/>
-              <calc_state/>
-            </grp_lbl_state>
-            <grp_lbl_district>
-              <lbl_district_lbl/>
-              <calc_district/>
-            </grp_lbl_district>
-          </group_summary>
-          <form_submit_timestamp_iso/>
-          <form_submit_timestamp_display/>
+          <symptom_detected/>
+          <group_summary_s1>
+            <grp_s1_filled_by>
+              <lbl_s1_filled_by/>
+              <calc_s1_reporter/>
+            </grp_s1_filled_by>
+            <grp_s1_patient>
+              <lbl_s1_patient/>
+              <calc_s1_patient/>
+            </grp_s1_patient>
+            <grp_s1_state>
+              <lbl_s1_state/>
+              <calc_s1_state_lbl/>
+            </grp_s1_state>
+            <grp_s1_district>
+              <lbl_s1_district/>
+              <calc_s1_district_lbl/>
+            </grp_s1_district>
+            <grp_s1_q1>
+              <lbl_s1_q1/>
+              <calc_s1_q1/>
+            </grp_s1_q1>
+            <grp_s1_q2>
+              <lbl_s1_q2/>
+              <calc_s1_q2/>
+            </grp_s1_q2>
+            <grp_s1_q3>
+              <lbl_s1_q3/>
+              <calc_s1_q3/>
+            </grp_s1_q3>
+            <grp_s1_q4>
+              <lbl_s1_q4/>
+              <calc_s1_q4/>
+            </grp_s1_q4>
+            <grp_s1_q5>
+              <lbl_s1_q5/>
+              <calc_s1_q5/>
+            </grp_s1_q5>
+            <grp_s1_q6>
+              <lbl_s1_q6/>
+              <calc_s1_q6/>
+            </grp_s1_q6>
+            <grp_s1_q7>
+              <lbl_s1_q7/>
+              <calc_s1_q7/>
+            </grp_s1_q7>
+            <grp_s1_q8>
+              <lbl_s1_q8/>
+              <calc_s1_q8/>
+            </grp_s1_q8>
+            <grp_s1_q9>
+              <lbl_s1_q9/>
+              <calc_s1_q9/>
+            </grp_s1_q9>
+            <grp_s1_q10>
+              <lbl_s1_q10/>
+              <calc_s1_q10/>
+            </grp_s1_q10>
+            <grp_s1_q11>
+              <lbl_s1_q11/>
+              <calc_s1_q11/>
+            </grp_s1_q11>
+            <grp_s1_symptom_status>
+              <lbl_s1_symptom_status/>
+              <calc_symptom_status_lbl/>
+            </grp_s1_symptom_status>
+          </group_summary_s1>
+          <section2_gate_page>
+            <do_section2/>
+          </section2_gate_page>
+          <section2_intro_page>
+            <section2_intro_note/>
+            <section2_intro_note_2/>
+          </section2_intro_page>
+          <cbe_page_1>
+            <trained_individual_sbe/>
+            <lump_in_breast_cbe/>
+          </cbe_page_1>
+          <cbe_page_2>
+            <swelling_in_armpit_cbe/>
+            <nipple_retraction_distortion/>
+          </cbe_page_2>
+          <cbe_page_3>
+            <ulceration_cbe/>
+            <discharge_from_nipple_cbe/>
+          </cbe_page_3>
+          <cbe_page_4>
+            <skin_dimpling_retraction/>
+          </cbe_page_4>
+          <group_summary_s2>
+            <grp_s2_filled_by>
+              <lbl_s2_filled_by/>
+              <calc_s2_reporter/>
+            </grp_s2_filled_by>
+            <grp_s2_patient>
+              <lbl_s2_patient/>
+              <calc_s2_patient/>
+            </grp_s2_patient>
+            <grp_s2_state>
+              <lbl_s2_state/>
+              <calc_s2_state_lbl/>
+            </grp_s2_state>
+            <grp_s2_district>
+              <lbl_s2_district/>
+              <calc_s2_district_lbl/>
+            </grp_s2_district>
+            <grp_s2_q1>
+              <lbl_s2_q1/>
+              <calc_s2_q1/>
+            </grp_s2_q1>
+            <grp_s2_q2>
+              <lbl_s2_q2/>
+              <calc_s2_q2/>
+            </grp_s2_q2>
+            <grp_s2_q3>
+              <lbl_s2_q3/>
+              <calc_s2_q3/>
+            </grp_s2_q3>
+            <grp_s2_q4>
+              <lbl_s2_q4/>
+              <calc_s2_q4/>
+            </grp_s2_q4>
+            <grp_s2_q5>
+              <lbl_s2_q5/>
+              <calc_s2_q5/>
+            </grp_s2_q5>
+            <grp_s2_q6>
+              <lbl_s2_q6/>
+              <calc_s2_q6/>
+            </grp_s2_q6>
+            <grp_s2_q7>
+              <lbl_s2_q7/>
+              <calc_s2_q7/>
+            </grp_s2_q7>
+          </group_summary_s2>
           <meta tag="hidden">
             <instanceID/>
           </meta>
@@ -102,34 +227,6 @@
           <item>
             <name>no</name>
             <label>No</label>
-          </item>
-        </root>
-      </instance>
-      <instance id="breastfeeding_history">
-        <root>
-          <item>
-            <name>lt24</name>
-            <label>Less than 24 months</label>
-          </item>
-          <item>
-            <name>gt24</name>
-            <label>Greater than 24 months</label>
-          </item>
-        </root>
-      </instance>
-      <instance id="ethnicity_groups">
-        <root>
-          <item>
-            <name>group_general</name>
-            <label>General / Other</label>
-          </item>
-          <item>
-            <name>group_medium</name>
-            <label>Group B</label>
-          </item>
-          <item>
-            <name>group_high</name>
-            <label>Group A</label>
           </item>
         </root>
       </instance>
@@ -297,8 +394,7 @@
       <bind nodeset="/data/reporter_name" type="string" calculate="../inputs/user/name"/>
       <bind nodeset="/data/reporter_place" type="string" calculate="instance('user-contact-summary')/context/facility_name"/>
       <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
-      <bind nodeset="/data/form_start_timestamp" type="string" calculate="once(if( /data/inputs/contact/_id  != '', now(), ''))"/>
-      <bind nodeset="/data/form_sync_timestamp" type="string"/>
+      <bind nodeset="/data/intro_page/intro_note" readonly="true()" type="string"/>
       <bind nodeset="/data/inputs/source" type="string"/>
       <bind nodeset="/data/inputs/source_id" type="string"/>
       <bind nodeset="/data/inputs/user/name" type="string"/>
@@ -309,33 +405,100 @@
       <bind nodeset="/data/inputs/contact/name" type="string"/>
       <bind nodeset="/data/inputs/state" type="string" required="true()"/>
       <bind nodeset="/data/inputs/district" type="string" required="true()"/>
-      <bind nodeset="/data/intro_page/assessment_intro" readonly="true()" type="string"/>
+      <bind nodeset="/data/section1_intro_page/section1_intro_note" readonly="true()" type="string"/>
       <bind nodeset="/data/symptoms_page_1/any_breast_related_symptoms" type="string" required="true()"/>
       <bind nodeset="/data/symptoms_page_1/lump_or_thickening_in_breast" type="string" required="true()"/>
       <bind nodeset="/data/symptoms_page_2/change_in_size" type="string" required="true()"/>
       <bind nodeset="/data/symptoms_page_2/change_in_shape_position" type="string" required="true()"/>
       <bind nodeset="/data/symptoms_page_3/any_retraction_of_nipple" type="string" required="true()"/>
-      <bind nodeset="/data/symptoms_page_3/discharge_from_nipple" type="string" required="true()"/>
+      <bind nodeset="/data/symptoms_page_3/discharge_from_nipple_s1" type="string" required="true()"/>
       <bind nodeset="/data/symptoms_page_4/puckering_or_dimpling" type="string" required="true()"/>
       <bind nodeset="/data/symptoms_page_4/swelling_lump_in_armpit" type="string" required="true()"/>
       <bind nodeset="/data/symptoms_page_5/constant_pain_breast_armpit" type="string" required="true()"/>
       <bind nodeset="/data/symptoms_page_5/redness_of_skin_over_breast" type="string" required="true()"/>
       <bind nodeset="/data/symptoms_page_6/erosions_of_nipple" type="string" required="true()"/>
-      <bind nodeset="/data/remarks_page/remarks" type="string"/>
-      <bind nodeset="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_lbl" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_lbl_filled_by/calc_reporter_name" type="string" calculate=" /data/reporter_name "/>
-      <bind nodeset="/data/group_summary/grp_lbl_patient/lbl_patient_lbl" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_lbl_patient/calc_patient_name" type="string" calculate=" /data/patient_name "/>
-      <bind nodeset="/data/group_summary/grp_lbl_state/lbl_state_lbl" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_lbl_state/calc_state" type="string" calculate=" /data/inputs/state "/>
-      <bind nodeset="/data/group_summary/grp_lbl_district/lbl_district_lbl" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_lbl_district/calc_district" type="string" calculate=" /data/inputs/district "/>
-      <bind nodeset="/data/form_submit_timestamp_iso" type="string" calculate="format-date-time(now(), '%Y-%m-%dT%H:%M:%S+05:30')"/>
-      <bind nodeset="/data/form_submit_timestamp_display" type="string" calculate="format-date-time(now(), '%e-%b-%Y %H:%M:%S')"/>
+      <bind nodeset="/data/symptom_detected" type="string" calculate="if( /data/symptoms_page_1/any_breast_related_symptoms  = 'yes' or  /data/symptoms_page_1/lump_or_thickening_in_breast  = 'yes' or  /data/symptoms_page_2/change_in_size  = 'yes' or  /data/symptoms_page_2/change_in_shape_position  = 'yes' or  /data/symptoms_page_3/any_retraction_of_nipple  = 'yes' or  /data/symptoms_page_3/discharge_from_nipple_s1  = 'yes' or  /data/symptoms_page_4/puckering_or_dimpling  = 'yes' or  /data/symptoms_page_4/swelling_lump_in_armpit  = 'yes' or  /data/symptoms_page_5/constant_pain_breast_armpit  = 'yes' or  /data/symptoms_page_5/redness_of_skin_over_breast  = 'yes' or  /data/symptoms_page_6/erosions_of_nipple  = 'yes', 'yes', 'no')"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_filled_by/lbl_s1_filled_by" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_filled_by/calc_s1_reporter" type="string" calculate=" /data/reporter_name "/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_patient/lbl_s1_patient" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_patient/calc_s1_patient" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_state/lbl_s1_state" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_state/calc_s1_state_lbl" type="string" calculate="jr:choice-name( /data/inputs/state , ' /data/inputs/state ')"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_district/lbl_s1_district" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_district/calc_s1_district_lbl" type="string" calculate="jr:choice-name( /data/inputs/district , ' /data/inputs/district ')"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q1/lbl_s1_q1" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q1/calc_s1_q1" type="string" calculate="jr:choice-name( /data/symptoms_page_1/any_breast_related_symptoms , ' /data/symptoms_page_1/any_breast_related_symptoms ')"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q2/lbl_s1_q2" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q2/calc_s1_q2" type="string" calculate="jr:choice-name( /data/symptoms_page_1/lump_or_thickening_in_breast , ' /data/symptoms_page_1/lump_or_thickening_in_breast ')"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q3/lbl_s1_q3" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q3/calc_s1_q3" type="string" calculate="jr:choice-name( /data/symptoms_page_2/change_in_size , ' /data/symptoms_page_2/change_in_size ')"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q4/lbl_s1_q4" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q4/calc_s1_q4" type="string" calculate="jr:choice-name( /data/symptoms_page_2/change_in_shape_position , ' /data/symptoms_page_2/change_in_shape_position ')"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q5/lbl_s1_q5" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q5/calc_s1_q5" type="string" calculate="jr:choice-name( /data/symptoms_page_3/any_retraction_of_nipple , ' /data/symptoms_page_3/any_retraction_of_nipple ')"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q6/lbl_s1_q6" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q6/calc_s1_q6" type="string" calculate="jr:choice-name( /data/symptoms_page_3/discharge_from_nipple_s1 , ' /data/symptoms_page_3/discharge_from_nipple_s1 ')"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q7/lbl_s1_q7" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q7/calc_s1_q7" type="string" calculate="jr:choice-name( /data/symptoms_page_4/puckering_or_dimpling , ' /data/symptoms_page_4/puckering_or_dimpling ')"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q8/lbl_s1_q8" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q8/calc_s1_q8" type="string" calculate="jr:choice-name( /data/symptoms_page_4/swelling_lump_in_armpit , ' /data/symptoms_page_4/swelling_lump_in_armpit ')"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q9/lbl_s1_q9" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q9/calc_s1_q9" type="string" calculate="jr:choice-name( /data/symptoms_page_5/constant_pain_breast_armpit , ' /data/symptoms_page_5/constant_pain_breast_armpit ')"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q10/lbl_s1_q10" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q10/calc_s1_q10" type="string" calculate="jr:choice-name( /data/symptoms_page_5/redness_of_skin_over_breast , ' /data/symptoms_page_5/redness_of_skin_over_breast ')"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q11/lbl_s1_q11" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_q11/calc_s1_q11" type="string" calculate="jr:choice-name( /data/symptoms_page_6/erosions_of_nipple , ' /data/symptoms_page_6/erosions_of_nipple ')"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_symptom_status/lbl_s1_symptom_status" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s1/grp_s1_symptom_status/calc_symptom_status_lbl" type="string" calculate="if( /data/symptom_detected  = 'yes', 'Some of the suspicious symptoms are detected', 'No Suspicious Symptoms detected')"/>
+      <bind nodeset="/data/section2_gate_page" relevant=" /data/symptom_detected  = 'yes'"/>
+      <bind nodeset="/data/section2_gate_page/do_section2" type="string" required="true()"/>
+      <bind nodeset="/data/section2_intro_page" relevant=" /data/section2_gate_page/do_section2  = 'yes'"/>
+      <bind nodeset="/data/section2_intro_page/section2_intro_note" readonly="true()" type="string"/>
+      <bind nodeset="/data/section2_intro_page/section2_intro_note_2" readonly="true()" type="string"/>
+      <bind nodeset="/data/cbe_page_1" relevant=" /data/section2_gate_page/do_section2  = 'yes'"/>
+      <bind nodeset="/data/cbe_page_1/trained_individual_sbe" type="string" required="true()"/>
+      <bind nodeset="/data/cbe_page_1/lump_in_breast_cbe" type="string" required="true()"/>
+      <bind nodeset="/data/cbe_page_2" relevant=" /data/section2_gate_page/do_section2  = 'yes'"/>
+      <bind nodeset="/data/cbe_page_2/swelling_in_armpit_cbe" type="string" required="true()"/>
+      <bind nodeset="/data/cbe_page_2/nipple_retraction_distortion" type="string" required="true()"/>
+      <bind nodeset="/data/cbe_page_3" relevant=" /data/section2_gate_page/do_section2  = 'yes'"/>
+      <bind nodeset="/data/cbe_page_3/ulceration_cbe" type="string" required="true()"/>
+      <bind nodeset="/data/cbe_page_3/discharge_from_nipple_cbe" type="string" required="true()"/>
+      <bind nodeset="/data/cbe_page_4" relevant=" /data/section2_gate_page/do_section2  = 'yes'"/>
+      <bind nodeset="/data/cbe_page_4/skin_dimpling_retraction" type="string" required="true()"/>
+      <bind nodeset="/data/group_summary_s2" relevant=" /data/section2_gate_page/do_section2  = 'yes'"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_filled_by/lbl_s2_filled_by" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_filled_by/calc_s2_reporter" type="string" calculate=" /data/reporter_name "/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_patient/lbl_s2_patient" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_patient/calc_s2_patient" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_state/lbl_s2_state" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_state/calc_s2_state_lbl" type="string" calculate="jr:choice-name( /data/inputs/state , ' /data/inputs/state ')"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_district/lbl_s2_district" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_district/calc_s2_district_lbl" type="string" calculate="jr:choice-name( /data/inputs/district , ' /data/inputs/district ')"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_q1/lbl_s2_q1" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_q1/calc_s2_q1" type="string" calculate="jr:choice-name( /data/cbe_page_1/trained_individual_sbe , ' /data/cbe_page_1/trained_individual_sbe ')"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_q2/lbl_s2_q2" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_q2/calc_s2_q2" type="string" calculate="jr:choice-name( /data/cbe_page_1/lump_in_breast_cbe , ' /data/cbe_page_1/lump_in_breast_cbe ')"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_q3/lbl_s2_q3" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_q3/calc_s2_q3" type="string" calculate="jr:choice-name( /data/cbe_page_2/swelling_in_armpit_cbe , ' /data/cbe_page_2/swelling_in_armpit_cbe ')"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_q4/lbl_s2_q4" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_q4/calc_s2_q4" type="string" calculate="jr:choice-name( /data/cbe_page_2/nipple_retraction_distortion , ' /data/cbe_page_2/nipple_retraction_distortion ')"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_q5/lbl_s2_q5" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_q5/calc_s2_q5" type="string" calculate="jr:choice-name( /data/cbe_page_3/ulceration_cbe , ' /data/cbe_page_3/ulceration_cbe ')"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_q6/lbl_s2_q6" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_q6/calc_s2_q6" type="string" calculate="jr:choice-name( /data/cbe_page_3/discharge_from_nipple_cbe , ' /data/cbe_page_3/discharge_from_nipple_cbe ')"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_q7/lbl_s2_q7" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary_s2/grp_s2_q7/calc_s2_q7" type="string" calculate="jr:choice-name( /data/cbe_page_4/skin_dimpling_retraction , ' /data/cbe_page_4/skin_dimpling_retraction ')"/>
       <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
     </model>
   </h:head>
   <h:body class="pages grid-layout">
+    <group appearance="field-list" ref="/data/intro_page">
+      <label>About This Screening</label>
+      <input ref="/data/intro_page/intro_note">
+        <label>Breast Cancer Screening is advised for women above 40 years. Breast cancer is curable if detected on time. This screening will take approximately 10 minutes.</label>
+      </input>
+    </group>
     <group appearance="field-list" ref="/data/inputs">
       <label>Patient &amp; Reporter Info</label>
       <group ref="/data/inputs/user"/>
@@ -369,11 +532,10 @@
         </itemset>
       </select1>
     </group>
-    <group appearance="field-list" ref="/data/intro_page">
-      <label>Breast Cancer Risk Assessment</label>
-      <input ref="/data/intro_page/assessment_intro">
-        <label>Breast Cancer Risk Assessment</label>
-        <hint>This assessment uses key risk factors to estimate your breast cancer risk level.</hint>
+    <group appearance="field-list" ref="/data/section1_intro_page">
+      <label>Section 1: Breast Symptom Exam</label>
+      <input ref="/data/section1_intro_page/section1_intro_note">
+        <label ref="jr:itext('/data/section1_intro_page/section1_intro_note:label')"/>
       </input>
     </group>
     <group appearance="field-list" ref="/data/symptoms_page_1">
@@ -419,7 +581,7 @@
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/symptoms_page_3/discharge_from_nipple">
+      <select1 ref="/data/symptoms_page_3/discharge_from_nipple_s1">
         <label>Discharge from One or Both Nipples?</label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
@@ -471,33 +633,224 @@
         </itemset>
       </select1>
     </group>
-    <group appearance="field-list" ref="/data/remarks_page">
-      <label>Additional Remarks</label>
-      <input ref="/data/remarks_page/remarks">
-        <label>Remarks</label>
-        <hint>Optional: Add any additional notes or observations here.</hint>
-      </input>
-    </group>
-    <group appearance="field-list" ref="/data/group_summary">
-      <label>Assessment Summary</label>
-      <group appearance="field-list" ref="/data/group_summary/grp_lbl_filled_by">
-        <input ref="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_lbl">
+    <group appearance="field-list" ref="/data/group_summary_s1">
+      <label>Section 1: Assessment Summary for Breast Symptom Exam</label>
+      <group ref="/data/group_summary_s1/grp_s1_filled_by">
+        <input ref="/data/group_summary_s1/grp_s1_filled_by/lbl_s1_filled_by">
           <label> **Filled by:** <output value=" /data/reporter_name "/></label>
         </input>
       </group>
-      <group appearance="field-list" ref="/data/group_summary/grp_lbl_patient">
-        <input ref="/data/group_summary/grp_lbl_patient/lbl_patient_lbl">
+      <group ref="/data/group_summary_s1/grp_s1_patient">
+        <input ref="/data/group_summary_s1/grp_s1_patient/lbl_s1_patient">
           <label> **Patient:** <output value=" /data/patient_name "/></label>
         </input>
       </group>
-      <group appearance="field-list" ref="/data/group_summary/grp_lbl_state">
-        <input ref="/data/group_summary/grp_lbl_state/lbl_state_lbl">
-          <label> **State:** <output value=" /data/inputs/state "/></label>
+      <group ref="/data/group_summary_s1/grp_s1_state">
+        <input ref="/data/group_summary_s1/grp_s1_state/lbl_s1_state">
+          <label> **State:** <output value=" /data/group_summary_s1/grp_s1_state/calc_s1_state_lbl "/></label>
         </input>
       </group>
-      <group appearance="field-list" ref="/data/group_summary/grp_lbl_district">
-        <input ref="/data/group_summary/grp_lbl_district/lbl_district_lbl">
-          <label> **District:** <output value=" /data/inputs/district "/></label>
+      <group ref="/data/group_summary_s1/grp_s1_district">
+        <input ref="/data/group_summary_s1/grp_s1_district/lbl_s1_district">
+          <label> **District:** <output value=" /data/group_summary_s1/grp_s1_district/calc_s1_district_lbl "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s1/grp_s1_q1">
+        <input ref="/data/group_summary_s1/grp_s1_q1/lbl_s1_q1">
+          <label> **1. Any Breast Related Symptoms?** <output value=" /data/group_summary_s1/grp_s1_q1/calc_s1_q1 "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s1/grp_s1_q2">
+        <input ref="/data/group_summary_s1/grp_s1_q2/lbl_s1_q2">
+          <label> **2. Lump or Thickening in Breast?** <output value=" /data/group_summary_s1/grp_s1_q2/calc_s1_q2 "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s1/grp_s1_q3">
+        <input ref="/data/group_summary_s1/grp_s1_q3/lbl_s1_q3">
+          <label> **3. Change in Size?** <output value=" /data/group_summary_s1/grp_s1_q3/calc_s1_q3 "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s1/grp_s1_q4">
+        <input ref="/data/group_summary_s1/grp_s1_q4/lbl_s1_q4">
+          <label> **4. Change in Shape &amp; Position of Nipple?** <output value=" /data/group_summary_s1/grp_s1_q4/calc_s1_q4 "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s1/grp_s1_q5">
+        <input ref="/data/group_summary_s1/grp_s1_q5/lbl_s1_q5">
+          <label> **5. Any Retraction of Nipple?** <output value=" /data/group_summary_s1/grp_s1_q5/calc_s1_q5 "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s1/grp_s1_q6">
+        <input ref="/data/group_summary_s1/grp_s1_q6/lbl_s1_q6">
+          <label> **6. Discharge from One or Both Nipples?** <output value=" /data/group_summary_s1/grp_s1_q6/calc_s1_q6 "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s1/grp_s1_q7">
+        <input ref="/data/group_summary_s1/grp_s1_q7/lbl_s1_q7">
+          <label> **7. Puckering or Dimpling?** <output value=" /data/group_summary_s1/grp_s1_q7/calc_s1_q7 "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s1/grp_s1_q8">
+        <input ref="/data/group_summary_s1/grp_s1_q8/lbl_s1_q8">
+          <label> **8. Swelling/Lump in Armpit?** <output value=" /data/group_summary_s1/grp_s1_q8/calc_s1_q8 "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s1/grp_s1_q9">
+        <input ref="/data/group_summary_s1/grp_s1_q9/lbl_s1_q9">
+          <label> **9. Constant Pain in Breast or Armpit?** <output value=" /data/group_summary_s1/grp_s1_q9/calc_s1_q9 "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s1/grp_s1_q10">
+        <input ref="/data/group_summary_s1/grp_s1_q10/lbl_s1_q10">
+          <label> **10. Redness of Skin over Breast or Any Ulcer?** <output value=" /data/group_summary_s1/grp_s1_q10/calc_s1_q10 "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s1/grp_s1_q11">
+        <input ref="/data/group_summary_s1/grp_s1_q11/lbl_s1_q11">
+          <label> **11. Erosions of Nipple?** <output value=" /data/group_summary_s1/grp_s1_q11/calc_s1_q11 "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s1/grp_s1_symptom_status">
+        <input ref="/data/group_summary_s1/grp_s1_symptom_status/lbl_s1_symptom_status">
+          <label> **Symptom Status:** <output value=" /data/group_summary_s1/grp_s1_symptom_status/calc_symptom_status_lbl "/></label>
+        </input>
+      </group>
+    </group>
+    <group appearance="field-list" ref="/data/section2_gate_page">
+      <label>Clinical Breast Exam</label>
+      <select1 ref="/data/section2_gate_page/do_section2">
+        <label>Proceed with Clinical Breast Exam (Section 2)?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/section2_intro_page">
+      <label>Section 2: Clinical Breast Exam</label>
+      <input ref="/data/section2_intro_page/section2_intro_note">
+        <label ref="jr:itext('/data/section2_intro_page/section2_intro_note:label')"/>
+      </input>
+      <input ref="/data/section2_intro_page/section2_intro_note_2">
+        <label>During a clinical breast exam, or CBE, a health care provider looks at and feels the breasts. They will also check under the arms for lumps or anything else that seems unusual.</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/cbe_page_1">
+      <label>Clinical Breast Exam (1–2)</label>
+      <select1 ref="/data/cbe_page_1/trained_individual_sbe">
+        <label>Trained Individual for Self Breast Exam?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/cbe_page_1/lump_in_breast_cbe">
+        <label>Lump in Breast?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/cbe_page_2">
+      <label>Clinical Breast Exam (3–4)</label>
+      <select1 ref="/data/cbe_page_2/swelling_in_armpit_cbe">
+        <label>Swelling in Armpit?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/cbe_page_2/nipple_retraction_distortion">
+        <label>Nipple Retraction/Distortion?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/cbe_page_3">
+      <label>Clinical Breast Exam (5–6)</label>
+      <select1 ref="/data/cbe_page_3/ulceration_cbe">
+        <label>Ulceration?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/cbe_page_3/discharge_from_nipple_cbe">
+        <label>Discharge from Nipple?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/cbe_page_4">
+      <label>Clinical Breast Exam (7)</label>
+      <select1 ref="/data/cbe_page_4/skin_dimpling_retraction">
+        <label>Skin Dimpling/Retraction?</label>
+        <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/group_summary_s2">
+      <label>Section 2: Assessment Summary for Clinic Breast Exam</label>
+      <group ref="/data/group_summary_s2/grp_s2_filled_by">
+        <input ref="/data/group_summary_s2/grp_s2_filled_by/lbl_s2_filled_by">
+          <label> **Filled by:** <output value=" /data/reporter_name "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s2/grp_s2_patient">
+        <input ref="/data/group_summary_s2/grp_s2_patient/lbl_s2_patient">
+          <label> **Patient:** <output value=" /data/patient_name "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s2/grp_s2_state">
+        <input ref="/data/group_summary_s2/grp_s2_state/lbl_s2_state">
+          <label> **State:** <output value=" /data/group_summary_s2/grp_s2_state/calc_s2_state_lbl "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s2/grp_s2_district">
+        <input ref="/data/group_summary_s2/grp_s2_district/lbl_s2_district">
+          <label> **District:** <output value=" /data/group_summary_s2/grp_s2_district/calc_s2_district_lbl "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s2/grp_s2_q1">
+        <input ref="/data/group_summary_s2/grp_s2_q1/lbl_s2_q1">
+          <label> **1. Trained Individual for Self Breast Exam?** <output value=" /data/group_summary_s2/grp_s2_q1/calc_s2_q1 "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s2/grp_s2_q2">
+        <input ref="/data/group_summary_s2/grp_s2_q2/lbl_s2_q2">
+          <label> **2. Lump in Breast?** <output value=" /data/group_summary_s2/grp_s2_q2/calc_s2_q2 "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s2/grp_s2_q3">
+        <input ref="/data/group_summary_s2/grp_s2_q3/lbl_s2_q3">
+          <label> **3. Swelling in Armpit?** <output value=" /data/group_summary_s2/grp_s2_q3/calc_s2_q3 "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s2/grp_s2_q4">
+        <input ref="/data/group_summary_s2/grp_s2_q4/lbl_s2_q4">
+          <label> **4. Nipple Retraction/Distortion?** <output value=" /data/group_summary_s2/grp_s2_q4/calc_s2_q4 "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s2/grp_s2_q5">
+        <input ref="/data/group_summary_s2/grp_s2_q5/lbl_s2_q5">
+          <label> **5. Ulceration?** <output value=" /data/group_summary_s2/grp_s2_q5/calc_s2_q5 "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s2/grp_s2_q6">
+        <input ref="/data/group_summary_s2/grp_s2_q6/lbl_s2_q6">
+          <label> **6. Discharge from Nipple?** <output value=" /data/group_summary_s2/grp_s2_q6/calc_s2_q6 "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary_s2/grp_s2_q7">
+        <input ref="/data/group_summary_s2/grp_s2_q7/lbl_s2_q7">
+          <label> **7. Skin Dimpling/Retraction?** <output value=" /data/group_summary_s2/grp_s2_q7/calc_s2_q7 "/></label>
         </input>
       </group>
     </group>

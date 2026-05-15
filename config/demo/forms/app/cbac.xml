@@ -12,7 +12,6 @@
           <reporter_place/>
           <title/>
           <form_start_timestamp/>
-          <form_sync_timestamp/>
           <inputs>
             <meta>
               <location>
@@ -42,13 +41,19 @@
           <instructions/>
           <page_1a>
             <age_range/>
+            <age_range_label/>
             <smoke_frequency/>
+            <smoke_frequency_label/>
             <alcohol_frequency/>
+            <alcohol_frequency_label/>
           </page_1a>
           <page_1b>
             <waist_size/>
+            <waist_size_label/>
             <physical_activities_frequency/>
+            <physical_activities_frequency_label/>
             <family_medical_history/>
+            <family_medical_history_label/>
           </page_1b>
           <total_score/>
           <risk_category/>
@@ -60,27 +65,40 @@
           </page_score>
           <page_3a>
             <breast_lump/>
+            <breast_lump_label/>
             <nipple_discharge/>
+            <nipple_discharge_label/>
             <breast_shape_size_change/>
+            <breast_shape_size_change_label/>
           </page_3a>
           <page_3b>
             <bleeding_between_periods/>
+            <bleeding_between_periods_label/>
             <post_menopause_bleeding/>
+            <post_menopause_bleeding_label/>
             <post_intercourse_bleeding/>
+            <post_intercourse_bleeding_label/>
           </page_3b>
           <page_3c>
             <foul_smelling_vaginal_discharge/>
+            <foul_smelling_vaginal_discharge_label/>
           </page_3c>
-          <page_4_phq2>
+          <page_4>
+            <fuel_type_for_cooking/>
+            <occupational_exposure/>
+          </page_4>
+          <page_5>
             <phq2_instructions/>
             <phq2_q1/>
+            <phq2_q1_label/>
             <phq2_q2/>
-          </page_4_phq2>
+            <phq2_q2_label/>
+          </page_5>
           <phq2_total/>
-          <page_4_phq2_score>
+          <page_5_score>
             <phq2_score_display/>
             <phq2_referral_note/>
-          </page_4_phq2_score>
+          </page_5_score>
           <group_summary>
             <grp_filled_by>
               <lbl_filled_by/>
@@ -164,6 +182,15 @@
               <q_discharge/>
               <calc_q_discharge/>
             </grp_q_discharge>
+            <sum_hdr_c/>
+            <grp_q_fuel>
+              <q_fuel/>
+              <calc_q_fuel/>
+            </grp_q_fuel>
+            <grp_q_occupation>
+              <q_occupation/>
+              <calc_q_occupation/>
+            </grp_q_occupation>
             <sum_hdr_d/>
             <grp_q_phq1>
               <q_phq1/>
@@ -516,6 +543,10 @@
             <name>kerosene</name>
             <label>Kerosene</label>
           </item>
+          <item>
+            <name>lpg</name>
+            <label>LPG</label>
+          </item>
         </root>
       </instance>
       <instance id="occupational_exposure">
@@ -528,6 +559,10 @@
             <name>working_in_industries</name>
             <label>Working in industries with smoke, gas and dust exposure such as brick kilns and glass factories etc.</label>
           </item>
+          <item>
+            <name>none</name>
+            <label>None of the above</label>
+          </item>
         </root>
       </instance>
       <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
@@ -537,7 +572,6 @@
       <bind nodeset="/data/reporter_place" type="string" calculate="instance('user-contact-summary')/context/facility_name"/>
       <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
       <bind nodeset="/data/form_start_timestamp" type="string" calculate="once(if( /data/inputs/contact/_id  != '', now(), ''))"/>
-      <bind nodeset="/data/form_sync_timestamp" type="string"/>
       <bind nodeset="/data/inputs/source" type="string"/>
       <bind nodeset="/data/inputs/source_id" type="string"/>
       <bind nodeset="/data/inputs/user/name" type="string"/>
@@ -552,11 +586,17 @@
       <bind nodeset="/data/total_question" type="string" calculate="if( /data/inputs/contact/gender  = 'male', '0', '7')"/>
       <bind nodeset="/data/instructions" readonly="true()" type="string"/>
       <bind nodeset="/data/page_1a/age_range" type="string" required="true()"/>
+      <bind nodeset="/data/page_1a/age_range_label" type="string" calculate="jr:choice-name( /data/page_1a/age_range , ' /data/page_1a/age_range ')"/>
       <bind nodeset="/data/page_1a/smoke_frequency" type="string" required="true()"/>
+      <bind nodeset="/data/page_1a/smoke_frequency_label" type="string" calculate="jr:choice-name( /data/page_1a/smoke_frequency , ' /data/page_1a/smoke_frequency ')"/>
       <bind nodeset="/data/page_1a/alcohol_frequency" type="string" required="true()"/>
+      <bind nodeset="/data/page_1a/alcohol_frequency_label" type="string" calculate="jr:choice-name( /data/page_1a/alcohol_frequency , ' /data/page_1a/alcohol_frequency ')"/>
       <bind nodeset="/data/page_1b/waist_size" type="string" required="true()"/>
+      <bind nodeset="/data/page_1b/waist_size_label" type="string" calculate="jr:choice-name( /data/page_1b/waist_size , ' /data/page_1b/waist_size ')"/>
       <bind nodeset="/data/page_1b/physical_activities_frequency" type="string" required="true()"/>
+      <bind nodeset="/data/page_1b/physical_activities_frequency_label" type="string" calculate="jr:choice-name( /data/page_1b/physical_activities_frequency , ' /data/page_1b/physical_activities_frequency ')"/>
       <bind nodeset="/data/page_1b/family_medical_history" type="string" required="true()"/>
+      <bind nodeset="/data/page_1b/family_medical_history_label" type="string" calculate="jr:choice-name( /data/page_1b/family_medical_history , ' /data/page_1b/family_medical_history ')"/>
       <bind nodeset="/data/total_score" type="string" calculate=" /data/page_1a/age_range  +  /data/page_1a/smoke_frequency  +  /data/page_1a/alcohol_frequency  +  /data/page_1b/waist_size  +  /data/page_1b/physical_activities_frequency  +  /data/page_1b/family_medical_history "/>
       <bind nodeset="/data/risk_category" type="string" calculate="if( /data/total_score  &gt; 4, 'High Risk', 'Low Risk')"/>
       <bind nodeset="/data/page_score/score_display" readonly="true()" type="string"/>
@@ -565,20 +605,31 @@
       <bind nodeset="/data/page_score/score_low_note" readonly="true()" type="string" relevant=" /data/total_score  &lt;= 4"/>
       <bind nodeset="/data/page_3a" relevant=" /data/inputs/contact/gender  = 'female'"/>
       <bind nodeset="/data/page_3a/breast_lump" type="string" required="true()" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3a/breast_lump_label" type="string" calculate="jr:choice-name( /data/page_3a/breast_lump , ' /data/page_3a/breast_lump ')"/>
       <bind nodeset="/data/page_3a/nipple_discharge" type="string" required="true()" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3a/nipple_discharge_label" type="string" calculate="jr:choice-name( /data/page_3a/nipple_discharge , ' /data/page_3a/nipple_discharge ')"/>
       <bind nodeset="/data/page_3a/breast_shape_size_change" type="string" required="true()" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3a/breast_shape_size_change_label" type="string" calculate="jr:choice-name( /data/page_3a/breast_shape_size_change , ' /data/page_3a/breast_shape_size_change ')"/>
       <bind nodeset="/data/page_3b" relevant=" /data/inputs/contact/gender  = 'female'"/>
       <bind nodeset="/data/page_3b/bleeding_between_periods" type="string" required="true()" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3b/bleeding_between_periods_label" type="string" calculate="jr:choice-name( /data/page_3b/bleeding_between_periods , ' /data/page_3b/bleeding_between_periods ')"/>
       <bind nodeset="/data/page_3b/post_menopause_bleeding" type="string" required="true()" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3b/post_menopause_bleeding_label" type="string" calculate="jr:choice-name( /data/page_3b/post_menopause_bleeding , ' /data/page_3b/post_menopause_bleeding ')"/>
       <bind nodeset="/data/page_3b/post_intercourse_bleeding" type="string" required="true()" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3b/post_intercourse_bleeding_label" type="string" calculate="jr:choice-name( /data/page_3b/post_intercourse_bleeding , ' /data/page_3b/post_intercourse_bleeding ')"/>
       <bind nodeset="/data/page_3c" relevant=" /data/inputs/contact/gender  = 'female'"/>
       <bind nodeset="/data/page_3c/foul_smelling_vaginal_discharge" type="string" required="true()" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/page_4_phq2/phq2_instructions" readonly="true()" type="string"/>
-      <bind nodeset="/data/page_4_phq2/phq2_q1" type="string" required="true()"/>
-      <bind nodeset="/data/page_4_phq2/phq2_q2" type="string" required="true()"/>
-      <bind nodeset="/data/phq2_total" type="string" calculate=" /data/page_4_phq2/phq2_q1  +  /data/page_4_phq2/phq2_q2 "/>
-      <bind nodeset="/data/page_4_phq2_score/phq2_score_display" readonly="true()" type="string"/>
-      <bind nodeset="/data/page_4_phq2_score/phq2_referral_note" readonly="true()" type="string" relevant=" /data/phq2_total  &gt; 3"/>
+      <bind nodeset="/data/page_3c/foul_smelling_vaginal_discharge_label" type="string" calculate="jr:choice-name( /data/page_3c/foul_smelling_vaginal_discharge , ' /data/page_3c/foul_smelling_vaginal_discharge ')"/>
+      <bind nodeset="/data/page_4/fuel_type_for_cooking" type="string" required="true()"/>
+      <bind nodeset="/data/page_4/occupational_exposure" type="string" required="true()"/>
+      <bind nodeset="/data/page_5/phq2_instructions" readonly="true()" type="string"/>
+      <bind nodeset="/data/page_5/phq2_q1" type="string" required="true()"/>
+      <bind nodeset="/data/page_5/phq2_q1_label" type="string" calculate="jr:choice-name( /data/page_5/phq2_q1 , ' /data/page_5/phq2_q1 ')"/>
+      <bind nodeset="/data/page_5/phq2_q2" type="string" required="true()"/>
+      <bind nodeset="/data/page_5/phq2_q2_label" type="string" calculate="jr:choice-name( /data/page_5/phq2_q2 , ' /data/page_5/phq2_q2 ')"/>
+      <bind nodeset="/data/phq2_total" type="string" calculate=" /data/page_5/phq2_q1  +  /data/page_5/phq2_q2 "/>
+      <bind nodeset="/data/page_5_score/phq2_score_display" readonly="true()" type="string"/>
+      <bind nodeset="/data/page_5_score/phq2_referral_note" readonly="true()" type="string" relevant=" /data/phq2_total  &gt; 3"/>
       <bind nodeset="/data/group_summary/grp_filled_by/lbl_filled_by" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_filled_by/calc_reporter" type="string" calculate=" /data/reporter_name "/>
       <bind nodeset="/data/group_summary/grp_patient/lbl_patient" readonly="true()" type="string"/>
@@ -628,11 +679,16 @@
       <bind nodeset="/data/group_summary/grp_q_discharge" relevant=" /data/inputs/contact/gender  = 'female'"/>
       <bind nodeset="/data/group_summary/grp_q_discharge/q_discharge" readonly="true()" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
       <bind nodeset="/data/group_summary/grp_q_discharge/calc_q_discharge" type="string" calculate="jr:choice-name( /data/page_3c/foul_smelling_vaginal_discharge , ' /data/page_3c/foul_smelling_vaginal_discharge ')"/>
+      <bind nodeset="/data/group_summary/sum_hdr_c" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_q_fuel/q_fuel" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_q_fuel/calc_q_fuel" type="string" calculate="concat(if(selected( /data/page_4/fuel_type_for_cooking , 'firewood'), 'Firewood', ''), if(selected( /data/page_4/fuel_type_for_cooking , 'firewood') and string-length( /data/page_4/fuel_type_for_cooking ) &gt; 9, ' / ', ''), if(selected( /data/page_4/fuel_type_for_cooking , 'crop_residue'), 'Crop Residue', ''), if(selected( /data/page_4/fuel_type_for_cooking , 'crop_residue') and (selected( /data/page_4/fuel_type_for_cooking , 'cow_dung_cake') or selected( /data/page_4/fuel_type_for_cooking , 'coal') or selected( /data/page_4/fuel_type_for_cooking , 'kerosene') or selected( /data/page_4/fuel_type_for_cooking , 'lpg')), ' / ', ''), if(selected( /data/page_4/fuel_type_for_cooking , 'cow_dung_cake'), 'Cow dung cake', ''), if(selected( /data/page_4/fuel_type_for_cooking , 'cow_dung_cake') and (selected( /data/page_4/fuel_type_for_cooking , 'coal') or selected( /data/page_4/fuel_type_for_cooking , 'kerosene') or selected( /data/page_4/fuel_type_for_cooking , 'lpg')), ' / ', ''), if(selected( /data/page_4/fuel_type_for_cooking , 'coal'), 'Coal', ''), if(selected( /data/page_4/fuel_type_for_cooking , 'coal') and (selected( /data/page_4/fuel_type_for_cooking , 'kerosene') or selected( /data/page_4/fuel_type_for_cooking , 'lpg')), ' / ', ''), if(selected( /data/page_4/fuel_type_for_cooking , 'kerosene'), 'Kerosene', ''), if(selected( /data/page_4/fuel_type_for_cooking , 'kerosene') and selected( /data/page_4/fuel_type_for_cooking , 'lpg'), ' / ', ''), if(selected( /data/page_4/fuel_type_for_cooking , 'lpg'), 'LPG', ''))"/>
+      <bind nodeset="/data/group_summary/grp_q_occupation/q_occupation" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_q_occupation/calc_q_occupation" type="string" calculate="concat(if(selected( /data/page_4/occupational_exposure , 'crop_residue_burning'), 'Crop residue burning', ''), if(selected( /data/page_4/occupational_exposure , 'crop_residue_burning') and (selected( /data/page_4/occupational_exposure , 'working_in_industries') or selected( /data/page_4/occupational_exposure , 'none')), ' / ', ''), if(selected( /data/page_4/occupational_exposure , 'working_in_industries'), 'Working in industries', ''), if(selected( /data/page_4/occupational_exposure , 'working_in_industries') and selected( /data/page_4/occupational_exposure , 'none'), ' / ', ''), if(selected( /data/page_4/occupational_exposure , 'none'), 'None of the above', ''))"/>
       <bind nodeset="/data/group_summary/sum_hdr_d" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_q_phq1/q_phq1" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_q_phq1/calc_q_phq1" type="string" calculate="jr:choice-name( /data/page_4_phq2/phq2_q1 , ' /data/page_4_phq2/phq2_q1 ')"/>
+      <bind nodeset="/data/group_summary/grp_q_phq1/calc_q_phq1" type="string" calculate="jr:choice-name( /data/page_5/phq2_q1 , ' /data/page_5/phq2_q1 ')"/>
       <bind nodeset="/data/group_summary/grp_q_phq2/q_phq2" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_q_phq2/calc_q_phq2" type="string" calculate="jr:choice-name( /data/page_4_phq2/phq2_q2 , ' /data/page_4_phq2/phq2_q2 ')"/>
+      <bind nodeset="/data/group_summary/grp_q_phq2/calc_q_phq2" type="string" calculate="jr:choice-name( /data/page_5/phq2_q2 , ' /data/page_5/phq2_q2 ')"/>
       <bind nodeset="/data/group_summary/grp_q_phq_tot/q_phq_tot" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_q_phq_tot/calc_q_phq_tot" type="string" calculate=" /data/phq2_total "/>
       <bind nodeset="/data/group_summary/summary_high_risk" readonly="true()" type="string" relevant=" /data/total_score  &gt; 4"/>
@@ -736,7 +792,7 @@
       </select1>
     </group>
     <group appearance="field-list" ref="/data/page_score">
-      <label>Part A: Score Summary</label>
+      <label>Part A: Risk Assessment Score Summary</label>
       <input ref="/data/page_score/score_display">
         <label> CBAC Total Score: <output value=" /data/total_score "/></label>
       </input>
@@ -808,19 +864,36 @@
         </itemset>
       </select1>
     </group>
-    <group appearance="field-list" ref="/data/page_4_phq2">
-      <label>Part C: PHQ 2</label>
-      <input ref="/data/page_4_phq2/phq2_instructions">
+    <group appearance="field-list" ref="/data/page_4">
+      <label>Part C: Environmental &amp; Occupational Risk Factors</label>
+      <select ref="/data/page_4/fuel_type_for_cooking">
+        <label>Type of Fuel used for cooking</label>
+        <itemset nodeset="instance('fuel_type')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select>
+      <select ref="/data/page_4/occupational_exposure">
+        <label>Occupational exposure</label>
+        <itemset nodeset="instance('occupational_exposure')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select>
+    </group>
+    <group appearance="field-list" ref="/data/page_5">
+      <label>Part D: PHQ 2</label>
+      <input ref="/data/page_5/phq2_instructions">
         <label>Over the last 2 weeks, how often have you been bothered by the following problems?</label>
       </input>
-      <select1 ref="/data/page_4_phq2/phq2_q1">
+      <select1 ref="/data/page_5/phq2_q1">
         <label>1. Little interest or pleasure in doing things?</label>
         <itemset nodeset="instance('frequency')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
-      <select1 ref="/data/page_4_phq2/phq2_q2">
+      <select1 ref="/data/page_5/phq2_q2">
         <label>2. Feeling down, depressed or hopeless?</label>
         <itemset nodeset="instance('frequency')/root/item">
           <value ref="name"/>
@@ -828,17 +901,17 @@
         </itemset>
       </select1>
     </group>
-    <group appearance="field-list" ref="/data/page_4_phq2_score">
-      <label>Part C: PHQ 2 Score</label>
-      <input ref="/data/page_4_phq2_score/phq2_score_display">
+    <group appearance="field-list" ref="/data/page_5_score">
+      <label>Part D: PHQ-2 Score Summary</label>
+      <input ref="/data/page_5_score/phq2_score_display">
         <label> PHQ-2 Total Score: <output value=" /data/phq2_total "/></label>
       </input>
-      <input ref="/data/page_4_phq2_score/phq2_referral_note">
+      <input ref="/data/page_5_score/phq2_referral_note">
         <label>Anyone with total score greater than 3 should be referred to CHO/MO (PHC/UPHC)</label>
       </input>
     </group>
     <group appearance="field-list" ref="/data/group_summary">
-      <label>Assessment Summary</label>
+      <label>Assessment Summary for CBAC Screening</label>
       <group appearance="field-list" ref="/data/group_summary/grp_filled_by">
         <input ref="/data/group_summary/grp_filled_by/lbl_filled_by">
           <label> **Filled by:** <output value=" /data/reporter_name "/></label>
@@ -945,8 +1018,21 @@
           <label> 13. Foul smelling vaginal discharge: <output value=" /data/group_summary/grp_q_discharge/calc_q_discharge "/></label>
         </input>
       </group>
+      <input ref="/data/group_summary/sum_hdr_c">
+        <label>**Part C: Environmental &amp; Occupational Risk Factors**</label>
+      </input>
+      <group appearance="field-list" ref="/data/group_summary/grp_q_fuel">
+        <input ref="/data/group_summary/grp_q_fuel/q_fuel">
+          <label> Fuel used for cooking: <output value=" /data/group_summary/grp_q_fuel/calc_q_fuel "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_q_occupation">
+        <input ref="/data/group_summary/grp_q_occupation/q_occupation">
+          <label> Occupational exposure: <output value=" /data/group_summary/grp_q_occupation/calc_q_occupation "/></label>
+        </input>
+      </group>
       <input ref="/data/group_summary/sum_hdr_d">
-        <label>**Part C: PHQ-2**</label>
+        <label>**Part D: PHQ-2**</label>
       </input>
       <group appearance="field-list" ref="/data/group_summary/grp_q_phq1">
         <input ref="/data/group_summary/grp_q_phq1/q_phq1">

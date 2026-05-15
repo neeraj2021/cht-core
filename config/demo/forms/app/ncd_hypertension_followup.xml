@@ -11,7 +11,6 @@
           <reporter_name/>
           <title/>
           <form_start_timestamp/>
-          <form_sync_timestamp/>
           <inputs>
             <meta>
               <location>
@@ -80,7 +79,6 @@
       <bind nodeset="/data/reporter_name" type="string" calculate="../inputs/user/name"/>
       <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
       <bind nodeset="/data/form_start_timestamp" type="string" calculate="once(if( /data/inputs/contact/_id  != '', now(), ''))"/>
-      <bind nodeset="/data/form_sync_timestamp" type="string"/>
       <bind nodeset="/data/inputs/source" type="string"/>
       <bind nodeset="/data/inputs/source_id" type="string"/>
       <bind nodeset="/data/inputs/user/name" type="string"/>

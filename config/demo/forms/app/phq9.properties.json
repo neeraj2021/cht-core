@@ -5,6 +5,6 @@
   "context": {
     "person": true,
     "place": false,
-    "expression": "false"
+    "permission": "can_view_phq9_form"
   }
 }

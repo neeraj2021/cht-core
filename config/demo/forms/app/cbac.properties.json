@@ -4,6 +4,6 @@
   "context": {
     "person": true,
     "place": false,
-    "expression": "true"
+    "permission": "can_view_cbac_form"
   }
 }

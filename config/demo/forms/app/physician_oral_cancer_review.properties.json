@@ -5,7 +5,8 @@
   "context": {
     "person": true,
     "place": false,
-    "expression": "true"
+    "expression": "false",
+    "permission": "can_view_physician_oral_cancer_review_form"
   },
   "subject_key": "patient_name"
 }

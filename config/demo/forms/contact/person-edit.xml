@@ -39,15 +39,18 @@
             <value>CHO</value>
           </text>
           <text id="roles-4">
-            <value>Medical Officer</value>
+            <value>Nurse</value>
           </text>
           <text id="roles-5">
-            <value>Medical Supervisor</value>
+            <value>Medical Officer</value>
           </text>
           <text id="roles-6">
-            <value>Patient</value>
+            <value>Physician</value>
           </text>
           <text id="roles-7">
+            <value>Patient</value>
+          </text>
+          <text id="roles-8">
             <value>Other</value>
           </text>
           <text id="place_type-0">
@@ -190,18 +193,30 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
             <value>जन्म की तारीख का पता नहीं</value>
           </text>
           <text id="roles-0">
-            <value>सामुदायिक स्वास्थ्य कर्मी</value>
+            <value>आशा</value>
           </text>
           <text id="roles-1">
-            <value>नर्स</value>
+            <value>एएनएम</value>
           </text>
           <text id="roles-2">
-            <value>स्वास्थ्य केंद्र के मैनजर</value>
+            <value>एमपीडब्लू</value>
           </text>
           <text id="roles-3">
-            <value>मरीज़</value>
+            <value>सीएचओ</value>
           </text>
           <text id="roles-4">
+            <value>नर्स</value>
+          </text>
+          <text id="roles-5">
+            <value>मेडिकल ऑफिसर</value>
+          </text>
+          <text id="roles-6">
+            <value>चिकित्सक</value>
+          </text>
+          <text id="roles-7">
+            <value>मरीज़</value>
+          </text>
+          <text id="roles-8">
             <value>अन्य</value>
           </text>
           <text id="place_type-0">
@@ -348,18 +363,30 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
             <value>Tanggal tidak diketahui lahir</value>
           </text>
           <text id="roles-0">
-            <value>Kader</value>
+            <value>ASHA</value>
           </text>
           <text id="roles-1">
-            <value>Perawat</value>
+            <value>ANM</value>
           </text>
           <text id="roles-2">
-            <value>Manajer Fasilitas</value>
+            <value>MPW</value>
           </text>
           <text id="roles-3">
-            <value>Pasien</value>
+            <value>CHO</value>
           </text>
           <text id="roles-4">
+            <value>Perawat</value>
+          </text>
+          <text id="roles-5">
+            <value>Petugas Medis</value>
+          </text>
+          <text id="roles-6">
+            <value>Dokter</value>
+          </text>
+          <text id="roles-7">
+            <value>Pasien</value>
+          </text>
+          <text id="roles-8">
             <value>Lain</value>
           </text>
           <text id="place_type-0">
@@ -506,19 +533,31 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
             <value>Tarehe haijulikani</value>
           </text>
           <text id="roles-0">
-            <value>Mhudumu wa afya</value>
+            <value>ASHA</value>
           </text>
           <text id="roles-1">
-            <value>muuguzi</value>
+            <value>ANM</value>
           </text>
           <text id="roles-2">
-            <value>Mkubwa wa Kituo</value>
+            <value>MPW</value>
           </text>
           <text id="roles-3">
-            <value>Mgonjwa</value>
+            <value>CHO</value>
           </text>
           <text id="roles-4">
-            <value>Ingine</value>
+            <value>Muuguzi</value>
+          </text>
+          <text id="roles-5">
+            <value>Afisa wa Matibabu</value>
+          </text>
+          <text id="roles-6">
+            <value>Daktari</value>
+          </text>
+          <text id="roles-7">
+            <value>Mgonjwa</value>
+          </text>
+          <text id="roles-8">
+            <value>Nyingine</value>
           </text>
           <text id="place_type-0">
             <value>Wilaya</value>
@@ -664,18 +703,30 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
             <value>जन्म मिती थाहा नभएको</value>
           </text>
           <text id="roles-0">
-            <value>महिला स्वास्थ्य स्वयम् सेविका</value>
+            <value>आशा</value>
           </text>
           <text id="roles-1">
-            <value>नर्स</value>
+            <value>एएनएम</value>
           </text>
           <text id="roles-2">
-            <value>स्वास्थ्य संस्था प्रमुख</value>
+            <value>एमपीडब्लू</value>
           </text>
           <text id="roles-3">
-            <value>बिरामी</value>
+            <value>सीएचओ</value>
           </text>
           <text id="roles-4">
+            <value>नर्स</value>
+          </text>
+          <text id="roles-5">
+            <value>मेडिकल अफिसर</value>
+          </text>
+          <text id="roles-6">
+            <value>चिकित्सक</value>
+          </text>
+          <text id="roles-7">
+            <value>बिरामी</value>
+          </text>
+          <text id="roles-8">
             <value>अन्य</value>
           </text>
           <text id="place_type-0">
@@ -822,18 +873,30 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
             <value>Date de naissance inconnue</value>
           </text>
           <text id="roles-0">
-            <value>ASC</value>
+            <value>ASHA</value>
           </text>
           <text id="roles-1">
-            <value>Infirmier</value>
+            <value>ANM</value>
           </text>
           <text id="roles-2">
-            <value>Personnel médical</value>
+            <value>MPW</value>
           </text>
           <text id="roles-3">
-            <value>Patient</value>
+            <value>CHO</value>
           </text>
           <text id="roles-4">
+            <value>Infirmier</value>
+          </text>
+          <text id="roles-5">
+            <value>Officier Médical</value>
+          </text>
+          <text id="roles-6">
+            <value>Médecin</value>
+          </text>
+          <text id="roles-7">
+            <value>Patient</value>
+          </text>
+          <text id="roles-8">
             <value>Autre</value>
           </text>
           <text id="place_type-0">
@@ -959,7 +1022,7 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
         </translation>
       </itext>
       <instance>
-        <data id="contact:person:edit" version="2025-05-01 22-43" prefix="J1!contact:person:edit!" delimiter="#">
+        <data id="contact:person:edit" prefix="J1!contact:person:edit!" delimiter="#">
           <inputs>
             <meta>
               <location>
