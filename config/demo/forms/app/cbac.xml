@@ -8,6 +8,7 @@
           <patient_id/>
           <patient_uuid/>
           <patient_name/>
+          <patient_gender/>
           <reporter_name/>
           <reporter_place/>
           <title/>
@@ -32,7 +33,7 @@
               <_id/>
               <patient_id/>
               <name/>
-              <gender/>
+              <sex/>
             </contact>
             <state/>
             <district/>
@@ -568,6 +569,7 @@
       <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
       <bind nodeset="/data/patient_uuid" type="string" calculate="../inputs/contact/_id"/>
       <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
+      <bind nodeset="/data/patient_gender" type="string" calculate="../inputs/contact/sex"/>
       <bind nodeset="/data/reporter_name" type="string" calculate="../inputs/user/name"/>
       <bind nodeset="/data/reporter_place" type="string" calculate="instance('user-contact-summary')/context/facility_name"/>
       <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
@@ -580,10 +582,10 @@
       <bind nodeset="/data/inputs/contact/_id" type="string" required="true()"/>
       <bind nodeset="/data/inputs/contact/patient_id" type="string"/>
       <bind nodeset="/data/inputs/contact/name" type="string"/>
-      <bind nodeset="/data/inputs/contact/gender" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/contact/sex" type="string"/>
       <bind nodeset="/data/inputs/state" type="string" required="true()"/>
       <bind nodeset="/data/inputs/district" type="string" required="true()"/>
-      <bind nodeset="/data/total_question" type="string" calculate="if( /data/inputs/contact/gender  = 'male', '0', '7')"/>
+      <bind nodeset="/data/total_question" type="string" calculate="if( /data/patient_gender  = 'male', '0', '7')"/>
       <bind nodeset="/data/instructions" readonly="true()" type="string"/>
       <bind nodeset="/data/page_1a/age_range" type="string" required="true()"/>
       <bind nodeset="/data/page_1a/age_range_label" type="string" calculate="jr:choice-name( /data/page_1a/age_range , ' /data/page_1a/age_range ')"/>
@@ -603,22 +605,22 @@
       <bind nodeset="/data/page_score/risk_display" readonly="true()" type="string"/>
       <bind nodeset="/data/page_score/score_high_note" readonly="true()" type="string" relevant=" /data/total_score  &gt; 4"/>
       <bind nodeset="/data/page_score/score_low_note" readonly="true()" type="string" relevant=" /data/total_score  &lt;= 4"/>
-      <bind nodeset="/data/page_3a" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/page_3a/breast_lump" type="string" required="true()" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3a" relevant=" /data/patient_gender  = 'female'"/>
+      <bind nodeset="/data/page_3a/breast_lump" type="string" required="true()" relevant=" /data/patient_gender  = 'female'"/>
       <bind nodeset="/data/page_3a/breast_lump_label" type="string" calculate="jr:choice-name( /data/page_3a/breast_lump , ' /data/page_3a/breast_lump ')"/>
-      <bind nodeset="/data/page_3a/nipple_discharge" type="string" required="true()" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3a/nipple_discharge" type="string" required="true()" relevant=" /data/patient_gender  = 'female'"/>
       <bind nodeset="/data/page_3a/nipple_discharge_label" type="string" calculate="jr:choice-name( /data/page_3a/nipple_discharge , ' /data/page_3a/nipple_discharge ')"/>
-      <bind nodeset="/data/page_3a/breast_shape_size_change" type="string" required="true()" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3a/breast_shape_size_change" type="string" required="true()" relevant=" /data/patient_gender  = 'female'"/>
       <bind nodeset="/data/page_3a/breast_shape_size_change_label" type="string" calculate="jr:choice-name( /data/page_3a/breast_shape_size_change , ' /data/page_3a/breast_shape_size_change ')"/>
-      <bind nodeset="/data/page_3b" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/page_3b/bleeding_between_periods" type="string" required="true()" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3b" relevant=" /data/patient_gender  = 'female'"/>
+      <bind nodeset="/data/page_3b/bleeding_between_periods" type="string" required="true()" relevant=" /data/patient_gender  = 'female'"/>
       <bind nodeset="/data/page_3b/bleeding_between_periods_label" type="string" calculate="jr:choice-name( /data/page_3b/bleeding_between_periods , ' /data/page_3b/bleeding_between_periods ')"/>
-      <bind nodeset="/data/page_3b/post_menopause_bleeding" type="string" required="true()" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3b/post_menopause_bleeding" type="string" required="true()" relevant=" /data/patient_gender  = 'female'"/>
       <bind nodeset="/data/page_3b/post_menopause_bleeding_label" type="string" calculate="jr:choice-name( /data/page_3b/post_menopause_bleeding , ' /data/page_3b/post_menopause_bleeding ')"/>
-      <bind nodeset="/data/page_3b/post_intercourse_bleeding" type="string" required="true()" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3b/post_intercourse_bleeding" type="string" required="true()" relevant=" /data/patient_gender  = 'female'"/>
       <bind nodeset="/data/page_3b/post_intercourse_bleeding_label" type="string" calculate="jr:choice-name( /data/page_3b/post_intercourse_bleeding , ' /data/page_3b/post_intercourse_bleeding ')"/>
-      <bind nodeset="/data/page_3c" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/page_3c/foul_smelling_vaginal_discharge" type="string" required="true()" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/page_3c" relevant=" /data/patient_gender  = 'female'"/>
+      <bind nodeset="/data/page_3c/foul_smelling_vaginal_discharge" type="string" required="true()" relevant=" /data/patient_gender  = 'female'"/>
       <bind nodeset="/data/page_3c/foul_smelling_vaginal_discharge_label" type="string" calculate="jr:choice-name( /data/page_3c/foul_smelling_vaginal_discharge , ' /data/page_3c/foul_smelling_vaginal_discharge ')"/>
       <bind nodeset="/data/page_4/fuel_type_for_cooking" type="string" required="true()"/>
       <bind nodeset="/data/page_4/occupational_exposure" type="string" required="true()"/>
@@ -635,7 +637,7 @@
       <bind nodeset="/data/group_summary/grp_patient/lbl_patient" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_patient/calc_patient" type="string" calculate=" /data/patient_name "/>
       <bind nodeset="/data/group_summary/grp_gender/lbl_gender" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_gender/calc_gender" type="string" calculate=" /data/inputs/contact/gender "/>
+      <bind nodeset="/data/group_summary/grp_gender/calc_gender" type="string" calculate="if( /data/patient_gender  = 'male', 'Male', 'Female')"/>
       <bind nodeset="/data/group_summary/grp_state/lbl_state" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_state/calc_state" type="string" calculate=" /data/inputs/state "/>
       <bind nodeset="/data/group_summary/grp_district/lbl_district" readonly="true()" type="string"/>
@@ -657,27 +659,27 @@
       <bind nodeset="/data/group_summary/grp_q_physical/calc_q_physical" type="string" calculate="jr:choice-name( /data/page_1b/physical_activities_frequency , ' /data/page_1b/physical_activities_frequency ')"/>
       <bind nodeset="/data/group_summary/grp_q_family/q_family" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_q_family/calc_q_family" type="string" calculate="jr:choice-name( /data/page_1b/family_medical_history , ' /data/page_1b/family_medical_history ')"/>
-      <bind nodeset="/data/group_summary/sum_hdr_b" readonly="true()" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/group_summary/grp_q_breast_lump" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/group_summary/grp_q_breast_lump/q_breast_lump" readonly="true()" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/group_summary/sum_hdr_b" readonly="true()" type="string" relevant=" /data/patient_gender  = 'female'"/>
+      <bind nodeset="/data/group_summary/grp_q_breast_lump" relevant=" /data/patient_gender  = 'female'"/>
+      <bind nodeset="/data/group_summary/grp_q_breast_lump/q_breast_lump" readonly="true()" type="string" relevant=" /data/patient_gender  = 'female'"/>
       <bind nodeset="/data/group_summary/grp_q_breast_lump/calc_q_breast_lump" type="string" calculate="jr:choice-name( /data/page_3a/breast_lump , ' /data/page_3a/breast_lump ')"/>
-      <bind nodeset="/data/group_summary/grp_q_nipple" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/group_summary/grp_q_nipple/q_nipple" readonly="true()" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/group_summary/grp_q_nipple" relevant=" /data/patient_gender  = 'female'"/>
+      <bind nodeset="/data/group_summary/grp_q_nipple/q_nipple" readonly="true()" type="string" relevant=" /data/patient_gender  = 'female'"/>
       <bind nodeset="/data/group_summary/grp_q_nipple/calc_q_nipple" type="string" calculate="jr:choice-name( /data/page_3a/nipple_discharge , ' /data/page_3a/nipple_discharge ')"/>
-      <bind nodeset="/data/group_summary/grp_q_breast_shape" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/group_summary/grp_q_breast_shape/q_breast_shape" readonly="true()" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/group_summary/grp_q_breast_shape" relevant=" /data/patient_gender  = 'female'"/>
+      <bind nodeset="/data/group_summary/grp_q_breast_shape/q_breast_shape" readonly="true()" type="string" relevant=" /data/patient_gender  = 'female'"/>
       <bind nodeset="/data/group_summary/grp_q_breast_shape/calc_q_breast_shape" type="string" calculate="jr:choice-name( /data/page_3a/breast_shape_size_change , ' /data/page_3a/breast_shape_size_change ')"/>
-      <bind nodeset="/data/group_summary/grp_q_bleeding_periods" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/group_summary/grp_q_bleeding_periods/q_bleeding_periods" readonly="true()" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/group_summary/grp_q_bleeding_periods" relevant=" /data/patient_gender  = 'female'"/>
+      <bind nodeset="/data/group_summary/grp_q_bleeding_periods/q_bleeding_periods" readonly="true()" type="string" relevant=" /data/patient_gender  = 'female'"/>
       <bind nodeset="/data/group_summary/grp_q_bleeding_periods/calc_q_bleeding_periods" type="string" calculate="jr:choice-name( /data/page_3b/bleeding_between_periods , ' /data/page_3b/bleeding_between_periods ')"/>
-      <bind nodeset="/data/group_summary/grp_q_menopause" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/group_summary/grp_q_menopause/q_menopause" readonly="true()" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/group_summary/grp_q_menopause" relevant=" /data/patient_gender  = 'female'"/>
+      <bind nodeset="/data/group_summary/grp_q_menopause/q_menopause" readonly="true()" type="string" relevant=" /data/patient_gender  = 'female'"/>
       <bind nodeset="/data/group_summary/grp_q_menopause/calc_q_menopause" type="string" calculate="jr:choice-name( /data/page_3b/post_menopause_bleeding , ' /data/page_3b/post_menopause_bleeding ')"/>
-      <bind nodeset="/data/group_summary/grp_q_intercourse" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/group_summary/grp_q_intercourse/q_intercourse" readonly="true()" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/group_summary/grp_q_intercourse" relevant=" /data/patient_gender  = 'female'"/>
+      <bind nodeset="/data/group_summary/grp_q_intercourse/q_intercourse" readonly="true()" type="string" relevant=" /data/patient_gender  = 'female'"/>
       <bind nodeset="/data/group_summary/grp_q_intercourse/calc_q_intercourse" type="string" calculate="jr:choice-name( /data/page_3b/post_intercourse_bleeding , ' /data/page_3b/post_intercourse_bleeding ')"/>
-      <bind nodeset="/data/group_summary/grp_q_discharge" relevant=" /data/inputs/contact/gender  = 'female'"/>
-      <bind nodeset="/data/group_summary/grp_q_discharge/q_discharge" readonly="true()" type="string" relevant=" /data/inputs/contact/gender  = 'female'"/>
+      <bind nodeset="/data/group_summary/grp_q_discharge" relevant=" /data/patient_gender  = 'female'"/>
+      <bind nodeset="/data/group_summary/grp_q_discharge/q_discharge" readonly="true()" type="string" relevant=" /data/patient_gender  = 'female'"/>
       <bind nodeset="/data/group_summary/grp_q_discharge/calc_q_discharge" type="string" calculate="jr:choice-name( /data/page_3c/foul_smelling_vaginal_discharge , ' /data/page_3c/foul_smelling_vaginal_discharge ')"/>
       <bind nodeset="/data/group_summary/sum_hdr_c" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_q_fuel/q_fuel" readonly="true()" type="string"/>
@@ -717,13 +719,6 @@
         <input ref="/data/inputs/contact/name" appearance="hidden">
           <label>Patient Name</label>
         </input>
-        <select1 ref="/data/inputs/contact/gender">
-          <label>Gender</label>
-          <itemset nodeset="instance('gender')/root/item">
-            <value ref="name"/>
-            <label ref="label"/>
-          </itemset>
-        </select1>
       </group>
       <select1 ref="/data/inputs/state" appearance="minimal">
         <label>State</label>
@@ -771,7 +766,7 @@
       <label>Part A: Risk Assessment (2 of 2)</label>
       <select1 ref="/data/page_1b/waist_size">
         <label>4. Measurement of waist (in cm)</label>
-        <itemset nodeset="instance('waist_size')/root/item[filter =  /data/inputs/contact/gender ]">
+        <itemset nodeset="instance('waist_size')/root/item[filter =  /data/patient_gender ]">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
@@ -924,7 +919,7 @@
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_gender">
         <input ref="/data/group_summary/grp_gender/lbl_gender">
-          <label> **Gender:** <output value=" /data/inputs/contact/gender "/></label>
+          <label> **Gender:** <output value=" /data/group_summary/grp_gender/calc_gender "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_state">

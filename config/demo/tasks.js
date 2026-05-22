@@ -1,550 +1,480 @@
-const extras = require('./nools-extras');
+// module.exports = [
+//   {
+//     name: 'phq9-followup',
+//     title: 'PHQ-9 Follow-up',
+//     icon: 'icon-healthcare',
+//     appliesTo: 'reports',
+//     appliesToType: ['phq9'],
+//     appliesIf: function(c, r) {
+//       // Only apply to reports where source is not 'task'
+//       // This prevents a follow-up from triggering another follow-up
+//       console.log(c.reports, 'Hello Worlssss');
+//       if (r.fields && r.fields.source === 'task') {
+//         return false;
+//       }
+//       // // Only generate a task for the most recent original PHQ-9 report
+//       // // This prevents multiple open tasks when a contact has several PHQ-9s
+//       var mostRecent = Utils.getMostRecentReport(r.reports, 'phq9');
+//       return mostRecent && mostRecent._id === r._id;
+//       // return true;
+//     },
+//     actions: [
+//       {
+//         type: 'report',
+//         form: 'phq9',
+//         label: 'Fill PHQ-9',
+//         // Removed unused (c, r, event) to pass linting
+//         modifyContent: function(content) {
+//           content.source = 'task';
+//         }
+//       }
+//     ],
+//     events: [
+//       {
+//         id: 'phq9-followup-event',
+//         dueDate: function(event, c, r) {
+//           return Utils.addDate(new Date(r.reported_date), 1);
+//         },
+//         start: 0,
+//         end: 3,
+//       }
+//     ],
+//     resolvedIf: function(c, r, event, dueDate) {
+//       return Utils.isFormSubmittedInWindow(
+//         c.reports,
+//         'phq9',
+//         Utils.addDate(dueDate, -event.start).getTime(),
+//         Utils.addDate(dueDate, event.end + 1).getTime()
+//       );
+//     }
+//   }
+// ];
 
-const {
-  MAX_DAYS_IN_PREGNANCY,
-  today,
-  getNewestPregnancyTimestamp,
-  getNewestDeliveryTimestamp,
-  isAlive,
-  isFormArraySubmittedInWindow,
-  getDateISOLocal,
-  getTimeForMidnight,
-  isDeliveryForm,
-  getMostRecentLMPDateForPregnancy,
-  addDays,
-  getRecentANCVisitWithEvent,
-  isPregnancyTaskMuted,
-  getField,
-  getNewestReport
-} = extras;
 
-const generateEventForHomeVisit = (week, start, end) => ({
-  id: `pregnancy-home-visit-week${week}`,
-  start,
-  end,
-  dueDate: function (event, contact, report) {
-    const recentLMPDate = getMostRecentLMPDateForPregnancy(contact, report);
-    if (recentLMPDate) { return addDays(recentLMPDate, week * 7); }
-    return addDays(report.reported_date, week * 7);
-  }
-});
+// module.exports = [
+//   {
+//     title: 'task.phq9_followup',
+//     name: 'phq9-followup',
+//     appliesTo: 'reports',
+//     appliesToType: ['phq9'],
+//     actions: [{ form: 'phq9' }],
+//     events: [
+//       { id: 'phq9-followup-1', days: 7, start: 0, end: 7 }
+//     ],
+//     resolvedIf: function (contact, report, event, dueDate) {
+//       return Utils.isFormSubmittedInWindow(
+//         contact.reports,
+//         'phq9',
+//         Utils.addDate(dueDate, -event.start).getTime(),
+//         Utils.addDate(dueDate, event.end + 1).getTime()
+//       );
+//     }
+//   }
+// ];
 
-function checkTaskResolvedForHomeVisit(contact, report, event, dueDate) {
-  //delivery form submitted
-  if (report.reported_date < getNewestDeliveryTimestamp(contact)) { return true; }
 
-  //old pregnancy report
-  if (report.reported_date < getNewestPregnancyTimestamp(contact)) { return true; }
+// module.exports = [
 
-  //miscarriage or abortion
-  if (getRecentANCVisitWithEvent(contact, report, 'abortion') || getRecentANCVisitWithEvent(contact, report, 'miscarriage')) { return true; }
+//   {
 
-  //Due date older than reported day
-  if (dueDate <= getTimeForMidnight(report.reported_date)) { return true; }
+//     name: 'follow-up-after-report',
 
-  //Tasks cleared
-  if (isPregnancyTaskMuted(contact)) { return true; }
-  const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date);
-  const endTime = addDays(dueDate, event.end + 1).getTime();
-  return isFormArraySubmittedInWindow(contact.reports, ['pregnancy_home_visit'], startTime, endTime);
+//     title: 'Follow Up',
+
+//     appliesTo: 'reports',
+
+//     appliesToType: ['phq9'], // replace with your form's code
+
+//     appliesIf: function (contact, report) {
+
+//       // optional: add conditions to filter which reports trigger the task
+//       console.log(contact.reports, 'Contactssss');
+//       console.log(report.reports, 'Reportsssss');
+
+//       return true;
+
+//     },
+
+//     resolvedIf: function (contact, report, event, dueDate) {
+
+//       return Utils.isFormSubmittedInWindow(
+
+//         contact.reports,
+
+//         'phq9',
+
+//         Utils.addDate(dueDate, -event.start).getTime(),
+
+//         Utils.addDate(dueDate, event.end + 1).getTime()
+
+//       );
+
+//     },
+
+//     actions: [{ form: 'phq9' }],
+
+//     events: [
+
+//       {
+
+//         id: 'follow-up-event',
+
+//         days: 0,   // due 7 days after the report's reported_date
+
+//         start: 0,  // show 2 days before due date
+
+//         end: 2,    // show 2 days after due date
+
+//       }
+
+//     ]
+
+//   }
+
+// ];
+ 
+// module.exports = [
+//   {
+//     name: 'follow-up-after-report',
+//     title: 'Follow Up',
+//     appliesTo: 'reports',
+//     appliesToType: ['phq9'],
+ 
+//     appliesIf: function (contact, report) {
+//       console.log('Triggered for report:', report.form);
+//       return true;
+//     },
+ 
+//     resolvedIf: () => false,
+ 
+//     actions: [{ form: 'phq9' }],
+ 
+//     events: [
+//       {
+//         id: 'follow-up-event',
+//         days: 0,
+//         start: 0,
+//         end: 2,
+//       }
+//     ]
+//   }
+// ];
+
+const getField = (report, fieldPath) => ['fields', ...(fieldPath || '').split('.')]
+  .reduce((prev, fieldName) => {
+    if (prev === undefined) { return undefined; }
+    return prev[fieldName];
+  }, report);
+
+function isAlive(contact) {
+  return contact && contact.contact && !contact.contact.date_of_death;
 }
 
-module.exports = [
 
-  //ANC Home Visit: 12, 20, 26, 30, 34, 36, 38, 40 weeks (Known LMP)
-  {
-    name: 'anc.pregnancy_home_visit.known_lmp',
-    icon: 'icon-pregnancy',
-    title: 'task.anc.pregnancy_home_visit.title',
-    appliesTo: 'reports',
-    appliesToType: ['pregnancy'],
-    appliesIf: function (contact, report) {
-      // If LMP date is known
-      return !!getMostRecentLMPDateForPregnancy(contact, report);
-    },
 
-    resolvedIf: checkTaskResolvedForHomeVisit,
-
-    actions: [
-      {
-        type: 'report',
-        form: 'pregnancy_home_visit',
-        label: 'Pregnancy home visit'
-      }
-    ],
-    events: [
-      generateEventForHomeVisit(12, 7, 14),
-      generateEventForHomeVisit(20, 7, 14),
-      generateEventForHomeVisit(26, 7, 14),
-      generateEventForHomeVisit(30, 7, 14),
-      generateEventForHomeVisit(34, 6, 7),
-      generateEventForHomeVisit(36, 6, 7),
-      generateEventForHomeVisit(38, 6, 7),
-      generateEventForHomeVisit(40, 6, 7)
-    ]
-  },
-
-  //ANC Home Visit: show every 2 weeks (Unknown LMP)
-  {
-    name: 'anc.pregnancy_home_visit.unknown_lmp',
-    icon: 'icon-pregnancy',
-    title: 'task.anc.pregnancy_home_visit.title',
-    appliesTo: 'reports',
-    appliesToType: ['pregnancy'],
-    appliesIf: function (contact, report) {// If LMP date is unknown
-      const recentLMP = getMostRecentLMPDateForPregnancy(contact, report);
-      //We only want to show until 42 weeks + 7 days
-      return !recentLMP && addDays(report.reported_date, MAX_DAYS_IN_PREGNANCY + 7) >= today;
-    },
-
-    resolvedIf: checkTaskResolvedForHomeVisit,
-
-    actions: [
-      {
-        type: 'report',
-        form: 'pregnancy_home_visit',
-        label: 'Pregnancy home visit'
-      }
-    ],
-    //every two weeks from reported date until 42nd week, show before due date: 6 days, show after due date: 7 days
-    events: [...Array(21).keys()].map(i => generateEventForHomeVisit((i + 1) * 2, 6, 7))
-  },
-
-  //ANC - Health Facility Visit Reminder
-  {
-    name: 'anc.facility_reminder',
-    icon: 'icon-pregnancy',
-    title: 'task.anc.facility_reminder.title',
-    appliesTo: 'reports',
-    appliesToType: ['pregnancy', 'pregnancy_home_visit'],
-    appliesIf: function (contact, report) {
-      //next pregnancy visit date is entered
-      return getField(report, 't_pregnancy_follow_up_date');
-    },
-
-    resolvedIf: function (contact, report, event, dueDate) {
-      //(refused or migrated) and cleared tasks 
-      if (isPregnancyTaskMuted(contact)) { return true; }
-      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date);
-      const endTime = addDays(dueDate, event.end + 1).getTime();
-      return isFormArraySubmittedInWindow(contact.reports, ['pregnancy_facility_visit_reminder'], startTime, endTime);
-
-    },
-    actions: [{
-      type: 'report',
-      form: 'pregnancy_facility_visit_reminder',
-      label: 'Pregnancy facility visit reminder',
-      modifyContent: function (content, contact, report) {
-        content.source_visit_date = getField(report, 't_pregnancy_follow_up_date');
-      }
-    }],
-    events: [{
-      id: 'pregnancy-facility-visit-reminder',
-      start: 3,
-      end: 7,
-      dueDate: function (event, contact, report) {
-        //next visit date
-        return getDateISOLocal(getField(report, 't_pregnancy_follow_up_date'));
-      }
+const getNewestReport = function (reports, forms) {
+  let result;
+  reports.forEach(function (report) {
+    if (!forms.includes(report.form)) { return; }
+    if (!result || report.reported_date > result.reported_date) {
+      result = report;
     }
-    ]
-  },
+  });
+  return result;
+};
 
-  {
-    name: 'anc.pregnancy_danger_sign_followup',
-    icon: 'icon-pregnancy-danger',
-    title: 'task.anc.pregnancy_danger_sign_followup.title',
-    appliesTo: 'reports',
-    appliesToType: ['pregnancy', 'pregnancy_home_visit', 'pregnancy_danger_sign', 'pregnancy_danger_sign_follow_up'],
-    appliesIf: function (contact, report) {
-      return getField(report, 't_danger_signs_referral_follow_up') === 'yes' && isAlive(contact);
-    },
-    resolvedIf: function (contact, report, event, dueDate) {
-      //(refused or migrated) and cleared tasks 
-      if (isPregnancyTaskMuted(contact)) { return true; }
-      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);
-      const endTime = addDays(dueDate, event.end + 1).getTime();
-      return isFormArraySubmittedInWindow(contact.reports, ['pregnancy_danger_sign_follow_up'], startTime, endTime);
-    },
-    actions: [
-      {
-        type: 'report',
-        form: 'pregnancy_danger_sign_follow_up'
-      }
-    ],
-    events: [
-      {
-        id: 'pregnancy-danger-sign-follow-up',
-        start: 3,
-        end: 7,
-        dueDate: function (event, contact, report) {
-          return getDateISOLocal(getField(report, 't_danger_signs_referral_follow_up_date'));
-        }
-      }
-    ]
-  },
+function getDateISOLocal(s) {
+  if (!s) { return new Date(); }
+  const b = s.split(/\D/);
+  const d = new Date(b[0], b[1] - 1, b[2]);
+  if (isValidDate(d)) { return d; }
+  return new Date();
+}
 
-  {
-    name: 'anc.delivery',
-    icon: 'icon-mother-child',
-    title: 'task.anc.delivery.title',
-    appliesTo: 'reports',
-    appliesToType: ['pregnancy'],
-    appliesIf: function (contact, report) {
-      const lmpDate = getMostRecentLMPDateForPregnancy(contact, report);
-      //only for known LMP, show for maximum of 42 + 6 weeks
-      return lmpDate && addDays(lmpDate, 336) >= today && isAlive(contact);
-    },
-    resolvedIf: function (contact, report, event, dueDate) {
-      //miscarriage or abortion
-      if (getRecentANCVisitWithEvent(contact, report, 'abortion') || getRecentANCVisitWithEvent(contact, report, 'miscarriage')) { return true; }
+function isValidDate(d) {
+  return d instanceof Date && !isNaN(d);
+}
 
-      //(refused or migrated) and cleared tasks 
-      if (isPregnancyTaskMuted(contact)) { return true; }
-      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date);
-      const endTime = addDays(dueDate, event.end + 1).getTime();
-      return isFormArraySubmittedInWindow(contact.reports, ['delivery'], startTime, endTime);
-    },
-    actions: [
-      {
-        type: 'report',
-        form: 'delivery'
-      }
-    ],
-    events: [
-      {
-        id: 'delivery-reminder',
-        start: 4 * 7,
-        end: 6 * 7,
-        dueDate: function (event, contact, report) {
-          return addDays(getMostRecentLMPDateForPregnancy(contact, report), MAX_DAYS_IN_PREGNANCY); //LMP + 42 weeks
-        }
-      }
-    ]
-  },
+const UserRole = Object.freeze({
+  ASHA: 'asha',
+  CHO: 'cho',
+});
 
-  {
-    name: 'pnc.danger_sign_followup_mother',
-    icon: 'icon-follow-up',
-    title: 'task.pnc.danger_sign_followup_mother.title',
-    appliesTo: 'reports',
-    appliesToType: ['delivery', 'pnc_danger_sign_follow_up_mother'],
-    appliesIf: function (contact, report) {
-      return getField(report, 't_danger_signs_referral_follow_up') === 'yes' && isAlive(contact);
-    },
-    resolvedIf: function (contact, report, event, dueDate) {
-      //(refused or migrated) and cleared tasks 
-      if (isPregnancyTaskMuted(contact)) { return true; }
-      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);//+1 so that source ds_follow_up does not resolve itself;
-      const endTime = addDays(dueDate, event.end + 1).getTime();
-      return isFormArraySubmittedInWindow(contact.reports, ['pnc_danger_sign_follow_up_mother'], startTime, endTime);
-    },
-    actions: [
-      {
-        type: 'report',
-        form: 'pnc_danger_sign_follow_up_mother',
-        modifyContent: function (content, contact, report) {
-          if (isDeliveryForm(report)) {
-            content.delivery_uuid = report._id;
-          }
-          else {
-            content.delivery_uuid = getField(report, 'inputs.delivery_uuid');
-          }
-        }
-      }
-    ],
-    events: [
-      {
-        id: 'pnc-danger-sign-follow-up-mother',
-        start: 3,
-        end: 7,
-        dueDate: function (event, contact, report) {
-          return getDateISOLocal(getField(report, 't_danger_signs_referral_follow_up_date'));
-        }
-      }
-    ]
-  },
-
-  {
-    name: 'pnc.danger_sign_followup_baby.from_contact',
-    icon: 'icon-follow-up',
-    title: 'task.pnc.danger_sign_followup_baby.title',
-    appliesTo: 'contacts',
-    appliesToType: ['person'],
-    appliesIf: function (contact) {
-      return contact.contact &&
-        contact.contact.t_danger_signs_referral_follow_up === 'yes' &&
-        isAlive(contact);
-    },
-    resolvedIf: function (contact, report, event, dueDate) {
-      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), contact.contact.reported_date);
-      const endTime = addDays(dueDate, event.end).getTime();
-      return isFormArraySubmittedInWindow(contact.reports, ['pnc_danger_sign_follow_up_baby'], startTime, endTime);
-    },
-    actions: [
-      {
-        type: 'report',
-        form: 'pnc_danger_sign_follow_up_baby',
-        modifyContent: function (content, contact) {
-          content.delivery_uuid = contact.contact.created_by_doc;
-        }
-      }
-    ],
-    events: [
-      {
-        id: 'pnc-danger-sign-follow-up-baby',
-        start: 3,
-        end: 7,
-        dueDate: function (event, contact) {
-          return getDateISOLocal(contact.contact.t_danger_signs_referral_follow_up_date);
-        }
-      }
-    ]
-  },
-
-  // NCD Task 1: Hypertension Follow-up — moderate (systolic > 120 AND diastolic > 80)
-  // Severe cases (systolic > 140 OR diastolic > 90) are handled by ncd.hypertension_referral below
-  {
-    name: 'ncd.hypertension_followup',
-    icon: 'icon-healthcare-generic-2',
-    title: 'task.ncd.hypertension_followup.title',
-    appliesTo: 'reports',
-    appliesToType: ['ncd'],
-    appliesIf: function(contact, report) {
-      const systolic = parseInt(getField(report, 'hypertension.systolic'));
-      const diastolic = parseInt(getField(report, 'hypertension.diastolic'));
-      // Moderate: both elevated, but NOT in severe range (severe task takes priority)
-      const isModerate = systolic > 120 && diastolic > 80;
-      const isSevere = systolic > 140 || diastolic > 90;
-      return isModerate && !isSevere && isAlive(contact);
-    },
-    resolvedIf: function(contact, report, event, dueDate) {
-      // Resolve if a newer NCD report exists for this patient (re-assessment happened)
-      const newerNcd = getNewestReport(contact.reports, ['ncd']);
-      if (newerNcd && newerNcd.reported_date > report.reported_date) { return true; }
-
-      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);
-      const endTime = addDays(dueDate, event.end + 1).getTime();
-      return isFormArraySubmittedInWindow(contact.reports, ['ncd_hypertension_followup'], startTime, endTime);
-    },
-    actions: [{
-      type: 'report',
-      form: 'ncd_hypertension_followup',
-      label: 'Hypertension Follow-up',
-      modifyContent: function(content, _contact, report) {
-        content.t_systolic = getField(report, 'hypertension.systolic');
-        content.t_diastolic = getField(report, 'hypertension.diastolic');
-      }
-    }],
-    events: [{
-      id: 'ncd-hypertension-followup',
-      // Production: days: 30, start: 5, end: 7
-      // days: 30,
-      // start: 5,
-      days: 0,  // DEV: immediate
-      start: 0, // DEV: immediate
-      end: 7,
-    }],
-  },
-
-  // NCD Task 2: Hypertension Referral — severe (systolic > 140 OR diastolic > 90)
-  {
-    name: 'ncd.hypertension_referral',
-    icon: 'icon-healthcare-generic-2',
-    title: 'task.ncd.hypertension_referral.title',
-    appliesTo: 'reports',
-    appliesToType: ['ncd'],
-    appliesIf: function(contact, report) {
-      const systolic = parseInt(getField(report, 'hypertension.systolic'));
-      const diastolic = parseInt(getField(report, 'hypertension.diastolic'));
-      const isSevere = systolic > 140 || diastolic > 90;
-      const isReferred = getField(report, 'bp_referral_page.bp_referral_decision') === 'refer_anyway';
-      return isSevere && isReferred && isAlive(contact);
-    },
-    resolvedIf: function(contact, report, event, dueDate) {
-      // Resolve if a newer NCD report exists for this patient (re-assessment happened)
-      const newerNcd = getNewestReport(contact.reports, ['ncd']);
-      if (newerNcd && newerNcd.reported_date > report.reported_date) { return true; }
-
-      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);
-      const endTime = addDays(dueDate, event.end + 1).getTime();
-      // Resolve if referral form submitted and patient visited PHC or not willing
-      const referralDone = contact.reports.some(function(r) {
-        if (r.form !== 'ncd_hypertension_referral') { return false; }
-        if (r.reported_date < startTime || r.reported_date > endTime) { return false; }
-        const visited = getField(r, 'referral.t_phc_visited');
-        const willing = getField(r, 'referral.t_willing_to_visit');
-        return visited === 'yes' || willing === 'no';
-      });
-      return referralDone;
-    },
-    actions: [{
-      type: 'report',
-      form: 'ncd_hypertension_referral',
-      label: 'Hypertension Referral Follow-up',
-      modifyContent: function(content, _contact, report) {
-        content.t_systolic = getField(report, 'hypertension.systolic');
-        content.t_diastolic = getField(report, 'hypertension.diastolic');
-      }
-    }],
-    events: [{
-      id: 'ncd-hypertension-referral',
-      // Production: days: 5, start: 3, end: 7
-      // days: 5,
-      // start: 3,
-      days: 0,  // DEV: immediate
-      start: 0, // DEV: immediate
-      end: 7,
-    }],
-  },
-
-  // NCD Task 2b: Hypertension Referral Follow-up — when patient agreed to a PHC visit date
-  {
-    name: 'ncd.hypertension_referral_scheduled',
-    icon: 'icon-healthcare-generic-2',
-    title: 'task.ncd.hypertension_referral_scheduled.title',
-    appliesTo: 'reports',
-    appliesToType: ['ncd_hypertension_referral'],
-    appliesIf: function(contact, report) {
-      return getField(report, 'referral.t_willing_to_visit') === 'yes' &&
-             getField(report, 'referral.t_phc_visit_date') &&
-             isAlive(contact);
-    },
-    resolvedIf: function(contact, report, event, dueDate) {
-      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);
-      const endTime = addDays(dueDate, event.end + 1).getTime();
-      const referralDone = contact.reports.some(function(r) {
-        if (r.form !== 'ncd_hypertension_referral') { return false; }
-        if (r.reported_date < startTime || r.reported_date > endTime) { return false; }
-        const visited = getField(r, 'referral.t_phc_visited');
-        const willing = getField(r, 'referral.t_willing_to_visit');
-        return visited === 'yes' || willing === 'no';
-      });
-      return referralDone;
-    },
-    actions: [{
-      type: 'report',
-      form: 'ncd_hypertension_referral',
-      label: 'Hypertension Referral Follow-up',
-      modifyContent: function(content, _contact, report) {
-        content.t_systolic = getField(report, 'inputs.t_systolic');
-        content.t_diastolic = getField(report, 'inputs.t_diastolic');
-      }
-    }],
-    events: [{
-      id: 'ncd-hypertension-referral-scheduled',
-      start: 3,
-      end: 7,
-      dueDate: function(_event, _contact, report) {
-        return getDateISOLocal(getField(report, 'referral.t_phc_visit_date'));
-      }
-    }],
-  },
-
-  // NCD Task 3: Diabetes Referral — rapid glucose > 140 mg/dL
-  {
-    name: 'ncd.diabetes_referral',
-    icon: 'icon-healthcare-generic-2',
-    title: 'task.ncd.diabetes_referral.title',
-    appliesTo: 'reports',
-    appliesToType: ['ncd'],
-    appliesIf: function(contact, report) {
-      const glucose = parseInt(getField(report, 'diabetes_section.rapid_glucose'));
-      const isHighGlucose = glucose > 140;
-      const isReferred = getField(report, 'glucose_referral_page.glucose_referral_decision') === 'refer_anyway';
-      return isHighGlucose && isReferred && isAlive(contact);
-    },
-    resolvedIf: function(contact, report, event, dueDate) {
-      // Resolve if a newer NCD report exists for this patient (re-assessment happened)
-      const newerNcd = getNewestReport(contact.reports, ['ncd']);
-      if (newerNcd && newerNcd.reported_date > report.reported_date) { return true; }
-
-      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);
-      const endTime = addDays(dueDate, event.end + 1).getTime();
-      const referralDone = contact.reports.some(function(r) {
-        if (r.form !== 'ncd_diabetes_referral') { return false; }
-        if (r.reported_date < startTime || r.reported_date > endTime) { return false; }
-        const visited = getField(r, 'referral.t_phc_visited');
-        const willing = getField(r, 'referral.t_willing_to_visit');
-        return visited === 'yes' || willing === 'no';
-      });
-      return referralDone;
-    },
-    actions: [{
-      type: 'report',
-      form: 'ncd_diabetes_referral',
-      label: 'Diabetes Referral Follow-up',
-      modifyContent: function(content, _contact, report) {
-        content.t_rapid_glucose = getField(report, 'diabetes_section.rapid_glucose');
-      }
-    }],
-    events: [{
-      id: 'ncd-diabetes-referral',
-      // Production: days: 5, start: 3, end: 7
-      // days: 5,
-      // start: 3,
-      days: 0,  // DEV: immediate
-      start: 0, // DEV: immediate
-      end: 7,
-    }],
-  },
-
-  // NCD Task 3b: Diabetes Referral Follow-up — when patient agreed to a PHC visit date
-  {
-    name: 'ncd.diabetes_referral_scheduled',
-    icon: 'icon-healthcare-generic-2',
-    title: 'task.ncd.diabetes_referral_scheduled.title',
-    appliesTo: 'reports',
-    appliesToType: ['ncd_diabetes_referral'],
-    appliesIf: function(contact, report) {
-      return getField(report, 'referral.t_willing_to_visit') === 'yes' &&
-             getField(report, 'referral.t_phc_visit_date') &&
-             isAlive(contact);
-    },
-    resolvedIf: function(contact, report, event, dueDate) {
-      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);
-      const endTime = addDays(dueDate, event.end + 1).getTime();
-      const referralDone = contact.reports.some(function(r) {
-        if (r.form !== 'ncd_diabetes_referral') { return false; }
-        if (r.reported_date < startTime || r.reported_date > endTime) { return false; }
-        const visited = getField(r, 'referral.t_phc_visited');
-        const willing = getField(r, 'referral.t_willing_to_visit');
-        return visited === 'yes' || willing === 'no';
-      });
-      return referralDone;
-    },
-    actions: [{
-      type: 'report',
-      form: 'ncd_diabetes_referral',
-      label: 'Diabetes Referral Follow-up',
-      modifyContent: function(content, _contact, report) {
-        content.t_rapid_glucose = getField(report, 'inputs.t_rapid_glucose');
-      }
-    }],
-    events: [{
-      id: 'ncd-diabetes-referral-scheduled',
-      start: 3,
-      end: 7,
-      dueDate: function(_event, _contact, report) {
-        return getDateISOLocal(getField(report, 'referral.t_phc_visit_date'));
-      }
-    }],
-  },
-
-  // Task 1: CBAC Follow-up — triggered after high-risk CBAC submission
+module.exports = [
+  // {
+  //   name: 'phq9.high_score_followup',
+  //   icon: 'icon-healthcare-generic-2', 
+  //   title: 'PHQ-9 Follow-up Required',
+  //   appliesTo: 'reports',
+  //   appliesToType: ['phq9'], // Matches form_id in your settings.csv
+  //   // appliesIf: function(contact, report) {
+  //   //   // Check the score from your PHQ-9 form submission
+  //   //   // Ensure 'total_score' is the exact name in your survey.csv/xml
+  //   //   return report.fields.total_score > 13;
+  //   // },
+  //   appliesIf: function() {
+  //     return true;
+  //   },
+  //   resolvedIf: function(contact, report) {
+  //     // Task disappears once this specific follow-up form is submitted
+  //     return contact.reports.some(function(r) {
+  //       return r.form === 'phq9_followup_actions' && 
+  //              r.reported_date >= report.reported_date;
+  //     });
+  //   },
+  //   actions: [
+  //     {
+  //       type: 'report',
+  //       form: 'phq9_followup_actions', // The ID of the form with your 3 questions
+  //       modifyContent: function(content, contact, report) {
+  //         // Pass the high score to the follow-up form's 'inputs'
+  //         content.previous_score = report.fields.total_score;
+  //         content.previous_severity = report.fields.severity_category;
+  //       }
+  //     }
+  //   ],
+  //   events: [
+  //     {
+  //       id: 'phq9-immediate',
+  //       days: 0,    // Task appears immediately
+  //       start: 0,
+  //       end: 14     // Stays on the list for 2 weeks or until resolved
+  //     }
+  //   ]
+  // },
+  // 2. Breast Cancer Risk Follow-up Task
+  // {
+  //   name: 'breast_cancer.followup',
+  //   icon: 'icon-people-woman', // Matches your properties.json
+  //   title: 'Breast Cancer Follow-up Required',
+  //   appliesTo: 'reports',
+  //   appliesToType: ['breast_cancer_risk_assessment'], // Matches form_id in settings.csv
+  //   appliesIf: function() {
+  //     return true;
+  //   },
+  //   resolvedIf: function(contact, report) {
+  //     // Assumes your follow-up form for this is named 'bc_followup_actions'
+  //     return contact.reports.some(function(r) {
+  //       return r.form === 'breast_cancer_followup_actions' && 
+  //              r.reported_date >= report.reported_date;
+  //     });
+  //   },
+  //   actions: [
+  //     {
+  //       type: 'report',
+  //       form: 'breast_cancer_followup_actions',
+  //       modifyContent: function(content, contact, report) {
+  //         // Mapping fields from your breast_cancer_risk_assessment.xlsx survey tab
+  //         content.previous_risk_score = report.fields.total_risk_score;
+  //         content.previous_risk_category = report.fields.risk_category;
+  //       }
+  //     }
+  //   ],
+  //   events: [
+  //     {
+  //       id: 'bc-immediate',
+  //       days: 0,
+  //       start: 0,
+  //       end: 14 
+  //     }
+  //   ]
+  // },
+  // 3. Oral Cancer Assessment Follow-up Task
+  // {
+  //   name: 'oral_cancer.followup',
+  //   icon: 'icon-disease-cancer', // Matches oral_cancer_assessment.properties.json
+  //   title: 'Oral Cancer Follow-up Required',
+  //   appliesTo: 'reports',
+  //   appliesToType: ['oral_cancer_assessment'], // Matches form_id in settings.csv
+  //   appliesIf: function() {
+  //     return true;
+  //   },
+  //   resolvedIf: function(contact, report) {
+  //     // Assumes your follow-up form is named 'oral_followup_actions'
+  //     return contact.reports.some(function(r) {
+  //       return r.form === 'oral_followup_actions' && 
+  //              r.reported_date >= report.reported_date;
+  //     });
+  //   },
+  //   actions: [
+  //     {
+  //       type: 'report',
+  //       form: 'oral_followup_actions',
+  //       modifyContent: function(content, contact, report) {
+  //         // Passing general context as there isn't a single 'score' field in this form
+          
+  //         content.patient_age = report.fields.participant.age;
+  //         content.patient_gender = report.fields.participant.gender;
+  //       }
+  //     }
+  //   ],
+  //   events: [
+  //     {
+  //       id: 'oral-immediate',
+  //       days: 0,
+  //       start: 0,
+  //       end: 14 
+  //     }
+  //   ]
+  // },
     {
+    name: 'physician_review_from_oral_assessment',
+    icon: 'icon-disease-cancer',
+    title: 'Physician Oral Cancer Review',
+    appliesTo: 'reports',
+    appliesToType: ['oral_cancer_assessment'],
+    appliesIf: function(contact, report) {
+      var fields = report.fields || {};
+      var analysisPage = fields.final_ai_analysis_page || {};
+      var referral = analysisPage.final_ai_referral || '';
+      return user.role === 'physician' && 
+             !report.deleted &&
+             (referral === 'refer' || referral === 'refer_anyway');
+    },
+    resolvedIf: function(contact, report) {
+      return contact.reports.some(function(r) {
+        return r.form === 'physician_oral_cancer_review' &&
+               !r.deleted &&
+               r.fields &&
+               r.fields.source_form_uuid === report._id;
+      });
+    },
+    actions: [
+      {
+        type: 'report',
+        form: 'physician_oral_cancer_review',
+        label: 'Review Oral Cancer Photos',
+        modifyContent: function(content, contact, report) {
+          var fields = report.fields || {};
+          content.inputs = content.inputs || {};
+          content.inputs.source_form_uuid_input = report._id;
+          for (var i = 1; i <= 8; i++) {
+            var page = fields['photo_' + i + '_page'] || {};
+            var val = page['photo_' + i] || '';
+            content.inputs['photo_' + i + '_fetched'] = val ? 'user-file-' + val : '';
+          }
+        }
+      }
+    ],
+    events: [
+      {
+        id: 'physician-review-oc',
+        days: 0,
+        start: 0,
+        end: 30
+      }
+    ]
+  },
+
+  // 5. Physician Review ← triggered by ncd (when oral section is filled)
+  {
+    name: 'physician_review_from_ncd',
+    icon: 'icon-disease-cancer',
+    title: 'Physician Oral Cancer Review',
+    appliesTo: 'reports',
+    appliesToType: ['ncd'],
+    appliesIf: function(contact, report) {
+      var fields = report.fields || {};
+      var analysisPage = fields.oc_final_ai_analysis_page || {};
+      var referral = analysisPage.oc_final_ai_referral || '';
+      return user.role === 'physician' && 
+             !report.deleted &&
+             report.fields &&
+             (referral === 'refer' || referral === 'refer_anyway');
+    },
+    resolvedIf: function(contact, report) {
+      return contact.reports.some(function(r) {
+        return r.form === 'physician_oral_cancer_review' &&
+               !r.deleted &&
+               r.fields &&
+               r.fields.source_form_uuid === report._id;
+      });
+    },
+    actions: [
+      {
+        type: 'report',
+        form: 'physician_oral_cancer_review',
+        label: 'Review Oral Cancer Photos',
+        modifyContent: function(content, contact, report) {
+          var fields = report.fields || {};
+          content.inputs = content.inputs || {};
+          content.inputs.source_form_uuid_input = report._id;
+
+          for (var i = 1; i <= 8; i++) {
+            var page = fields['oc_photo_' + i + '_page'] || {};
+            var val = page['oc_photo_' + i] || '';
+            content.inputs['photo_' + i + '_fetched'] = val ? 'user-file-' + val : '';
+          }
+        }
+      }
+    ],
+    events: [
+      {
+        id: 'physician-review-ncd',
+        days: 0,
+        start: 0,
+        end: 30
+      }
+    ]
+  },
+    {
+    name: 'phq9_followup_after_physician_review',
+    icon: 'icon-healthcare-generic-2',
+    title: 'PHQ-9 Follow-up After Oral Cancer Review',
+    appliesTo: 'reports',
+    appliesToType: ['physician_oral_cancer_review'],
+    appliesIf: function(contact, report) {
+      return user.role === UserRole.ASHA && !report.deleted;
+    },
+    resolvedIf: function(contact, report) {
+      // Resolved once a phq9_followup_actions form is submitted after the physician review
+      return contact.reports.some(function(r) {
+        return r.form === 'phq9_followup_actions' &&
+               !r.deleted &&
+               r.reported_date >= report.reported_date;
+      });
+    },
+    actions: [
+      {
+        type: 'report',
+        form: 'phq9_followup_actions',
+        label: 'Complete PHQ-9 Follow-up',
+        modifyContent: function(content, contact, report) {
+          var fields = report.fields || {};
+          // Pass physician review context into the PHQ-9 follow-up form
+          content.previous_score    = fields.previous_score || '';
+          content.previous_severity = fields.previous_severity || '';
+        }
+      }
+    ],
+    events: [
+      {
+        id: 'phq9-followup-after-physician-review',
+        days: 0,    // Appears immediately after physician form is submitted
+        start: 0,
+        end: 14     // Stays open for 2 weeks or until resolved
+      }
+    ]
+  },
+  {
     name: 'cbac.follow_up',
     icon: 'icon-healthcare',
     title: 'task.cbac.follow_up.title',
     appliesTo: 'reports',
     appliesToType: ['cbac'],
     appliesIf: function(contact, report) {
-      return getField(report, 'risk_category') === 'High Risk' && isAlive(contact);
+      if (user.role !== UserRole.ASHA || getField(report, 'risk_category') !== 'High Risk' || !isAlive(contact)) {
+        return false;
+      }
+      // Only apply to the most recent CBAC — older ones are superseded by the new submission
+      const newestCbac = getNewestReport(contact.reports, ['cbac']);
+      return newestCbac && newestCbac._id === report._id;
     },
-    resolvedIf: function(contact, report, event, dueDate) {
-      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);
-      const endTime = addDays(dueDate, event.end + 1).getTime();
-      return isFormArraySubmittedInWindow(contact.reports, ['cbac_followup'], startTime, endTime);
+    resolvedIf: function(contact, report) {
+      // Resolved once any cbac_followup is submitted after this cbac report
+      return contact.reports.some(function(r) {
+        return r.form === 'cbac_followup' && r.reported_date > report.reported_date;
+      });
     },
     actions: [{
       type: 'report',
@@ -569,6 +499,49 @@ module.exports = [
   },
 
 
+  // Task 1b: CBAC PHQ-9 Follow-up — triggered when PHQ-2 total score > 3 (Part D)
+  {
+    name: 'cbac.phq9_followup',
+    icon: 'icon-healthcare-generic-2',
+    title: 'task.cbac.phq9_followup.title',
+    appliesTo: 'reports',
+    appliesToType: ['cbac'],
+    appliesIf: function(contact, report) {
+      if (user.role !== UserRole.CHO) { return false; }
+      if (!isAlive(contact)) { return false; }
+      // Only trigger if PHQ-2 score is high enough to warrant follow-up
+      const phq2Total = parseInt(getField(report, 'phq2_total'));
+      if (phq2Total <= 3) { return false; }
+      // Only apply to the most recent CBAC — older ones are superseded by the new submission
+      const newestCbac = getNewestReport(contact.reports, ['cbac']);
+      return newestCbac && newestCbac._id === report._id;
+    },
+    resolvedIf: function(contact, report) {
+      // Resolve if a newer CBAC exists — the old task is superseded
+      const newerCbac = getNewestReport(contact.reports, ['cbac']);
+      if (newerCbac && newerCbac.reported_date > report.reported_date) { return true; }
+      // Resolve once any phq9 form is submitted after this cbac report
+      return contact.reports.some(function(r) {
+        return r.form === 'phq9' && r.reported_date > report.reported_date;
+      });
+    },
+    actions: [{
+      type: 'report',
+      form: 'phq9',
+      label: 'task.cbac.phq9_followup.action_label',
+      modifyContent: function(content, _contact, report) {
+        content.state    = getField(report, 'inputs.state');
+        content.district = getField(report, 'inputs.district');
+      }
+    }],
+    events: [{
+      id: 'cbac-phq9-followup',
+      days: 0,
+      start: 0,
+      end: 60,
+    }],
+  },
+
   // Task 1b: CBAC NCD Screening — triggered alongside CBAC follow-up for high-risk patients
   {
     name: 'cbac.ncd_screening',
@@ -577,14 +550,18 @@ module.exports = [
     appliesTo: 'reports',
     appliesToType: ['cbac'],
     appliesIf: function(contact, report) {
-      return user.role === 'chw_supervisor' &&
-             getField(report, 'risk_category') === 'High Risk' &&
-             isAlive(contact);     
+      if (user.role !== UserRole.CHO) { return false; }
+      if (getField(report, 'risk_category') !== 'High Risk') { return false; }
+      if (!isAlive(contact)) { return false; }
+      // Only apply to the most recent CBAC — when a new CBAC is submitted the old task disappears
+      const newestCbac = getNewestReport(contact.reports, ['cbac']);
+      return newestCbac && newestCbac._id === report._id;
     },
-    resolvedIf: function(contact, report, event, dueDate) {
-      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);
-      const endTime = addDays(dueDate, event.end + 1).getTime();
-      return isFormArraySubmittedInWindow(contact.reports, ['ncd'], startTime, endTime);
+    resolvedIf: function(contact, report) {
+      // Resolved once any ncd form is submitted after this cbac report
+      return contact.reports.some(function(r) {
+        return r.form === 'ncd' && r.reported_date > report.reported_date;
+      });
     },
     actions: [{
       type: 'report',
@@ -614,67 +591,323 @@ module.exports = [
     appliesTo: 'reports',
     appliesToType: ['cbac_followup'],
     appliesIf: function(contact, report) {
-      return getField(report, 't_willing_for_checkup') === 'yes' && isAlive(contact);
+      if (user.role !== UserRole.ASHA) { return false; }
+      if (!isAlive(contact)) { return false; }
+      if (getField(report, 'ncd_followup.t_willing_for_checkup') !== 'yes') { return false; }
+      if (getField(report, 'ncd_followup.t_ncd_day_visited') === 'yes') { return false; }
+      // Only apply to the most recent cbac_followup — older ones are superseded
+      const newestFollowup = getNewestReport(contact.reports, ['cbac_followup']);
+      if (!newestFollowup || newestFollowup._id !== report._id) { return false; }
+      // Count only cbac_followups submitted after the most recent CBAC — resets per CBAC cycle
+      const newestCbac = getNewestReport(contact.reports, ['cbac']);
+      const newestCbacDate = newestCbac ? newestCbac.reported_date : 0;
+      const followupCount = contact.reports.filter(function(r) {
+        return r.form === 'cbac_followup' && r.reported_date > newestCbacDate;
+      }).length;
+      return followupCount <= 2;
     },
-    resolvedIf: function(contact, report, event, dueDate) {
-      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);
-      const endTime = addDays(dueDate, event.end + 1).getTime();
-      return isFormArraySubmittedInWindow(contact.reports, ['cbac_followup'], startTime, endTime);
+    resolvedIf: function(contact, report) {
+      // Resolved when any newer cbac_followup is submitted — supersedes this scheduled task
+      return contact.reports.some(function(r) {
+        return r.form === 'cbac_followup' && r.reported_date > report.reported_date;
+      });
     },
     actions: [{
       type: 'report',
       form: 'cbac_followup',
-      label: 'CBAC Checkup Follow-up',
+      label: 'CBAC Checkup Follow-up'
     }],
     events: [{
       id: 'cbac-checkup-date-follow-up',
-      // Production: use date entered by CHW in previous cbac_followup
-      // dueDate: function(event, contact, report) {
-      //   return getDateISOLocal(getField(report, 't_checkup_date'));
-      // },
+      // Production: use date entered by ASHA in previous cbac_followup
+      dueDate: function(event, contact, report) {
+        return getDateISOLocal(getField(report, 'ncd_followup.t_checkup_date'));
+      },
       // start: 1,
-      days: 0,   // DEV: immediate
       start: 0,  // DEV: immediate
       end: 7,
     }],
   },
 
+
+  // NCD Task 1: Hypertension Follow-up — moderate (systolic > 120 AND diastolic > 80)
+  // Severe cases (systolic > 140 OR diastolic > 90) are handled by ncd.hypertension_referral below
   {
-    name: 'pnc.danger_sign_followup_baby.from_report',
-    icon: 'icon-follow-up',
-    title: 'task.pnc.danger_sign_followup_baby.title',
+    name: 'ncd.hypertension_followup',
+    icon: 'icon-healthcare-generic-2',
+    title: 'task.ncd.hypertension_followup.title',
     appliesTo: 'reports',
-    appliesToType: ['pnc_danger_sign_follow_up_baby'],
-    appliesIf: function (contact, report) {
-      return getField(report, 't_danger_signs_referral_follow_up') === 'yes' && isAlive(contact);
+    appliesToType: ['ncd'],
+    appliesIf: function(contact, report) {
+      const userRole = user.role;
+      const systolic = parseInt(getField(report, 'f2_hypertension.f2_systolic'));
+      const diastolic = parseInt(getField(report, 'f2_hypertension.f2_diastolic'));
+      // Moderate: both elevated, but NOT in severe range (severe task takes priority)
+      const isModerate = systolic > 120 && diastolic > 80;
+      const isSevere = systolic > 140 || diastolic > 90;
+      return userRole === UserRole.ASHA && isModerate && !isSevere && isAlive(contact);
     },
-    resolvedIf: function (contact, report, event, dueDate) {
-      //(refused or migrated) and cleared tasks 
-      if (isPregnancyTaskMuted(contact)) { return true; }
-      const startTime = Math.max(addDays(dueDate, -event.start).getTime(), report.reported_date + 1);
-      //reported_date + 1 so that source ds_follow_up does not resolve itself
-      const endTime = addDays(dueDate, event.end + 1).getTime();
-      return isFormArraySubmittedInWindow(contact.reports, ['pnc_danger_sign_follow_up_baby'], startTime, endTime);
+    resolvedIf: function(contact, report) {
+      // Resolve if a newer NCD report exists — re-assessment supersedes this task
+      const newerNcd = getNewestReport(contact.reports, ['ncd']);
+      if (newerNcd && newerNcd.reported_date > report.reported_date) { return true; }
+      // Resolve once any hypertension follow-up form is submitted after this ncd report
+      return contact.reports.some(function(r) {
+        return r.form === 'ncd_hypertension_followup' && r.reported_date > report.reported_date;
+      });
     },
-    actions: [
-      {
-        type: 'report',
-        form: 'pnc_danger_sign_follow_up_baby',
-        modifyContent: function (content, contact, report) {
-          content.delivery_uuid = getField(report, 'inputs.delivery_uuid');
-        }
+    actions: [{
+      type: 'report',
+      form: 'ncd_hypertension_followup',
+      label: 'Hypertension Follow-up',
+      modifyContent: function(content, _contact, report) {
+        content.t_systolic = getField(report, 'f2_hypertension.f2_systolic');
+        content.t_diastolic = getField(report, 'f2_hypertension.f2_diastolic');
       }
-    ],
-    events: [
-      {
-        id: 'pnc-danger-sign-follow-up-baby',
-        start: 3,
-        end: 7,
-        dueDate: function (event, contact, report) {
-          return getDateISOLocal(getField(report, 't_danger_signs_referral_follow_up_date'));
-        }
+    }],
+    events: [{
+      id: 'ncd-hypertension-followup',
+      // Production: days: 30, start: 5, end: 7
+      // days: 30,
+      // start: 5,
+      days: 0,  // DEV: immediate
+      start: 0, // DEV: immediate
+      end: 7,
+    }],
+  },
+
+  // NCD Task 2: Hypertension Referral — severe (systolic > 140 OR diastolic > 90)
+  {
+    name: 'ncd.hypertension_referral',
+    icon: 'icon-healthcare-generic-2',
+    title: 'task.ncd.hypertension_referral.title',
+    appliesTo: 'reports',
+    appliesToType: ['ncd'],
+    appliesIf: function(contact, report) {
+      const userRole = user.role;
+      const isReferred = getField(report, 'f2_bp_referral_page.f2_bp_referral_decision') === 'refer_anyway' || getField(report, 'f2_bp_normal_page.f2_bp_referral_decision_normal') === 'refer_anyway';
+      return userRole === UserRole.ASHA && isReferred && isAlive(contact);
+    },
+    resolvedIf: function(contact, report) {
+      // Resolve if a newer NCD report exists (re-assessment happened)
+      const newerNcd = getNewestReport(contact.reports, ['ncd']);
+      if (newerNcd && newerNcd.reported_date > report.reported_date) { return true; }
+
+      // Resolve once any ncd_hypertension_referral form is submitted after this report
+      // — regardless of outcome (visited, refused, or agreed to future date)
+      return contact.reports.some(function(r) {
+        return r.form === 'ncd_hypertension_referral' && r.reported_date > report.reported_date;
+      });
+    },
+    actions: [{
+      type: 'report',
+      form: 'ncd_hypertension_referral',
+      label: 'Hypertension Referral Follow-up',
+      modifyContent: function(content, _contact, report) {
+        content.t_systolic = getField(report, 'f2_hypertension.f2_systolic');
+        content.t_diastolic = getField(report, 'f2_hypertension.f2_diastolic');
       }
-    ]
-  }
+    }],
+    events: [{
+      id: 'ncd-hypertension-referral',
+      // Production: days: 5, start: 3, end: 7
+      // days: 5,
+      // start: 3,
+      days: 0,  // DEV: immediate
+      start: 0, // DEV: immediate
+      end: 7,
+    }],
+  },
+
+  // NCD Task 2b: Hypertension Referral Follow-up — when patient agreed to a PHC visit date
+  {
+    name: 'ncd.hypertension_referral_scheduled',
+    icon: 'icon-healthcare-generic-2',
+    title: 'task.ncd.hypertension_referral_scheduled.title',
+    appliesTo: 'reports',
+    appliesToType: ['ncd_hypertension_referral'],
+    appliesIf: function(contact, report) {
+      // Only trigger on reports where the patient agreed but hasn't visited yet
+      // t_phc_visited being set means this is a completed follow-up, not an initial referral
+      return user.role === UserRole.ASHA &&
+             getField(report, 'referral.t_willing_to_visit') === 'yes' &&
+             getField(report, 'referral.t_phc_visit_date') &&
+             getField(report, 'referral.t_phc_visited') !== 'yes' &&
+             isAlive(contact);
+    },
+    resolvedIf: function(contact, report) {
+      // Resolved when any newer ncd_hypertension_referral is submitted — the scheduled
+      // task is superseded by the follow-up regardless of its outcome
+      return contact.reports.some(function(r) {
+        return r.form === 'ncd_hypertension_referral' && r.reported_date > report.reported_date;
+      });
+    },
+    actions: [{
+      type: 'report',
+      form: 'ncd_hypertension_referral',
+      label: 'Hypertension Referral Follow-up',
+      modifyContent: function(content, _contact, report) {
+        content.t_systolic = getField(report, 'inputs.t_systolic');
+        content.t_diastolic = getField(report, 'inputs.t_diastolic');
+      }
+    }],
+    events: [{
+      id: 'ncd-hypertension-referral-scheduled',
+      start: 3,
+      end: 7,
+      dueDate: function(_event, _contact, report) {
+        return getDateISOLocal(getField(report, 'referral.t_phc_visit_date'));
+      }
+    }],
+  },
+
+  // NCD Task 3: Diabetes Referral — rapid glucose > 140 mg/dL
+  {
+    name: 'ncd.diabetes_referral',
+    icon: 'icon-healthcare-generic-2',
+    title: 'task.ncd.diabetes_referral.title',
+    appliesTo: 'reports',
+    appliesToType: ['ncd'],
+    appliesIf: function(contact, report) {
+      const userRole = user.role;
+
+      const isReferred = getField(report, 'f2_glucose_referral_page.f2_glucose_referral_decision') === 'refer_anyway' || getField(report, 'f2_glucose_normal_page.f2_glucose_referral_decision_normal') === 'refer_anyway';
+
+      return userRole === UserRole.ASHA && isReferred && isAlive(contact);
+    },
+    resolvedIf: function(contact, report) {
+      // Resolve if a newer NCD report exists (re-assessment happened)
+      const newerNcd = getNewestReport(contact.reports, ['ncd']);
+      if (newerNcd && newerNcd.reported_date > report.reported_date) { return true; }
+
+      // Resolve once any ncd_diabetes_referral form is submitted after this report
+      // — regardless of outcome (visited, refused, or agreed to future date)
+      return contact.reports.some(function(r) {
+        return r.form === 'ncd_diabetes_referral' && r.reported_date > report.reported_date;
+      });
+    },
+    actions: [{
+      type: 'report',
+      form: 'ncd_diabetes_referral',
+      label: 'Diabetes Referral Follow-up',
+      modifyContent: function(content, _contact, report) {
+        content.t_rapid_glucose = getField(report, 'f2_diabetes_section.f2_rapid_glucose');
+      }
+    }],
+    events: [{
+      id: 'ncd-diabetes-referral',
+      // Production: days: 5, start: 3, end: 7
+      // days: 5,
+      // start: 3,
+      days: 0,  // DEV: immediate
+      start: 0, // DEV: immediate
+      end: 7,
+    }],
+  },
+
+  // NCD Task 3b: Diabetes Referral Follow-up — when patient agreed to a PHC visit date
+  {
+    name: 'ncd.diabetes_referral_scheduled',
+    icon: 'icon-healthcare-generic-2',
+    title: 'task.ncd.diabetes_referral_scheduled.title',
+    appliesTo: 'reports',
+    appliesToType: ['ncd_diabetes_referral'],
+    appliesIf: function(contact, report) {
+      // Only trigger on reports where the patient agreed but hasn't visited yet
+      // t_phc_visited being set means this is a completed follow-up, not an initial referral
+      return user.role === UserRole.ASHA &&
+             getField(report, 'referral.t_willing_to_visit') === 'yes' &&
+             getField(report, 'referral.t_phc_visit_date') &&
+             getField(report, 'referral.t_phc_visited') !== 'yes' &&
+             isAlive(contact);
+    },
+    resolvedIf: function(contact, report) {
+      // Resolved when any newer ncd_diabetes_referral is submitted — the scheduled
+      // task is superseded by the follow-up regardless of its outcome
+      return contact.reports.some(function(r) {
+        return r.form === 'ncd_diabetes_referral' && r.reported_date > report.reported_date;
+      });
+    },
+    actions: [{
+      type: 'report',
+      form: 'ncd_diabetes_referral',
+      label: 'Diabetes Referral Follow-up',
+      modifyContent: function(content, _contact, report) {
+        content.t_rapid_glucose = getField(report, 'inputs.t_rapid_glucose');
+      }
+    }],
+    events: [{
+      id: 'ncd-diabetes-referral-scheduled',
+      start: 3,
+      end: 7,
+      dueDate: function(_event, _contact, report) {
+        return getDateISOLocal(getField(report, 'referral.t_phc_visit_date'));
+      }
+    }],
+  },
+  // {
+  //   name: 'physician_oral_cancer_review',
+  //   icon: 'icon-disease-cancer',
+  //   title: 'Physician Oral Cancer Photo Review',
+  //   appliesTo: 'reports',
+  //   appliesToType: ['oral_cancer_assessment', 'ncd'],
+  //   appliesIf: function(contact, report) {
+  //     // Trigger for standalone oral cancer assessment
+  //     if (report.form === 'oral_cancer_assessment') {
+  //       return true;
+  //     }
+  //     // Trigger for NCD form only when Form 4 (oral section) was filled
+  //     if (report.form === 'ncd') {
+  //       return report.fields.fill_oral_cancer_form === 'yes';
+  //     }
+  //     return false;
+  //   },
+  //   resolvedIf: function(contact, report) {
+  //     return contact.reports.some(function(r) {
+  //       return r.form === 'physician_oral_cancer_review' &&
+  //             r.reported_date >= report.reported_date;
+  //     });
+  //   },
+  //   actions: [
+  //     {
+  //       type: 'report',
+  //       form: 'physician_oral_cancer_review',
+  //       modifyContent: function(content, contact, report) {
+  //         content.patient_id   = contact.patient_id;
+  //         content.patient_uuid = contact._id;
+  //         content.patient_name = contact.name;
+
+  //         content.source_form_id   = report.form;
+  //         content.source_form_uuid = report._id;  // used to build the img URL
+
+  //         // Pass the attachment field name for each photo.
+  //         // CHT stores image fields as the filename of the attachment.
+  //         // The note renders: /api/v1/documents/{source_form_uuid}/{photo_N_fetched}
+  //         var prefix = report.form === 'ncd' ? 'oc_' : '';
+  //         for (var i = 1; i <= 8; i++) {
+  //           var fieldName = prefix + 'photo_' + i;
+  //           // report.fields stores the attachment filename string for image fields
+  //           content['photo_' + i + '_fetched'] = report.fields[fieldName] || '';
+  //         }
+  //       }
+  //     }
+  //   ],
+  //   events: [
+  //     {
+  //       id: 'physician-review-immediate',
+  //       days: 0,
+  //       start: 0,
+  //       end: 30
+  //     }
+  //   ]
+  // }
+
+
 ];
+
+
+
+
+
+//Hello
 

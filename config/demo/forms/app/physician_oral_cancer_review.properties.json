@@ -7,6 +7,5 @@
     "place": false,
     "expression": "false",
     "permission": "can_view_physician_oral_cancer_review_form"
-  },
-  "subject_key": "patient_name"
+  }
 }

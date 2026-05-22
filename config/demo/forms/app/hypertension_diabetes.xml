@@ -393,7 +393,7 @@
         <label> Filled by: <output value=" /data/reporter_name "/></label>
       </input>
       <group ref="/data/inputs/contact">
-        <input ref="/data/inputs/contact/_id" appearance="select-contact type-patient">
+        <input ref="/data/inputs/contact/_id" appearance="select-contact type-patient role-patient">
           <label>Patient's Name</label>
           <hint>Select the patient from your area</hint>
         </input>

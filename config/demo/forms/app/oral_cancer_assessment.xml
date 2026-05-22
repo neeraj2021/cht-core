@@ -5,8 +5,8 @@
     <model odk:xforms-version="1.0.0">
       <itext>
         <translation lang="en">
-          <text id="/data/oral_intro_page/oral_intro_note:label">
-            <value>You will now ask questions and if needed take 8 photos of the oral cavity.</value>
+          <text id="/data/photo_intro_page/photo_intro_note:label">
+            <value>You will now take 8 photos of the oral cavity to identify lesions.</value>
             <value form="image">jr://images/21056-oral-cancer-screening.jpg</value>
           </text>
         </translation>
@@ -16,6 +16,8 @@
           <patient_id/>
           <patient_uuid/>
           <patient_name/>
+          <contact_age/>
+          <contact_sex/>
           <reporter_name/>
           <reporter_place/>
           <title/>
@@ -42,14 +44,12 @@
               <_id/>
               <patient_id/>
               <name/>
+              <date_of_birth/>
+              <sex/>
             </contact>
             <state/>
             <district/>
           </inputs>
-          <participant>
-            <age/>
-            <gender/>
-          </participant>
           <habit_history>
             <cigarette_bidi/>
             <smokeless_tobacco/>
@@ -121,6 +121,7 @@
             </grp_lbl_district>
             <grp_lbl_age>
               <lbl_age/>
+              <calc_age_lbl/>
             </grp_lbl_age>
             <grp_lbl_gender>
               <lbl_gender/>
@@ -421,6 +422,8 @@
       <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
       <bind nodeset="/data/patient_uuid" type="string" calculate="../inputs/contact/_id"/>
       <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
+      <bind nodeset="/data/contact_age" type="string" calculate="../inputs/contact/date_of_birth"/>
+      <bind nodeset="/data/contact_sex" type="string" calculate="../inputs/contact/sex"/>
       <bind nodeset="/data/reporter_name" type="string" calculate="../inputs/user/name"/>
       <bind nodeset="/data/reporter_place" type="string" calculate="instance('user-contact-summary')/context/facility_name"/>
       <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
@@ -433,10 +436,10 @@
       <bind nodeset="/data/inputs/contact/_id" type="string" required="true()"/>
       <bind nodeset="/data/inputs/contact/patient_id" type="string"/>
       <bind nodeset="/data/inputs/contact/name" type="string"/>
+      <bind nodeset="/data/inputs/contact/date_of_birth" type="string" calculate=" /data/contact_age "/>
+      <bind nodeset="/data/inputs/contact/sex" type="string" calculate=" /data/contact_sex "/>
       <bind nodeset="/data/inputs/state" type="string" required="true()"/>
       <bind nodeset="/data/inputs/district" type="string" required="true()"/>
-      <bind nodeset="/data/participant/age" type="int" required="true()" constraint=". &gt;= 0 and . &lt;= 120" jr:constraintMsg="Age must be between 0 and 120"/>
-      <bind nodeset="/data/participant/gender" type="string" required="true()"/>
       <bind nodeset="/data/habit_history/cigarette_bidi" type="string" required="true()"/>
       <bind nodeset="/data/habit_history/smokeless_tobacco" type="string" required="true()"/>
       <bind nodeset="/data/habit_history/areca_nut" type="string" required="true()"/>
@@ -472,8 +475,8 @@
       <bind nodeset="/data/photo_8_page/photo_8" type="binary" required="true()"/>
       <bind nodeset="/data/photo_8_page/ai_photo_8_suspicion" type="string" required="true()"/>
       <bind nodeset="/data/final_ai_analysis_page" relevant=" /data/all_habits_never  = 'no'"/>
-      <bind nodeset="/data/final_ai_analysis_page/final_ai_suspicion" type="string"/>
-      <bind nodeset="/data/final_ai_analysis_page/final_ai_referral" type="string" relevant=" /data/final_ai_analysis_page/final_ai_suspicion  = 'suspicious' or  /data/final_ai_analysis_page/final_ai_suspicion  = 'non_suspicious'"/>
+      <bind nodeset="/data/final_ai_analysis_page/final_ai_suspicion" type="string" calculate="if( /data/final_ai_analysis_page/final_ai_suspicion  != '',  /data/final_ai_analysis_page/final_ai_suspicion , 'non_suspicious')" readonly="true()"/>
+      <bind nodeset="/data/final_ai_analysis_page/final_ai_referral" type="string" required="true()" relevant=" /data/final_ai_analysis_page/final_ai_suspicion  = 'suspicious' or  /data/final_ai_analysis_page/final_ai_suspicion  = 'non_suspicious'"/>
       <bind nodeset="/data/state_final" type="string" calculate=" /data/inputs/state "/>
       <bind nodeset="/data/district_final" type="string" calculate=" /data/inputs/district "/>
       <bind nodeset="/data/group_summary/grp_lbl_filled_by/lbl_filled_by" readonly="true()" type="string"/>
@@ -485,8 +488,9 @@
       <bind nodeset="/data/group_summary/grp_lbl_district/lbl_district" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_lbl_district/calc_district_lbl" type="string" calculate="jr:choice-name( /data/inputs/district ,' /data/inputs/district ')"/>
       <bind nodeset="/data/group_summary/grp_lbl_age/lbl_age" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_lbl_age/calc_age_lbl" type="string" calculate="number(format-date(today(), '%Y')) - number(format-date( /data/inputs/contact/date_of_birth , '%Y'))"/>
       <bind nodeset="/data/group_summary/grp_lbl_gender/lbl_gender" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_lbl_gender/calc_gender_lbl" type="string" calculate="jr:choice-name( /data/participant/gender ,' /data/participant/gender ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_gender/calc_gender_lbl" type="string" calculate=" /data/contact_sex "/>
       <bind nodeset="/data/group_summary/grp_lbl_hh_q1/lbl_hh_q1" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_lbl_hh_q1/calc_cigarette_lbl" type="string" calculate="jr:choice-name( /data/habit_history/cigarette_bidi ,' /data/habit_history/cigarette_bidi ')"/>
       <bind nodeset="/data/group_summary/grp_lbl_hh_q2/lbl_hh_q2" readonly="true()" type="string"/>
@@ -523,7 +527,7 @@
       <bind nodeset="/data/group_summary/grp_lbl_photo_8/calc_photo_8_suspicion_lbl" type="string" calculate="jr:choice-name( /data/photo_8_page/ai_photo_8_suspicion ,' /data/photo_8_page/ai_photo_8_suspicion ')"/>
       <bind nodeset="/data/group_summary/grp_lbl_final_suspicion" relevant=" /data/all_habits_never  = 'no'"/>
       <bind nodeset="/data/group_summary/grp_lbl_final_suspicion/lbl_final_suspicion" readonly="true()" type="string"/>
-      <bind nodeset="/data/group_summary/grp_lbl_final_suspicion/calc_final_suspicion_lbl" type="string" calculate="jr:choice-name( /data/final_ai_analysis_page/final_ai_suspicion ,' /data/final_ai_analysis_page/final_ai_suspicion ')"/>
+      <bind nodeset="/data/group_summary/grp_lbl_final_suspicion/calc_final_suspicion_lbl" type="string" calculate=" /data/final_ai_analysis_page/final_ai_suspicion "/>
       <bind nodeset="/data/group_summary/grp_lbl_final_referral" relevant=" /data/all_habits_never  = 'no' and ( /data/final_ai_analysis_page/final_ai_suspicion  = 'non_suspicious' or  /data/final_ai_analysis_page/final_ai_suspicion  = 'suspicious')"/>
       <bind nodeset="/data/group_summary/grp_lbl_final_referral/lbl_final_referral" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_lbl_final_referral/calc_final_referral_lbl" type="string" calculate="jr:choice-name( /data/final_ai_analysis_page/final_ai_referral ,' /data/final_ai_analysis_page/final_ai_referral ')"/>
@@ -540,7 +544,7 @@
     <group appearance="field-list" ref="/data/oral_intro_page">
       <label>Oral Cancer Screening</label>
       <input ref="/data/oral_intro_page/oral_intro_note">
-        <label ref="jr:itext('/data/oral_intro_page/oral_intro_note:label')"/>
+        <label>You will now ask questions and if needed take 8 photos of the oral cavity.</label>
       </input>
     </group>
     <group appearance="field-list" ref="/data/inputs">
@@ -550,7 +554,7 @@
         <label> Filled by: <output value=" /data/reporter_name "/></label>
       </input>
       <group ref="/data/inputs/contact">
-        <input ref="/data/inputs/contact/_id" appearance="select-contact type-patient">
+        <input ref="/data/inputs/contact/_id" appearance="select-contact type-patient role-patient">
           <label>Patient's Name</label>
           <hint>Select the patient from your area</hint>
         </input>
@@ -571,20 +575,6 @@
       <select1 ref="/data/inputs/district" appearance="minimal">
         <label>District</label>
         <itemset nodeset="instance('districts')/root/item[filter =  /data/inputs/state ]">
-          <value ref="name"/>
-          <label ref="label"/>
-        </itemset>
-      </select1>
-    </group>
-    <group appearance="field-list" ref="/data/participant">
-      <label>Participant details</label>
-      <input ref="/data/participant/age">
-        <label>Age</label>
-        <hint>Enter age in completed years</hint>
-      </input>
-      <select1 ref="/data/participant/gender">
-        <label>Gender</label>
-        <itemset nodeset="instance('gender')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
@@ -634,7 +624,7 @@
     <group appearance="field-list" ref="/data/photo_intro_page">
       <label>Oral Photo Instructions</label>
       <input ref="/data/photo_intro_page/photo_intro_note">
-        <label>You will now take 8 photos of the oral cavity to identify lesions.</label>
+        <label ref="jr:itext('/data/photo_intro_page/photo_intro_note:label')"/>
       </input>
     </group>
     <group appearance="field-list" ref="/data/photo_1_page">
@@ -642,7 +632,7 @@
         <label>Photo 1 / 8</label>
       </upload>
       <select1 ref="/data/photo_1_page/ai_photo_1_suspicion">
-        <label>Photo 1 Suspicion</label>
+        <label>Photo 1 Health Worker Observation</label>
         <itemset nodeset="instance('suspicion')/root/item">
           <value ref="name"/>
           <label ref="label"/>
@@ -654,7 +644,7 @@
         <label>Photo 2 / 8</label>
       </upload>
       <select1 ref="/data/photo_2_page/ai_photo_2_suspicion">
-        <label>Photo 2 Suspicion</label>
+        <label>Photo 2 Health Worker Observation</label>
         <itemset nodeset="instance('suspicion')/root/item">
           <value ref="name"/>
           <label ref="label"/>
@@ -666,7 +656,7 @@
         <label>Photo 3 / 8</label>
       </upload>
       <select1 ref="/data/photo_3_page/ai_photo_3_suspicion">
-        <label>Photo 3 Suspicion</label>
+        <label>Photo 3 Health Worker Observation</label>
         <itemset nodeset="instance('suspicion')/root/item">
           <value ref="name"/>
           <label ref="label"/>
@@ -678,7 +668,7 @@
         <label>Photo 4 / 8</label>
       </upload>
       <select1 ref="/data/photo_4_page/ai_photo_4_suspicion">
-        <label>Photo 4 Suspicion</label>
+        <label>Photo 4 Health Worker Observation</label>
         <itemset nodeset="instance('suspicion')/root/item">
           <value ref="name"/>
           <label ref="label"/>
@@ -690,7 +680,7 @@
         <label>Photo 5 / 8</label>
       </upload>
       <select1 ref="/data/photo_5_page/ai_photo_5_suspicion">
-        <label>Photo 5 Suspicion</label>
+        <label>Photo 5 Health Worker Observation</label>
         <itemset nodeset="instance('suspicion')/root/item">
           <value ref="name"/>
           <label ref="label"/>
@@ -702,7 +692,7 @@
         <label>Photo 6 / 8</label>
       </upload>
       <select1 ref="/data/photo_6_page/ai_photo_6_suspicion">
-        <label>Photo 6 Suspicion</label>
+        <label>Photo 6 Health Worker Observation</label>
         <itemset nodeset="instance('suspicion')/root/item">
           <value ref="name"/>
           <label ref="label"/>
@@ -714,7 +704,7 @@
         <label>Photo 7 / 8</label>
       </upload>
       <select1 ref="/data/photo_7_page/ai_photo_7_suspicion">
-        <label>Photo 7 Suspicion</label>
+        <label>Photo 7 Health Worker Observation</label>
         <itemset nodeset="instance('suspicion')/root/item">
           <value ref="name"/>
           <label ref="label"/>
@@ -726,7 +716,7 @@
         <label>Photo 8 / 8</label>
       </upload>
       <select1 ref="/data/photo_8_page/ai_photo_8_suspicion">
-        <label>Photo 8 Suspicion</label>
+        <label>Photo 8 Health Worker Observation</label>
         <itemset nodeset="instance('suspicion')/root/item">
           <value ref="name"/>
           <label ref="label"/>
@@ -734,15 +724,12 @@
       </select1>
     </group>
     <group appearance="field-list" ref="/data/final_ai_analysis_page">
-      <select1 ref="/data/final_ai_analysis_page/final_ai_suspicion">
+      <input ref="/data/final_ai_analysis_page/final_ai_suspicion">
         <label>Final AI Recommendation</label>
-        <itemset nodeset="instance('suspicion')/root/item">
-          <value ref="name"/>
-          <label ref="label"/>
-        </itemset>
-      </select1>
+      </input>
       <select1 ref="/data/final_ai_analysis_page/final_ai_referral">
         <label>Referral Decision</label>
+        <hint>Please tell the client to consult a dentist as soon as possible. Provide all necessary instructions to reach the dentist's facility.</hint>
         <itemset nodeset="instance('referral')/root/item[suspicion_type =  /data/final_ai_analysis_page/final_ai_suspicion ]">
           <value ref="name"/>
           <label ref="label"/>
@@ -773,7 +760,7 @@
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_age">
         <input ref="/data/group_summary/grp_lbl_age/lbl_age">
-          <label> **Age:** <output value=" /data/participant/age "/></label>
+          <label> **Age:** <output value=" /data/group_summary/grp_lbl_age/calc_age_lbl "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_gender">
@@ -808,42 +795,42 @@
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_photo_1">
         <input ref="/data/group_summary/grp_lbl_photo_1/lbl_photo_1_suspicion">
-          <label> **Photo 1 Suspicion:** <output value=" /data/group_summary/grp_lbl_photo_1/calc_photo_1_suspicion_lbl "/></label>
+          <label> **Photo 1 Health Worker Observation:** <output value=" /data/group_summary/grp_lbl_photo_1/calc_photo_1_suspicion_lbl "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_photo_2">
         <input ref="/data/group_summary/grp_lbl_photo_2/lbl_photo_2_suspicion">
-          <label> **Photo 2 Suspicion:** <output value=" /data/group_summary/grp_lbl_photo_2/calc_photo_2_suspicion_lbl "/></label>
+          <label> **Photo 2 Health Worker Observation:** <output value=" /data/group_summary/grp_lbl_photo_2/calc_photo_2_suspicion_lbl "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_photo_3">
         <input ref="/data/group_summary/grp_lbl_photo_3/lbl_photo_3_suspicion">
-          <label> **Photo 3 Suspicion:** <output value=" /data/group_summary/grp_lbl_photo_3/calc_photo_3_suspicion_lbl "/></label>
+          <label> **Photo 3 Health Worker Observation:** <output value=" /data/group_summary/grp_lbl_photo_3/calc_photo_3_suspicion_lbl "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_photo_4">
         <input ref="/data/group_summary/grp_lbl_photo_4/lbl_photo_4_suspicion">
-          <label> **Photo 4 Suspicion:** <output value=" /data/group_summary/grp_lbl_photo_4/calc_photo_4_suspicion_lbl "/></label>
+          <label> **Photo 4 Health Worker Observation:** <output value=" /data/group_summary/grp_lbl_photo_4/calc_photo_4_suspicion_lbl "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_photo_5">
         <input ref="/data/group_summary/grp_lbl_photo_5/lbl_photo_5_suspicion">
-          <label> **Photo 5 Suspicion:** <output value=" /data/group_summary/grp_lbl_photo_5/calc_photo_5_suspicion_lbl "/></label>
+          <label> **Photo 5 Health Worker Observation:** <output value=" /data/group_summary/grp_lbl_photo_5/calc_photo_5_suspicion_lbl "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_photo_6">
         <input ref="/data/group_summary/grp_lbl_photo_6/lbl_photo_6_suspicion">
-          <label> **Photo 6 Suspicion:** <output value=" /data/group_summary/grp_lbl_photo_6/calc_photo_6_suspicion_lbl "/></label>
+          <label> **Photo 6 Health Worker Observation:** <output value=" /data/group_summary/grp_lbl_photo_6/calc_photo_6_suspicion_lbl "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_photo_7">
         <input ref="/data/group_summary/grp_lbl_photo_7/lbl_photo_7_suspicion">
-          <label> **Photo 7 Suspicion:** <output value=" /data/group_summary/grp_lbl_photo_7/calc_photo_7_suspicion_lbl "/></label>
+          <label> **Photo 7 Health Worker Observation:** <output value=" /data/group_summary/grp_lbl_photo_7/calc_photo_7_suspicion_lbl "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_photo_8">
         <input ref="/data/group_summary/grp_lbl_photo_8/lbl_photo_8_suspicion">
-          <label> **Photo 8 Suspicion:** <output value=" /data/group_summary/grp_lbl_photo_8/calc_photo_8_suspicion_lbl "/></label>
+          <label> **Photo 8 Health Worker Observation:** <output value=" /data/group_summary/grp_lbl_photo_8/calc_photo_8_suspicion_lbl "/></label>
         </input>
       </group>
       <group appearance="field-list" ref="/data/group_summary/grp_lbl_final_suspicion">
@@ -861,7 +848,7 @@
           <label> **Habit Status:** <output value=" /data/group_summary/grp_lbl_habit_status/calc_habit_status_lbl "/></label>
         </input>
       </group>
-      <input ref="/data/group_summary/ai_analysis_summary" appearance="hidden">
+      <input ref="/data/group_summary/ai_analysis_summary" appearance="multiline hidden">
         <label>Summary</label>
       </input>
       <input ref="/data/group_summary/ai_analysis_status" appearance="hidden">

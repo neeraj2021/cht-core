@@ -108,7 +108,7 @@
             <value>Date of Birth</value>
           </text>
           <text id="/data/patient/ephemeral_dob/age_label:label">
-            <value>**Please enter date of birth**</value>
+            <value>**Please enter your age**</value>
           </text>
           <text id="/data/patient/ephemeral_dob/age_years:jr:constraintMsg">
             <value>Age must be between 0 and 130</value>

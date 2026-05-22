@@ -77,7 +77,8 @@
       <bind nodeset="/data/inputs/contact/name" type="string"/>
       <bind nodeset="/data/ncd_followup/ncd_day_visited" type="string" required="true()"/>
       <bind nodeset="/data/ncd_followup/willing_for_checkup" type="string" required=" /data/ncd_followup/ncd_day_visited  = 'no'" relevant=" /data/ncd_followup/ncd_day_visited  = 'no'"/>
-      <bind nodeset="/data/ncd_followup/checkup_date" type="date" required="true()" relevant=" /data/ncd_followup/willing_for_checkup  = 'yes'"/>
+      <bind nodeset="/data/ncd_followup/checkup_date" type="date" required="true()" relevant=" /data/ncd_followup/willing_for_checkup  = 'yes'" constraint=". &gt;= today()" jr:constraintMsg="Please select today or a future date."/>
+      <setvalue ref="/data/ncd_followup/checkup_date" value="today()" event="odk-instance-first-load"/>
       <bind nodeset="/data/ncd_followup/t_ncd_day_visited" type="string" calculate=" /data/ncd_followup/ncd_day_visited "/>
       <bind nodeset="/data/ncd_followup/t_willing_for_checkup" type="string" calculate=" /data/ncd_followup/willing_for_checkup "/>
       <bind nodeset="/data/ncd_followup/t_checkup_date" type="string" calculate=" /data/ncd_followup/checkup_date "/>

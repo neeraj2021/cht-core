@@ -95,7 +95,8 @@
       <bind nodeset="/data/followup/referred_to_phc" type="string" required="true()"/>
       <bind nodeset="/data/followup/willing_to_visit" type="string" required="true()" relevant=" /data/followup/referred_to_phc  = 'yes'"/>
       <bind nodeset="/data/followup/not_willing_note" readonly="true()" type="string" relevant=" /data/followup/referred_to_phc  = 'yes' and  /data/followup/willing_to_visit  = 'no'"/>
-      <bind nodeset="/data/followup/phc_visit_date" type="date" required="true()" relevant=" /data/followup/referred_to_phc  = 'yes' and  /data/followup/willing_to_visit  = 'yes'"/>
+      <bind nodeset="/data/followup/phc_visit_date" type="date" required="true()" relevant=" /data/followup/referred_to_phc  = 'yes' and  /data/followup/willing_to_visit  = 'yes'" constraint=". &gt;= today()" jr:constraintMsg="Please select today or a future date."/>
+      <setvalue ref="/data/followup/phc_visit_date" value="today()" event="odk-instance-first-load"/>
       <bind nodeset="/data/followup/notes" type="string"/>
       <bind nodeset="/data/followup/t_current_systolic" type="string" calculate=" /data/followup/current_systolic "/>
       <bind nodeset="/data/followup/t_current_diastolic" type="string" calculate=" /data/followup/current_diastolic "/>

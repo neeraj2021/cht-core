@@ -108,7 +108,7 @@
             <value>Date of Birth</value>
           </text>
           <text id="/data/person/ephemeral_dob/age_label:label">
-            <value>**Please enter date of birth**</value>
+            <value>**Please enter your age**</value>
           </text>
           <text id="/data/person/ephemeral_dob/age_years:jr:constraintMsg">
             <value>Age must be between 0 and 130</value>
@@ -1082,47 +1082,47 @@ DOB ISO: <output value=" /data/person/ephemeral_dob/dob_iso "/></value>
           <item>
             <itextId>roles-0</itextId>
             <name>asha</name>
-            <creator_role>cho anm mpw nurse physician medical_officer</creator_role>
+            <creator_role>cho anm mpw nurse physician medical_officer admin</creator_role>
           </item>
           <item>
             <itextId>roles-1</itextId>
             <name>anm</name>
-            <creator_role>cho anm mpw nurse physician medical_officer</creator_role>
+            <creator_role>cho anm mpw nurse physician medical_officer admin</creator_role>
           </item>
           <item>
             <itextId>roles-2</itextId>
             <name>mpw</name>
-            <creator_role>cho anm mpw nurse physician medical_officer</creator_role>
+            <creator_role>cho anm mpw nurse physician medical_officer admin</creator_role>
           </item>
           <item>
             <itextId>roles-3</itextId>
             <name>cho</name>
-            <creator_role>nurse physician medical_officer</creator_role>
+            <creator_role>nurse physician medical_officer admin</creator_role>
           </item>
           <item>
             <itextId>roles-4</itextId>
             <name>nurse</name>
-            <creator_role>physician medical_officer</creator_role>
+            <creator_role>physician medical_officer admin</creator_role>
           </item>
           <item>
             <itextId>roles-5</itextId>
             <name>medical_officer</name>
-            <creator_role>medical_officer</creator_role>
+            <creator_role>medical_officer admin</creator_role>
           </item>
           <item>
             <itextId>roles-6</itextId>
             <name>physician</name>
-            <creator_role>medical_officer</creator_role>
+            <creator_role>medical_officer admin</creator_role>
           </item>
           <item>
             <itextId>roles-7</itextId>
             <name>patient</name>
-            <creator_role>asha cho anm mpw nurse physician medical_officer</creator_role>
+            <creator_role>asha cho anm mpw nurse physician medical_officer admin</creator_role>
           </item>
           <item>
             <itextId>roles-8</itextId>
             <name>other</name>
-            <creator_role>asha cho anm mpw nurse physician medical_officer</creator_role>
+            <creator_role>asha cho anm mpw nurse physician medical_officer admin</creator_role>
           </item>
         </root>
       </instance>
