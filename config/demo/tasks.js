@@ -706,6 +706,11 @@ module.exports = [
       modifyContent: function(content, _contact, report) {
         content.t_systolic = getField(report, 'f2_hypertension.f2_systolic');
         content.t_diastolic = getField(report, 'f2_hypertension.f2_diastolic');
+        // Pass selected referral facility — high-risk path takes priority over normal "Refer Anyway"
+        content.t_referral_facility =
+          getField(report, 'f2_bp_referral_facility_page.f2_bp_referral_facility') ||
+          getField(report, 'f2_bp_normal_referral_facility_page.f2_bp_normal_referral_facility') ||
+          'phc';
       }
     }],
     events: [{
@@ -792,6 +797,11 @@ module.exports = [
       label: 'Diabetes Referral Follow-up',
       modifyContent: function(content, _contact, report) {
         content.t_rapid_glucose = getField(report, 'f2_diabetes_section.f2_rapid_glucose');
+        // Pass selected referral facility — high-risk path takes priority over normal "Refer Anyway"
+        content.t_referral_facility =
+          getField(report, 'f2_glucose_referral_facility_page.f2_glucose_referral_facility') ||
+          getField(report, 'f2_glucose_normal_referral_facility_page.f2_glucose_normal_referral_facility') ||
+          'phc';
       }
     }],
     events: [{
