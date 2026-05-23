@@ -64,6 +64,9 @@
             <score_high_note/>
             <score_low_note/>
           </page_score>
+          <page_referral>
+            <referral_note/>
+          </page_referral>
           <page_3a>
             <breast_lump/>
             <breast_lump_label/>
@@ -100,6 +103,9 @@
             <phq2_score_display/>
             <phq2_referral_note/>
           </page_5_score>
+          <page_phq2_referral>
+            <phq2_referral_note_page/>
+          </page_phq2_referral>
           <group_summary>
             <grp_filled_by>
               <lbl_filled_by/>
@@ -207,6 +213,13 @@
             </grp_q_phq_tot>
             <summary_high_risk/>
             <summary_low_risk/>
+            <grp_referral>
+              <lbl_referral/>
+            </grp_referral>
+            <grp_phq2_referral>
+              <lbl_phq2_referral/>
+              <calc_phq2_referral/>
+            </grp_phq2_referral>
           </group_summary>
           <form_submit_timestamp_iso/>
           <form_submit_timestamp_display/>
@@ -566,6 +579,26 @@
           </item>
         </root>
       </instance>
+      <instance id="referral_facility">
+        <root>
+          <item>
+            <name>hwc</name>
+            <label>Health and Wellness Center</label>
+          </item>
+          <item>
+            <name>phc</name>
+            <label>Primary Health Center</label>
+          </item>
+          <item>
+            <name>chc</name>
+            <label>Community Health Center</label>
+          </item>
+          <item>
+            <name>dh</name>
+            <label>District Hospital</label>
+          </item>
+        </root>
+      </instance>
       <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
       <bind nodeset="/data/patient_uuid" type="string" calculate="../inputs/contact/_id"/>
       <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
@@ -605,6 +638,8 @@
       <bind nodeset="/data/page_score/risk_display" readonly="true()" type="string"/>
       <bind nodeset="/data/page_score/score_high_note" readonly="true()" type="string" relevant=" /data/total_score  &gt; 4"/>
       <bind nodeset="/data/page_score/score_low_note" readonly="true()" type="string" relevant=" /data/total_score  &lt;= 4"/>
+      <bind nodeset="/data/page_referral" relevant=" /data/total_score  &gt; 4"/>
+      <bind nodeset="/data/page_referral/referral_note" readonly="true()" type="string" relevant=" /data/total_score  &gt; 4"/>
       <bind nodeset="/data/page_3a" relevant=" /data/patient_gender  = 'female'"/>
       <bind nodeset="/data/page_3a/breast_lump" type="string" required="true()" relevant=" /data/patient_gender  = 'female'"/>
       <bind nodeset="/data/page_3a/breast_lump_label" type="string" calculate="jr:choice-name( /data/page_3a/breast_lump , ' /data/page_3a/breast_lump ')"/>
@@ -632,6 +667,8 @@
       <bind nodeset="/data/phq2_total" type="string" calculate=" /data/page_5/phq2_q1  +  /data/page_5/phq2_q2 "/>
       <bind nodeset="/data/page_5_score/phq2_score_display" readonly="true()" type="string"/>
       <bind nodeset="/data/page_5_score/phq2_referral_note" readonly="true()" type="string" relevant=" /data/phq2_total  &gt; 3"/>
+      <bind nodeset="/data/page_phq2_referral" relevant=" /data/phq2_total  &gt; 3"/>
+      <bind nodeset="/data/page_phq2_referral/phq2_referral_note_page" readonly="true()" type="string" relevant=" /data/phq2_total  &gt; 3"/>
       <bind nodeset="/data/group_summary/grp_filled_by/lbl_filled_by" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_filled_by/calc_reporter" type="string" calculate=" /data/reporter_name "/>
       <bind nodeset="/data/group_summary/grp_patient/lbl_patient" readonly="true()" type="string"/>
@@ -695,6 +732,11 @@
       <bind nodeset="/data/group_summary/grp_q_phq_tot/calc_q_phq_tot" type="string" calculate=" /data/phq2_total "/>
       <bind nodeset="/data/group_summary/summary_high_risk" readonly="true()" type="string" relevant=" /data/total_score  &gt; 4"/>
       <bind nodeset="/data/group_summary/summary_low_risk" readonly="true()" type="string" relevant=" /data/total_score  &lt;= 4"/>
+      <bind nodeset="/data/group_summary/grp_referral" relevant=" /data/total_score  &gt; 4"/>
+      <bind nodeset="/data/group_summary/grp_referral/lbl_referral" readonly="true()" type="string" relevant=" /data/total_score  &gt; 4"/>
+      <bind nodeset="/data/group_summary/grp_phq2_referral" relevant=" /data/phq2_total  &gt; 3"/>
+      <bind nodeset="/data/group_summary/grp_phq2_referral/lbl_phq2_referral" readonly="true()" type="string" relevant=" /data/phq2_total  &gt; 3"/>
+      <bind nodeset="/data/group_summary/grp_phq2_referral/calc_phq2_referral" type="string" calculate="if( /data/phq2_total  &gt; 3, 'Health and Wellness Center (HWC)', '')"/>
       <bind nodeset="/data/form_submit_timestamp_iso" type="string" calculate="format-date-time(now(), '%Y-%m-%dT%H:%M:%S+05:30')"/>
       <bind nodeset="/data/form_submit_timestamp_display" type="string" calculate="format-date-time(now(), '%e-%b-%Y %H:%M:%S')"/>
       <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
@@ -801,6 +843,12 @@
         <label>Score is 4 or below. This person appears to be at low risk for NCDs at this time.</label>
       </input>
     </group>
+    <group appearance="field-list" ref="/data/page_referral">
+      <label>Referral</label>
+      <input ref="/data/page_referral/referral_note">
+        <label>Refer this patient to **Health and Wellness Center (HWC)**</label>
+      </input>
+    </group>
     <group appearance="field-list" ref="/data/page_3a">
       <label>Part B: Early Detection – Women only (1 of 3)</label>
       <select1 ref="/data/page_3a/breast_lump">
@@ -902,7 +950,13 @@
         <label> PHQ-2 Total Score: <output value=" /data/phq2_total "/></label>
       </input>
       <input ref="/data/page_5_score/phq2_referral_note">
-        <label>Anyone with total score greater than 3 should be referred to CHO/MO (PHC/UPHC)</label>
+        <label>Anyone with total score greater than 3 should be referred to Health and Wellness Center (HWC)</label>
+      </input>
+    </group>
+    <group appearance="field-list" ref="/data/page_phq2_referral">
+      <label>PHQ-2 Referral</label>
+      <input ref="/data/page_phq2_referral/phq2_referral_note_page">
+        <label>PHQ-2 score is greater than 3. Refer this patient to **Health and Wellness Center (HWC)**.</label>
       </input>
     </group>
     <group appearance="field-list" ref="/data/group_summary">
@@ -1050,6 +1104,16 @@
       <input ref="/data/group_summary/summary_low_risk">
         <label>**Score is 4 or below.** This person appears to be at low risk for NCDs at this time.</label>
       </input>
+      <group appearance="field-list" ref="/data/group_summary/grp_referral">
+        <input ref="/data/group_summary/grp_referral/lbl_referral">
+          <label>**CBAC Risk Score Referral:** Health and Wellness Center (HWC)</label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/group_summary/grp_phq2_referral">
+        <input ref="/data/group_summary/grp_phq2_referral/lbl_phq2_referral">
+          <label>**PHQ-2 Referral:** Health and Wellness Center (HWC)</label>
+        </input>
+      </group>
     </group>
   </h:body>
 </h:html>

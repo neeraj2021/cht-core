@@ -196,6 +196,9 @@
             <f2_bp_referral_note/>
             <f2_bp_referral_decision/>
           </f2_bp_referral_page>
+          <f2_bp_referral_facility_page>
+            <f2_bp_referral_facility>phc</f2_bp_referral_facility>
+          </f2_bp_referral_facility_page>
           <f2_bp_lifestyle_page>
             <f2_bp_lifestyle_note/>
           </f2_bp_lifestyle_page>
@@ -203,6 +206,9 @@
             <f2_bp_normal_note/>
             <f2_bp_referral_decision_normal/>
           </f2_bp_normal_page>
+          <f2_bp_normal_referral_facility_page>
+            <f2_bp_normal_referral_facility>phc</f2_bp_normal_referral_facility>
+          </f2_bp_normal_referral_facility_page>
           <f2_diabetes_section>
             <f2_rapid_glucose/>
           </f2_diabetes_section>
@@ -210,14 +216,22 @@
             <f2_glucose_referral_note/>
             <f2_glucose_referral_decision/>
           </f2_glucose_referral_page>
+          <f2_glucose_referral_facility_page>
+            <f2_glucose_referral_facility>phc</f2_glucose_referral_facility>
+          </f2_glucose_referral_facility_page>
           <f2_glucose_normal_page>
             <f2_glucose_normal_note/>
             <f2_glucose_referral_decision_normal/>
           </f2_glucose_normal_page>
+          <f2_glucose_normal_referral_facility_page>
+            <f2_glucose_normal_referral_facility>phc</f2_glucose_normal_referral_facility>
+          </f2_glucose_normal_referral_facility_page>
           <f2_calc_state_lbl/>
           <f2_calc_district_lbl/>
           <f2_calc_bp_referral_lbl/>
           <f2_calc_glucose_referral_lbl/>
+          <f2_calc_bp_referral_facility_lbl/>
+          <f2_calc_glucose_referral_facility_lbl/>
           <f2_form_2_summary>
             <f2_grp_lbl_filled_by>
               <f2_lbl_filled_by/>
@@ -263,6 +277,14 @@
               <f2_lbl_glucose_referral/>
               <f2_calc_glucose_referral_sum/>
             </f2_grp_lbl_glucose_referral>
+            <f2_grp_lbl_bp_referral_facility>
+              <f2_lbl_bp_referral_facility/>
+              <f2_calc_bp_referral_facility_sum/>
+            </f2_grp_lbl_bp_referral_facility>
+            <f2_grp_lbl_glucose_referral_facility>
+              <f2_lbl_glucose_referral_facility/>
+              <f2_calc_glucose_referral_facility_sum/>
+            </f2_grp_lbl_glucose_referral_facility>
           </f2_form_2_summary>
           <oc_gate_page>
             <oc_gate_note/>
@@ -985,6 +1007,22 @@
           </item>
         </root>
       </instance>
+      <instance id="ncd_referral_facility">
+        <root>
+          <item>
+            <name>phc</name>
+            <label>Primary Health Center</label>
+          </item>
+          <item>
+            <name>chc</name>
+            <label>Community Health Center</label>
+          </item>
+          <item>
+            <name>dh</name>
+            <label>District Hospital</label>
+          </item>
+        </root>
+      </instance>
       <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
       <bind nodeset="/data/patient_uuid" type="string" calculate="../inputs/contact/_id"/>
       <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
@@ -1096,22 +1134,32 @@
       <bind nodeset="/data/f2_bp_referral_page" relevant=" /data/f2_hypertension/f2_systolic  &gt; 140 or  /data/f2_hypertension/f2_diastolic  &gt; 90"/>
       <bind nodeset="/data/f2_bp_referral_page/f2_bp_referral_note" readonly="true()" type="string"/>
       <bind nodeset="/data/f2_bp_referral_page/f2_bp_referral_decision" type="string" required="true()" relevant=" /data/f2_hypertension/f2_systolic  &gt; 140 or  /data/f2_hypertension/f2_diastolic  &gt; 90"/>
+      <bind nodeset="/data/f2_bp_referral_facility_page" relevant=" /data/f2_hypertension/f2_systolic  &gt; 140 or  /data/f2_hypertension/f2_diastolic  &gt; 90"/>
+      <bind nodeset="/data/f2_bp_referral_facility_page/f2_bp_referral_facility" type="string" required="true()" relevant=" /data/f2_hypertension/f2_systolic  &gt; 140 or  /data/f2_hypertension/f2_diastolic  &gt; 90"/>
       <bind nodeset="/data/f2_bp_lifestyle_page" relevant="not( /data/f2_hypertension/f2_systolic  &gt; 140 or  /data/f2_hypertension/f2_diastolic  &gt; 90) and ( /data/f2_hypertension/f2_systolic  &gt; 120 and  /data/f2_hypertension/f2_diastolic  &gt; 80)"/>
       <bind nodeset="/data/f2_bp_lifestyle_page/f2_bp_lifestyle_note" readonly="true()" type="string"/>
       <bind nodeset="/data/f2_bp_normal_page" relevant="not( /data/f2_hypertension/f2_systolic  &gt; 140 or  /data/f2_hypertension/f2_diastolic  &gt; 90) and not( /data/f2_hypertension/f2_systolic  &gt; 120 and  /data/f2_hypertension/f2_diastolic  &gt; 80)"/>
       <bind nodeset="/data/f2_bp_normal_page/f2_bp_normal_note" readonly="true()" type="string"/>
       <bind nodeset="/data/f2_bp_normal_page/f2_bp_referral_decision_normal" type="string" required="true()" relevant="not( /data/f2_hypertension/f2_systolic  &gt; 140 or  /data/f2_hypertension/f2_diastolic  &gt; 90) and not( /data/f2_hypertension/f2_systolic  &gt; 120 and  /data/f2_hypertension/f2_diastolic  &gt; 80)"/>
+      <bind nodeset="/data/f2_bp_normal_referral_facility_page" relevant=" /data/f2_bp_normal_page/f2_bp_referral_decision_normal  = 'refer_anyway'"/>
+      <bind nodeset="/data/f2_bp_normal_referral_facility_page/f2_bp_normal_referral_facility" type="string" required="true()" relevant=" /data/f2_bp_normal_page/f2_bp_referral_decision_normal  = 'refer_anyway'"/>
       <bind nodeset="/data/f2_diabetes_section/f2_rapid_glucose" type="int" required="true()" constraint=". &gt;= 20 and . &lt;= 600" jr:constraintMsg="Rapid glucose must be between 20 and 600 mg/dL."/>
       <bind nodeset="/data/f2_glucose_referral_page" relevant=" /data/f2_diabetes_section/f2_rapid_glucose  &gt; 140"/>
       <bind nodeset="/data/f2_glucose_referral_page/f2_glucose_referral_note" readonly="true()" type="string"/>
       <bind nodeset="/data/f2_glucose_referral_page/f2_glucose_referral_decision" type="string" required="true()" relevant=" /data/f2_diabetes_section/f2_rapid_glucose  &gt; 140"/>
+      <bind nodeset="/data/f2_glucose_referral_facility_page" relevant=" /data/f2_diabetes_section/f2_rapid_glucose  &gt; 140"/>
+      <bind nodeset="/data/f2_glucose_referral_facility_page/f2_glucose_referral_facility" type="string" required="true()" relevant=" /data/f2_diabetes_section/f2_rapid_glucose  &gt; 140"/>
       <bind nodeset="/data/f2_glucose_normal_page" relevant="not( /data/f2_diabetes_section/f2_rapid_glucose  &gt; 140)"/>
       <bind nodeset="/data/f2_glucose_normal_page/f2_glucose_normal_note" readonly="true()" type="string"/>
       <bind nodeset="/data/f2_glucose_normal_page/f2_glucose_referral_decision_normal" type="string" required="true()" relevant="not( /data/f2_diabetes_section/f2_rapid_glucose  &gt; 140)"/>
+      <bind nodeset="/data/f2_glucose_normal_referral_facility_page" relevant=" /data/f2_glucose_normal_page/f2_glucose_referral_decision_normal  = 'refer_anyway'"/>
+      <bind nodeset="/data/f2_glucose_normal_referral_facility_page/f2_glucose_normal_referral_facility" type="string" required="true()" relevant=" /data/f2_glucose_normal_page/f2_glucose_referral_decision_normal  = 'refer_anyway'"/>
       <bind nodeset="/data/f2_calc_state_lbl" type="string" calculate="jr:choice-name( /data/inputs/state ,' /data/inputs/state ')"/>
       <bind nodeset="/data/f2_calc_district_lbl" type="string" calculate="jr:choice-name( /data/inputs/district ,' /data/inputs/district ')"/>
       <bind nodeset="/data/f2_calc_bp_referral_lbl" type="string" calculate="if( /data/f2_hypertension/f2_systolic  &gt; 140 or  /data/f2_hypertension/f2_diastolic  &gt; 90, jr:choice-name( /data/f2_bp_referral_page/f2_bp_referral_decision ,' /data/f2_bp_referral_page/f2_bp_referral_decision '), if(not( /data/f2_hypertension/f2_systolic  &gt; 120 and  /data/f2_hypertension/f2_diastolic  &gt; 80), jr:choice-name( /data/f2_bp_normal_page/f2_bp_referral_decision_normal ,' /data/f2_bp_normal_page/f2_bp_referral_decision_normal '), ''))"/>
       <bind nodeset="/data/f2_calc_glucose_referral_lbl" type="string" calculate="if( /data/f2_diabetes_section/f2_rapid_glucose  &gt; 140, jr:choice-name( /data/f2_glucose_referral_page/f2_glucose_referral_decision ,' /data/f2_glucose_referral_page/f2_glucose_referral_decision '), jr:choice-name( /data/f2_glucose_normal_page/f2_glucose_referral_decision_normal ,' /data/f2_glucose_normal_page/f2_glucose_referral_decision_normal '))"/>
+      <bind nodeset="/data/f2_calc_bp_referral_facility_lbl" type="string" calculate="if( /data/f2_hypertension/f2_systolic  &gt; 140 or  /data/f2_hypertension/f2_diastolic  &gt; 90, jr:choice-name( /data/f2_bp_referral_facility_page/f2_bp_referral_facility ,' /data/f2_bp_referral_facility_page/f2_bp_referral_facility '), if( /data/f2_bp_normal_page/f2_bp_referral_decision_normal  = 'refer_anyway', jr:choice-name( /data/f2_bp_normal_referral_facility_page/f2_bp_normal_referral_facility ,' /data/f2_bp_normal_referral_facility_page/f2_bp_normal_referral_facility '), ''))"/>
+      <bind nodeset="/data/f2_calc_glucose_referral_facility_lbl" type="string" calculate="if( /data/f2_diabetes_section/f2_rapid_glucose  &gt; 140, jr:choice-name( /data/f2_glucose_referral_facility_page/f2_glucose_referral_facility ,' /data/f2_glucose_referral_facility_page/f2_glucose_referral_facility '), if( /data/f2_glucose_normal_page/f2_glucose_referral_decision_normal  = 'refer_anyway', jr:choice-name( /data/f2_glucose_normal_referral_facility_page/f2_glucose_normal_referral_facility ,' /data/f2_glucose_normal_referral_facility_page/f2_glucose_normal_referral_facility '), ''))"/>
       <bind nodeset="/data/f2_form_2_summary/f2_grp_lbl_filled_by/f2_lbl_filled_by" readonly="true()" type="string"/>
       <bind nodeset="/data/f2_form_2_summary/f2_grp_lbl_filled_by/f2_calc_reporter_name" type="string" calculate=" /data/reporter_name "/>
       <bind nodeset="/data/f2_form_2_summary/f2_grp_lbl_patient/f2_lbl_patient" readonly="true()" type="string"/>
@@ -1135,6 +1183,12 @@
       <bind nodeset="/data/f2_form_2_summary/f2_grp_lbl_glucose_status/f2_calc_glucose_status_lbl" type="string" calculate="if( /data/f2_diabetes_section/f2_rapid_glucose  &gt; 140, 'High Blood Glucose – Referral Required', 'Normal')"/>
       <bind nodeset="/data/f2_form_2_summary/f2_grp_lbl_glucose_referral/f2_lbl_glucose_referral" readonly="true()" type="string"/>
       <bind nodeset="/data/f2_form_2_summary/f2_grp_lbl_glucose_referral/f2_calc_glucose_referral_sum" type="string" calculate=" /data/f2_calc_glucose_referral_lbl "/>
+      <bind nodeset="/data/f2_form_2_summary/f2_grp_lbl_bp_referral_facility" relevant="( /data/f2_hypertension/f2_systolic  &gt; 140 or  /data/f2_hypertension/f2_diastolic  &gt; 90) or  /data/f2_bp_normal_page/f2_bp_referral_decision_normal  = 'refer_anyway'"/>
+      <bind nodeset="/data/f2_form_2_summary/f2_grp_lbl_bp_referral_facility/f2_lbl_bp_referral_facility" readonly="true()" type="string" relevant="( /data/f2_hypertension/f2_systolic  &gt; 140 or  /data/f2_hypertension/f2_diastolic  &gt; 90) or  /data/f2_bp_normal_page/f2_bp_referral_decision_normal  = 'refer_anyway'"/>
+      <bind nodeset="/data/f2_form_2_summary/f2_grp_lbl_bp_referral_facility/f2_calc_bp_referral_facility_sum" type="string" calculate=" /data/f2_calc_bp_referral_facility_lbl "/>
+      <bind nodeset="/data/f2_form_2_summary/f2_grp_lbl_glucose_referral_facility" relevant=" /data/f2_diabetes_section/f2_rapid_glucose  &gt; 140 or  /data/f2_glucose_normal_page/f2_glucose_referral_decision_normal  = 'refer_anyway'"/>
+      <bind nodeset="/data/f2_form_2_summary/f2_grp_lbl_glucose_referral_facility/f2_lbl_glucose_referral_facility" readonly="true()" type="string" relevant=" /data/f2_diabetes_section/f2_rapid_glucose  &gt; 140 or  /data/f2_glucose_normal_page/f2_glucose_referral_decision_normal  = 'refer_anyway'"/>
+      <bind nodeset="/data/f2_form_2_summary/f2_grp_lbl_glucose_referral_facility/f2_calc_glucose_referral_facility_sum" type="string" calculate=" /data/f2_calc_glucose_referral_facility_lbl "/>
       <bind nodeset="/data/oc_gate_page/oc_gate_note" readonly="true()" type="string"/>
       <bind nodeset="/data/oc_gate_page/fill_oral_cancer_form" type="string" required="true()"/>
       <bind nodeset="/data/oc_section_wrapper" relevant=" /data/oc_gate_page/fill_oral_cancer_form  = 'yes'"/>
@@ -1725,6 +1779,16 @@ Please enter your blood pressure and blood glucose readings.</label>
         </itemset>
       </select1>
     </group>
+    <group appearance="field-list" ref="/data/f2_bp_referral_facility_page">
+      <label>Referral Facility</label>
+      <select1 ref="/data/f2_bp_referral_facility_page/f2_bp_referral_facility">
+        <label>Where do you want to refer this patient?</label>
+        <itemset nodeset="instance('ncd_referral_facility')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
     <group appearance="field-list" ref="/data/f2_bp_lifestyle_page">
       <label>Lifestyle Modification</label>
       <input ref="/data/f2_bp_lifestyle_page/f2_bp_lifestyle_note">
@@ -1739,6 +1803,16 @@ Please enter your blood pressure and blood glucose readings.</label>
       <select1 ref="/data/f2_bp_normal_page/f2_bp_referral_decision_normal" appearance="radio">
         <label>Referral Decision</label>
         <itemset nodeset="instance('referral')/root/item[suspicion_type = 'non_suspicious']">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/f2_bp_normal_referral_facility_page">
+      <label>Referral Facility</label>
+      <select1 ref="/data/f2_bp_normal_referral_facility_page/f2_bp_normal_referral_facility">
+        <label>Where do you want to refer this patient?</label>
+        <itemset nodeset="instance('ncd_referral_facility')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
@@ -1764,6 +1838,16 @@ Please enter your blood pressure and blood glucose readings.</label>
         </itemset>
       </select1>
     </group>
+    <group appearance="field-list" ref="/data/f2_glucose_referral_facility_page">
+      <label>Referral Facility</label>
+      <select1 ref="/data/f2_glucose_referral_facility_page/f2_glucose_referral_facility">
+        <label>Where do you want to refer this patient?</label>
+        <itemset nodeset="instance('ncd_referral_facility')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
     <group appearance="field-list" ref="/data/f2_glucose_normal_page">
       <label>Glucose Assessment</label>
       <input ref="/data/f2_glucose_normal_page/f2_glucose_normal_note">
@@ -1772,6 +1856,16 @@ Please enter your blood pressure and blood glucose readings.</label>
       <select1 ref="/data/f2_glucose_normal_page/f2_glucose_referral_decision_normal" appearance="radio">
         <label>Referral Decision</label>
         <itemset nodeset="instance('referral')/root/item[suspicion_type = 'non_suspicious']">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/f2_glucose_normal_referral_facility_page">
+      <label>Referral Facility</label>
+      <select1 ref="/data/f2_glucose_normal_referral_facility_page/f2_glucose_normal_referral_facility">
+        <label>Where do you want to refer this patient?</label>
+        <itemset nodeset="instance('ncd_referral_facility')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
@@ -1832,6 +1926,16 @@ Please enter your blood pressure and blood glucose readings.</label>
       <group appearance="field-list" ref="/data/f2_form_2_summary/f2_grp_lbl_glucose_referral">
         <input ref="/data/f2_form_2_summary/f2_grp_lbl_glucose_referral/f2_lbl_glucose_referral">
           <label> **Glucose Referral Decision:** <output value=" /data/f2_calc_glucose_referral_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/f2_form_2_summary/f2_grp_lbl_bp_referral_facility">
+        <input ref="/data/f2_form_2_summary/f2_grp_lbl_bp_referral_facility/f2_lbl_bp_referral_facility">
+          <label> **BP Referral Facility:** <output value=" /data/f2_calc_bp_referral_facility_lbl "/></label>
+        </input>
+      </group>
+      <group appearance="field-list" ref="/data/f2_form_2_summary/f2_grp_lbl_glucose_referral_facility">
+        <input ref="/data/f2_form_2_summary/f2_grp_lbl_glucose_referral_facility/f2_lbl_glucose_referral_facility">
+          <label> **Glucose Referral Facility:** <output value=" /data/f2_calc_glucose_referral_facility_lbl "/></label>
         </input>
       </group>
     </group>
