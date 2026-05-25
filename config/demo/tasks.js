@@ -56,7 +56,6 @@ const AppForms = Object.freeze({
   NCD_HYPERTENSION_FOLLOWUP: 'ncd_hypertension_followup',
   NCD_HYPERTENSION_REFERRAL: 'ncd_hypertension_referral',
   NCD_HYPERTENSION_REFERRAL_REVIEW: 'ncd_bp_referral_review',
-  NCD_GLUCOSE_REFERRAL: 'ncd_glucose_referral',
   NCD_GLUCOSE_REFERRAL_REVIEW: 'ncd_glucose_referral_review',
 });
 
@@ -356,7 +355,7 @@ module.exports = [
           return r.reported_date > report.reported_date;
         }
         return r.form === AppForms.CBAC_REFERRAL_REVIEW_HIGH_RISK &&
-          r.fields && r.fields.inputs && r.fields.inputs.source_cbac_id === report._id;
+          r.fields && r.fields.inputs && r.fields.inputs.cbac_source_id === report._id;
       });
     },
     actions: [{
@@ -369,7 +368,7 @@ module.exports = [
         content.t_risk_category = getField(report, 'risk_category');
         content.t_phq2_total = getField(report, 'phq2_total') || '0';
         content.t_referral_reason = 'High CBAC Risk Score (' + getField(report, 'total_score') + ')';
-        content.source_cbac_id = report._id;
+        content.cbac_source_id = report._id;
       }
     }],
     events: [{
@@ -402,7 +401,7 @@ module.exports = [
           return r.fields && r.fields.inputs && r.fields.inputs.cbac_source_id === report._id;
         }
         return r.form === AppForms.CBAC_REFERRAL_REVIEW_PHQ2 &&
-          r.fields && r.fields.inputs && r.fields.inputs.source_cbac_id === report._id;
+          r.fields && r.fields.inputs && r.fields.inputs.cbac_source_id === report._id;
       });
     },
     actions: [{
@@ -415,7 +414,7 @@ module.exports = [
         content.t_risk_category = getField(report, 'risk_category');
         content.t_phq2_total = getField(report, 'phq2_total') || '0';
         content.t_referral_reason = 'High PHQ-2 Score (' + getField(report, 'phq2_total') + ')';
-        content.source_cbac_id = report._id;
+        content.cbac_source_id = report._id;
       }
     }],
     events: [{
@@ -497,7 +496,7 @@ module.exports = [
 
         // Close if this NCD BP Referral Review is submitted after this NCD Report
         const isBpReferralReview = r.form === AppForms.NCD_HYPERTENSION_REFERRAL_REVIEW &&
-          r.fields && r.fields.inputs && r.fields.inputs.source_ncd_id === report._id;
+          r.fields && r.fields.inputs && r.fields.inputs.ncd_source_id === report._id;
 
         return isHypertensionReferral || isBpReferralReview;
       });
@@ -514,7 +513,7 @@ module.exports = [
         content.t_bp_systolic = getField(report, 'f2_hypertension.f2_systolic');
         content.t_bp_diastolic = getField(report, 'f2_hypertension.f2_diastolic');
         content.t_glucose = getField(report, 'f2_diabetes_section.f2_rapid_glucose');
-        content.source_ncd_id = report._id;
+        content.ncd_source_id = report._id;
       }
     }],
     events: [{
@@ -543,8 +542,20 @@ module.exports = [
     },
     resolvedIf: function (contact, report) {
       return contact.reports.some(function (r) {
-        return r.form === AppForms.NCD_GLUCOSE_REFERRAL_REVIEW &&
-          r.fields && r.fields.inputs && r.fields.inputs.source_ncd_id === report._id;
+        
+        console.log('r.form', r.form);
+        console.log('r.fields', r.fields);
+        console.log('r.fields.inputs', r.fields.inputs);
+        console.log('r.fields.inputs.ncd_source_id', r.fields.inputs.ncd_source_id);
+        console.log('report._id', report._id);
+
+        const isGlucoseReferralReview = r.form === AppForms.NCD_GLUCOSE_REFERRAL_REVIEW &&
+          r.fields && r.fields.inputs && r.fields.inputs.ncd_source_id === report._id;
+
+        const isDiabetesReferral = r.form === AppForms.NCD_DIABETES_REFERRAL &&
+          r.fields && r.fields.inputs && r.fields.inputs.ncd_source_id === report._id;
+
+        return isGlucoseReferralReview || isDiabetesReferral;
       });
     },
     actions: [{
@@ -559,7 +570,7 @@ module.exports = [
         content.t_bp_systolic = getField(report, 'f2_hypertension.f2_systolic');
         content.t_bp_diastolic = getField(report, 'f2_hypertension.f2_diastolic');
         content.t_glucose = getField(report, 'f2_diabetes_section.f2_rapid_glucose');
-        content.source_ncd_id = report._id;
+        content.ncd_source_id = report._id;
       }
     }],
     events: [{
@@ -803,3 +814,7 @@ module.exports = [
 
 
 ];
+
+
+
+

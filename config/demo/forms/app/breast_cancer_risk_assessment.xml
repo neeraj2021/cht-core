@@ -165,6 +165,10 @@
           <cbe_page_4>
             <skin_dimpling_retraction/>
           </cbe_page_4>
+          <referral_page>
+            <referral_question/>
+            <referral_location>phc</referral_location>
+          </referral_page>
           <group_summary_s2>
             <grp_s2_filled_by>
               <lbl_s2_filled_by/>
@@ -388,6 +392,34 @@
           </item>
         </root>
       </instance>
+      <instance id="referral">
+        <root>
+          <item>
+            <name>do_not_refer</name>
+            <label>Don't Refer</label>
+          </item>
+          <item>
+            <name>refer_anyway</name>
+            <label>Refer Anyway</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="referral_location">
+        <root>
+          <item>
+            <name>phc</name>
+            <label>Primary Health Center</label>
+          </item>
+          <item>
+            <name>chc</name>
+            <label>Community Health Center</label>
+          </item>
+          <item>
+            <name>dh</name>
+            <label>District Hospital</label>
+          </item>
+        </root>
+      </instance>
       <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
       <bind nodeset="/data/patient_uuid" type="string" calculate="../inputs/contact/_id"/>
       <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
@@ -466,6 +498,9 @@
       <bind nodeset="/data/cbe_page_3/discharge_from_nipple_cbe" type="string" required="true()"/>
       <bind nodeset="/data/cbe_page_4" relevant=" /data/section2_gate_page/do_section2  = 'yes'"/>
       <bind nodeset="/data/cbe_page_4/skin_dimpling_retraction" type="string" required="true()"/>
+      <bind nodeset="/data/referral_page" relevant=" /data/section2_gate_page/do_section2  = 'yes'"/>
+      <bind nodeset="/data/referral_page/referral_question" type="string" required="true()"/>
+      <bind nodeset="/data/referral_page/referral_location" type="string" required="true()" relevant=" /data/referral_page/referral_question  = 'refer_anyway'"/>
       <bind nodeset="/data/group_summary_s2" relevant=" /data/section2_gate_page/do_section2  = 'yes'"/>
       <bind nodeset="/data/group_summary_s2/grp_s2_filled_by/lbl_s2_filled_by" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary_s2/grp_s2_filled_by/calc_s2_reporter" type="string" calculate=" /data/reporter_name "/>
@@ -506,7 +541,7 @@
         <label> Filled by: <output value=" /data/reporter_name "/></label>
       </input>
       <group ref="/data/inputs/contact">
-        <input ref="/data/inputs/contact/_id" appearance="select-contact type-patient">
+        <input ref="/data/inputs/contact/_id" appearance="select-contact type-patient role-patient">
           <label>Patient's Name</label>
           <hint>Select the patient from your area</hint>
         </input>
@@ -791,6 +826,22 @@
       <select1 ref="/data/cbe_page_4/skin_dimpling_retraction">
         <label>Skin Dimpling/Retraction?</label>
         <itemset nodeset="instance('yes_no')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/referral_page">
+      <select1 ref="/data/referral_page/referral_question" appearance="radio">
+        <label>Do you want to refer?</label>
+        <itemset nodeset="instance('referral')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/referral_page/referral_location">
+        <label>Where do you want to refer the patient?</label>
+        <itemset nodeset="instance('referral_location')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>

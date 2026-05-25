@@ -36,7 +36,7 @@
             <t_bp_systolic/>
             <t_bp_diastolic/>
             <t_glucose/>
-            <source_ncd_id/>
+            <ncd_source_id/>
           </inputs>
           <facility_label/>
           <review_page>
@@ -87,7 +87,7 @@
       <bind nodeset="/data/inputs/t_bp_systolic" type="string"/>
       <bind nodeset="/data/inputs/t_bp_diastolic" type="string"/>
       <bind nodeset="/data/inputs/t_glucose" type="string"/>
-      <bind nodeset="/data/inputs/source_ncd_id" type="string"/>
+      <bind nodeset="/data/inputs/ncd_source_id" type="string"/>
       <bind nodeset="/data/facility_label" type="string" calculate="if( /data/inputs/t_referral_facility  = 'phc', 'Primary Health Center', if( /data/inputs/t_referral_facility  = 'chc', 'Community Health Center', if( /data/inputs/t_referral_facility  = 'dh', 'District Hospital',  /data/inputs/t_referral_facility )))"/>
       <bind nodeset="/data/review_page/lbl_patient" readonly="true()" type="string"/>
       <bind nodeset="/data/review_page/lbl_cho" readonly="true()" type="string"/>

@@ -25,6 +25,7 @@
             </meta>
             <source/>
             <source_id/>
+            <cbac_source_id/>
             <user>
               <name/>
               <phone/>
@@ -325,6 +326,7 @@
       <bind nodeset="/data/page_info/lbl_about_phq9" readonly="true()" type="string"/>
       <bind nodeset="/data/inputs/source" type="string"/>
       <bind nodeset="/data/inputs/source_id" type="string"/>
+      <bind nodeset="/data/inputs/cbac_source_id" type="string"/>
       <bind nodeset="/data/inputs/user/name" type="string"/>
       <bind nodeset="/data/inputs/user/phone" type="string"/>
       <bind nodeset="/data/inputs/reporter_name_note" readonly="true()" type="string"/>

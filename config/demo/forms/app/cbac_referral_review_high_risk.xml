@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://www.opendatakit.org/xforms">
   <h:head>
-    <h:title>NCD BP Referral Review</h:title>
+    <h:title>CBAC High Risk Referral Review</h:title>
     <model odk:xforms-version="1.0.0">
       <instance>
-        <data id="ncd_bp_referral_review" prefix="J1!ncd_bp_referral_review!" delimiter="#">
+        <data id="cbac_referral_review_high_risk" prefix="J1!cbac_referral_review_high_risk!" delimiter="#">
           <patient_id/>
           <patient_uuid/>
           <patient_name/>
@@ -31,20 +31,21 @@
               <patient_id/>
               <name/>
             </contact>
-            <t_cho_name/>
-            <t_referral_facility/>
-            <t_bp_systolic/>
-            <t_bp_diastolic/>
-            <t_glucose/>
-            <ncd_source_id/>
+            <t_asha_name/>
+            <t_total_score/>
+            <t_risk_category/>
+            <t_phq2_total/>
+            <t_referral_reason/>
+            <cbac_source_id/>
           </inputs>
-          <facility_label/>
           <review_page>
             <lbl_patient/>
-            <lbl_cho/>
+            <lbl_asha/>
             <lbl_facility/>
-            <lbl_bp/>
-            <lbl_glucose/>
+            <lbl_score/>
+            <lbl_risk/>
+            <lbl_phq2/>
+            <lbl_reason/>
             <lbl_message/>
           </review_page>
           <form_submit_timestamp_iso/>
@@ -82,18 +83,19 @@
       <bind nodeset="/data/inputs/contact/_id" type="string" readonly="true()"/>
       <bind nodeset="/data/inputs/contact/patient_id" type="string"/>
       <bind nodeset="/data/inputs/contact/name" type="string"/>
-      <bind nodeset="/data/inputs/t_cho_name" type="string"/>
-      <bind nodeset="/data/inputs/t_referral_facility" type="string"/>
-      <bind nodeset="/data/inputs/t_bp_systolic" type="string"/>
-      <bind nodeset="/data/inputs/t_bp_diastolic" type="string"/>
-      <bind nodeset="/data/inputs/t_glucose" type="string"/>
-      <bind nodeset="/data/inputs/ncd_source_id" type="string"/>
-      <bind nodeset="/data/facility_label" type="string" calculate="if( /data/inputs/t_referral_facility  = 'phc', 'Primary Health Center', if( /data/inputs/t_referral_facility  = 'chc', 'Community Health Center', if( /data/inputs/t_referral_facility  = 'dh', 'District Hospital',  /data/inputs/t_referral_facility )))"/>
+      <bind nodeset="/data/inputs/t_asha_name" type="string"/>
+      <bind nodeset="/data/inputs/t_total_score" type="string"/>
+      <bind nodeset="/data/inputs/t_risk_category" type="string"/>
+      <bind nodeset="/data/inputs/t_phq2_total" type="string"/>
+      <bind nodeset="/data/inputs/t_referral_reason" type="string"/>
+      <bind nodeset="/data/inputs/cbac_source_id" type="string"/>
       <bind nodeset="/data/review_page/lbl_patient" readonly="true()" type="string"/>
-      <bind nodeset="/data/review_page/lbl_cho" readonly="true()" type="string"/>
+      <bind nodeset="/data/review_page/lbl_asha" readonly="true()" type="string"/>
       <bind nodeset="/data/review_page/lbl_facility" readonly="true()" type="string"/>
-      <bind nodeset="/data/review_page/lbl_bp" readonly="true()" type="string"/>
-      <bind nodeset="/data/review_page/lbl_glucose" readonly="true()" type="string"/>
+      <bind nodeset="/data/review_page/lbl_score" readonly="true()" type="string"/>
+      <bind nodeset="/data/review_page/lbl_risk" readonly="true()" type="string"/>
+      <bind nodeset="/data/review_page/lbl_phq2" readonly="true()" type="string"/>
+      <bind nodeset="/data/review_page/lbl_reason" readonly="true()" type="string"/>
       <bind nodeset="/data/review_page/lbl_message" readonly="true()" type="string"/>
       <bind nodeset="/data/form_submit_timestamp_iso" type="string" calculate="format-date-time(now(), '%Y-%m-%dT%H:%M:%S+05:30')"/>
       <bind nodeset="/data/form_submit_timestamp_display" type="string" calculate="format-date-time(now(), '%e-%b-%Y %H:%M:%S')"/>
@@ -118,24 +120,30 @@
       </group>
     </group>
     <group appearance="field-list" ref="/data/review_page">
-      <label>Referral Review</label>
+      <label>CBAC Referral Review</label>
       <input ref="/data/review_page/lbl_patient">
         <label> **Patient:** <output value=" /data/patient_name "/></label>
       </input>
-      <input ref="/data/review_page/lbl_cho">
-        <label> **Referred by (CHO):** <output value=" /data/inputs/t_cho_name "/></label>
+      <input ref="/data/review_page/lbl_asha">
+        <label> **Referred by (ASHA):** <output value=" /data/inputs/t_asha_name "/></label>
       </input>
       <input ref="/data/review_page/lbl_facility">
-        <label> **Referred to:** <output value=" /data/facility_label "/></label>
+        <label>**Referred to:** Health and Wellness Center (HWC)</label>
       </input>
-      <input ref="/data/review_page/lbl_bp">
-        <label> **BP Reading:** <output value=" /data/inputs/t_bp_systolic "/> / <output value=" /data/inputs/t_bp_diastolic "/> mmHg </label>
+      <input ref="/data/review_page/lbl_score">
+        <label> **CBAC Risk Score:** <output value=" /data/inputs/t_total_score "/></label>
       </input>
-      <input ref="/data/review_page/lbl_glucose">
-        <label> **Glucose Reading:** <output value=" /data/inputs/t_glucose "/> mg/dL </label>
+      <input ref="/data/review_page/lbl_risk">
+        <label> **Risk Category:** <output value=" /data/inputs/t_risk_category "/></label>
+      </input>
+      <input ref="/data/review_page/lbl_phq2">
+        <label> **PHQ-2 Score:** <output value=" /data/inputs/t_phq2_total "/></label>
+      </input>
+      <input ref="/data/review_page/lbl_reason">
+        <label> **Referral Reason:** <output value=" /data/inputs/t_referral_reason "/></label>
       </input>
       <input ref="/data/review_page/lbl_message">
-        <label> Patient <output value=" /data/patient_name "/> has been referred to <output value=" /data/facility_label "/> for hypertension/diabetes assessment by CHO <output value=" /data/inputs/t_cho_name "/>. </label>
+        <label> Patient <output value=" /data/patient_name "/> has been referred to Health and Wellness Center (HWC) by ASHA <output value=" /data/inputs/t_asha_name "/>. </label>
       </input>
     </group>
   </h:body>

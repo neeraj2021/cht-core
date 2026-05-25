@@ -344,6 +344,7 @@
             <oc_final_ai_analysis_page>
               <oc_final_ai_suspicion/>
               <oc_final_ai_referral/>
+              <oc_referral_location>phc</oc_referral_location>
             </oc_final_ai_analysis_page>
             <oc_state_final/>
             <oc_district_final/>
@@ -563,6 +564,10 @@
             <bc_cbe_page_4>
               <bc_skin_dimpling_retraction/>
             </bc_cbe_page_4>
+            <bc_referral_page>
+              <bc_referral_question/>
+              <bc_referral_location>phc</bc_referral_location>
+            </bc_referral_page>
             <bc_group_summary_s2>
               <bc_grp_s2_filled_by>
                 <bc_lbl_s2_filled_by/>
@@ -647,6 +652,10 @@
             </phq_page_5>
             <phq_total_score/>
             <phq_severity_category/>
+            <phq_referral_page>
+              <phq_referral_question/>
+              <phq_referral_location>phc</phq_referral_location>
+            </phq_referral_page>
             <phq_group_summary>
               <phq_grp_lbl_filled_by>
                 <phq_lbl_filled_by_lbl/>
@@ -1232,6 +1241,7 @@
       <bind nodeset="/data/oc_section_wrapper/oc_final_ai_analysis_page" relevant=" /data/oc_section_wrapper/oc_all_habits_never  = 'no'"/>
       <bind nodeset="/data/oc_section_wrapper/oc_final_ai_analysis_page/oc_final_ai_suspicion" type="string" calculate="if( /data/oc_section_wrapper/oc_final_ai_analysis_page/oc_final_ai_suspicion  != '',  /data/oc_section_wrapper/oc_final_ai_analysis_page/oc_final_ai_suspicion , 'non_suspicious')" readonly="true()"/>
       <bind nodeset="/data/oc_section_wrapper/oc_final_ai_analysis_page/oc_final_ai_referral" type="string" required="true()" relevant=" /data/oc_section_wrapper/oc_final_ai_analysis_page/oc_final_ai_suspicion  = 'suspicious' or  /data/oc_section_wrapper/oc_final_ai_analysis_page/oc_final_ai_suspicion  = 'non_suspicious'"/>
+      <bind nodeset="/data/oc_section_wrapper/oc_final_ai_analysis_page/oc_referral_location" type="string" required="true()" relevant=" /data/oc_section_wrapper/oc_final_ai_analysis_page/oc_final_ai_referral  = 'refer' or  /data/oc_section_wrapper/oc_final_ai_analysis_page/oc_final_ai_referral  = 'refer_anyway'"/>
       <bind nodeset="/data/oc_section_wrapper/oc_state_final" type="string" calculate=" /data/inputs/state "/>
       <bind nodeset="/data/oc_section_wrapper/oc_district_final" type="string" calculate=" /data/inputs/district "/>
       <bind nodeset="/data/oc_section_wrapper/oc_group_summary/oc_grp_lbl_filled_by/oc_lbl_filled_by" readonly="true()" type="string"/>
@@ -1356,6 +1366,9 @@
       <bind nodeset="/data/bc_section_wrapper/bc_cbe_page_3/bc_discharge_from_nipple_cbe" type="string" required="true()"/>
       <bind nodeset="/data/bc_section_wrapper/bc_cbe_page_4" relevant=" /data/bc_section_wrapper/bc_section2_gate_page/bc_do_section2  = 'yes'"/>
       <bind nodeset="/data/bc_section_wrapper/bc_cbe_page_4/bc_skin_dimpling_retraction" type="string" required="true()"/>
+      <bind nodeset="/data/bc_section_wrapper/bc_referral_page" relevant=" /data/bc_section_wrapper/bc_section2_gate_page/bc_do_section2  = 'yes'"/>
+      <bind nodeset="/data/bc_section_wrapper/bc_referral_page/bc_referral_question" type="string" required="true()"/>
+      <bind nodeset="/data/bc_section_wrapper/bc_referral_page/bc_referral_location" type="string" required="true()" relevant=" /data/bc_section_wrapper/bc_referral_page/bc_referral_question  = 'refer_anyway'"/>
       <bind nodeset="/data/bc_section_wrapper/bc_group_summary_s2" relevant=" /data/bc_section_wrapper/bc_section2_gate_page/bc_do_section2  = 'yes'"/>
       <bind nodeset="/data/bc_section_wrapper/bc_group_summary_s2/bc_grp_s2_filled_by/bc_lbl_s2_filled_by" readonly="true()" type="string"/>
       <bind nodeset="/data/bc_section_wrapper/bc_group_summary_s2/bc_grp_s2_filled_by/bc_calc_s2_reporter" type="string" calculate=" /data/reporter_name "/>
@@ -1400,6 +1413,8 @@
       <bind nodeset="/data/phq_section_wrapper/phq_page_5/phq_thoughts_of_self_harm" type="string" required="true()"/>
       <bind nodeset="/data/phq_section_wrapper/phq_total_score" type="string" calculate=" /data/phq_section_wrapper/phq_page_1/phq_little_interest_or_pleasure  +  /data/phq_section_wrapper/phq_page_1/phq_feeling_depressed_or_hopeless  +  /data/phq_section_wrapper/phq_page_2/phq_trouble_sleeping  +  /data/phq_section_wrapper/phq_page_2/phq_feeling_tired  +  /data/phq_section_wrapper/phq_page_3/phq_poor_appetite_or_overeating  +  /data/phq_section_wrapper/phq_page_3/phq_feeling_bad_about_yourself  +  /data/phq_section_wrapper/phq_page_4/phq_trouble_concentrating  +  /data/phq_section_wrapper/phq_page_4/phq_moving_or_speaking_slowly  +  /data/phq_section_wrapper/phq_page_5/phq_thoughts_of_self_harm "/>
       <bind nodeset="/data/phq_section_wrapper/phq_severity_category" type="string" calculate="if( /data/phq_section_wrapper/phq_total_score  &lt;= 4, 'minimal', if( /data/phq_section_wrapper/phq_total_score  &lt;= 9, 'mild', if( /data/phq_section_wrapper/phq_total_score  &lt;= 14, 'moderate', if( /data/phq_section_wrapper/phq_total_score  &lt;= 19, 'moderately_severe', 'severe'))))"/>
+      <bind nodeset="/data/phq_section_wrapper/phq_referral_page/phq_referral_question" type="string" required="true()"/>
+      <bind nodeset="/data/phq_section_wrapper/phq_referral_page/phq_referral_location" type="string" required="true()" relevant=" /data/phq_section_wrapper/phq_referral_page/phq_referral_question  = 'refer_anyway'"/>
       <bind nodeset="/data/phq_section_wrapper/phq_group_summary/phq_grp_lbl_filled_by/phq_lbl_filled_by_lbl" readonly="true()" type="string"/>
       <bind nodeset="/data/phq_section_wrapper/phq_group_summary/phq_grp_lbl_filled_by/phq_calc_reporter_name" type="string" calculate=" /data/reporter_name "/>
       <bind nodeset="/data/phq_section_wrapper/phq_group_summary/phq_grp_lbl_patient/phq_lbl_patient_lbl" readonly="true()" type="string"/>
@@ -2117,6 +2132,13 @@ Please enter your blood pressure and blood glucose readings.</label>
             <label ref="label"/>
           </itemset>
         </select1>
+        <select1 ref="/data/oc_section_wrapper/oc_final_ai_analysis_page/oc_referral_location">
+          <label>Where do you want to refer the patient?</label>
+          <itemset nodeset="instance('ncd_referral_facility')/root/item">
+            <value ref="name"/>
+            <label ref="label"/>
+          </itemset>
+        </select1>
       </group>
       <group appearance="field-list" ref="/data/oc_section_wrapper/oc_group_summary">
         <label>Assessment Summary for Oral Cancer Assessment</label>
@@ -2526,6 +2548,22 @@ Please enter your blood pressure and blood glucose readings.</label>
           </itemset>
         </select1>
       </group>
+      <group appearance="field-list" ref="/data/bc_section_wrapper/bc_referral_page">
+        <select1 ref="/data/bc_section_wrapper/bc_referral_page/bc_referral_question" appearance="radio">
+          <label>Do you want to refer?</label>
+          <itemset nodeset="instance('referral')/root/item[suspicion_type = 'non_suspicious']">
+            <value ref="name"/>
+            <label ref="label"/>
+          </itemset>
+        </select1>
+        <select1 ref="/data/bc_section_wrapper/bc_referral_page/bc_referral_location">
+          <label>Where do you want to refer the patient?</label>
+          <itemset nodeset="instance('ncd_referral_facility')/root/item">
+            <value ref="name"/>
+            <label ref="label"/>
+          </itemset>
+        </select1>
+      </group>
       <group appearance="field-list" ref="/data/bc_section_wrapper/bc_group_summary_s2">
         <label>Section 2: Assessment Summary for Clinic Breast Exam</label>
         <group ref="/data/bc_section_wrapper/bc_group_summary_s2/bc_grp_s2_filled_by">
@@ -2708,6 +2746,22 @@ Please enter your blood pressure and blood glucose readings.</label>
           <label>9. Thoughts that you would be better off dead or of hurting yourself in some way</label>
           <hint>Use ✓ to indicate your answer</hint>
           <itemset nodeset="instance('frequency')/root/item">
+            <value ref="name"/>
+            <label ref="label"/>
+          </itemset>
+        </select1>
+      </group>
+      <group appearance="field-list" ref="/data/phq_section_wrapper/phq_referral_page">
+        <select1 ref="/data/phq_section_wrapper/phq_referral_page/phq_referral_question" appearance="radio">
+          <label>Do you want to refer?</label>
+          <itemset nodeset="instance('referral')/root/item[suspicion_type = 'non_suspicious']">
+            <value ref="name"/>
+            <label ref="label"/>
+          </itemset>
+        </select1>
+        <select1 ref="/data/phq_section_wrapper/phq_referral_page/phq_referral_location">
+          <label>Where do you want to refer the patient?</label>
+          <itemset nodeset="instance('ncd_referral_facility')/root/item">
             <value ref="name"/>
             <label ref="label"/>
           </itemset>

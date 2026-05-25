@@ -99,6 +99,7 @@
           <final_ai_analysis_page>
             <final_ai_suspicion/>
             <final_ai_referral/>
+            <referral_location>phc</referral_location>
           </final_ai_analysis_page>
           <state_final/>
           <district_final/>
@@ -419,6 +420,22 @@
           </item>
         </root>
       </instance>
+      <instance id="referral_location">
+        <root>
+          <item>
+            <name>phc</name>
+            <label>Primary Health Center</label>
+          </item>
+          <item>
+            <name>chc</name>
+            <label>Community Health Center</label>
+          </item>
+          <item>
+            <name>dh</name>
+            <label>District Hospital</label>
+          </item>
+        </root>
+      </instance>
       <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
       <bind nodeset="/data/patient_uuid" type="string" calculate="../inputs/contact/_id"/>
       <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
@@ -477,6 +494,7 @@
       <bind nodeset="/data/final_ai_analysis_page" relevant=" /data/all_habits_never  = 'no'"/>
       <bind nodeset="/data/final_ai_analysis_page/final_ai_suspicion" type="string" calculate="if( /data/final_ai_analysis_page/final_ai_suspicion  != '',  /data/final_ai_analysis_page/final_ai_suspicion , 'non_suspicious')" readonly="true()"/>
       <bind nodeset="/data/final_ai_analysis_page/final_ai_referral" type="string" required="true()" relevant=" /data/final_ai_analysis_page/final_ai_suspicion  = 'suspicious' or  /data/final_ai_analysis_page/final_ai_suspicion  = 'non_suspicious'"/>
+      <bind nodeset="/data/final_ai_analysis_page/referral_location" type="string" required="true()" relevant=" /data/final_ai_analysis_page/final_ai_referral  = 'refer' or  /data/final_ai_analysis_page/final_ai_referral  = 'refer_anyway'"/>
       <bind nodeset="/data/state_final" type="string" calculate=" /data/inputs/state "/>
       <bind nodeset="/data/district_final" type="string" calculate=" /data/inputs/district "/>
       <bind nodeset="/data/group_summary/grp_lbl_filled_by/lbl_filled_by" readonly="true()" type="string"/>
@@ -731,6 +749,13 @@
         <label>Referral Decision</label>
         <hint>Please tell the client to consult a dentist as soon as possible. Provide all necessary instructions to reach the dentist's facility.</hint>
         <itemset nodeset="instance('referral')/root/item[suspicion_type =  /data/final_ai_analysis_page/final_ai_suspicion ]">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/final_ai_analysis_page/referral_location">
+        <label>Where do you want to refer the patient?</label>
+        <itemset nodeset="instance('referral_location')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
