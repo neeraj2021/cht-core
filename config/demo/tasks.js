@@ -48,16 +48,15 @@ const AppForms = Object.freeze({
   CBAC: 'cbac',
   PHQ9: 'phq9',
   PHQ9_FOLLOWUP: 'phq9_followup',
+  PHQ9_FOLLOWUP_ACTIONS: 'phq9_followup_actions',
   CBAC_FOLLOWUP: 'cbac_followup',
   CBAC_REFERRAL_REVIEW_HIGH_RISK: 'cbac_referral_review_high_risk',
   CBAC_REFERRAL_REVIEW_PHQ2: 'cbac_referral_review_phq2',
   NCD_DIABETES_REFERRAL: 'ncd_diabetes_referral',
   NCD_HYPERTENSION_FOLLOWUP: 'ncd_hypertension_followup',
   NCD_HYPERTENSION_REFERRAL: 'ncd_hypertension_referral',
+  NCD_HYPERTENSION_REFERRAL_REVIEW: 'ncd_bp_referral_review',
   NCD_GLUCOSE_REFERRAL: 'ncd_glucose_referral',
-  NCD_BP_REFERRAL: 'ncd_bp_referral',
-  PHQ9_FOLLOWUP_ACTIONS: 'phq9_followup_actions',
-  NCD_BP_REFERRAL_REVIEW: 'ncd_bp_referral_review',
   NCD_GLUCOSE_REFERRAL_REVIEW: 'ncd_glucose_referral_review',
 });
 
@@ -491,13 +490,21 @@ module.exports = [
     },
     resolvedIf: function (contact, report) {
       return contact.reports.some(function (r) {
-        return r.form === AppForms.NCD_BP_REFERRAL_REVIEW &&
+
+        // Close if this NCD Hypertension Referral is submitted for this NCD
+        const isHypertensionReferral = r.form === AppForms.NCD_HYPERTENSION_REFERRAL &&
+          r.fields && r.fields.inputs && r.fields.inputs.ncd_source_id === report._id;
+
+        // Close if this NCD BP Referral Review is submitted after this NCD Report
+        const isBpReferralReview = r.form === AppForms.NCD_HYPERTENSION_REFERRAL_REVIEW &&
           r.fields && r.fields.inputs && r.fields.inputs.source_ncd_id === report._id;
+
+        return isHypertensionReferral || isBpReferralReview;
       });
     },
     actions: [{
       type: 'report',
-      form: AppForms.NCD_BP_REFERRAL_REVIEW,
+      form: AppForms.NCD_HYPERTENSION_REFERRAL_REVIEW,
       label: 'Review BP Referral',
       modifyContent: function (content, _contact, report) {
         content.t_cho_name = getField(report, 'reporter_name');
@@ -626,10 +633,10 @@ module.exports = [
       const newerNcd = getNewestReport(contact.reports, ['ncd']);
       if (newerNcd && newerNcd.reported_date > report.reported_date) { return true; }
 
-      // Resolve once any ncd_hypertension_referral form is submitted after this report
-      // — regardless of outcome (visited, refused, or agreed to future date)
+      // Resolve once a ncd_hypertension_referral linked to this NCD is submitted
       return contact.reports.some(function (r) {
-        return r.form === AppForms.NCD_HYPERTENSION_REFERRAL && r.reported_date > report.reported_date;
+        return r.form === AppForms.NCD_HYPERTENSION_REFERRAL &&
+          r.fields && r.fields.inputs && r.fields.inputs.ncd_source_id === report._id;
       });
     },
     actions: [{
@@ -639,6 +646,7 @@ module.exports = [
       modifyContent: function (content, _contact, report) {
         content.t_systolic = getField(report, 'f2_hypertension.f2_systolic');
         content.t_diastolic = getField(report, 'f2_hypertension.f2_diastolic');
+        content.ncd_source_id = report._id;
         // Pass selected referral facility — high-risk path takes priority over normal "Refer Anyway"
         content.t_referral_facility =
           getField(report, 'f2_bp_referral_facility_page.f2_bp_referral_facility') ||
@@ -719,10 +727,10 @@ module.exports = [
       const newerNcd = getNewestReport(contact.reports, ['ncd']);
       if (newerNcd && newerNcd.reported_date > report.reported_date) { return true; }
 
-      // Resolve once any ncd_diabetes_referral form is submitted after this report
-      // — regardless of outcome (visited, refused, or agreed to future date)
+      // Resolve once a ncd_diabetes_referral linked to this NCD is submitted
       return contact.reports.some(function (r) {
-        return r.form === AppForms.NCD_DIABETES_REFERRAL && r.reported_date > report.reported_date;
+        return r.form === AppForms.NCD_DIABETES_REFERRAL &&
+          r.fields && r.fields.inputs && r.fields.inputs.ncd_source_id === report._id;
       });
     },
     actions: [{
@@ -731,6 +739,7 @@ module.exports = [
       label: 'Diabetes Referral Follow-up',
       modifyContent: function (content, _contact, report) {
         content.t_rapid_glucose = getField(report, 'f2_diabetes_section.f2_rapid_glucose');
+        content.ncd_source_id = report._id;
         // Pass selected referral facility — high-risk path takes priority over normal "Refer Anyway"
         content.t_referral_facility =
           getField(report, 'f2_glucose_referral_facility_page.f2_glucose_referral_facility') ||
@@ -794,7 +803,3 @@ module.exports = [
 
 
 ];
-
-
-
-
