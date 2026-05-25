@@ -32,7 +32,9 @@
               <name/>
             </contact>
             <t_rapid_glucose/>
+            <t_referral_facility/>
           </inputs>
+          <facility_label/>
           <referral>
             <glucose_note/>
             <phc_visited/>
@@ -65,6 +67,22 @@
           </item>
         </root>
       </instance>
+      <instance id="ncd_referral_facility">
+        <root>
+          <item>
+            <name>phc</name>
+            <label>Primary Health Center</label>
+          </item>
+          <item>
+            <name>chc</name>
+            <label>Community Health Center</label>
+          </item>
+          <item>
+            <name>dh</name>
+            <label>District Hospital</label>
+          </item>
+        </root>
+      </instance>
       <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
       <bind nodeset="/data/patient_uuid" type="string" calculate="../inputs/contact/_id"/>
       <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
@@ -79,6 +97,8 @@
       <bind nodeset="/data/inputs/contact/patient_id" type="string"/>
       <bind nodeset="/data/inputs/contact/name" type="string"/>
       <bind nodeset="/data/inputs/t_rapid_glucose" type="string"/>
+      <bind nodeset="/data/inputs/t_referral_facility" type="string"/>
+      <bind nodeset="/data/facility_label" type="string" calculate="if( /data/inputs/t_referral_facility  = 'phc', 'Primary Health Center', if( /data/inputs/t_referral_facility  = 'chc', 'Community Health Center', if( /data/inputs/t_referral_facility  = 'dh', 'District Hospital', 'PHC')))"/>
       <bind nodeset="/data/referral/glucose_note" readonly="true()" type="string"/>
       <bind nodeset="/data/referral/phc_visited" type="string" required="true()"/>
       <bind nodeset="/data/referral/willing_to_visit" type="string" required="true()" relevant=" /data/referral/phc_visited  = 'no'"/>
@@ -111,29 +131,29 @@
       </group>
     </group>
     <group appearance="field-list" ref="/data/referral">
-      <label>Diabetes PHC Referral</label>
+      <label> Diabetes <output value=" /data/facility_label "/> Referral </label>
       <input ref="/data/referral/glucose_note">
         <label> **Previous Rapid Glucose Reading:** <output value=" /data/inputs/t_rapid_glucose "/> mg/dL </label>
       </input>
       <select1 ref="/data/referral/phc_visited">
-        <label>Did the patient visit the PHC?</label>
+        <label> Did the patient visit the <output value=" /data/facility_label "/>? </label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
       <select1 ref="/data/referral/willing_to_visit">
-        <label>Is the patient willing to visit the PHC?</label>
+        <label> Is the patient willing to visit the <output value=" /data/facility_label "/>? </label>
         <itemset nodeset="instance('yes_no')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
       </select1>
       <input ref="/data/referral/not_willing_note">
-        <label>Patient is not willing to visit PHC.</label>
+        <label> Patient is not willing to visit <output value=" /data/facility_label "/>. </label>
       </input>
       <input ref="/data/referral/phc_visit_date">
-        <label>When will the patient visit the PHC?</label>
+        <label> When will the patient visit the <output value=" /data/facility_label "/>? </label>
       </input>
     </group>
   </h:body>

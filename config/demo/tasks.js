@@ -473,6 +473,10 @@ module.exports = [
     resolvedIf: function(contact, report) {
       // Resolved once any cbac_followup is submitted after this cbac report
       return contact.reports.some(function(r) {
+        // Resolve if this NCD was opened from this specific CBAC task
+        if (r.fields && r.fields.inputs && r.fields.inputs.cbac_source_id === report._id) { 
+          return true; 
+        }
         return r.form === 'cbac_followup' && r.reported_date > report.reported_date;
       });
     },
@@ -560,7 +564,9 @@ module.exports = [
     resolvedIf: function(contact, report) {
       // Resolved once any ncd form is submitted after this cbac report
       return contact.reports.some(function(r) {
-        return r.form === 'ncd' && r.reported_date > report.reported_date;
+        if (r.form !== 'ncd') { return false; }
+        // Fallback: resolve on any NCD submitted after this CBAC
+        return r.reported_date > report.reported_date;
       });
     },
     actions: [{
@@ -568,8 +574,9 @@ module.exports = [
       form: 'ncd',
       label: 'NCD Screening',
       modifyContent: function(content, _contact, report) {
-        content.state    = getField(report, 'inputs.state');
-        content.district = getField(report, 'inputs.district');
+        content.state           = getField(report, 'inputs.state');
+        content.district        = getField(report, 'inputs.district');
+        content.cbac_source_id  = report._id;
       }
     }],
     events: [{

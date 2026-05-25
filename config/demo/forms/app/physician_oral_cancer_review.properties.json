@@ -6,6 +6,6 @@
     "person": true,
     "place": false,
     "expression": "false",
-    "permission": "can_view_physician_oral_cancer_review_form"
+    "permission": "can_view_oral_cancer_review_form"
   }
 }

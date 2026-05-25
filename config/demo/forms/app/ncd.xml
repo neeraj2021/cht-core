@@ -59,6 +59,7 @@
             </contact>
             <state/>
             <district/>
+            <cbac_source_id/>
           </inputs>
           <f1_intro_form_1/>
           <f1_form_1_personal_details>
@@ -1046,6 +1047,7 @@
       <bind nodeset="/data/inputs/contact/sex" type="string"/>
       <bind nodeset="/data/inputs/state" type="string" required="true()"/>
       <bind nodeset="/data/inputs/district" type="string" required="true()"/>
+      <bind nodeset="/data/inputs/cbac_source_id" type="string"/>
       <bind nodeset="/data/f1_intro_form_1" readonly="true()" type="string"/>
       <bind nodeset="/data/f1_form_1_personal_details/f1_height_cm" type="decimal" required="true()" constraint=". &gt;= 1 and . &lt;= 230" jr:constraintMsg="Height must be between 1 and 230 cm."/>
       <bind nodeset="/data/f1_form_1_personal_details/f1_weight_kg" type="decimal" required="true()" constraint=". &gt;= 1 and . &lt;= 300" jr:constraintMsg="Weight must be between 1 and 300 kg."/>
