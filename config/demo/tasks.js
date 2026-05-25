@@ -198,6 +198,11 @@ function isValidDate(d) {
 const UserRole = Object.freeze({
   ASHA: 'asha',
   CHO: 'cho',
+  MPW: 'mpw',
+  ANM: 'anm',
+  PHYSICIAN: 'physician',
+  NURSE: 'nurse',
+  MEDICAL_OFFICER: 'medical_officer'
 });
 
 module.exports = [
@@ -637,6 +642,142 @@ module.exports = [
   },
 
 
+  // CBAC Task: Referral Review — shown to CHO when score > 4 or PHQ-2 > 3 (always HWC)
+  {
+    name: 'cbac.referral_review',
+    icon: 'icon-healthcare-generic-2',
+    title: 'CBAC Referral Review',
+    appliesTo: 'reports',
+    appliesToType: ['cbac'],
+    appliesIf: function(contact, report) {
+      if (user.role !== UserRole.CHO) { return false; }
+      if (!isAlive(contact)) { return false; }
+      const highRisk = getField(report, 'risk_category') === 'High Risk';
+      const highPhq2 = parseInt(getField(report, 'phq2_total')) > 3;
+      return highRisk || highPhq2;
+    },
+    resolvedIf: function(contact, report) {
+      return contact.reports.some(function(r) {
+        return r.form === 'cbac_referral_review' &&
+               r.fields && r.fields.inputs && r.fields.inputs.source_cbac_id === report._id;
+      });
+    },
+    actions: [{
+      type: 'report',
+      form: 'cbac_referral_review',
+      label: 'Review CBAC Referral',
+      modifyContent: function(content, _contact, report) {
+        const highRisk = getField(report, 'risk_category') === 'High Risk';
+        const highPhq2 = parseInt(getField(report, 'phq2_total')) > 3;
+        const reasons = [];
+        if (highRisk) { reasons.push('High CBAC Risk Score (' + getField(report, 'total_score') + ')'); }
+        if (highPhq2) { reasons.push('High PHQ-2 Score (' + getField(report, 'phq2_total') + ')'); }
+        content.t_asha_name      = getField(report, 'reporter_name');
+        content.t_total_score    = getField(report, 'total_score');
+        content.t_risk_category  = getField(report, 'risk_category');
+        content.t_phq2_total     = getField(report, 'phq2_total') || '0';
+        content.t_referral_reason = reasons.join(', ');
+        content.source_cbac_id   = report._id;
+      }
+    }],
+    events: [{
+      id: 'cbac-referral-review',
+      days: 0,
+      start: 0,
+      end: 30,
+    }],
+  },
+
+  // NCD Task: BP Referral Review — shown to Physician (PHC) or Medical Officer (CHC)
+  {
+    name: 'ncd.bp_referral_review',
+    icon: 'icon-healthcare-generic-2',
+    title: 'NCD BP Referral Review',
+    appliesTo: 'reports',
+    appliesToType: ['ncd'],
+    appliesIf: function(contact, report) {
+      const facility =
+        getField(report, 'f2_bp_referral_facility_page.f2_bp_referral_facility') ||
+        getField(report, 'f2_bp_normal_referral_facility_page.f2_bp_normal_referral_facility');
+      if (!facility || facility === 'dh') { return false; }
+      if (facility === 'phc') { return user.role === UserRole.PHYSICIAN && isAlive(contact); }
+      if (facility === 'chc') { return user.role === UserRole.MEDICAL_OFFICER && isAlive(contact); }
+      return false;
+    },
+    resolvedIf: function(contact, report) {
+      return contact.reports.some(function(r) {
+        return r.form === 'ncd_bp_referral_review' &&
+               r.fields && r.fields.inputs && r.fields.inputs.source_ncd_id === report._id;
+      });
+    },
+    actions: [{
+      type: 'report',
+      form: 'ncd_bp_referral_review',
+      label: 'Review BP Referral',
+      modifyContent: function(content, _contact, report) {
+        content.t_cho_name         = getField(report, 'reporter_name');
+        content.t_referral_facility =
+          getField(report, 'f2_bp_referral_facility_page.f2_bp_referral_facility') ||
+          getField(report, 'f2_bp_normal_referral_facility_page.f2_bp_normal_referral_facility') || '';
+        content.t_bp_systolic      = getField(report, 'f2_hypertension.f2_systolic');
+        content.t_bp_diastolic     = getField(report, 'f2_hypertension.f2_diastolic');
+        content.t_glucose          = getField(report, 'f2_diabetes_section.f2_rapid_glucose');
+        content.source_ncd_id      = report._id;
+      }
+    }],
+    events: [{
+      id: 'ncd-bp-referral-review',
+      days: 0,
+      start: 0,
+      end: 30,
+    }],
+  },
+
+  // NCD Task: Glucose Referral Review — shown to Physician (PHC) or Medical Officer (CHC)
+  {
+    name: 'ncd.glucose_referral_review',
+    icon: 'icon-healthcare-generic-2',
+    title: 'NCD Glucose Referral Review',
+    appliesTo: 'reports',
+    appliesToType: ['ncd'],
+    appliesIf: function(contact, report) {
+      const facility =
+        getField(report, 'f2_glucose_referral_facility_page.f2_glucose_referral_facility') ||
+        getField(report, 'f2_glucose_normal_referral_facility_page.f2_glucose_normal_referral_facility');
+      if (!facility || facility === 'dh') { return false; }
+      if (facility === 'phc') { return user.role === UserRole.PHYSICIAN && isAlive(contact); }
+      if (facility === 'chc') { return user.role === UserRole.MEDICAL_OFFICER && isAlive(contact); }
+      return false;
+    },
+    resolvedIf: function(contact, report) {
+      return contact.reports.some(function(r) {
+        return r.form === 'ncd_glucose_referral_review' &&
+               r.fields && r.fields.inputs && r.fields.inputs.source_ncd_id === report._id;
+      });
+    },
+    actions: [{
+      type: 'report',
+      form: 'ncd_glucose_referral_review',
+      label: 'Review Glucose Referral',
+      modifyContent: function(content, _contact, report) {
+        content.t_cho_name          = getField(report, 'reporter_name');
+        content.t_referral_facility =
+          getField(report, 'f2_glucose_referral_facility_page.f2_glucose_referral_facility') ||
+          getField(report, 'f2_glucose_normal_referral_facility_page.f2_glucose_normal_referral_facility') || '';
+        content.t_bp_systolic       = getField(report, 'f2_hypertension.f2_systolic');
+        content.t_bp_diastolic      = getField(report, 'f2_hypertension.f2_diastolic');
+        content.t_glucose           = getField(report, 'f2_diabetes_section.f2_rapid_glucose');
+        content.source_ncd_id       = report._id;
+      }
+    }],
+    events: [{
+      id: 'ncd-glucose-referral-review',
+      days: 0,
+      start: 0,
+      end: 30,
+    }],
+  },
+
   // NCD Task 1: Hypertension Follow-up — moderate (systolic > 120 AND diastolic > 80)
   // Severe cases (systolic > 140 OR diastolic > 90) are handled by ncd.hypertension_referral below
   {
@@ -759,8 +900,9 @@ module.exports = [
       form: 'ncd_hypertension_referral',
       label: 'Hypertension Referral Follow-up',
       modifyContent: function(content, _contact, report) {
-        content.t_systolic = getField(report, 'inputs.t_systolic');
-        content.t_diastolic = getField(report, 'inputs.t_diastolic');
+        content.t_systolic          = getField(report, 'inputs.t_systolic');
+        content.t_diastolic         = getField(report, 'inputs.t_diastolic');
+        content.t_referral_facility = getField(report, 'inputs.t_referral_facility') || 'phc';
       }
     }],
     events: [{
@@ -850,7 +992,8 @@ module.exports = [
       form: 'ncd_diabetes_referral',
       label: 'Diabetes Referral Follow-up',
       modifyContent: function(content, _contact, report) {
-        content.t_rapid_glucose = getField(report, 'inputs.t_rapid_glucose');
+        content.t_rapid_glucose     = getField(report, 'inputs.t_rapid_glucose');
+        content.t_referral_facility = getField(report, 'inputs.t_referral_facility') || 'phc';
       }
     }],
     events: [{
