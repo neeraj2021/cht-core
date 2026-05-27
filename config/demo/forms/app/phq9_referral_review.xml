@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://www.opendatakit.org/xforms">
+  <h:head>
+    <h:title>PHQ-9 Referral Review</h:title>
+    <model odk:xforms-version="1.0.0">
+      <instance>
+        <data id="phq9_referral_review" version="1" prefix="J1!phq9_referral_review!" delimiter="#">
+          <patient_id/>
+          <patient_uuid/>
+          <patient_name/>
+          <reporter_name/>
+          <title/>
+          <form_start_timestamp/>
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source/>
+            <source_id/>
+            <user>
+              <name/>
+              <phone/>
+            </user>
+            <contact>
+              <_id/>
+              <patient_id/>
+              <name/>
+            </contact>
+            <t_cho_name/>
+            <t_referral_facility/>
+            <t_phq_score/>
+            <t_severity/>
+            <phq9_source_id/>
+          </inputs>
+          <facility_label/>
+          <review_page>
+            <lbl_patient/>
+            <lbl_cho/>
+            <lbl_facility/>
+            <lbl_score/>
+            <lbl_severity/>
+            <lbl_message/>
+          </review_page>
+          <form_submit_timestamp_iso/>
+          <form_submit_timestamp_display/>
+          <meta tag="hidden">
+            <instanceID/>
+          </meta>
+        </data>
+      </instance>
+      <instance id="contact-summary"/>
+      <instance id="user-contact-summary"/>
+      <instance id="yes_no">
+        <root>
+          <item>
+            <name>yes</name>
+            <label>Yes</label>
+          </item>
+          <item>
+            <name>no</name>
+            <label>No</label>
+          </item>
+        </root>
+      </instance>
+      <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
+      <bind nodeset="/data/patient_uuid" type="string" calculate="../inputs/contact/_id"/>
+      <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
+      <bind nodeset="/data/reporter_name" type="string" calculate="../inputs/user/name"/>
+      <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/form_start_timestamp" type="string" calculate="once(if( /data/inputs/contact/_id  != '', now(), ''))"/>
+      <bind nodeset="/data/inputs/source" type="string"/>
+      <bind nodeset="/data/inputs/source_id" type="string"/>
+      <bind nodeset="/data/inputs/user/name" type="string"/>
+      <bind nodeset="/data/inputs/user/phone" type="string"/>
+      <bind nodeset="/data/inputs/contact/_id" type="string"/>
+      <bind nodeset="/data/inputs/contact/patient_id" type="string"/>
+      <bind nodeset="/data/inputs/contact/name" type="string"/>
+      <bind nodeset="/data/inputs/t_cho_name" type="string"/>
+      <bind nodeset="/data/inputs/t_referral_facility" type="string"/>
+      <bind nodeset="/data/inputs/t_phq_score" type="string"/>
+      <bind nodeset="/data/inputs/t_severity" type="string"/>
+      <bind nodeset="/data/inputs/phq9_source_id" type="string"/>
+      <bind nodeset="/data/facility_label" type="string" calculate="if( /data/inputs/t_referral_facility  = 'primary_health_center', 'Primary Health Center', if( /data/inputs/t_referral_facility  = 'community_health_center', 'Community Health Center', if( /data/inputs/t_referral_facility  = 'district_hospital', 'District Hospital',  /data/inputs/t_referral_facility )))"/>
+      <bind nodeset="/data/review_page/lbl_patient" readonly="true()" type="string"/>
+      <bind nodeset="/data/review_page/lbl_cho" readonly="true()" type="string"/>
+      <bind nodeset="/data/review_page/lbl_facility" readonly="true()" type="string"/>
+      <bind nodeset="/data/review_page/lbl_score" readonly="true()" type="string"/>
+      <bind nodeset="/data/review_page/lbl_severity" readonly="true()" type="string"/>
+      <bind nodeset="/data/review_page/lbl_message" readonly="true()" type="string"/>
+      <bind nodeset="/data/form_submit_timestamp_iso" type="string" calculate="format-date-time(now(), '%Y-%m-%dT%H:%M:%S+05:30')"/>
+      <bind nodeset="/data/form_submit_timestamp_display" type="string" calculate="format-date-time(now(), '%e-%b-%Y %H:%M:%S')"/>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
+    </model>
+  </h:head>
+  <h:body>
+    <group ref="/data/inputs">
+      <label>Patient &amp; Reporter Info</label>
+      <group ref="/data/inputs/user"/>
+      <group ref="/data/inputs/contact">
+        <input ref="/data/inputs/contact/_id" appearance="select-contact type-patient role-patient">
+          <label>Patient's Name</label>
+        </input>
+        <input ref="/data/inputs/contact/patient_id" appearance="hidden">
+          <label>Medic ID</label>
+        </input>
+        <input ref="/data/inputs/contact/name" appearance="hidden">
+          <label>Patient Name</label>
+        </input>
+      </group>
+    </group>
+    <group appearance="field-list" ref="/data/review_page">
+      <label>PHQ-9 Referral Review</label>
+      <input ref="/data/review_page/lbl_patient">
+        <label> **Patient:** <output value=" /data/patient_name "/></label>
+      </input>
+      <input ref="/data/review_page/lbl_cho">
+        <label> **Referred by (CHO):** <output value=" /data/inputs/t_cho_name "/></label>
+      </input>
+      <input ref="/data/review_page/lbl_facility">
+        <label> **Referred to:** <output value=" /data/facility_label "/></label>
+      </input>
+      <input ref="/data/review_page/lbl_score">
+        <label> **PHQ-9 Score:** <output value=" /data/inputs/t_phq_score "/></label>
+      </input>
+      <input ref="/data/review_page/lbl_severity">
+        <label> **Severity:** <output value=" /data/inputs/t_severity "/></label>
+      </input>
+      <input ref="/data/review_page/lbl_message">
+        <label> Patient <output value=" /data/patient_name "/> has been referred for mental health support based on their PHQ-9 assessment. Please review and attend. </label>
+      </input>
+    </group>
+  </h:body>
+</h:html>

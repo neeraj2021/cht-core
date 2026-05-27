@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://www.opendatakit.org/xforms">
+  <h:head>
+    <h:title>Breast Cancer Referral Review</h:title>
+    <model odk:xforms-version="1.0.0">
+      <instance>
+        <data id="bc_referral_review" version="2" prefix="J1!bc_referral_review!" delimiter="#">
+          <patient_id/>
+          <patient_uuid/>
+          <patient_name/>
+          <reporter_name/>
+          <title/>
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <source/>
+            <source_id/>
+            <user>
+              <name/>
+              <phone/>
+            </user>
+            <bc_source_id/>
+            <t_cho_name/>
+            <t_referral_facility/>
+            <t_symptom_detected/>
+            <contact>
+              <_id/>
+              <patient_id/>
+              <name/>
+            </contact>
+          </inputs>
+          <group_summary>
+            <grp_filled_by>
+              <lbl_filled_by/>
+            </grp_filled_by>
+            <grp_patient>
+              <lbl_patient/>
+            </grp_patient>
+            <grp_referred_by>
+              <lbl_referred_by/>
+            </grp_referred_by>
+            <grp_facility>
+              <lbl_facility/>
+            </grp_facility>
+            <grp_symptom>
+              <lbl_symptom/>
+            </grp_symptom>
+          </group_summary>
+          <meta tag="hidden">
+            <instanceID/>
+          </meta>
+        </data>
+      </instance>
+      <instance id="contact-summary"/>
+      <instance id="user-contact-summary"/>
+      <instance id="bc_review_decision">
+        <root>
+          <item>
+            <name>findings_confirmed</name>
+            <label>Findings Confirmed – Refer for Further Investigation</label>
+          </item>
+          <item>
+            <name>findings_not_confirmed</name>
+            <label>Findings Not Confirmed – No Further Action</label>
+          </item>
+          <item>
+            <name>refer_higher_facility</name>
+            <label>Refer to Higher Facility</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="bc_followup_action">
+        <root>
+          <item>
+            <name>schedule_followup</name>
+            <label>Schedule Follow-up Visit</label>
+          </item>
+          <item>
+            <name>discharge</name>
+            <label>Discharge – No Further Action Required</label>
+          </item>
+          <item>
+            <name>refer_higher_facility</name>
+            <label>Refer to Higher Facility</label>
+          </item>
+        </root>
+      </instance>
+      <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
+      <bind nodeset="/data/patient_uuid" type="string" calculate="../inputs/contact/_id"/>
+      <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
+      <bind nodeset="/data/reporter_name" type="string" calculate="../inputs/user/name"/>
+      <bind nodeset="/data/title" type="string" calculate=" /data/patient_name "/>
+      <bind nodeset="/data/inputs/source" type="string"/>
+      <bind nodeset="/data/inputs/source_id" type="string"/>
+      <bind nodeset="/data/inputs/user/name" type="string"/>
+      <bind nodeset="/data/inputs/user/phone" type="string"/>
+      <bind nodeset="/data/inputs/bc_source_id" type="string"/>
+      <bind nodeset="/data/inputs/t_cho_name" type="string"/>
+      <bind nodeset="/data/inputs/t_referral_facility" type="string"/>
+      <bind nodeset="/data/inputs/t_symptom_detected" type="string"/>
+      <bind nodeset="/data/inputs/contact/_id" type="string"/>
+      <bind nodeset="/data/inputs/contact/patient_id" type="string"/>
+      <bind nodeset="/data/inputs/contact/name" type="string"/>
+      <bind nodeset="/data/group_summary/grp_filled_by/lbl_filled_by" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_patient/lbl_patient" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_referred_by/lbl_referred_by" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_facility/lbl_facility" readonly="true()" type="string"/>
+      <bind nodeset="/data/group_summary/grp_symptom/lbl_symptom" readonly="true()" type="string"/>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
+    </model>
+  </h:head>
+  <h:body>
+    <group ref="/data/inputs">
+      <label>Patient &amp; Reporter Info</label>
+      <group ref="/data/inputs/user"/>
+      <group ref="/data/inputs/contact">
+        <input ref="/data/inputs/contact/_id" appearance="select-contact type-patient role-patient">
+          <label>Patient's Name</label>
+        </input>
+        <input ref="/data/inputs/contact/patient_id" appearance="hidden">
+          <label>Medic ID</label>
+        </input>
+        <input ref="/data/inputs/contact/name" appearance="hidden">
+          <label>Patient Name</label>
+        </input>
+      </group>
+    </group>
+    <group ref="/data/group_summary">
+      <label>Assessment Summary</label>
+      <group ref="/data/group_summary/grp_filled_by">
+        <input ref="/data/group_summary/grp_filled_by/lbl_filled_by">
+          <label> **Filled by:** <output value=" /data/reporter_name "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary/grp_patient">
+        <input ref="/data/group_summary/grp_patient/lbl_patient">
+          <label> **Patient:** <output value=" /data/patient_name "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary/grp_referred_by">
+        <input ref="/data/group_summary/grp_referred_by/lbl_referred_by">
+          <label> **Referred by (CHO/ASHA):** <output value=" /data/inputs/t_cho_name "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary/grp_facility">
+        <input ref="/data/group_summary/grp_facility/lbl_facility">
+          <label> **Referral Facility:** <output value=" /data/inputs/t_referral_facility "/></label>
+        </input>
+      </group>
+      <group ref="/data/group_summary/grp_symptom">
+        <input ref="/data/group_summary/grp_symptom/lbl_symptom">
+          <label> **Symptom Detected:** <output value=" /data/inputs/t_symptom_detected "/></label>
+        </input>
+      </group>
+    </group>
+  </h:body>
+</h:html>

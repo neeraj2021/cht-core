@@ -49,6 +49,9 @@ const AppForms = Object.freeze({
   PHQ9: 'phq9',
   PHQ9_FOLLOWUP: 'phq9_followup',
   PHQ9_FOLLOWUP_ACTIONS: 'phq9_followup_actions',
+  PHQ9_REFERRAL_REVIEW: 'phq9_referral_review',
+  BC_RISK_ASSESSMENT: 'breast_cancer_risk_assessment',
+  BC_REFERRAL_REVIEW: 'bc_referral_review',
   CBAC_FOLLOWUP: 'cbac_followup',
   CBAC_REFERRAL_REVIEW_HIGH_RISK: 'cbac_referral_review_high_risk',
   CBAC_REFERRAL_REVIEW_PHQ2: 'cbac_referral_review_phq2',
@@ -60,6 +63,7 @@ const AppForms = Object.freeze({
 });
 
 module.exports = [
+  // ── Task: Physician Review ← triggered by oral_cancer_assessment ─────────────
   {
     name: 'physician_review_from_oral_assessment',
     icon: 'icon-disease-cancer',
@@ -67,12 +71,11 @@ module.exports = [
     appliesTo: 'reports',
     appliesToType: [AppForms.ORAL_CANCER_ASSESSMENT],
     appliesIf: function (contact, report) {
-      var fields = report.fields || {};
-      var analysisPage = fields.final_ai_analysis_page || {};
-      var referral = analysisPage.final_ai_referral || '';
-      return user.role === 'physician' &&
-        !report.deleted &&
-        (referral === 'refer' || referral === 'refer_anyway');
+      var facility = getField(report, 'final_ai_analysis_page.referral_location') || '';
+      if (!facility || facility === 'dh') { return false; }
+      if (facility === 'phc') { return user.role === UserRole.PHYSICIAN && isAlive(contact); }
+      if (facility === 'chc') { return user.role === UserRole.MEDICAL_OFFICER && isAlive(contact); }
+      return false;
     },
     resolvedIf: function (contact, report) {
       return contact.reports.some(function (r) {
@@ -88,12 +91,15 @@ module.exports = [
         form: AppForms.PHYSICIAN_ORAL_CANCER_REVIEW,
         label: 'Review Oral Cancer Photos',
         modifyContent: function (content, contact, report) {
-          var fields = report.fields || {};
           content.inputs = content.inputs || {};
           content.inputs.source_form_uuid_input = report._id;
+          // NEW: pass referred-by and referral facility to the form
+          content.inputs.t_cho_name          = getField(report, 'reporter_name') || '';
+          content.inputs.t_referral_facility = getField(report, 'final_ai_analysis_page.referral_location') || '';
+          // Photo attachments
           for (var i = 1; i <= 8; i++) {
-            var page = fields['photo_' + i + '_page'] || {};
-            var val = page['photo_' + i] || '';
+            var page = getField(report, 'photo_' + i + '_page') || {};
+            var val  = (page && page['photo_' + i]) || '';
             content.inputs['photo_' + i + '_fetched'] = val ? 'user-file-' + val : '';
           }
         }
@@ -109,7 +115,7 @@ module.exports = [
     ]
   },
 
-  // 5. Physician Review ← triggered by ncd (when oral section is filled)
+  // ── Task: Physician Review ← triggered by ncd (oral cancer section) ─────────
   {
     name: 'physician_review_from_ncd',
     icon: 'icon-disease-cancer',
@@ -117,13 +123,11 @@ module.exports = [
     appliesTo: 'reports',
     appliesToType: [AppForms.NCD],
     appliesIf: function (contact, report) {
-      var fields = report.fields || {};
-      var analysisPage = fields.oc_final_ai_analysis_page || {};
-      var referral = analysisPage.oc_final_ai_referral || '';
-      return user.role === 'physician' &&
-        !report.deleted &&
-        report.fields &&
-        (referral === 'refer' || referral === 'refer_anyway');
+      var facility = getField(report, 'oc_section_wrapper.oc_final_ai_analysis_page.oc_referral_location') || '';
+      if (!facility || facility === 'dh') { return false; }
+      if (facility === 'phc') { return user.role === UserRole.PHYSICIAN && isAlive(contact); }
+      if (facility === 'chc') { return user.role === UserRole.MEDICAL_OFFICER && isAlive(contact); }
+      return false;
     },
     resolvedIf: function (contact, report) {
       return contact.reports.some(function (r) {
@@ -139,13 +143,15 @@ module.exports = [
         form: AppForms.PHYSICIAN_ORAL_CANCER_REVIEW,
         label: 'Review Oral Cancer Photos',
         modifyContent: function (content, contact, report) {
-          var fields = report.fields || {};
           content.inputs = content.inputs || {};
           content.inputs.source_form_uuid_input = report._id;
-
+          // NEW: pass referred-by and referral facility to the form
+          content.inputs.t_cho_name          = getField(report, 'reporter_name') || '';
+          content.inputs.t_referral_facility = getField(report, 'oc_section_wrapper.oc_final_ai_analysis_page.oc_referral_location') || '';
+          // Photo attachments (NCD uses oc_photo_N prefix)
           for (var i = 1; i <= 8; i++) {
-            var page = fields['oc_photo_' + i + '_page'] || {};
-            var val = page['oc_photo_' + i] || '';
+            var page = getField(report, 'oc_section_wrapper.oc_photo_' + i + '_page') || {};
+            var val  = (page && page['oc_photo_' + i]) || '';
             content.inputs['photo_' + i + '_fetched'] = val ? 'user-file-' + val : '';
           }
         }
@@ -810,7 +816,162 @@ module.exports = [
       }
     }],
   },
-
+  {
+    name: 'phq9.referral_review',
+    icon: 'icon-healthcare-generic-2',
+    title: 'PHQ-9 Referral Review',
+    appliesTo: 'reports',
+    appliesToType: [AppForms.PHQ9],
+    appliesIf: function (contact, report) {
+      const facility = getField(report, 'referral_page.referral_location');
+      if (!facility || facility === 'dh') { return false; }
+      if (facility === 'phc') { return user.role === UserRole.PHYSICIAN && isAlive(contact); }
+      if (facility === 'chc') { return user.role === UserRole.MEDICAL_OFFICER && isAlive(contact); }
+      return false;
+    },
+    resolvedIf: function (contact, report) {
+      return contact.reports.some(function (r) {
+        const isPHQ9ReferralReview = r.form === AppForms.PHQ9_REFERRAL_REVIEW &&
+          r.fields && r.fields.inputs && r.fields.inputs.phq9_source_id === report._id;
+        return isPHQ9ReferralReview;
+      });
+    },
+    actions: [{
+      type: 'report',
+      form: AppForms.PHQ9_REFERRAL_REVIEW,
+      label: 'Review PHQ-9 Referral',
+      modifyContent: function (content, _contact, report) {
+        content.t_cho_name          = getField(report, 'reporter_name');
+        content.t_referral_facility = getField(report, 'referral_page.referral_location') || '';
+        content.t_phq_score         = getField(report, 'total_score') || '';
+        content.t_severity          = getField(report, 'severity_category') || '';
+        content.phq9_source_id      = report._id;
+      }
+    }],
+    events: [{
+      id: 'phq9-referral-review',
+      days: 0,
+      start: 0,
+      end: 30,
+    }],
+  },
+  {
+    name: 'ncd.phq9_referral_review',
+    icon: 'icon-healthcare-generic-2',
+    title: 'NCD PHQ-9 Referral Review',
+    appliesTo: 'reports',
+    appliesToType: [AppForms.NCD],
+    appliesIf: function (contact, report) {
+      const facility = getField(report, 'phq_section_wrapper.phq_referral_page.phq_referral_location');
+      if (!facility || facility === 'dh') { return false; }
+      if (facility === 'phc') { return user.role === UserRole.PHYSICIAN && isAlive(contact); }
+      if (facility === 'chc') { return user.role === UserRole.MEDICAL_OFFICER && isAlive(contact); }
+      return false;
+    },
+    resolvedIf: function (contact, report) {
+      return contact.reports.some(function (r) {
+        return r.form === AppForms.PHQ9_REFERRAL_REVIEW &&
+          r.fields && r.fields.inputs && r.fields.inputs.phq9_source_id === report._id;
+      });
+    },
+    actions: [{
+      type: 'report',
+      form: AppForms.PHQ9_REFERRAL_REVIEW,
+      label: 'Review PHQ-9 Referral',
+      modifyContent: function (content, _contact, report) {
+        content.t_cho_name          = getField(report, 'reporter_name');
+        content.t_referral_facility = getField(report, 'phq_section_wrapper.phq_referral_page.phq_referral_location') || '';
+        content.t_phq_score         = getField(report, 'phq_section_wrapper.phq_total_score') || '';
+        content.t_severity          = getField(report, 'phq_section_wrapper.phq_severity_category') || '';
+        content.phq9_source_id      = report._id;
+      }
+    }],
+    events: [{
+      id: 'ncd-phq9-referral-review',
+      days: 0,
+      start: 0,
+      end: 30,
+    }],
+  },
+  {
+    name: 'bc.referral_review',
+    icon: 'icon-people-woman',
+    title: 'Breast Cancer Referral Review',
+    appliesTo: 'reports',
+    appliesToType: [AppForms.BC_RISK_ASSESSMENT],
+    appliesIf: function (contact, report) {
+      var facility = getField(report, 'referral_page.referral_location');
+      if (!facility || facility === 'dh') { return false; }
+      if (facility === 'phc') { return user.role === UserRole.PHYSICIAN && isAlive(contact); }
+      if (facility === 'chc') { return user.role === UserRole.MEDICAL_OFFICER && isAlive(contact); }
+      return false;
+    },
+    resolvedIf: function (contact, report) {
+      return contact.reports.some(function (r) {
+        return r.form === AppForms.BC_REFERRAL_REVIEW &&
+          !r.deleted &&
+          r.fields && r.fields.inputs && r.fields.inputs.bc_source_id === report._id;
+      });
+    },
+    actions: [{
+      type: 'report',
+      form: AppForms.BC_REFERRAL_REVIEW,
+      label: 'Review Breast Cancer Referral',
+      modifyContent: function (content, _contact, report) {
+        content.bc_source_id        = report._id;
+        content.t_cho_name          = getField(report, 'reporter_name') || '';
+        content.t_referral_facility = getField(report, 'referral_page.referral_location') || '';
+        // symptom_detected is a calculate field at the top level of the form
+        content.t_symptom_detected  = getField(report, 'symptom_detected') || '';
+      }
+    }],
+    events: [{
+      id: 'bc-referral-review',
+      days: 0,
+      start: 0,
+      end: 30,
+    }],
+  },
+  {
+    name: 'ncd.bc_referral_review',
+    icon: 'icon-people-woman',
+    title: 'Breast Cancer Referral Review',
+    appliesTo: 'reports',
+    appliesToType: [AppForms.NCD],
+    appliesIf: function (contact, report) {
+ 
+      var facility = getField(report, 'bc_section_wrapper.bc_referral_page.bc_referral_location');
+      if (!facility || facility === 'dh') { return false; }
+      if (facility === 'phc') { return user.role === UserRole.PHYSICIAN && isAlive(contact); }
+      if (facility === 'chc') { return user.role === UserRole.MEDICAL_OFFICER && isAlive(contact); }
+      return false;
+    },
+    resolvedIf: function (contact, report) {
+      return contact.reports.some(function (r) {
+        return r.form === AppForms.BC_REFERRAL_REVIEW &&
+          !r.deleted &&
+          r.fields && r.fields.inputs && r.fields.inputs.bc_source_id === report._id;
+      });
+    },
+    actions: [{
+      type: 'report',
+      form: AppForms.BC_REFERRAL_REVIEW,
+      label: 'Review Breast Cancer Referral',
+      modifyContent: function (content, _contact, report) {
+        content.bc_source_id        = report._id;
+        content.t_cho_name          = getField(report, 'reporter_name') || '';
+        content.t_referral_facility = getField(report, 'bc_section_wrapper.bc_referral_page.bc_referral_location') || '';
+        // bc_symptom_detected is a calculate field inside bc_section_wrapper
+        content.t_symptom_detected  = getField(report, 'bc_section_wrapper.bc_symptom_detected') || '';
+      }
+    }],
+    events: [{
+      id: 'ncd-bc-referral-review',
+      days: 0,
+      start: 0,
+      end: 30,
+    }],
+  }
 
 
 ];

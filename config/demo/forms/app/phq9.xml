@@ -25,7 +25,6 @@
             </meta>
             <source/>
             <source_id/>
-            <cbac_source_id/>
             <user>
               <name/>
               <phone/>
@@ -68,6 +67,10 @@
           </page_5>
           <total_score/>
           <severity_category/>
+          <referral_page>
+            <referral_question/>
+            <referral_location>phc</referral_location>
+          </referral_page>
           <group_summary>
             <grp_lbl_filled_by>
               <lbl_filled_by_lbl/>
@@ -317,6 +320,34 @@
           </item>
         </root>
       </instance>
+      <instance id="referral">
+        <root>
+          <item>
+            <name>do_not_refer</name>
+            <label>Don't Refer</label>
+          </item>
+          <item>
+            <name>refer_anyway</name>
+            <label>Refer Anyway</label>
+          </item>
+        </root>
+      </instance>
+      <instance id="referral_location">
+        <root>
+          <item>
+            <name>phc</name>
+            <label>Primary Health Center</label>
+          </item>
+          <item>
+            <name>chc</name>
+            <label>Community Health Center</label>
+          </item>
+          <item>
+            <name>dh</name>
+            <label>District Hospital</label>
+          </item>
+        </root>
+      </instance>
       <bind nodeset="/data/patient_id" type="string" calculate="../inputs/contact/patient_id"/>
       <bind nodeset="/data/patient_uuid" type="string" calculate="../inputs/contact/_id"/>
       <bind nodeset="/data/patient_name" type="string" calculate="../inputs/contact/name"/>
@@ -326,7 +357,6 @@
       <bind nodeset="/data/page_info/lbl_about_phq9" readonly="true()" type="string"/>
       <bind nodeset="/data/inputs/source" type="string"/>
       <bind nodeset="/data/inputs/source_id" type="string"/>
-      <bind nodeset="/data/inputs/cbac_source_id" type="string"/>
       <bind nodeset="/data/inputs/user/name" type="string"/>
       <bind nodeset="/data/inputs/user/phone" type="string"/>
       <bind nodeset="/data/inputs/reporter_name_note" readonly="true()" type="string"/>
@@ -352,6 +382,8 @@
       <bind nodeset="/data/page_5/thoughts_of_self_harm" type="string" required="true()"/>
       <bind nodeset="/data/total_score" type="string" calculate=" /data/page_1/little_interest_or_pleasure  +  /data/page_1/feeling_depressed_or_hopeless  +  /data/page_2/trouble_sleeping  +  /data/page_2/feeling_tired  +  /data/page_3/poor_appetite_or_overeating  +  /data/page_3/feeling_bad_about_yourself  +  /data/page_4/trouble_concentrating  +  /data/page_4/moving_or_speaking_slowly  +  /data/page_5/thoughts_of_self_harm "/>
       <bind nodeset="/data/severity_category" type="string" calculate="if( /data/total_score  &lt;= 4, 'minimal', if( /data/total_score  &lt;= 9, 'mild', if( /data/total_score  &lt;= 14, 'moderate', if( /data/total_score  &lt;= 19, 'moderately_severe', 'severe'))))"/>
+      <bind nodeset="/data/referral_page/referral_question" type="string" required="true()"/>
+      <bind nodeset="/data/referral_page/referral_location" type="string" required="true()" relevant=" /data/referral_page/referral_question  = 'refer_anyway'"/>
       <bind nodeset="/data/group_summary/grp_lbl_filled_by/lbl_filled_by_lbl" readonly="true()" type="string"/>
       <bind nodeset="/data/group_summary/grp_lbl_filled_by/calc_reporter_name" type="string" calculate=" /data/reporter_name "/>
       <bind nodeset="/data/group_summary/grp_lbl_patient/lbl_patient_lbl" readonly="true()" type="string"/>
@@ -401,7 +433,7 @@
         <label> Filled by: <output value=" /data/reporter_name "/></label>
       </input>
       <group ref="/data/inputs/contact">
-        <input ref="/data/inputs/contact/_id" appearance="select-contact type-patient">
+        <input ref="/data/inputs/contact/_id" appearance="select-contact type-patient role-patient">
           <label>Patient's Name</label>
           <hint>Select the patient from your area</hint>
         </input>
@@ -529,6 +561,22 @@
         <label>9. Thoughts that you would be better off dead or of hurting yourself in some way</label>
         <hint>Use ✓ to indicate your answer</hint>
         <itemset nodeset="instance('frequency')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+    </group>
+    <group appearance="field-list" ref="/data/referral_page">
+      <select1 ref="/data/referral_page/referral_question" appearance="radio">
+        <label>Do you want to refer?</label>
+        <itemset nodeset="instance('referral')/root/item">
+          <value ref="name"/>
+          <label ref="label"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/referral_page/referral_location">
+        <label>Where do you want to refer the patient?</label>
+        <itemset nodeset="instance('referral_location')/root/item">
           <value ref="name"/>
           <label ref="label"/>
         </itemset>
